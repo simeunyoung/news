@@ -37,6 +37,7 @@
 <body>
 	<form action="loginPro.jsp" method="post" name="myform" onsubmit="return loginCheck();">
 		<h2>로그인</h2>
+		<div>
 		<table>
 			<tr>
 				<td>
@@ -58,12 +59,14 @@
 					<label for="auto">로그인 상태 유지</label>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2">
-				</td>
-			</tr>
 		</table>
+		</div>
 		<input type="submit" value="로그인" />
 	</form>
+	<ul class="loginList">
+		<li><a href="">비밀번호 찾기</a></li>
+		<li><a href="">아이디 찾기</a></li>
+		<li><a href="inputForm.jsp">회원가입</a></li>
+	</ul>
 </body>
 </html>

@@ -49,3 +49,4 @@ a{
 	color:#111;
 }
 input[type="submit"]{background:#0074d9}
+.loginList{display:flex;}

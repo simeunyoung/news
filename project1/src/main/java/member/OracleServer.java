@@ -14,7 +14,7 @@ public class OracleServer {
 	protected Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String user = "java20", pass="java";
+			String user = "team01", pass="team";
 			String dburl = "jdbc:oracle:thin:@192.168.219.123:1521:orcl";
 			conn = DriverManager.getConnection(dburl, user, pass);
 		} catch (Exception e) {

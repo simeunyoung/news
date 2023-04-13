@@ -50,10 +50,10 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getpNum() {
+	public int getPNum() {
 		return pNum;
 	}
-	public void setpNum(int pNum) {
+	public void setPNum(int pNum) {
 		this.pNum = pNum;
 	}
 	public Timestamp getReg() {
