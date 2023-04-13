@@ -59,20 +59,58 @@ public class MemberDAO extends OracleServer {
 		public void insertMember(MemberDTO member) {
 			try {
 				conn = getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,sysdate,'0',?)");
+				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,?,sysdate,'0')");
 				pstmt.setString(1, member.getId());
 				pstmt.setString(2, member.getPw());
 				pstmt.setString(3, member.getName());
-				pstmt.setString(4, member.getNickName());
-				pstmt.setInt(5, member.getBirthday());
+				pstmt.setString(4, member.getPress());
+				pstmt.setString(5, member.getNick());
 				pstmt.setString(6, member.getEmail());
-				pstmt.setInt(7, member.getPNum());
-				pstmt.setString(8, member.getPress());
+				pstmt.setString(7, member.getTel());
+				pstmt.setString(8, member.getBirthdate());
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				oracleClose();
 			}
+		}
+		
+		public String idFind(MemberDTO member) {
+			String result = null;
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement("select id from member where name=? and birthdate=?");
+				pstmt.setString(1, member.getName());
+				pstmt.setString(2, member.getBirthdate());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getString("id");
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+			return result;
+		}
+		
+		public String pwFind(MemberDTO member) {
+			String result = null;
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement("select pw from member where id=? and email=?");
+				pstmt.setString(1, member.getId());
+				pstmt.setString(2, member.getEmail());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getString("pw");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+			return result;
 		}
 }

@@ -64,8 +64,8 @@
 		<input type="submit" value="로그인" />
 	</form>
 	<ul class="loginList">
-		<li><a href="">비밀번호 찾기</a></li>
-		<li><a href="">아이디 찾기</a></li>
+		<li><a href="pwFindForm.jsp">비밀번호 찾기</a></li>
+		<li><a href="idFindForm.jsp">아이디 찾기</a></li>
 		<li><a href="inputForm.jsp">회원가입</a></li>
 	</ul>
 </body>

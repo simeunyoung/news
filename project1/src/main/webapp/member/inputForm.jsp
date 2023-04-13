@@ -22,9 +22,34 @@
 			userinput.pw.focus();
 			return false;
 		}
+		if(!userinput.pwCheck.value){
+			alert("비밀번호 확인을 입력하세요.");
+			userinput.pwCheck.focus();
+			return false;
+		}
 		if(!userinput.name.value){
 			alert("이름을 입력하세요.");
 			userinput.name.focus();
+			return false;
+		}
+		if(!userinput.nick.value){
+			alert("닉네임을 입력하세요.");
+			userinput.nick.focus();
+			return false;
+		}
+		if(!userinput.birthdate.value){
+			alert("생년월일을 입력하세요.");
+			userinput.birthdate.focus();
+			return false;
+		}
+		if(!userinput.email.value){
+			alert("이메일을 입력하세요.");
+			userinput.email.focus();
+			return false;
+		}
+		if(!userinput.tel.value){
+			alert("핸드폰번호를 입력하세요.");
+			userinput.tel.focus();
 			return false;
 		}
 	}
@@ -77,7 +102,7 @@
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="birth" /></td>
+					<td><input type="text" name="birthdate" /></td>
 				</tr>
 				<tr>
 					<td>이메일</td>
@@ -85,7 +110,7 @@
 				</tr>
 				<tr>
 					<td>핸드폰번호</td>
-					<td><input type="text" name="pNum" /></td>
+					<td><input type="text" name="tel" /></td>
 				</tr>
 			</table>
 		</div>

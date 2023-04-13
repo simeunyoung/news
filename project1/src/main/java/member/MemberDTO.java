@@ -7,10 +7,10 @@ public class MemberDTO {
 	private String id;
 	private String pw;
 	private String name;
-	private String nickName;
-	private int birthday;
+	private String nick;
+	private String birthdate;
 	private String email;
-	private int pNum;
+	private String tel;
 	private Timestamp reg;
 	private String memberType;
 	private String press;
@@ -32,17 +32,17 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getNickName() {
-		return nickName;
+	public String getNick() {
+		return nick;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
-	public int getBirthday() {
-		return birthday;
+	public String getBirthdate() {
+		return birthdate;
 	}
-	public void setBirthday(int birthday) {
-		this.birthday = birthday;
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 	public String getEmail() {
 		return email;
@@ -50,11 +50,11 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getPNum() {
-		return pNum;
+	public String getTel() {
+		return tel;
 	}
-	public void setPNum(int pNum) {
-		this.pNum = pNum;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	public Timestamp getReg() {
 		return reg;
