@@ -85,7 +85,9 @@
 				<td align = "center"> <%=number-- %> </td>
 				
 			</tr>
+			<%} %>
 		</table>
+		<%} %>
 	</center>
 	</body>
 </html>
