@@ -10,4 +10,3 @@
 <br />
 <jsp:include page="qnaList.jsp"></jsp:include>
 <jsp:include page="qnaForm.jsp"></jsp:include>
-asdasdasdasdasdasdasdas
