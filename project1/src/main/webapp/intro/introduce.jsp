@@ -90,39 +90,21 @@
 			</style>
 			<table border ="1">
 			<tr><td width = 300px>언론사</td><td width = 800px>기자</td></tr>
-			<tr><td><h1>AAA</h1></td><td>
-			<%ArrayList<MemberDTO> pressList = dao.select()%>
 			
-			
-			<%for(int i = 0; i < pressList.size ; i++ ){ %>
-			<%ArrayList<MemberDTO> list = dao.pressReporter("aaa");%>
-			<a href="journalist_mypage_form.jsp?id=gija">gi 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija1">gi1 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija2">gi2 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija3">gi3 기자</a>&nbsp;&nbsp;&nbsp;</td></tr>
-			<tr><td><h1>BBB</h1></td><td>
-			<%ArrayList<MemberDTO> list1 = dao.pressReporter("bbb");%>
-			<a href="journalist_mypage_form.jsp?id=gija4">gi4 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija5">gi5 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija6">gi6 기자</a>&nbsp;&nbsp;&nbsp;</td></tr>
-			<tr><td><h1>CCC</h1></td><td>
-			<%ArrayList<MemberDTO> list2 = dao.pressReporter("ccc");%>
-			<a href="journalist_mypage_form.jsp?id=gija7">gi7 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija8">gi8 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija9">gi9 기자</a>&nbsp;&nbsp;&nbsp;</td></tr>
-			<tr><td><h1>DDD</h1></td><td>
-			<%ArrayList<MemberDTO> list3 = dao.pressReporter("ddd");%>
-			<a href="journalist_mypage_form.jsp?id=gija7">gi7 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija8">gi8 기자</a>&nbsp;&nbsp;&nbsp;
-			<a href="journalist_mypage_form.jsp?id=gija9">gi9 기자</a>&nbsp;&nbsp;&nbsp;</td></tr>
+			<%TreeSet<String> pressList = dao.selectPress();
+			Object[] pressArray = pressList.toArray();
+			String element;
+			String press;
+			for(int i = 0; i < pressList.size() ; i++ ){
+			press = (String) pressArray[i];
+			element = press;%>
+			<tr><td><h1><%=element.toUpperCase()%></h1></td><td>
+			<%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
+			for(int z = 0 ; z < reporterList.size() ; z++){%>
+				<a href="journalist_mypage_form.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
+			<%} %></td></tr>
 			<%} %>
 			</table>
-
-			<%=list.get(0).getId()%>
-			
-			
-			
-			
 	</main>
 	<% }%>
 	<footer>
