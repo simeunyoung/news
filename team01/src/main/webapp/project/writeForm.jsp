@@ -3,7 +3,7 @@
 <jsp:include page="header2.jsp"></jsp:include>
 <%-- 액션태그 include를 사용하여 writeForm페이지에 header페이지를 상단으로 불러온다. --%>
 <title>기사 작성</title>
-
+<%request.setCharacterEncoding("UTF-8"); %>
 <%
 
 //String id = request.getParameter("id");

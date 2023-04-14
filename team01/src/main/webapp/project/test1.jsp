@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <title>기사 작성</title>
-
+<%request.setCharacterEncoding("UTF-8"); %>
 <form action="writePro.jsp" name="write">
 	<input type="hidden" name="id" value="Tester">
 	<h3>게시글 작성</h3>

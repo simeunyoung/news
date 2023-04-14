@@ -15,11 +15,13 @@ div 4 : company 기자.jsp <재가공 예정>
 2. 
  --%>
 
-
+<%request.setCharacterEncoding("UTF-8"); %>
 
 <div class="main_box">
 	<div class="left_box">
-		<div class="topic_box"></div>
+		<div class="topic_box">
+		<input type="button" value="테스트리스트로 이동" onClick="location='testlist.jsp'" >
+		</div>
 		<div class="list_box"></div>
 	</div>
 	<div class="right_box">

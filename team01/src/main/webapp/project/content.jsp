@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="header2.jsp"></jsp:include>
+
+<%request.setCharacterEncoding("UTF-8"); %>
 <title>글 확인</title>
 
 <div class="content_box">

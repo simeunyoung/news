@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <link href="News.css" rel="stylesheet" type="text/css"> 
+<%request.setCharacterEncoding("UTF-8"); %>
 <table width="1920" height="85" bgcolor="#f3f5f7" align="center" >
 <tr height="40"></tr>
 <tr >

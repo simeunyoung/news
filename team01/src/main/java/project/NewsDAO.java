@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 public class NewsDAO extends OracleServer {
 	private static NewsDAO instance = new NewsDAO();
@@ -28,6 +30,8 @@ public class NewsDAO extends OracleServer {
 		}
 		return x; 
 	} // public int CountAllList() throws Exception {
+	
+
 	
 	public void insert(NewsDTO dto) {
 		try {
@@ -67,7 +71,7 @@ public class NewsDAO extends OracleServer {
 				info.setId(rs.getString("id"));
 				info.setNewstype(rs.getString("newstype"));
 				info.setTitle(rs.getString("title"));
-				info.setCon(rs.getString("Con"));
+				info.setCon(rs.getString("con"));
 				info.setReg(rs.getTimestamp("reg"));
 				info.setPw(rs.getString("pw"));
 				info.setIp(rs.getString("ip"));
@@ -83,5 +87,78 @@ public class NewsDAO extends OracleServer {
 		
 		return info;
 	}
+	
+	public List gettexts(int a, int b) throws Exception {
+		List textList = null;
+		try {
+			conn = getConnection();
+			sql = "select * from (select e.*,rownum r from (select num,id,newstype,title,con,reg,pw,ip,recon,views,press from news order by reg desc) e )"
+					+ " where r >= ? and r <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, a);
+			pstmt.setInt(2, b);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				textList = new ArrayList(b); // end는 list의 최대 공간을 의미한다.
+					NewsDTO allinfo = new NewsDTO();
+					while(rs.next()) {
+					allinfo = new NewsDTO();
+					allinfo.setNum(rs.getInt("num"));
+					allinfo.setId(rs.getString("id"));
+					allinfo.setNewstype(rs.getString("newstype"));
+					allinfo.setTitle(rs.getString("title"));
+					allinfo.setCon(rs.getString("con"));
+					allinfo.setReg(rs.getTimestamp("reg"));
+					allinfo.setPw(rs.getString("pw"));
+					allinfo.setIp(rs.getString("ip"));
+					allinfo.setRecon(rs.getString("recon"));
+					allinfo.setViews(rs.getInt("views"));
+					allinfo.setPress(rs.getString("press"));
+					textList.add(allinfo);
+					}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return textList;
+	} // public List getTexts(int start, int end) throws Exception {
+	
+	
+	public List gettt() throws Exception {
+		List textList = null;
+		try {
+			conn = getConnection();
+			sql = "select * from news";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				textList = new ArrayList(10); // end는 list의 최대 공간을 의미한다.
+					NewsDTO allinfo = new NewsDTO();
+					while(rs.next()) {
+					allinfo = new NewsDTO();
+					allinfo.setNum(rs.getInt("num"));
+					allinfo.setId(rs.getString("id"));
+					allinfo.setNewstype(rs.getString("newstype"));
+					allinfo.setTitle(rs.getString("title"));
+					allinfo.setCon(rs.getString("con"));
+					allinfo.setReg(rs.getTimestamp("reg"));
+					allinfo.setPw(rs.getString("pw"));
+					allinfo.setIp(rs.getString("ip"));
+					allinfo.setRecon(rs.getString("recon"));
+					allinfo.setViews(rs.getInt("views"));
+					allinfo.setPress(rs.getString("press"));
+					textList.add(allinfo);
+					}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return textList;
+	} // public List getTexts(int start, int end) throws Exception {
+	
 	
 } // public class NewsDAO {

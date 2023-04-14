@@ -4,7 +4,7 @@
 <%@ page import="project.NewsDAO" %>
 <jsp:useBean id="dto" class="project.NewsDTO" />
 <jsp:setProperty property="*" name="dto" />
-
+<%request.setCharacterEncoding("UTF-8"); %>
 <%
     dto.setReg(new Timestamp(System.currentTimeMillis())); //날짜 가져오기
 	dto.setIp(request.getRemoteAddr()); // ip 가져오기
