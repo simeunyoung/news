@@ -10,7 +10,7 @@
 	function start(){
 		document.userinput.id.focus();
 	}
-	function inputCheck(){
+	function inputCheck1(){
 		userinput = eval("document.userinput");
 		if(!userinput.id.value){
 			alert("아이디를 입력하세요.");
