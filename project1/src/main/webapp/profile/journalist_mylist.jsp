@@ -41,7 +41,6 @@
 	</head>
 	
 	<body>
-	<center>
 		<b> 글 목록 (전체 글 : <%=count %>)</b>
 		<table>
 			<tr>
@@ -88,6 +87,5 @@
 			<%} %>
 		</table>
 		<%} %>
-	</center>
 	</body>
 </html>
