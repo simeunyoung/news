@@ -14,6 +14,7 @@ public class MemberDTO {
 	private Timestamp reg;
 	private String memberType;
 	private String press;
+	
 	public String getId() {
 		return id;
 	}

@@ -113,4 +113,31 @@ public class MemberDAO extends OracleServer {
 			}
 			return result;
 		}
+
+		public MemberDTO getMember(String id) {
+			MemberDTO member = null;
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement("select * from member where id = ?");
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					member = new MemberDTO();
+					member.setId(rs.getString("id"));
+					member.setPw(rs.getString("pw"));
+					member.setName(rs.getString("name"));
+					member.setNick(rs.getString("nick"));
+					member.setEmail(rs.getString("email"));
+					member.setTel(rs.getString("tel"));
+					member.setBirthdate(rs.getString("birthdate"));
+					member.setReg(rs.getTimestamp("reg"));
+					member.setMemberType(rs.getString("memberType"));
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+			return member;
+		}
 }
