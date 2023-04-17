@@ -140,4 +140,53 @@ public class MemberDAO extends OracleServer {
 			}
 			return member;
 		}
+
+		public void updateMember(MemberDTO member) {
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement("update member set pw=?,name=?,press=?,nick=?,email=?,tel=?,birthdate=?,reg=?,membertype=? where id=?");
+				pstmt.setString(1, member.getPw());
+				pstmt.setString(2, member.getName());
+				pstmt.setString(3, member.getPress());
+				pstmt.setString(4, member.getNick());
+				pstmt.setString(5, member.getEmail());
+				pstmt.setString(6, member.getTel());
+				pstmt.setString(7, member.getBirthdate());			
+				pstmt.setTimestamp(8, member.getReg());			
+				pstmt.setString(9, member.getMemberType());
+				pstmt.setString(10, member.getId());
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+		}
+
+		public int deleteMember(String id, String pw) {
+			int x = -1;
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement("select pw from member where id =? ");
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					String dbpw=rs.getString("pw");
+					if(dbpw.equals(pw)) {
+						pstmt = conn.prepareStatement("delete from member where id = ?");
+						pstmt.setString(1, id);
+						pstmt.executeUpdate();
+						x = 1;
+					}else {
+						x = 0;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+			return x;
+		}
+
 }

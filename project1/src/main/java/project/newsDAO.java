@@ -3,6 +3,8 @@ package project;
 import java.util.ArrayList;
 import java.util.List;
 
+import member.OracleServer;
+
 public class newsDAO extends OracleServer {
 
 	private static newsDAO instance = new newsDAO();
@@ -26,7 +28,7 @@ public class newsDAO extends OracleServer {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			oracleclose();
+			oracleClose();
 			}
 		return x;
 	}
@@ -69,7 +71,7 @@ public class newsDAO extends OracleServer {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			oracleclose();
+			oracleClose();
 		}
 		return articleList;
 	}
