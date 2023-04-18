@@ -14,6 +14,7 @@
 	<meta charset="UTF-8">
 	<title>회사 이름 - 소개</title>
 	<link rel="stylesheet" href="style.css">
+	<link href = "mypage.css" rel = "stylesheet" type = "text/css">
 </head>
 <body>
 	<header>
@@ -98,7 +99,9 @@
 			for(int i = 0; i < pressList.size() ; i++ ){
 			press = (String) pressArray[i];
 			element = press;%>
-			<tr><td><h1><%=element.toUpperCase()%></h1></td><td>
+			<tr><td><h1>
+				<a href="pressPage.jsp?press=<%=element%>"><%=element.toUpperCase()%><br /><button class="btn btn-primary">구독하기</button></a>
+			</h1></td><td>
 			<%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
 			for(int z = 0 ; z < reporterList.size() ; z++){%>
 				<a href="journalist_mypage_form.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;

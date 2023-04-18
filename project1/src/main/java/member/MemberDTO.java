@@ -8,12 +8,14 @@ public class MemberDTO {
 	private String pw;
 	private String name;
 	private String nickName;
-	private int birthday;
+	private Timestamp birthday;
 	private String email;
-	private int pNum;
+	private String pNum;
 	private Timestamp reg;
 	private String memberType;
 	private String press;
+	private String pressSubcribe;
+	private String reporterSubcribe;
 	public String getId() {
 		return id;
 	}
@@ -38,10 +40,10 @@ public class MemberDTO {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public int getBirthday() {
+	public Timestamp getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(int birthday) {
+	public void setBirthday(Timestamp birthday) {
 		this.birthday = birthday;
 	}
 	public String getEmail() {
@@ -50,10 +52,10 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getpNum() {
+	public String getpNum() {
 		return pNum;
 	}
-	public void setpNum(int pNum) {
+	public void setpNum(String pNum) {
 		this.pNum = pNum;
 	}
 	public Timestamp getReg() {
@@ -73,5 +75,17 @@ public class MemberDTO {
 	}
 	public void setPress(String press) {
 		this.press = press;
+	}
+	public String getPressSubcribe() {
+		return pressSubcribe;
+	}
+	public void setPressSubcribe(String pressSubcribe) {
+		this.pressSubcribe = pressSubcribe;
+	}
+	public String getReporterSubcribe() {
+		return reporterSubcribe;
+	}
+	public void setReporterSubcribe(String reporterSubcribe) {
+		this.reporterSubcribe = reporterSubcribe;
 	}
 }
