@@ -37,19 +37,17 @@ public class newsDAO extends OracleServer {
 	// 게시글 목록을 가져옴 리스트 조회 후 list 형태로 변환
 	public List getNews(int start, int end) throws Exception{
 		
-		List newsList = null;
+		List newsList = new ArrayList();
 		
 		try {
 			conn = getConnection();
-			sql = "SELECT * FROM news ORDER BY reg DESC";
+			sql = "select * from(select e.*,  rownum r from(select * from news order by reg desc) e) where r >= ? and r <= ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				newsList = new ArrayList(end);
-				do {
+			while(rs.next()) {
 					newsDTO article = new newsDTO();
 					article.setNum(rs.getInt("num"));
 					article.setId(rs.getString("id"));
@@ -62,8 +60,7 @@ public class newsDAO extends OracleServer {
 					article.setPress(rs.getString("press"));
 					article.setIp(rs.getString("ip"));
 					newsList.add(article);
-				} while(rs.next());
-			}
+				}
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		} finally {

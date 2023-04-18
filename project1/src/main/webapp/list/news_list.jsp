@@ -32,8 +32,6 @@
 	number = newscount - (currentPage - 1) * pageSize;
 %>
 
-<%=newscount%>
-
 <html>
 	<head>
 		<title> 모든 뉴스 </title>
@@ -43,34 +41,34 @@
 	<%
 	if(newscount == 0){
 	%>
-	<table>
+	<table width = "700" border = "1" cellpadding = "0" cellspacing = "0">
 		<tr>
 			<td> 뉴스 목록에 기사가 없습니다.</td>
 		</tr>
-	</table>
+	</table> 
 	<%
 	}else{
 	%>
-	<table>
-		<tr>
-			<td> 번호 </td>
-			<td> 제목 </td>
-			<td> 작성자 </td>
-			<td> 언론사 </td>
-			<td> 작성일 </td>
-			<td> 조회 </td>
+	<table border = "1" width = "700" cellpadding = "0" cellspacing = "0" align = "center">
+		<tr height = "30">
+			<td align = "center" width = "50"> 번호 </td>
+			<td align = "center" width = "250"> 제목 </td>
+			<td align = "center" width = "100"> 작성자 </td>
+			<td align = "center" width = "150"> 언론사 </td>
+			<td align = "center" width = "150"> 작성일 </td>
+			<td align = "center" width = "50"> 조회 </td>
 		</tr>
 		<%
 		for(int i = 0; i < newsList.size(); i++){
 			newsDTO article = (newsDTO)newsList.get(i);
 		%>
-		<tr>
-			<td><%=number--%></td>
-			<td><a href = "newsView.jsp?num=<%=article.getNum()%>"><%=article.getTitle() %></a></td>
-			<td><%=article.getId() %></td>
-			<td><%=article.getPress() %></td>
-			<td><%=sdf.format(article.getReg()) %></td>
-			<td><%=article.getViews() %></td>
+		<tr height = "30">
+			<td align = "center" width = "50"><%=number--%></td>
+			<td align = "center" width = "150"><a href = "newsView.jsp?num=<%=article.getNum()%>"><%=article.getTitle() %></a></td>
+			<td align = "center" width = "150"><%=article.getId() %></td>
+			<td align = "center" width = "150"><%=article.getPress() %></td>
+			<td align = "center" width = "150"><%=sdf.format(article.getReg()) %></td>
+			<td align = "center" width = "50"><%=article.getViews() %></td>
 		</tr>
 		<%} %>
 	</table>
@@ -86,17 +84,17 @@
 		}
 		if(startPage > 10){
 %>
-		<a href = "newslist.jsp?pageNum=<%=startPage - 10%>"> [이 전]</a>
+		<a href = "news_list.jsp?pageNum=<%=startPage - 10 %>"> [이 전]</a>
 <%
 		}
 			for(int i = startPage; i <= endPage; i++){
 %>
-			<a href = "newslist.jsp?pageNum=<%=i%>"> [<%=i %>]</a>
+			<a href = "news_list.jsp?pageNum=<%=i%>"> [<%=i %>]</a>
 <%
 			}
 		if(endPage < pageCount){
 %>
-		<a href = "newslist.jsp?pageNum=<%=startPage + 10%>"> [다 음]</a>
+		<a href = "news_list.jsp?pageNum=<%=startPage + 10%>"> [다 음]</a>
 <%
 		}
 	}
