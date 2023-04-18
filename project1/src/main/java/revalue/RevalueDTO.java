@@ -9,7 +9,7 @@ public class RevalueDTO {
 	private String con;
 	private String reCon;
 	private String ip;
-	private Timestamp date;
+	private Timestamp reg;
 	public int getNum() {
 		return num;
 	}
@@ -46,11 +46,11 @@ public class RevalueDTO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public Timestamp getDate() {
-		return date;
+	public Timestamp getReg() {
+		return reg;
 	}
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setReg(Timestamp reg) {
+		this.reg = reg;
 	}
 	
 	

@@ -1,5 +1,4 @@
 
-
 @charset 'UTF-8';
 
 .carbon-horizontal #carbonads {
@@ -200,7 +199,7 @@ code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shad
   -o-transform: rotate(-135deg) translateY(-50%);
   transform: rotate(-135deg) translateY(-50%);
 }
-@charset "UTF-8";
+
 
 /*!
  * animate.css -http://daneden.me/animate

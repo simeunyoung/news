@@ -1,26 +1,48 @@
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="revalue.RevalueDTO"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
 <%@page import="revalue.RevalueDAO"%>
 <%@page import="member.MemberDTO"%>
 <%@page import="member.MemberDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-
 
 <html>
 <head>
 <%-- css파일 경로 지정 --%>
-<link href="mypage.css" rel="stylesheet" type="text/css">
+<link href="/project1/resource/css/mypage.css" rel="stylesheet" >
+<link href="/project1/resource/css/style.css" rel="stylesheet" >
+
+<%
+	int pageSize = 10; // 한 페이지에 보여줄 목록의 수
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+%>
 
 <%
 	String id = (String)session.getAttribute("memId");
+	String pageNum = request.getParameter("pageNum");
 	String num = request.getParameter("num");
 	
+	if(pageNum == null){
+		pageNum = "1";
+	}
+	
+	int currentPage = Integer.parseInt(pageNum);
+	int startRow = (currentPage - 1) * pageSize + 1;
+	int endRow = currentPage * pageSize;
+	
+	List articleList = null;
 	MemberDAO manager = MemberDAO.getInstance();
+	RevalueDAO rv = RevalueDAO.getInstance();
 	MemberDTO member = manager.getMember(id);
 	
-	RevalueDAO rv = RevalueDAO.getInstance();
 	int count = rv.getMyArticleCount(id);
+	if(count > 0){
+		articleList = rv.getMyArticles(id, startRow, endRow);
+	}
+	
+	int number = count - (currentPage - 1) * pageSize;
 
 		if(id == null){
 %>
@@ -68,7 +90,7 @@
 									<p class="text-secondary mb-1">Full Stack Developer</p>
 									<p class="text-muted font-size-sm">Bay Area, San Francisco,
 										CA</p>
-									<button class="btn btn-outline-primary">탈퇴하기</button>
+									<button class="btn btn-outline-primary" onclick="location='deleteForm.jsp'">탈퇴하기</button>
 								</div>
 							</div>
 						</div>
@@ -223,8 +245,7 @@
 							<%-- 프로필 편집 --%>
 							<div class="row">
 								<div class="col-sm-12">
-									<input type="submit" name="update" value="적용" />
-									<a class="btn btn-info"	onclick="location='user_mypage_form.jsp?num=1'">적용</a>
+									<input type="submit" class="btn btn-info" name="update" value="적용" />
 									<a class="btn btn-info"	onclick="location='user_mypage_form.jsp'">취소</a>
 								</div>
 							</div>
@@ -232,10 +253,7 @@
 						</form>
 					<%} %>
 					</div>
-
-					<div class="row gutters-sm">
-						<div class="col-sm-6 mb-3">
-							<div class="card h-100">
+							<div class="card">
 								<div class="card-body">
 									<h6 class="d-flex align-items-center mb-3">
 										<i class="material-icons text-info mr-2">내가 쓴 댓글(<%=count %>)</i>
@@ -244,18 +262,69 @@
 										<div>
 											저장된 댓글이 없습니다.
 										</div>
-									<%}else{ %>
-									<%} %>
+									<%}else { %>
+										<table>
+											<tr>
+												<th>NO</th>
+												<th>ID</th>
+												<th>TITLE</th>
+												<th>CONTENTS</th>
+												<th>RECONTENTS</th>
+												<th>IP</th>
+												<th>DATE</th>												
+											</tr>
+											<%
+											if(articleList != null){
+												for(int i = 0; i < articleList.size(); i++){
+													RevalueDTO article = (RevalueDTO)articleList.get(i);
+											%>
+												<tr>
+													<td><%=number-- %></td>
+													<td><%=article.getId() %></td>
+													<td>
+														<a href="news.jsp?num<%=article.getNum()%>&pageNum=<%=currentPage%>">
+															<%=article.getTitle() %>
+														</a>
+													</td>
+													<td><%=article.getCon() %></td>
+													<td><%=article.getReCon() %></td>
+													<td><%=article.getIp() %></td>
+													<td><%=sdf.format(article.getReg()) %></td>											
+												</tr>
+											<%} %>
+										</table>
+									<%}} %>
+									<%
+										if(count > 0){
+											// 하단 페이지 목록 번호 갯수 정하기
+											int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+											
+											int startPage = (int)(currentPage/10) * 10 + 1;
+											int pageBlock = 10;
+											int endPage = startPage + pageBlock - 1;
+											if(endPage > pageCount) { endPage = pageCount;}
+											
+											if(startPage > 10){ %>
+												<a href="user_mypage_form.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
+											<%} 
+											for(int i = startPage; i <= endPage; i++){%>
+												<a href="user_mypage_form.jsp?pageNum=<%=i %>">[<%=i %>]</a>
+											<%} 
+											if(endPage < pageCount){%>
+												<a href="user_mypage_form.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+											<%
+										}
+										}
+									%>
+									
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-			</div>
-		</div>
-	</div>
+			</div>	
 </body>
 
 </html>
-<%} %>
+<%}%>
+

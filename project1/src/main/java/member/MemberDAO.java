@@ -59,7 +59,7 @@ public class MemberDAO extends OracleServer {
 		public void insertMember(MemberDTO member) {
 			try {
 				conn = getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,?,sysdate,'0')");
+				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,?,sysdate,'0',null,null)");
 				pstmt.setString(1, member.getId());
 				pstmt.setString(2, member.getPw());
 				pstmt.setString(3, member.getName());
