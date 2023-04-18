@@ -188,5 +188,23 @@ public class MemberDAO extends OracleServer {
 			}
 			return x;
 		}
+		
+		public int typeCheck(String id) {
+			int result = 0;
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement("select membertype from member where id = ?");
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = Integer.parseInt(rs.getString("membertype"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+			return result;
+		}
 
 }
