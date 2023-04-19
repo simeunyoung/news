@@ -10,7 +10,7 @@ public class RevalueDAO extends OracleServer {
 	public static RevalueDAO getInstance() { return instance;}
 	private RevalueDAO() {}
 	
-	public int getMyArticleCount(String id) {
+	public int getMyReconCount(String id) {
 		int x = 0;
 		try {
 			conn = getConnection();
@@ -28,33 +28,33 @@ public class RevalueDAO extends OracleServer {
 		return x;
 	}
 
-	public List getMyArticles(String id, int start, int end) {
-		List articleList = new ArrayList();
+	public List getMyReconList(String id, int startNum, int endNum) {
+		List userList = new ArrayList();
 		try {
 			conn = getConnection();
 			String sql = "select * from (select e.*,rownum r from (select * from revalue where id = ? order by num desc) e)where r >= ? and r <= ?";
 			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, id);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
+			pstmt.setInt(2, startNum);
+			pstmt.setInt(3, endNum);
 			rs = pstmt.executeQuery();
 				while(rs.next()) {
-					RevalueDTO article = new RevalueDTO();
-					article.setNum(rs.getInt("num"));
-					article.setId(rs.getString("id"));
-					article.setTitle(rs.getString("title"));
-					article.setCon(rs.getString("con"));
-					article.setReCon(rs.getString("recon"));
-					article.setIp(rs.getString("ip"));	
-					article.setReg(rs.getTimestamp("reg"));									
-					articleList.add(article);
+					RevalueDTO recon = new RevalueDTO();
+					recon.setNum(rs.getInt("num"));
+					recon.setId(rs.getString("id"));
+					recon.setTitle(rs.getString("title"));
+					recon.setCon(rs.getString("con"));
+					recon.setReCon(rs.getString("recon"));
+					recon.setIp(rs.getString("ip"));	
+					recon.setReg(rs.getTimestamp("reg"));									
+					userList.add(recon);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			oracleClose();
 		}
-		return articleList;
+		return userList;
 	}
 
 }
