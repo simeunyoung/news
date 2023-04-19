@@ -38,7 +38,9 @@ if (id == null) {
 <body>
 	<%-- col-mb-4 = mb는 중간 크기 화면 4는 가로크기, mb-3 = 하단 여백 --%>
 	<%-- card 본문을 감쌈 --%>
+	<jsp:include page="header.jsp" />
 	<div class="container">
+	
 		<%
 		if (check == 0 || check == 1) {
 		%>

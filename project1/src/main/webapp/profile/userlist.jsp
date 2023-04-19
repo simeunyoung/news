@@ -63,7 +63,13 @@ int number = count - (crtPage - 1) * pageSize;
 			%>
 			<tr>
 				<td><%=number--%></td>
-				<td><%=recon.getId()%></td>
+				<td>
+					<%if(recon.getId().equals("@@")) {%>
+						탈퇴한 회원
+					<%}else{ %>
+						<%=recon.getId()%>
+					<%} %>
+				</td>
 				<td><a
 					href="news.jsp?num<%=recon.getNum()%>&pageNum=<%=crtPage%>">
 						<%=recon.getTitle()%>

@@ -173,7 +173,7 @@ public class MemberDAO extends OracleServer {
 				if(rs.next()) {
 					String dbpw=rs.getString("pw");
 					if(dbpw.equals(pw)) {
-						pstmt = conn.prepareStatement("delete from member where id = ?");
+						pstmt = conn.prepareStatement("update member set name ='@@' where id = ?");
 						pstmt.setString(1, id);
 						pstmt.executeUpdate();
 						x = 1;

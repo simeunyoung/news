@@ -52,3 +52,4 @@ input[type="submit"]{background:#0074d9}
 .loginList{display:flex;}
 /* 공통 */
 .hidden{display:hidden;}
+.flex-wrap{display:flex;}
