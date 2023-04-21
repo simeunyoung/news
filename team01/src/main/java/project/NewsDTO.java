@@ -12,7 +12,7 @@ public class NewsDTO {
 	private String recon;
 	private int views;
 	private String title;
-	private String press;
+	private String press; // member , news
 	
 	public String getPress() {	return press;	}
 	public void setPress(String press) {	this.press = press;	}
