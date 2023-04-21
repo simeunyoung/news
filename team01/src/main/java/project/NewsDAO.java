@@ -302,6 +302,57 @@ public class NewsDAO extends OracleServer {
 		return result;
 	} // public int deleteNews(int num, String pw) throws Exception {
 	
+	public int getNewsCount() throws Exception{
+		int x = 0;
+		try {
+			conn = getConnection();
+			sql = "select count(*) from news";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				x = rs.getInt(1);
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return x;
+	} // public int getNewsCount() throws Exception{
+	
+	public List getNews(int start, int end) throws Exception{
+		List newsList = new ArrayList();
+		
+		try {
+			conn = getConnection();
+			sql = "select * from(select e.*, rownum r from(select * from news order by reg desc) e) where r >= ? and r <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+					NewsDTO article = new NewsDTO();
+					article.setNum(rs.getInt("num"));
+					article.setId(rs.getString("id"));
+					article.setNewstype(rs.getString("newstype"));
+					article.setTitle(rs.getString("title"));
+					article.setCon(rs.getString("con"));
+					article.setReg(rs.getTimestamp("reg"));
+					article.setPw(rs.getString("pw"));
+					article.setViews(rs.getInt("views"));
+					article.setPress(rs.getString("press"));
+					article.setIp(rs.getString("ip"));
+					newsList.add(article);
+				}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return newsList;
+	} // public List getNews(int start, int end) throws Exception{
+	
 	public void deleteRecon(int num) throws Exception { // 댓글 삭제 메소드
 		try {
 			conn = getConnection();
@@ -317,5 +368,61 @@ public class NewsDAO extends OracleServer {
 		}
 		
 	} // public void deleteRecon(int num) throws Exception {
+	
+	public int getNewstypeCount(String newstype) throws Exception {
+		int x = 0;
+		try {
+			conn = getConnection();
+			sql = "select count(*) from news where newstype = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newstype);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x = rs.getInt(1);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return x;
+	} // public int getNewstypeCount(String newstype) throws Exception {
+
+	// 뉴스 타입별로 목록을 리스트로 가져옴
+	public List<NewsDTO> getNewsType(int start, int end, String newstype) throws Exception {
+
+		List<NewsDTO> newsList = new ArrayList<NewsDTO>();
+
+		try {
+			conn = getConnection();
+			sql = "select * from (select e.*, rownum r from (select * from news where newstype = ? order by reg desc) e) where r >= ? and r <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newstype);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				NewsDTO article = new NewsDTO();
+				article.setNum(rs.getInt("num"));
+				article.setId(rs.getString("id"));
+				article.setNewstype(rs.getString("newstype"));
+				article.setTitle(rs.getString("title"));
+				article.setCon(rs.getString("con"));
+				article.setReg(rs.getTimestamp("reg"));
+				article.setPw(rs.getString("pw"));
+				article.setViews(rs.getInt("views"));
+				article.setPress(rs.getString("press"));
+				article.setIp(rs.getString("ip"));
+				newsList.add(article);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return newsList;
+	} // public List<NewsDTO> getNewsType(int start, int end, String newstype) throws
+		// Exception{
 	
 } // public class NewsDAO {

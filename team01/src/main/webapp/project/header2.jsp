@@ -9,16 +9,16 @@
 		<tr>
 			<td width="73%" rowspan="2"><img src="mainpage.png"
 				onclick="location='main.jsp'" width="300" height="45" /></td>
-			<td>&nbsp; <a href="listhottopic.jsp" class="menu"><font
+			<td>&nbsp; <a href="newstypelist.jsp?newstype=topic" class="menu"><font
 					color="#OO5397"><b>topic</b></a></font> &nbsp;
 			</td>
-			<td>&nbsp; <a href="listPython.jsp" class="menu"><font
+			<td>&nbsp; <a href="newstypelist.jsp?newstype=Python" class="menu"><font
 					color="#OO5397"><b>Python</b></a></font> &nbsp;
 			</td>
-			<td>&nbsp; <a href="listJava.jsp" class="menu"><font
+			<td>&nbsp; <a href="newstypelist.jsp?newstype=java" class="menu"><font
 					color="#OO5397"><b>Java</b></a></font> &nbsp;
 			</td>
-			<td>&nbsp; <a href="listJavaSript.jsp" class="menu"><font
+			<td>&nbsp; <a href="newstypelist.jsp?newstype=JavaScript" class="menu"><font
 					color="#OO5397"><b>JavaScript</b></a></font> &nbsp;
 			</td>
 			<td>&nbsp; <a href="listPartner.jsp" class="menu"><font

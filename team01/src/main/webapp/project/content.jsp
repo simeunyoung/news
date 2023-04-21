@@ -35,6 +35,7 @@ String con = text.getCon();
 
 <div class="recon_box">
 <b>댓글</b><br /><br />
+<div align="right"><button  onClick="window.location.reload()">새로고침</button></div>
 <% 
 List recons = method.getRecon(title,con);
 if(recons != null){
