@@ -3,6 +3,8 @@ package member;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import admin.OracleServer;
+
 public class MemberDAO extends OracleServer {
 
 		private static MemberDAO instance = new MemberDAO();

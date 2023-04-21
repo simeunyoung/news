@@ -3,7 +3,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import member.OracleServer;
+import admin.OracleServer;
+
+
 public class SvcenterDAO extends OracleServer{
 	
 	private static SvcenterDAO instance = new SvcenterDAO();
