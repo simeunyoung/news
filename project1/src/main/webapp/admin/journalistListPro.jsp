@@ -6,8 +6,8 @@
 <jsp:setProperty property="*" name="dto" />
 
 <%
-LoginDAO dao = LoginDAO.getInstance();
-dao.insertPJ(dto);
+	LoginDAO dao = LoginDAO.getInstance();
+	dao.addJournalist(dto.getId());
 %>
 
 dto.getId() : <%=dto.getId()%><br />

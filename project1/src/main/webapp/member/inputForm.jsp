@@ -76,7 +76,7 @@
 	<form action="inputPro.jsp" method="post" name="userinput" onsubmit="return inputCheck();">
 		<h2>회원가입</h2>
 		<div>
-			<table>
+			<table align="center">
 				<tr>
 					<td>아이디</td>
 					<td>

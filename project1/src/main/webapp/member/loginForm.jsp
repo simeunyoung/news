@@ -1,28 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
 <link href="/project1/resource/css/style.css" rel="stylesheet"/>
-<script type="text/javascript" >
-function start(){
-	document.myform.id.focus();
-}
-function loginCheck(){
-	if(!document.myform.id.value){
-		alert("아이디를 입력하지 않으셨습니다.");
-		document.myform.id.focus();
-		return false;
-	}
-	if(!document.myform.pw.value){
-		alert("비밀번호를 입력하지 않으셨습니다.");
-		document.myform.pw.focus();
-		return false;
-	}
-}
-</script>
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <%
 	String cooId = null;
@@ -33,7 +15,7 @@ function loginCheck(){
 		}
 	}
 %>
-<body>
+<body onload="start()">
 	<form action="loginPro.jsp" method="post" name="myform" onsubmit="return loginCheck();">
 		<h2>로그인</h2>
 		<div>
