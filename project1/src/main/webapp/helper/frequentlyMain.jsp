@@ -101,7 +101,7 @@
 </form>
 
 		
-		
+<%-- 	
 <%//if(id.equals("admin")){%>		
 <form method = "post" action = "frequentlyForm.jsp" name = "frequentlyMain">
 	<table width = "600" border = "1" cellspacing ="0" cellpadding = "0" align = "right">
@@ -111,4 +111,4 @@
 <%//}%>
 	</table>
 </form>
-	
+--%>	
