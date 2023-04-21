@@ -36,10 +36,10 @@
 <%	for(int i = 0; i < jList.size(); i++) {
 		LoginDTO dto = (LoginDTO)jList.get(i);%>	
 		<tr height="20">
-			<td align="center" width="200"><%=dto.getId()%><input type="hidden" name="id" value="<%=dto.getId()%>" /></td>
-			<td align="center" width="100"><%=dto.getType()%><input type="hidden" name="type" value="<%=dto.getType()%>" /></td>
-			<td align="center" width="300"><%=dto.getEmail()%><input type="hidden" name="email" value="<%=dto.getEmail()%>" /></td>
-			<td align="center" width="100"><input type="submit" value="승인"/></td>
+			<td align="center" width="200"><%=dto.getId()%></td>
+			<td align="center" width="100"><%=dto.getType()%></td>
+			<td align="center" width="300"><%=dto.getEmail()%></td>
+			<td align="center" width="100"><input type="button" value="승인" onclick="location='journalistListPro.jsp?id=<%=dto.getId()%>&Type=<%=dto.getType()%>&email=<%=dto.getEmail()%>'"/></td>
 		</tr>
 <%	} %>
 	</table>

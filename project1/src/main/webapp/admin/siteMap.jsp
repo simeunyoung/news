@@ -9,8 +9,10 @@ sid = <%=sid%>
 
 <h3>관리자</h3>
 <a href="journalistForm.jsp">기자변경 폼 v</a> &nbsp;
-<a href="journalistPro.jsp">기자변경 프로 v</a> &nbsp;
+<a href="journalistPro.jsp">기자변경 프로 v</a> &nbsp; <br />
 <a href="journalistList.jsp">기자변경 리스트</a> &nbsp;
+<a href="journalistListPro.jsp">기자변경 리스트 프로</a> &nbsp;
+
 
 <hr>
 
