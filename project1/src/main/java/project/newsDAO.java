@@ -3,7 +3,7 @@ package project;
 import java.sql.*;
 import javax.sql.*;
 
-import board2.BoardDataBean;
+import project.newsDTO;
 
 import javax.naming.*;
 import java.util.*;

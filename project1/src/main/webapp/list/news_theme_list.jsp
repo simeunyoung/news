@@ -24,7 +24,6 @@
 	List<newsDTO> newsList = null;
 	newsDAO newsPro = newsDAO.getInstance();
 	String newsType = request.getParameter("newsType");
-	newsType = "java";
 	
 	newscount = newsPro.getNewstypeCount(newsType);
 	

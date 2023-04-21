@@ -73,31 +73,33 @@
 		<%} %>
 	</table>
 	<%} %>
-<%
-	if(newscount > 0){
-		int pageCount = newscount / pageSize + (newscount % pageSize == 0 ? 0 : 1);
-		int startPage = (int)(currentPage / 10) * 10 + 1;
-		int pageBlock = 10;
-		int endPage = startPage + pageBlock - 1;
-		if(endPage > pageCount){
-			endPage = pageCount;
-		}
-		if(startPage > 10){
-%>
-		<a href = "news_list.jsp?pageNum=<%=startPage - 10 %>"> [이 전]</a>
-<%
-		}
-			for(int i = startPage; i <= endPage; i++){
-%>
-			<a href = "news_list.jsp?pageNum=<%=i%>"> [<%=i %>]</a>
-<%
+	<div align="center">
+	<%
+		if(newscount > 0){
+			int pageCount = newscount / pageSize + (newscount % pageSize == 0 ? 0 : 1);
+			int startPage = (int)(currentPage / 10) * 10 + 1;
+			int pageBlock = 10;
+			int endPage = startPage + pageBlock - 1;
+			if(endPage > pageCount){
+				endPage = pageCount;
 			}
-		if(endPage < pageCount){
-%>
-		<a href = "news_list.jsp?pageNum=<%=startPage + 10%>"> [다 음]</a>
-<%
+			if(startPage > 10){
+	%>
+			<a href = "news_list.jsp?pageNum=<%=startPage - 10 %>"> [이 전]</a>
+	<%
+			}
+				for(int i = startPage; i <= endPage; i++){
+	%>
+				<a href = "news_list.jsp?pageNum=<%=i%>"> [<%=i %>]</a>
+	<%
+				}
+			if(endPage < pageCount){
+	%>
+			<a href = "news_list.jsp?pageNum=<%=startPage + 10%>"> [다 음]</a>
+	<%
+			}
 		}
-	}
-%>
+	%>
+	</div>
 	</body>
 </html>
