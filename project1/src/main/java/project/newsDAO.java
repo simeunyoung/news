@@ -70,7 +70,7 @@ public class newsDAO extends OracleServer {
 	}
 	
 	// 뉴스 타입별로 수를 구하는 메서드
-	public int getNewstypeCount(String newstype) throws Exception {
+	public int getNewsTypeCount(String newstype) throws Exception {
 	    
 		int x = 0;
 
@@ -126,4 +126,39 @@ public class newsDAO extends OracleServer {
 		}
 		return newsList;
 	}
+	
+	// 게시글 목록 중 핫 토픽 리스트 조회 후 list 형태로 변환
+		public List gethotNews(int start, int end) throws Exception{
+			
+			List newsList = new ArrayList();
+			
+			try {
+				conn = getConnection();
+				sql = "select * from(select e.*, rownum r from(select * from news order by views desc) e) where r >= ? and r <= ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+						newsDTO article = new newsDTO();
+						article.setNum(rs.getInt("num"));
+						article.setId(rs.getString("id"));
+						article.setNewstype(rs.getString("newstype"));
+						article.setTitle(rs.getString("title"));
+						article.setCon(rs.getString("con"));
+						article.setReg(rs.getTimestamp("reg"));
+						article.setPw(rs.getString("pw"));
+						article.setViews(rs.getInt("views"));
+						article.setPress(rs.getString("press"));
+						article.setIp(rs.getString("ip"));
+						newsList.add(article);
+					}
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				oracleclose();
+			}
+			return newsList;
+		}
 }

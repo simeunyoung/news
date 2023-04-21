@@ -25,7 +25,7 @@
 	newsDAO newsPro = newsDAO.getInstance();
 	String newsType = request.getParameter("newsType");
 	
-	newscount = newsPro.getNewstypeCount(newsType);
+	newscount = newsPro.getNewsTypeCount(newsType);
 	
 	if(newscount > 0){
 		newsList = newsPro.getNewsType(startRow, endRow, newsType);
