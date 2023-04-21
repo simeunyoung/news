@@ -87,6 +87,14 @@
                   <div class="card h-100">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-5">관련 기사</i></h6>
+                      <%
+                      // 임시 !!!
+                      List articleList = new ArrayList();
+                      	int count = 0;
+                      	int number = 0;
+                      	int currentPage = 0;
+                      	int pageSize = 0;
+                      %>
                     	<i class="material-icons text-info mr-2">내가 쓴 댓글(<%=count %>)</i>
                     	<%if(count == 0){ %>
 										<div>
@@ -119,7 +127,7 @@
 													<td><%=article.getCon() %></td>
 													<td><%=article.getReCon() %></td>
 													<td><%=article.getIp() %></td>
-													<td><%=sdf.format(article.getReg()) %></td>											
+													<%-- 임시 !!<td><%=sdf.format(article.getReg()) %></td> --%>											
 												</tr>
 											<%} %>
 										</table>
