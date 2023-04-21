@@ -3,7 +3,8 @@ package revalue;
 import java.util.ArrayList;
 import java.util.List;
 
-import member.OracleServer;
+import admin.OracleServer;
+
 
 public class RevalueDAO extends OracleServer {
 	private static RevalueDAO instance = new RevalueDAO();

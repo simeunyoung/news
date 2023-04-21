@@ -1,7 +1,6 @@
 package member;
-
-import java.util.ArrayList;
-import java.util.TreeSet;
+import java.util.*;
+import admin.OracleServer;
 
 public class MemberDAO extends OracleServer {
 
@@ -212,16 +211,16 @@ public class MemberDAO extends OracleServer {
 		
 		// company
 		  public TreeSet<String> selectPress() {
-				TreeSet<String> list = new TreeSet<>();
+			  	TreeSet<String> list = new TreeSet<>();
+			  	try {
 				conn = getConnection();
-				String sql = "select press from member where press is not null and press != 'null'";
-				try { pstmt = conn.prepareStatement(sql);
-				 		rs = pstmt.executeQuery();
-					while(rs.next()) {
-				 		MemberDTO dto = new MemberDTO();
-						dto.setPress(rs.getString("press"));
-						list.add(dto.getPress());
-					}
+				pstmt = conn.prepareStatement("select press from member where press is not null and press != 'null'");
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+				 	MemberDTO dto = new MemberDTO();
+					dto.setPress(rs.getString("press"));
+					list.add(dto.getPress());
+				}
 				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {
