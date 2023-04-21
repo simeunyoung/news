@@ -88,11 +88,14 @@
 			if(startPage > 10){%>
 		<a href="list.jsp?pageNum=<%=startPage - 10 %>"> [이 전]</a>
 		<%}	for(int i = startPage; i <= endPage; i++){%>
-		<a href="list.jsp?pageNum=<%=i%>"> [<%=i %>]
-		</a>
+		<a href="list.jsp?pageNum=<%=i%>"> [<%=i %>]</a>
 		<%}if(endPage < pageCount){	%>
 		<a href="list.jsp?pageNum=<%=startPage + 10%>"> [다 음]</a>
 		<%	}	}	%>
+		
+		
+		
+		
 	</div>
 </body>
 </html>

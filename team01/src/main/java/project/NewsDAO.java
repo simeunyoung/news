@@ -391,7 +391,7 @@ public class NewsDAO extends OracleServer {
 	// 뉴스 타입별로 목록을 리스트로 가져옴
 	public List<NewsDTO> getNewsType(int start, int end, String newstype) throws Exception {
 
-		List<NewsDTO> newsList = new ArrayList<NewsDTO>();
+		List<NewsDTO> newsList = new ArrayList<NewsDTO>(end);
 
 		try {
 			conn = getConnection();

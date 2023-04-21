@@ -9,7 +9,7 @@
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
-	String newsType = request.getParameter("newstype");
+	String newstype = request.getParameter("newstype");
 	String pageNum = request.getParameter("pageNum");
 	
 	if(pageNum == null){
@@ -24,10 +24,10 @@
 	
 	List<NewsDTO> newsList = null;
 	NewsDAO newsPro = NewsDAO.getInstance();
-	newscount = newsPro.getNewstypeCount(newsType); // 메소드
+	newscount = newsPro.getNewstypeCount(newstype); // 메소드
 	
 	if(newscount > 0){
-		newsList = newsPro.getNewsType(startRow, endRow, newsType); // 메소드
+		newsList = newsPro.getNewsType(startRow, endRow, newstype); // 메소드
 	}
 	
 	number = newscount - (currentPage - 1) * pageSize;
@@ -36,7 +36,7 @@
 <html>
 <body>
 <center>
-	<h2><%= newsType %>
+	<h2><%= newstype %>
 		뉴스
 	</h2>
 	<table border="1">
@@ -68,31 +68,18 @@
 	<div align="center">
 		<% if (newsList != null && newsList.size() > 0) {
                 int pageCount = (newscount / pageSize) + (newscount % pageSize == 0 ? 0 : 1);
-                int startPage = ((currentPage - 1) / 10) * 10 + 1;
+                int startPage = ((currentPage) / 10) * 10 + 1;
                 int endPage = startPage + 9;
-
                 if (endPage > pageCount) {
-                    endPage = pageCount;
-                }
+                    endPage = pageCount;}
 
                 if (startPage > 1) { %>
-		<a
-			href="newstypelist.jsp?pageNum=<%= startPage - 1 %>&newsType=<%= newsType %>">[이전]</a>
-		<% }
-
-                for (int i = startPage; i <= endPage; i++) { %>
-		<% if (i == currentPage) { %>
-		<%= i %>
-		<% } else { %>
-		<a href="newstypelist.jsp?pageNum=<%= i %>&newsType=<%= newsType %>"><%= i %></a>
-		<% } %>
-		<% }
-
-                if (endPage < pageCount) { %>
-		<a
-			href="newstypelist.jsp?pageNum=<%= endPage + 1 %>&newsType=<%= newsType %>">[다음]</a>
-		<% }
-            } %>
+		<a href="newstypelist.jsp?pageNum=<%= startPage - 10 %>&newstype=<%= newstype %>">[이전]</a>
+		<% } for (int i = startPage; i <= endPage; i++) { %>
+		<a href="newstypelist.jsp?pageNum=<%= i %>&newstype=<%= newstype %>">[<%= i %>]</a>
+		<% } if (endPage < pageCount) { %>
+		<a	href="newstypelist.jsp?pageNum=<%= endPage + 10 %>&newstype=<%= newstype %>">[다음]</a>
+		<% } } %>
 	</div>
 
 
