@@ -83,17 +83,12 @@ nav ul ul ul {
 %>
 <body>
 <nav>
-	<a href="#">CODENEWS</a>
+	<a href="main.jsp">CODENEWS</a>
   <ul>
     <li><a href="#">회사소개</a>
       <ul>
         <li><a href="#">사이트 소개</a></li>
         <li><a href="#">팀원 소개</a></li>
-      </ul>
-    </li>
-    <li><a href="#">나의정보</a>
-      <ul>
-        <li><a href="#">마이 프로필</a></li>
       </ul>
     </li>
     <li><a href="#">뉴스</a>
@@ -137,8 +132,8 @@ nav ul ul ul {
   </div>
   <%}else{ %>
   <div class="flex-wrap">
- 	<div><a href="/project1/profile/user_mypage_form.jsp?id=id">마이페이지</a></div>
-  	<div><a href="/project1/profile/main.jsp">로그아웃</a></div>
+ 	<div><a href="/project1/profile/user_mypage_form.jsp?id=<%=id%>">마이페이지</a></div>
+  	<div><a href="/project1/member/logout.jsp">로그아웃</a></div>
   </div>
   <%} %>
 </nav>

@@ -50,7 +50,7 @@ if (id == null) {
 				<ol class="breadcrumb">
 					<%-- 사용자가 이전 페이지 or 홈으로 돌아갈 수 있음 --%>
 					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page">ueser
+					<li class="breadcrumb-item active" aria-current="page">user
 						Profile</li>
 				</ol>
 			</nav>
