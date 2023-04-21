@@ -14,6 +14,8 @@ public class MemberDTO {
 	private Timestamp reg;
 	private String memberType;
 	private String press;
+	private String pressSubcribe;
+	private String reporterSubcribe;
 	
 	public String getId() {
 		return id;
@@ -74,5 +76,17 @@ public class MemberDTO {
 	}
 	public void setPress(String press) {
 		this.press = press;
+	}
+	public String getPressSubcribe() {
+		return pressSubcribe;
+	}
+	public void setPressSubcribe(String pressSubcribe) {
+		this.pressSubcribe = pressSubcribe;
+	}
+	public String getReporterSubcribe() {
+		return reporterSubcribe;
+	}
+	public void setReporterSubcribe(String reporterSubcribe) {
+		this.reporterSubcribe = reporterSubcribe;
 	}
 }
