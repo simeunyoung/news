@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="admin.QnaDAO"%>
-<%@ page import="admin.QnaDTO"%>
+<%@ page import="admin.AdminDAO"%>
+<%@ page import="admin.AdminDTO"%>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
@@ -9,8 +9,8 @@
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	
-	QnaDAO dao = QnaDAO.getInstance();
-	QnaDTO dto = dao.getQna(num);
+	AdminDAO dao = AdminDAO.getInstance();
+	AdminDTO dto = dao.getQna(num);
 %>
 <center><h3>Q&A</h3></center>
 
@@ -20,10 +20,10 @@
 <form>
 	<table align="center" width="800" border="1" cellspacing="0">
 		<tr height="30">
-			<td align="center"><%=dto.getSubject()%></td>
+			<td align="center"><%=dto.getTitle()%></td>
 		</tr>
 		<tr height="300">
-			<td align="center"><%=dto.getContent()%></td>
+			<td align="center"><%=dto.getCon()%></td>
 		</tr>
 	</table>
 </form>

@@ -68,14 +68,16 @@ public class AdminDAO extends OracleServer {
 	
 	// dto를 입력받아 기자신청명단 db에 등록하는 메서드
 	// set값 추가되야할듯
-	public void insertPJ(MemberDTO dto) {
+	public void insertJas(MemberDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into pj values(?,?,?)";
+			sql = "insert into jas values(?,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getMemberType());
 			pstmt.setString(3, dto.getEmail());
+			pstmt.setString(4, dto.getTel());
+			pstmt.setString(5, dto.getIp());
 			pstmt.executeUpdate();
 			
 		} catch(Exception e) {
@@ -90,7 +92,7 @@ public class AdminDAO extends OracleServer {
 		int result = 0;
 		try {
 			conn = getConnection();
-			sql = "select count(*) from pj";
+			sql = "select count(*) from jas";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -109,7 +111,7 @@ public class AdminDAO extends OracleServer {
 		List JList = new ArrayList();
 		try {
 			conn = getConnection();
-			sql = "select * from pj";
+			sql = "select * from jas";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -118,6 +120,9 @@ public class AdminDAO extends OracleServer {
 				dto.setId(rs.getString("id"));
 				dto.setMemberType(rs.getString("memberType"));
 				dto.setEmail(rs.getString("email"));
+				dto.setTel(rs.getString("tel"));
+				dto.setIp(rs.getString("ip"));
+				dto.setReg(rs.getTimestamp("reg"));
 				JList.add(dto);
 			}
 		} catch(Exception e) {
@@ -133,19 +138,20 @@ public class AdminDAO extends OracleServer {
 	
 	// 1-1Form에서 받은 데이터를 받아 db에 입력해주는 메서드
 	// dto 통합후 확인
-		public boolean oneononeInsert(HelperDTO dto) {
+		public boolean oneononeInsert(AdminDTO dto) {
 			boolean result = false;
 			try {
 				conn = getConnection();
-				sql = "insert into project1(num,name,pw,email,subject,content,readcount,ip,reg) values(project1_seq.nextval,?,?,?,?,?,?,?,sysdate)";
+				sql = "insert into project1(num,id,name,email,tel,title,con,membertype,ip,reg) values(project1_seq.nextval,?,?,?,?,?,?,?,sysdate)";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, dto.getName());
-				pstmt.setString(2, dto.getPw());
+				pstmt.setString(1, dto.getId());
+				pstmt.setString(2, dto.getName());
 				pstmt.setString(3, dto.getEmail());
-				pstmt.setString(4, dto.getSubject());
-				pstmt.setString(5, dto.getContent());
-				pstmt.setInt(6, dto.getReadcount());
-				pstmt.setString(7, dto.getIp());
+				pstmt.setString(4, dto.getTel());
+				pstmt.setString(5, dto.getTitle());
+				pstmt.setString(6, dto.getCon());
+				pstmt.setString(7, dto.getMemberType());
+				pstmt.setString(8, dto.getIp());
 				pstmt.executeUpdate();
 				result = true;
 			} catch(Exception e) {
@@ -183,22 +189,23 @@ public class AdminDAO extends OracleServer {
 			List qnaList = new ArrayList();
 			try {
 				conn = getConnection();
-				sql = "select * from (select e.*, rownum r from (select * from project1 order by num desc) e) where r >=? and r <=?";
+				sql = "select * from (select e.*, rownum r from (select * from oneonone order by num desc) e) where r >=? and r <=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
-					HelperDTO dto = new HelperDTO();
+					AdminDTO dto = new AdminDTO();
 					dto.setNum(rs.getInt("num"));
-					dto.setName(rs.getString("name"));
+					dto.setId(rs.getString("id"));
 					dto.setPw(rs.getString("pw"));
 					dto.setEmail(rs.getString("email"));
-					dto.setSubject(rs.getString("subject"));
-					dto.setContent(rs.getString("content"));
-					dto.setReadcount(rs.getInt("readcount"));
-					dto.setType(rs.getString("type"));
+					dto.setTel(rs.getString("tel"));
+					dto.setName(rs.getString("name"));
+					dto.setMemberType(rs.getString("memberType"));
+					dto.setTitle(rs.getString("title"));
+					dto.setCon(rs.getString("con"));
 					dto.setIp(rs.getString("ip"));
 					dto.setReg(rs.getTimestamp("reg"));
 					qnaList.add(dto);
@@ -212,29 +219,25 @@ public class AdminDAO extends OracleServer {
 		} // public List getQnaList() {
 		
 		// 글 고유번호를 입력받아서 그 고유번호의 데이터를 dto에 대입해주는 메소드
-		public HelperDTO oneononeGet(int num) {
-			HelperDTO dto = null;
+		public AdminDTO oneononeGet(int num) {
+			AdminDTO dto = null;
 			try {
 				conn = getConnection();
-				sql = "update project1 set readcount = readcount+1 where num=?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, num);
-				pstmt.executeUpdate();
-				sql = "select * from project1 where num=?";
+				sql = "select * from oneonone where num=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
-				
 				if(rs.next()) {
-					dto = new HelperDTO();
+					dto = new AdminDTO();
 					dto.setNum(rs.getInt("num"));
-					dto.setName(rs.getString("name"));
+					dto.setId(rs.getString("id"));
 					dto.setPw(rs.getString("pw"));
 					dto.setEmail(rs.getString("email"));
-					dto.setSubject(rs.getString("subject"));
-					dto.setContent(rs.getString("content"));
-					dto.setReadcount(rs.getInt("readcount"));
-					dto.setType(rs.getString("type"));
+					dto.setTel(rs.getString("tel"));
+					dto.setName(rs.getString("name"));
+					dto.setMemberType(rs.getString("memberType"));
+					dto.setTitle(rs.getString("title"));
+					dto.setCon(rs.getString("con"));
 					dto.setIp(rs.getString("ip"));
 					dto.setReg(rs.getTimestamp("reg"));
 				}
@@ -250,15 +253,16 @@ public class AdminDAO extends OracleServer {
 		// Q&A 관련 ---------------------------------------------------
 		
 		// Q&A db에 데이터를 입력하는 메서드
-		public boolean qnaInsert(QnaDTO dto) {
+		public boolean qnaInsert(AdminDTO dto) {
 			boolean result = false;
 			try {
 				conn = getConnection();
-				sql = "insert into pqna values(pqna_seq.nextval,?,?,?,sysdate)";
+				sql = "insert into qna values(qna_seq.nextval,?,?,?,?,sysdate)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, dto.getId());
-				pstmt.setString(2, dto.getSubject());
-				pstmt.setString(3, dto.getContent());
+				pstmt.setString(2, dto.getTitle());
+				pstmt.setString(3, dto.getCon());
+				pstmt.setString(4, dto.getIp());
 				pstmt.executeUpdate();
 				result = true;
 			} catch(Exception e) {
@@ -274,18 +278,19 @@ public class AdminDAO extends OracleServer {
 			List qnaList = new ArrayList();
 			try {
 				conn = getConnection();
-				sql = "select * from (select e.*, rownum r from (select * from pqna order by num desc) e) where r >=? and r <=?";
+				sql = "select * from (select e.*, rownum r from (select * from qna order by num desc) e) where r >=? and r <=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
-					QnaDTO dto = new QnaDTO();
+					AdminDTO dto = new AdminDTO();
 					dto.setNum(rs.getInt("num"));
 					dto.setId(rs.getString("id"));
-					dto.setSubject(rs.getString("subject"));
-					dto.setContent(rs.getString("content"));
+					dto.setTitle(rs.getString("title"));
+					dto.setCon(rs.getString("con"));
+					dto.setIp(rs.getString("ip"));
 					dto.setReg(rs.getTimestamp("reg"));
 					qnaList.add(dto);
 				}
@@ -302,7 +307,7 @@ public class AdminDAO extends OracleServer {
 			int result = 0;
 			try {
 				conn = getConnection();
-				sql ="select count(*) from pqna";
+				sql ="select count(*) from qna";
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				
@@ -322,13 +327,13 @@ public class AdminDAO extends OracleServer {
 			int result = 0;
 			try {
 				conn = getConnection();
-				sql = "select type from plogin where id=?";
+				sql = "select MemberType from member where id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					result = Integer.parseInt(rs.getString("type"));
+					result = Integer.parseInt(rs.getString("memberType"));
 				}
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -339,21 +344,22 @@ public class AdminDAO extends OracleServer {
 		} // public int typeChk(String id) {
 		
 		// num을 이용하여 Q&A 정보를 dto에 set하는 메서드
-		public QnaDTO getQna(int num) {
-			QnaDTO dto = null;
+		public AdminDTO getQna(int num) {
+			AdminDTO dto = null;
 			try {
 				conn = getConnection();
-				sql = "select * from pqna where num=?";
+				sql = "select * from qna where num=?";
 				pstmt= conn.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					dto = new QnaDTO();
+					dto = new AdminDTO();
 					dto.setNum(rs.getInt("num"));
 					dto.setId(rs.getString("id"));
-					dto.setSubject(rs.getString("subject"));
-					dto.setContent(rs.getString("content"));
+					dto.setTitle(rs.getString("title"));
+					dto.setCon(rs.getString("content"));
+					dto.setIp(rs.getString("ip"));
 					dto.setReg(rs.getTimestamp("reg"));
 				}
 			} catch(Exception e) {
