@@ -32,7 +32,7 @@ NewsDTO text = method.getdata(num);
 			type="submit" class="submit_button" value="변경완료" /> &nbsp; <input
 			type="reset" class="submit_button" value="초기화"> &nbsp; <input
 			type="button" class="submit_button" value="목록보기"
-			onclick="location='testlist.jsp'">
+			onclick="location='list.jsp'">
 	</div>
 </form>
 
