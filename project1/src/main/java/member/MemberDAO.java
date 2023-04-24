@@ -268,5 +268,38 @@ public class MemberDAO extends OracleServer {
 				}
 				return list;
 			}
+		    public void PSubscribe(String id, String Wpress) {
+				   	try {
+					conn = getConnection();
+					pstmt = conn.prepareStatement("update member set presssubscribe=? where id=?");
+					pstmt.setString(1, Wpress);
+					pstmt.setString(2, id);
+					pstmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					oracleClose();
+				}
+			}
+		    public String selectExist(String id) {
+		        String exist = "1233";
+		        try {
+		            conn = getConnection();
+		            pstmt = conn.prepareStatement("select presssubscribe from member where id = ?");
+		            pstmt.setString(1, id);
+		            rs = pstmt.executeQuery();
+		            while (rs.next()) {
+		                MemberDTO dto = new MemberDTO();
+		                dto.setPress(rs.getString("presssubscribe"));
+		                exist = dto.getPress();
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		            oracleClose();
+		        }
+		        return exist;
+		    }
+
 
 }
