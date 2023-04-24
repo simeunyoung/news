@@ -1,13 +1,13 @@
 package helper;
 import java.sql.Timestamp;
 public class SvcenterDTO {		//1대1 문의하기
-	private int num1;			//글번호
-	private String id;			//작성자
-	private String title;		//글제목
-	private String email;		//이메일
-	private String con;			//글내용
-	private String pw;			//비밀번호
-	private Timestamp reg;		//작성날짜
+	private int num1;
+	private String id;
+	private String title;
+	private String email;
+	private String con;
+	private String pw;
+	private Timestamp reg;
 	
 	public void setNum1(int num1) {this.num1 = num1;}
 	public void setId(String id) {this.id = id;}	

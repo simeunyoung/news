@@ -11,8 +11,8 @@
     dto.setReg(new Timestamp(System.currentTimeMillis())); //날짜 가져오기
 	dto.setIp(request.getRemoteAddr()); // ip 가져오기
 	
-	String nick = request.getParameter("nick");
-	dto.setNick(nick); // 작성자 : 아이디로 가져오기
+	String id = request.getParameter("id");
+	dto.setId(id); // 작성자 : 아이디로 가져오기
 
     NewsDAO news = NewsDAO.getInstance();
     news.insert(dto);

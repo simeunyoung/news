@@ -3,14 +3,12 @@
 <%@ page import = "helper.Svcenter1DAO"%>
 <%@ page import = "helper.Svcenter1DTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
-<%-- 자주 묻는 질문 내용보는 곳 --%>
+
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	
-	String id = (String)session.getAttribute("memId");
 	
 	try{
 		Svcenter1DAO svdao1 = Svcenter1DAO.getInstance();
@@ -46,16 +44,12 @@
 		<tr>
 			<td colspan = "4" align = "right">
 			
-			<%if(id != null){
-				if(id.equals("admin")){%>
-			
 			<input type = "button" value = "글수정" onclick = "location.href='fqupForm.jsp?num=<%=svdto1.getNum()%>&pageNum<%=pageNum%>'">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type = "button" value = "글삭제" onclick = "location.href='fqdeleForm.jsp?num=<%=svdto1.getNum()%>&pageNum<%=pageNum%>'">
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<%}%>
-		<%}%>
-			<input type = "button" value = "글목록" onclick = "location.href='svmain.jsp?pageNum=<%=pageNum%>'">
+			
+			<input type = "button" value = "글목록" onclick = "location.href='frequentlyMain.jsp?pageNum=<%=pageNum%>'">
 			</td>
 		</tr>
 	</table>

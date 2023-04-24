@@ -13,7 +13,7 @@
 	int check = svDAO.deleteSvcenter(num, pw); 
 	
 	if(check == 1){%>
-		<meta http-equiv="Refresh" content="0;url=qalist.jsp?pageNum=<%=pageNum%>">
+		<meta http-equiv="Refresh" content="0;url=svmain.jsp?pageNum=<%=pageNum%>">
 	<%}else{%>
 		<script language = "JavaScript">
 			alert("비밀번호가 맞지 않습니다.");

@@ -6,9 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import member.MemberDTO;
-
 import java.util.ArrayList;
 
 public class NewsDAO extends OracleServer {
@@ -43,7 +40,7 @@ public class NewsDAO extends OracleServer {
 	public void insert(NewsDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into news(num,pw,title,con,newstype,ip,reg,nick) values(news_seq.nextval,?,?,?,?,?,?,?)";
+			sql = "insert into news(num,pw,title,con,newstype,ip,reg,id) values(news_seq.nextval,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getPw());
 			pstmt.setString(2, dto.getTitle());
@@ -51,7 +48,7 @@ public class NewsDAO extends OracleServer {
 			pstmt.setString(4, dto.getNewstype());
 			pstmt.setString(5, dto.getIp());
 			pstmt.setTimestamp(6, dto.getReg());
-			pstmt.setString(7, dto.getNick());
+			pstmt.setString(7, dto.getId());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,7 +90,7 @@ public class NewsDAO extends OracleServer {
 			if (rs.next()) { // 게시글 번호에 맞는 정보를 찾기
 				info = new NewsDTO();
 				info.setNum(rs.getInt("num"));
-				info.setNick(rs.getString("nick"));
+				info.setId(rs.getString("id"));
 				info.setNewstype(rs.getString("newstype"));
 				info.setTitle(rs.getString("title"));
 				info.setCon(rs.getString("con"));
@@ -123,7 +120,7 @@ public class NewsDAO extends OracleServer {
 			if (rs.next()) { // 게시글 번호에 맞는 정보를 찾기
 				info = new NewsDTO();
 				info.setNum(rs.getInt("num"));
-				info.setNick(rs.getString("nick"));
+				info.setId(rs.getString("id"));
 				info.setNewstype(rs.getString("newstype"));
 				info.setTitle(rs.getString("title"));
 				info.setCon(rs.getString("con"));
@@ -179,9 +176,9 @@ public class NewsDAO extends OracleServer {
 				checkpw = rs.getString("pw");
 				if (checkpw.equals(info.getPw())) {
 					result = 1;
-					sql = "update news set nick=?,newstype=?,title=?,con=?,pw=? where num=?";
+					sql = "update news set id=?,newstype=?,title=?,con=?,pw=? where num=?";
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, info.getNick());
+					pstmt.setString(1, info.getId());
 					pstmt.setString(2, info.getNewstype());
 					pstmt.setString(3, info.getTitle());
 					pstmt.setString(4, info.getCon());
@@ -218,7 +215,7 @@ public class NewsDAO extends OracleServer {
 		List textList = null;
 		try {
 			conn = getConnection();
-			sql = "select * from (select e.*,rownum r from (select num,nick,newstype,title,con,reg,pw,ip,views,press from news order by reg desc) e )"
+			sql = "select * from (select e.*,rownum r from (select num,id,newstype,title,con,reg,pw,ip,views,press from news order by reg desc) e )"
 					+ " where r >= ? and r <= ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, a);
@@ -230,7 +227,7 @@ public class NewsDAO extends OracleServer {
 				do {
 					allinfo = new NewsDTO();
 					allinfo.setNum(rs.getInt("num"));
-					allinfo.setNick(rs.getString("nick"));
+					allinfo.setId(rs.getString("id"));
 					allinfo.setNewstype(rs.getString("newstype"));
 					allinfo.setTitle(rs.getString("title"));
 					allinfo.setCon(rs.getString("con"));
@@ -360,7 +357,7 @@ public class NewsDAO extends OracleServer {
 			while (rs.next()) {
 				NewsDTO article = new NewsDTO();
 				article.setNum(rs.getInt("num"));
-				article.setNick(rs.getString("nick"));
+				article.setId(rs.getString("id"));
 				article.setNewstype(rs.getString("newstype"));
 				article.setTitle(rs.getString("title"));
 				article.setCon(rs.getString("con"));
@@ -418,7 +415,7 @@ public class NewsDAO extends OracleServer {
 			while (rs.next()) {
 				NewsDTO article = new NewsDTO();
 				article.setNum(rs.getInt("num"));
-				article.setNick(rs.getString("nick"));
+				article.setId(rs.getString("id"));
 				article.setNewstype(rs.getString("newstype"));
 				article.setTitle(rs.getString("title"));
 				article.setCon(rs.getString("con"));
@@ -438,13 +435,13 @@ public class NewsDAO extends OracleServer {
 	}
 
 	// member
-	public int getMyNewsCount(String nick) { // 기자 자신의 기사 카운트 메서드
+	public int getMyNewsCount(String id) { // 기자 자신의 기사 카운트 메서드
 		int x = 0;
 		try {
 			conn = getConnection();
-			sql = "select count(*) from news where nick = ?";
+			sql = "select count(*) from news where id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nick);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				x = rs.getInt(1);
@@ -457,20 +454,20 @@ public class NewsDAO extends OracleServer {
 		return x;
 	} // public int getMyNewsCount(String id) {
 
-	public List getMyNewsList(String nick, int startNum, int endNum) { // 기자 자신의 기사 리스트
+	public List getMyNewsList(String id, int startNum, int endNum) { // 기자 자신의 기사 리스트
 		List newsList = new ArrayList();
 		try {
 			conn = getConnection();
-			sql = "select * from (select e.*,rownum r from (select * from news where nick = ? order by num)e) where r >= ? and r <= ?";
+			sql = "select * from (select e.*,rownum r from (select * from news where id = ? order by num)e) where r >= ? and r <= ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nick);
+			pstmt.setString(1, id);
 			pstmt.setInt(2, startNum);
 			pstmt.setInt(3, endNum);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				NewsDTO news = new NewsDTO();
 				news.setNum(rs.getInt("num"));
-				news.setNick(rs.getString("nick"));
+				news.setId(rs.getString("id"));
 				news.setNewstype(rs.getString("newstype"));
 				news.setTitle(rs.getString("title"));
 				news.setCon(rs.getString("con"));
@@ -503,7 +500,7 @@ public class NewsDAO extends OracleServer {
 			while (rs.next()) {
 				NewsDTO article = new NewsDTO();
 				article.setNum(rs.getInt("num"));
-				article.setNick(rs.getString("nick"));
+				article.setId(rs.getString("id"));
 				article.setNewstype(rs.getString("newstype"));
 				article.setTitle(rs.getString("title"));
 				article.setCon(rs.getString("con"));
@@ -521,27 +518,5 @@ public class NewsDAO extends OracleServer {
 		}
 		return newsList;
 	}
-	//언론사별 기사 목록
-    public ArrayList<NewsDTO> selectArticle(String press) {
-		ArrayList<NewsDTO> list = new ArrayList<>();
-		conn = getConnection();
-		String sql = "select * from news where press = ? ";
-		try { 	pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, press);
-		 		rs = pstmt.executeQuery();
-			while(rs.next()) {
-		 		NewsDTO dto = new NewsDTO();
-		 		dto.setNum(rs.getInt("num"));
-				dto.setId(rs.getString("id"));
-				dto.setTitle(rs.getString("title"));
-				dto.setReg(rs.getTimestamp("reg"));
-				list.add(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			oracleClose();
-		}
-		return list;
-	}
+
 } // public class NewsDAO {

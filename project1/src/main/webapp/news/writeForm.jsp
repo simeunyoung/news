@@ -6,7 +6,7 @@
 <%request.setCharacterEncoding("UTF-8"); %>
 <%
 
-String nick = request.getParameter("nick");
+//String id = request.getParameter("id");
 %>
 <body>
 	<Script>
@@ -22,14 +22,13 @@ String nick = request.getParameter("nick");
 	<form action="writePro.jsp" name="write"
 		onsubmit="return option_check()">
 			
-		<input type="hidden" name="id" ><%--<%=id%> --%>
-		<input type="hidden" name="nick" >
+		<input type="hidden" name="id" value="Tester"><%--<%=id%> --%>
 		<%-- 작성자 --%>
 		<%-- 글을 작성할 때 직접 입력하면 안되는 부분을 히든 값으로 넘겨서 기록하기 --%>
-		
 		<div class="form_box">
 			<h3>게시글 작성</h3>
-			작성자 : <%=nick%><br />
+			작성자 : Tester
+			<%--<%=id%>--%><br />
 			<br /> TOPIC : <select class="select_box" name="newstype">
 				<option value="x">종류를 정해주세요.</option>
 				<option value="Python">Python</option>

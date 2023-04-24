@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@ page import="admin.AdminDAO"%>
-<%@ page import="admin.AdminDTO" %>
+<%@ page import="admin.LoginDAO"%>
+<%@ page import="admin.LoginDTO" %>
 
 <%
 	List jList = null;
 
-	AdminDAO dao = AdminDAO.getInstance();
+	LoginDAO dao = LoginDAO.getInstance();
 	int count = dao.getJCount();
 	
 	jList = dao.getJList();
@@ -34,12 +34,12 @@
 	</table>
 	<table action="journalistPro.jsp" align="center" width="700" border="1" cellspacing="0">
 <%	for(int i = 0; i < jList.size(); i++) {
-		AdminDTO dto = (AdminDTO)jList.get(i);%>	
+		LoginDTO dto = (LoginDTO)jList.get(i);%>	
 		<tr height="20">
 			<td align="center" width="200"><%=dto.getId()%></td>
-			<td align="center" width="100"><%=dto.getMemberType()%></td>
+			<td align="center" width="100"><%=dto.getType()%></td>
 			<td align="center" width="300"><%=dto.getEmail()%></td>
-			<td align="center" width="100"><input type="button" value="승인" onclick="location='journalistListPro.jsp?id=<%=dto.getId()%>&Type=<%=dto.getMemberType()%>&email=<%=dto.getEmail()%>'"/></td>
+			<td align="center" width="100"><input type="button" value="승인" onclick="location='journalistListPro.jsp?id=<%=dto.getId()%>&Type=<%=dto.getType()%>&email=<%=dto.getEmail()%>'"/></td>
 		</tr>
 <%	} %>
 	</table>

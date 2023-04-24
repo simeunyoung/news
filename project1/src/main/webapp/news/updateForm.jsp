@@ -15,9 +15,8 @@ NewsDTO text = method.getdata(num);
 	<div class="form_box">
 		<h3>게시글 수정</h3>
 		작성자 :
-		<%=text.getNick()%><br /> <input type="hidden" name="nick"
-			value="<%=text.getNick()%>">
-			<input type="hidden" name="id" value="<%=text.getId()%>">
+		<%=text.getId()%><br /> <input type="hidden" name="id"
+			value="<%=text.getId()%>">
 		<%--<%=id%> --%>
 		<br /> <input type="hidden" name="num" value="<%=text.getNum()%>">
 		</td> TOPIC : <select class="select_box" name="newstype">
@@ -33,7 +32,7 @@ NewsDTO text = method.getdata(num);
 			type="submit" class="submit_button" value="변경완료" /> &nbsp; <input
 			type="reset" class="submit_button" value="초기화"> &nbsp; <input
 			type="button" class="submit_button" value="목록보기"
-			onclick="location='list.jsp'">
+			onclick="location='testlist.jsp'">
 	</div>
 </form>
 

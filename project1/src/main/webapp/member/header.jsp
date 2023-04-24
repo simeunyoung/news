@@ -132,7 +132,7 @@ nav ul ul ul {
   </div>
   <%}else{ %>
   <div class="flex-wrap">
- 	<div><a href="/project1/profile/user_mypage_form.jsp?id=<%=id%>">마이페이지</a></div>
+ 	<div><a href="/project1/member/user_mypage_form.jsp?id=<%=id%>">마이페이지</a></div>
   	<div><a href="/project1/member/logout.jsp">로그아웃</a></div>
   </div>
   <%} %>

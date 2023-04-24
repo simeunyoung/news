@@ -19,13 +19,13 @@
 			<td align="center" colspan="2">제목</td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="text" name="title" size="55" placeholder="제목" /></td>
+			<td colspan="2"><input type="text" name="subject" size="55" placeholder="제목" /></td>
 		</tr>
 		<tr height="30">
 			<td align="center" colspan="2">문의내용</td>
 		</tr>
 		<tr>
-			<td colspan="2"><textarea cols="55" rows="10" name="cont" placeholder="내용"></textarea>
+			<td colspan="2"><textarea cols="55" rows="10" name="content" placeholder="내용"></textarea>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">

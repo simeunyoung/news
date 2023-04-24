@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "helper.SvcenterDAO"%>
 <%@ page import = "helper.SvcenterDTO"%>
-<%-- 1대1 문의 글 수정 페이지 --%>
+
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
@@ -46,7 +46,7 @@
 				<td colspan = "2" align = "center">
 					<input type = "submit" value = "글수정">
 					<input type = "reset" value = "다시작성">
-					<input type = "button" value = "글목록" onclick = "location.href='qalist.jsp?pageNum=<%=pageNum%>'"></td>
+					<input type = "button" value = "글목록" onclick = "location.href='svmain.jsp?pageNum=<%=pageNum%>'"></td>
 			</tr>
 		</table>
 	</form>

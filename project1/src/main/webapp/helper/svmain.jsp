@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import = "helper.Svcenter1DAO"%>
-<%@ page import = "helper.Svcenter1DTO"%>
+<%@ page import = "helper.SvcenterDAO"%>
+<%@ page import = "helper.SvcenterDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.List"%>
 
-<%-- 고객센터 메인페이지 --%>
 <%!
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 
 <%
-	String id = (String)session.getAttribute("memId");
-
 	String pageNum = request.getParameter("pageNum");
 	if(pageNum == null){
 		pageNum = "1";
@@ -26,11 +23,11 @@
 	int count = 0;
 	int number = 0;
 	
-	List svcenterList1 = null;
-	Svcenter1DAO svDAO1 = Svcenter1DAO.getInstance();
-	count = svDAO1.getSvcenterCount1();
+	List svcenterList = null;
+	SvcenterDAO svDAO = SvcenterDAO.getInstance();
+	count = svDAO.getSvcenterCount();
 	if(count > 0){
-		svcenterList1 = svDAO1.getSvcenter1(startRow, endRow);
+		svcenterList = svDAO.getSvcenter(startRow, endRow);
 	}
 	number = count - (currentPage - 1) * pageSize;
 %>
@@ -42,18 +39,21 @@
 		<td align = "center" colspan = "2">
 			<a href = "questionForm.jsp">1대1문의하기</a>
 		</td>
+	
+		<td align = "center" colspan = "2">
+			<a href = "">신고하기</a>
+		</td>
+
+		<td align = "center" colspan = "2">
+			<a href = "">기자신청하기</a>
+		</td>
 		
 		<td align = "center" colspan = "2">
-			<a href = "qalist.jsp">문의목록</a>
+			<a href = "">내문의목록</a>
 		</td>
-	<%if(id != null){%>
+		
 		<td align = "center" colspan = "2">
-			<a href = "gijaap.jsp">기자신청하기</a>
-		</td>
-	<%}%>	
-		<td align = "center" colspan = "2">
-			<a href = "myquestion.jsp">내문의목록</a>
-		</td>
+			<a href = "frequentlyMain.jsp">자주묻는질문</a>
 	</tr>			
 </table>
 
@@ -70,7 +70,7 @@
 
 <% }else{ %>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<center><b>자주묻는질문</b></center>
+<center><b>문의목록</b></center>
 <table align = "center" width = "800" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr height = "30">
 		<td align = "center" width = "50">번 호</td>
@@ -79,15 +79,15 @@
 		<td align = "center" width = "100">작성날짜</td>
 		
 	<%
-		for(int i = 0; i < svcenterList1.size() ; i++){
-			Svcenter1DTO svdto1 = (Svcenter1DTO)svcenterList1.get(i);
+		for(int i = 0; i < svcenterList.size() ; i++){
+			SvcenterDTO svdto = (SvcenterDTO)svcenterList.get(i);
 	%>
 	
 	<tr height = "20">
 		<td align = "center" width = "50"><%=number--%></td>
-		<td align = "center" width = "200"><a href = "fqcon.jsp?num=<%=svdto1.getNum()%>&pageNum=<%=currentPage%>"><%=svdto1.getTitle()%></a></td>			
-		<td align = "center" width = "100"><%=svdto1.getId()%></td>
-		<td align = "center" width = "100"><%=sdf.format(svdto1.getReg())%></td>
+		<td align = "center" width = "200"><a href = "qtcon.jsp?num=<%=svdto.getNum1()%>&pageNum=<%=currentPage%>"><%=svdto.getTitle()%></a></td>			
+		<td align = "center" width = "100"><%=svdto.getId()%></td>
+		<td align = "center" width = "100"><%=sdf.format(svdto.getReg())%></td>
 	</tr>
 	<%}%>	
 </table>
@@ -116,14 +116,4 @@
 	}
 }
 %>
-</form>
-
-<%if(id != null){
-	if(id.equals("admin")){%>
-	<form method = "post" action = "frequentlyForm.jsp" name = "svmain" align = "rigth">
-		<table width = "600" border = "0" cellspacing = "0" cellpadding = "0" align = "right">
-			<input type = "submit" value = "글쓰기">
-		<%}%>
-	<%}%>
-	</table>
 </form>

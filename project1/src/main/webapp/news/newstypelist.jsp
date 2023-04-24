@@ -55,7 +55,7 @@
 			<tr>
 				<td><%= number %></td>
 				<td><a href="content.jsp?num=<%= article.getNum() %>"><%= article.getTitle() %></a></td>
-				<td><%= article.getNick() %></td>
+				<td><%= article.getId() %></td>
 				<td><%= sdf.format(article.getReg()) %></td>
 				<td><%= article.getViews() %></td>
 			</tr>

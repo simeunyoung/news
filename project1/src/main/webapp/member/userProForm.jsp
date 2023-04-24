@@ -15,12 +15,16 @@ String fileName = "";
 %>
 <script>
 	function setThumbnail(event){
+		imgWrap = document.querySelector("div#image_container");
+		if(!imgWrap.hasChildNodes()){
+			imgWrap.appendChild('<img src="/project1/resource/img/profile.png" class="rounded-circle" width="150">');
+		}
 		var reader = new FileReader();
-		
+		document.querySelector("div#image_container img").remove();
 		reader.onload = function(event){
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
-			img.setAttribute("class", "rounded-circle");
+			img.setAttribute("class", "rounded-circle addImg");
 			document.querySelector("div#image_container").appendChild(img);
 		};
 		
@@ -34,8 +38,10 @@ String fileName = "";
 			<%-- 자식요소들을 정렬 --%>
 			<div class="d-flex flex-column align-items-center text-center">
 				<%-- 이미지 가져오고 크기 조정 --%>
-				<div id="image_container"></div>
-				 <%-- <img src="<%=선택한 이미지가 있는 파일의 경로 필요%>" class="rounded-circle" width="150">--%>
+				<div id="image_container">
+					<img src="/project1/resource/img/profile.png" class="rounded-circle" width="150">
+				</div>
+				
 				<form action="imgUpload.jsp" method="post"
 					enctype="multipart/form-data">
 					<input type="file"	name="save" id="profile-pic" onchange="setThumbnail(event)"> 

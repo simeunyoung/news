@@ -61,7 +61,7 @@ NewsDTO article = (NewsDTO)newsList.get(i); %>
 <div class="one_box" align="center"><%=number--%></div>
 <div class="two_see" >
 <b><font size="4px" color="#000000"><%=article.getTitle() %></font></b><br /><br />&nbsp;&nbsp;<%=article.getCon() %></div>
-<div class="three_box" align="center"><%=article.getNick() %></div>
+<div class="three_box" align="center"><%=article.getId() %></div>
 <div class="four_box" align="center"><%=article.getPress() %> </div>
 <div class="five_box" align="center"><%=sdf.format(article.getReg()) %> </div>
 <div class="six_box" align="center"><%=article.getViews() %> </div>
