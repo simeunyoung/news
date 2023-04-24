@@ -65,7 +65,7 @@
 		<tr height = "30">
 			<td align = "center" width = "50"><%=number--%></td>
 			<td align = "center" width = "150"><a href = "content.jsp?num=<%=article.getNum()%>"><%=article.getTitle() %></a></td>
-			<td align = "center" width = "150"><%=article.getId() %></td>
+			<td align = "center" width = "150"><%=article.getNick() %></td>
 			<td align = "center" width = "150"><%=article.getPress() %></td>
 			<td align = "center" width = "150"><%=sdf.format(article.getReg()) %></td>
 			<td align = "center" width = "50"><%=article.getViews() %></td>

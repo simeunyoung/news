@@ -22,6 +22,7 @@ String con = text.getCon();
 <div class="content_box">
 <div class="con1"><div class="conl"><b>뉴스 종류 : </b><%=text.getNewstype()%></div><div class="conr"><b>조회수 : </b><%=text.getViews()%></div></div>
 <div class="con1"><b>Title : </b><%=text.getTitle()%></div>
+<<<<<<< Updated upstream
 <div class="con1"><div class="conl"><b>작성자 : </b><%=text.getId()%>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
 <div class="con1"><b> 글자 크기 </b></div><br />
 <div align="left">
@@ -30,6 +31,10 @@ String con = text.getCon();
 <button type="button" class="button" onclick="changeFontSize('large')">크게</button>
 <div class="con1"><b>내용 : </b></div><br />
 <div id="content"><%=text.getCon()%></div>
+=======
+<div class="con1"><div class="conl"><b>작성자 : </b><%=text.getNick()%>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
+<div class="con1"><b>내용 : </b><%=text.getCon()%></div><br />
+>>>>>>> Stashed changes
 <div align="right">
 <button id="copyButton">URL 복사</button>
 <input type="button" class="button" value="수정하기" onclick="location='updateForm.jsp?num=<%=text.getNum()%>'">
@@ -88,7 +93,7 @@ NewsDTO recontext = (NewsDTO) recons.get(rnum); //Object(list)형 --> DTO형으�
 <a href="reconUpdateForm.jsp?num=<%=recontext.getNum()%>" ><font color="#808080">수정</font></a>&nbsp;
 /&nbsp;<a href="reconDeletePro.jsp?num=<%=recontext.getNum()%>"><font color="#808080">삭제</font></a>
 </div>
-<b><%= recontext.getId()%></b><font color="#808080">#<%=recontext.getNum() %></font> [ IP : <%= recontext.getIp() %> ]
+<b><%= recontext.getNick()%></b><font color="#808080">#<%=recontext.getNum() %></font> [ IP : <%= recontext.getIp() %> ]
 <br />&nbsp;&nbsp;&nbsp;&nbsp;<%=recontext.getRecon()%>
 			
 <hr />		

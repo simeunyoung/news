@@ -28,9 +28,10 @@ int startRow = (currentPage - 1) * pageSize + 1;
 int endRow = currentPage * pageSize;
 
 List newsList = null;
+List topicList = null;
 NewsDAO newsPro = NewsDAO.getInstance();
 newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
-
+topicList = newsPro.getNews(startRow, endRow);
 %>
 
 <input type="button" value="리스트로 이동" onClick="location='list.jsp'" >
@@ -76,7 +77,7 @@ for문 끝
 
 <div align="right"><font color="#a9a9a9"><b><%=article.getNewstype() %>&nbsp;뉴스</b></font></div>
 <b><font size="5px" color="#696969"><%=article.getTitle() %></font></b><br />
-<b><font size="4px" color="#778899"><%=article.getId() %> 기자</font></b><br /><br />
+<b><font size="4px" color="#778899"><%=article.getNick() %> 기자</font></b><br /><br />
 <div class="make_short">&nbsp;&nbsp;<font color="#000000"><%=article.getCon() %></div><br /><br />
 <div align="right"><b>작성일자 : <%=sdf.format(article.getReg()) %></b></div></font>
 

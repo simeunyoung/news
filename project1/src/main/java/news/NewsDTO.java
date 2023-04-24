@@ -3,6 +3,7 @@ import java.sql.Timestamp;
 
 public class NewsDTO {
 	private int num;
+	private String nick;
 	private String id;
 	private String con;
 	private String newstype;
@@ -14,6 +15,9 @@ public class NewsDTO {
 	private String title;
 	private String press; // member , news
 	
+	
+	public String getNick() {	return nick;	}
+	public void setNick(String nick) {	this.nick = nick;	}
 	public String getPress() {	return press;	}
 	public void setPress(String press) {	this.press = press;	}
 	public int getNum() {	return num;	}

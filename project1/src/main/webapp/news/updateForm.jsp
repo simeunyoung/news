@@ -15,8 +15,9 @@ NewsDTO text = method.getdata(num);
 	<div class="form_box">
 		<h3>게시글 수정</h3>
 		작성자 :
-		<%=text.getId()%><br /> <input type="hidden" name="id"
-			value="<%=text.getId()%>">
+		<%=text.getNick()%><br /> <input type="hidden" name="nick"
+			value="<%=text.getNick()%>">
+			<input type="hidden" name="id" value="<%=text.getId()%>">
 		<%--<%=id%> --%>
 		<br /> <input type="hidden" name="num" value="<%=text.getNum()%>">
 		</td> TOPIC : <select class="select_box" name="newstype">
