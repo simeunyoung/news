@@ -16,6 +16,7 @@ public class MemberDTO {
 	private String press;
 	private String pressSubcribe;
 	private String reporterSubcribe;
+	private String ip;
 	
 	public String getId() {
 		return id;
@@ -88,5 +89,11 @@ public class MemberDTO {
 	}
 	public void setReporterSubcribe(String reporterSubcribe) {
 		this.reporterSubcribe = reporterSubcribe;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 }

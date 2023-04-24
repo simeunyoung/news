@@ -29,7 +29,7 @@
 			response.addCookie(coo2);
 			response.addCookie(coo3);
 		}
-		response.sendRedirect("/project1/profile/main.jsp");
+		response.sendRedirect("/project1/member/main.jsp");
 	} else if(check == 0){ %>
 		<script>
 			alert("비밀번호가 맞지 않습니다.");

@@ -1,6 +1,5 @@
 package member;
 import java.util.*;
-import admin.OracleServer;
 
 public class MemberDAO extends OracleServer {
 
@@ -61,15 +60,15 @@ public class MemberDAO extends OracleServer {
 		public void insertMember(MemberDTO member) {
 			try {
 				conn = getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,?,sysdate,'0',null,null)");
+				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,'0',?,null,null,null,sysdate)");
 				pstmt.setString(1, member.getId());
 				pstmt.setString(2, member.getPw());
 				pstmt.setString(3, member.getName());
-				pstmt.setString(4, member.getPress());
-				pstmt.setString(5, member.getNick());
-				pstmt.setString(6, member.getEmail());
-				pstmt.setString(7, member.getTel());
-				pstmt.setString(8, member.getBirthdate());
+				pstmt.setString(4, member.getNick());
+				pstmt.setString(5, member.getEmail());
+				pstmt.setString(6, member.getTel());
+				pstmt.setString(7, member.getBirthdate());
+				pstmt.setString(8, member.getPress());
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
