@@ -208,23 +208,6 @@ public class MemberDAO extends OracleServer {
 			return result;
 		}
 		
-		public String updateImg(String sysName, String id) {
-			String result = "";
-			try {
-				conn = getConnection();
-				sql ="update member set img = ?, id = ?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, sysName);
-				pstmt.setString(2, id);
-				pstmt.executeUpdate();
-			}catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				oracleClose();
-			}
-			return result;
-		}
-		
 		// company
 		  public TreeSet<String> selectPress() {
 			  	TreeSet<String> list = new TreeSet<>();
@@ -285,6 +268,5 @@ public class MemberDAO extends OracleServer {
 				}
 				return list;
 			}
-		    
 
 }

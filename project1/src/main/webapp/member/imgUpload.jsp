@@ -1,5 +1,4 @@
 <!DOCTYPE >
-<%@page import="member.MemberDAO"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page import="java.util.*" %>
@@ -10,7 +9,6 @@
 <%@ page import="java.sql.*" %>
 
 <%
-	String id = (String)session.getAttribute("memId");
 	String dir = request.getRealPath("resource/img");
 	out.println(dir);
 	int max = 1024*1024*100;
@@ -20,10 +18,11 @@
 	String name = mr.getParameter("name");
 	String sysName = mr.getFilesystemName("save");
 	String orgName = mr.getOriginalFileName("save");
-	
-	MemberDAO member = MemberDAO.getInstance();
-	member = updateImg(sysName, id);
 %>
-<script>
-	
-</script>
+
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
