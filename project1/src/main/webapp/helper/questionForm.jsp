@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- 1대1 문의글 작성 페이지 --%>
+<%if(session.getAttribute("memId") == null){%>
+	<script>
+		alert("로그인을 해주십시오");
+		location = "/project1/member/loginForm.jsp";
+	</script>
+<%}%>
 
 <center><b>글쓰기</b></center>
 <br>

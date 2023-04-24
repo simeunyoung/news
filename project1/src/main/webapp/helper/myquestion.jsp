@@ -4,7 +4,7 @@
 <%@ page import = "helper.SvcenterDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.List"%>
-
+<%-- 내문의목록 게시판 --%>
 <%!
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -34,20 +34,20 @@
 	number = count - (currentPage - 1) * pageSize;
 %>
 
-<%-- 
+
 <center><b>내문의목록(전체 글 : <%=count%>)</b>
 <table width = "700">
 	<tr>
 		<td align = "right">
 		<%if(session.getAttribute("memId") == null){%>
-			<a href = "">로그인</a>
+			<a href = "/project1/member/loginForm">로그인</a>
 		<%}else{%>
 			<a href = "questionForm.jsp">글쓰기</a>
 		<%}%>
 		</td>
 	</tr>
 </table>
---%>
+
 
 <%if(count == 0){%>
 &nbsp;&nbsp;&nbsp;&nbsp;

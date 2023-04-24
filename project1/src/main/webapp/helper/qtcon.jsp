@@ -3,7 +3,7 @@
 <%@ page import = "helper.SvcenterDAO"%>
 <%@ page import = "helper.SvcenterDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
-
+<%-- 1대1 문의보는 페이지 --%>
 <title>문의내용</title>
 
 <% 
@@ -52,17 +52,17 @@
 		<tr>
 			<td colspan = "4" align = "right">
 				<%
-					//String id = (String)session.getAttribute("memId");
-					//if(id != null){
-						//if(id.equals(svDTO.getTitle())){
+					String id = (String)session.getAttribute("memId");
+					if(id != null){
+						if(id.equals(svDTO.getId())){
 				%>
 			<input type = "button" value = "글수정" onclick = "location.href='qtupForm.jsp?num=<%=svDTO.getNum1()%>&pageNum=<%=pageNum%>'">
 				&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type = "button" value = "글삭제" onclick = "location.href='qtdeleForm.jsp?num=<%=svDTO.getNum1()%>&pageNum=<%=pageNum%>'">
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<%//}%>
-			<%//}%>
-			<input type = "button" value = "글목록" onclick = "location.href='svmain.jsp?pageNum=<%=pageNum%>'">
+				<%}%>
+			<%}%>
+			<input type = "button" value = "글목록" onclick = "location.href='qalist.jsp?pageNum=<%=pageNum%>'">
 		</td>
 	</tr>		
 </table>

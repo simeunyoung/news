@@ -7,11 +7,11 @@
 <jsp:setProperty name = "svDTO" property = "*"/>
 
 <%
-	//String id = (String)session.getAttribute("memId");
-	//svDTO.setId(id);
+	String id = (String)session.getAttribute("memId");
+	svDTO.setId(id);
 	
 	SvcenterDAO svDAO = SvcenterDAO.getInstance();
 	svDAO.insertSvcenter(svDTO);
 	
-	response.sendRedirect("svmain.jsp");
+	response.sendRedirect("qalist.jsp");
 %>

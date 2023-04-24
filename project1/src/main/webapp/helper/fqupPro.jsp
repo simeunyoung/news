@@ -14,5 +14,5 @@
 	Svcenter1DAO svdao1 = Svcenter1DAO.getInstance();
 	svdao1.updateSvcenter1(svdto1);
 	
-	response.sendRedirect("frequentlyMain.jsp");
+	response.sendRedirect("svmain.jsp");
 %>

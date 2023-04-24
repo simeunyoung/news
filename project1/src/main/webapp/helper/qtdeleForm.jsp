@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%-- 1대1문의 삭제 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
@@ -34,7 +34,7 @@ function deleteSave(){
 			<tr heigth = "30">
 				<td align = "center">
 					<input type = "submit" value = "글삭제">
-					<input type = "button" value = "문의목록" onclick = "location.href='svmain.jsp?pageNum=<%=pageNum%>'">
+					<input type = "button" value = "문의목록" onclick = "location.href='qalist.jsp?pageNum=<%=pageNum%>'">
 				</td>
 			</tr>
 		</table>
