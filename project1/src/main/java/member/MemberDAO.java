@@ -285,9 +285,7 @@ public class MemberDAO extends OracleServer {
 				}
 				return list;
 			}
-<<<<<<< Updated upstream
 
-=======
 		    public void PSubscribe(String id, String Wpress) {
 				   	try {
 					conn = getConnection();
@@ -372,5 +370,5 @@ public class MemberDAO extends OracleServer {
 		        }
 		        return "window.location.href='pressPage.jsp?press="+press+"'";
 		    }
->>>>>>> Stashed changes
+
 }
