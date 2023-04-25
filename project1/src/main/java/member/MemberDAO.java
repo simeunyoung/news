@@ -310,5 +310,92 @@ public class MemberDAO extends OracleServer {
 				}
 				return list;
 			}
+<<<<<<< Updated upstream
 
+=======
+		    public void PSubscribe(String id, String Wpress) {
+				   	try {
+					conn = getConnection();
+					pstmt = conn.prepareStatement("update member set presssubscribe=? where id=?");
+					pstmt.setString(1, Wpress);
+					pstmt.setString(2, id);
+					pstmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					oracleClose();
+				}
+			}
+		    public String selectExist(String id) {
+		        String exist = "";
+		        try {
+		            conn = getConnection();
+		            pstmt = conn.prepareStatement("select presssubscribe from member where id = ?");
+		            pstmt.setString(1, id);
+		            rs = pstmt.executeQuery();
+		            while (rs.next()) {
+		            MemberDTO dto = new MemberDTO();
+		            dto.setPressSubcribe(rs.getString("presssubscribe"));
+		            exist = dto.getPressSubcribe();
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		            oracleClose();
+		        }
+		        return exist;
+		    }
+		    public String savePress(String exist, String press, String id) {
+		    	String[] parts = exist.split("@");
+		    	boolean include = false;
+		    	for (String part : parts) {
+		    	    if (part.equals(press)) {
+		    	        include = true;
+		    	        break;
+		    	    }
+		    	}
+		        try {
+		            conn = getConnection();
+		            pstmt = conn.prepareStatement("update member set presssubscribe=? where id=?");
+		            if(!include) {
+		            pstmt.setString(1, exist+"@"+press);
+		            pstmt.setString(2, id);
+		            }
+		            else {return "window.location.href='pressPage.jsp?press="+press+"'";}
+		            pstmt.executeUpdate();
+		            }catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		            oracleClose();
+		        }
+		        return "window.location.href='pressPage.jsp?press="+press+"'";
+		    }
+		    public String unSavePress(String exist, String press, String id) {
+		    	String[] parts = exist.split("@");
+		    	String wPress = "";
+		    	boolean include = false;
+		    	for (String part : parts) {
+		    	    if (part.equals(press)) {
+		    	        include = true;
+		    	        break;
+		    	    }
+		    	}
+		        try {
+		            conn = getConnection();
+		            pstmt = conn.prepareStatement("update member set presssubscribe=? where id=?");
+		            if(include) {
+		            String aPress = "@"+press;
+		            wPress = exist.replace(aPress , "");
+		            pstmt.setString(1, wPress);
+		            pstmt.setString(2, id);
+		            }
+		            pstmt.executeUpdate();
+		            }catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		            oracleClose();
+		        }
+		        return "window.location.href='pressPage.jsp?press="+press+"'";
+		    }
+>>>>>>> Stashed changes
 }

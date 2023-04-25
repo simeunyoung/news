@@ -8,9 +8,12 @@
 <%@ page import = "revalue.RevalueDTO"%>
 <% MemberDAO dao = MemberDAO.getInstance(); %>
 <% String press = request.getParameter("press");%>
+<<<<<<< Updated upstream
 <% RevalueDAO rv = RevalueDAO.getInstance();%>
 <% String id = (String)session.getAttribute("memId");%>
 
+
+=======
 
 <html>
 <head>
@@ -47,7 +50,15 @@
                     <%-- 이름, 나머지 글자들 크기 및 글자색 조정 --%>
                     <div class="mt-3">
                       <h4><%=press.toUpperCase()%></h4>
+<<<<<<< Updated upstream
                       <button class="btn btn-primary">구독하기</button>
+=======
+                      <% if(!include){%>
+                      <button class="btn btn-primary" onclick= "window.location.href='pressPro.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>'">구독하기</button>
+                      <%}else{%>
+                      <button class="btn btn-primary" onclick= "window.location.href='pressDelete.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>'">구독취소</button>
+                      <%}%>
+>>>>>>> Stashed changes
                     </div>
                   </div>
                 </div>
