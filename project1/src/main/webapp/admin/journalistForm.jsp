@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="admin.LoginDAO" %>
-<%@ page import="admin.LoginDTO" %>
+<%@ page import="admin.AdminDAO" %>
+<%@ page import="member.MemberDTO" %>
 
 <%
-	LoginDAO dao = LoginDAO.getInstance();
-	String sid = (String)session.getAttribute("sid");
-	LoginDTO dto = null;
-	dto = dao.typeChk(sid);
+	AdminDAO dao = AdminDAO.getInstance();
+	String memId = (String)session.getAttribute("memId");
+	MemberDTO dto = null;
+	dto = dao.setMember(memId);
 %>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
@@ -20,7 +20,7 @@
 
 <form method="post" action="journalistPro.jsp">
 	<input type="hidden" name="id" value="<%=dto.getId()%>" />
-	<input type="hidden" name="type" value="<%=dto.getType()%>" />
+	<input type="hidden" name="memberType" value="<%=dto.getMemberType()%>" />
 	<input type="hidden" name="email" value="<%=dto.getEmail()%>" />
 	<input type="submit" value="전송">
 </form> 

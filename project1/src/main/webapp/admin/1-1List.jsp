@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List"%>
-<%@ page import="admin.HelperDAO"%>
-<%@ page import="admin.HelperDTO" %>
+<%@ page import="admin.AdminDAO"%>
+<%@ page import="admin.AdminDTO" %>
 
 <%	
 	int pageSize = 20; // 한 페이지에서 보여줄 게시물 수
@@ -17,13 +17,13 @@
 	int currentPage = Integer.parseInt(pageNum); // String을 int로 변환
 	int startRow = (currentPage - 1) * pageSize + 1; // (1페이지 - 1) * 20 + 1 = 1
 	int endRow = currentPage * pageSize; // 1페이지 x 20개
-	List qnaList = null; // 게시물 목록을 보여줄 리스트 선언
+	List oneononeList = null; // 게시물 목록을 보여줄 리스트 선언
 	
-	HelperDAO dao = HelperDAO.getInstance(); // dao 객체 불러옴
-	int count = dao.getQnaCount(); // db에 있는 게시물 수
+	AdminDAO dao = AdminDAO.getInstance(); // dao 객체 불러옴
+	int count = dao.oneononeCount(); // db에 있는 게시물 수
 	// 게시물이 있으면 목록 가져옴 1, 20 / 21, 40
 	if(count > 0) {
-		qnaList = dao.getQnaList(startRow, endRow);
+		oneononeList = dao.oneononeList(startRow, endRow);
 	}
 	
 	int number = count - (currentPage-1) * pageSize;
@@ -51,20 +51,18 @@
 			<td align="center" width="50">순번</td>
 			<td align="center" width="80">고유번호</td>
 			<td align="center" width="250">제목</td>
-			<td align="center" width="100">작성자</td>
+			<td align="center" width="150">작성자</td>
 			<td align="center" width="200">작성일</td>
-			<td align="center" width="80">조회</td>
 			<td align="center" width="150">IP</td>
 		</tr>
-<%	for(int i = 0; i < qnaList.size(); i++) {
-		HelperDTO dto = (HelperDTO)qnaList.get(i);%>
+<%	for(int i = 0; i < oneononeList.size(); i++) {
+		AdminDTO dto = (AdminDTO)oneononeList.get(i);%>
 		<tr height="30">
 			<td align="center"><%=number--%></td>
 			<td align="center"><%=dto.getNum()%></td>
-			<td align="center"><a href="1-1Content.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>"><%=dto.getSubject()%></a></td>
-			<td align="center"><%=dto.getName()%></td>
+			<td align="center"><a href="1-1Content.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>"><%=dto.getTitle()%></a></td>
+			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>)</td>
 			<td align="center"><%=sdf.format(dto.getReg())%></td>
-			<td align="center"><%=dto.getReadcount()%></td>
 			<td align="center"><%=dto.getIp()%></td>
 		</tr>
 <%	}%>		
