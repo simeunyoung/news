@@ -224,32 +224,7 @@ public class MemberDAO extends OracleServer {
             }
         }
         
-        public List getSearchList(String search) throws Exception {
-            List searchList=null;
-            try {
-               conn = getConnection();
-               pstmt = conn.prepareStatement(
-                     "SELECT * FROM news WHERE title LIKE '%' || ? || '%'");
-                     pstmt.setString(1, search);
-                     rs = pstmt.executeQuery();
-                     if (rs.next()) {
-                    	 searchList = new ArrayList(); 
-                        do{ 
-                           MemberDTO dto= new MemberDTO();
-                           dto.setId(rs.getString("id"));
-
-                           searchList.add(dto); 
-                        }while(rs.next());
-                     }
-            } catch(Exception ex) {
-               ex.printStackTrace();
-            } finally {
-            oracleClose();
-            }
-
-            
-            return searchList;
-         }
+     
 		// company
 		  public TreeSet<String> selectPress() {
 			  	TreeSet<String> list = new TreeSet<>();

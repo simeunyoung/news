@@ -542,7 +542,9 @@ public class NewsDAO extends OracleServer {
         } finally {
         oracleClose();
         }
+        return searchList;
     }
+    
 }
 
 
