@@ -15,6 +15,19 @@
 	<table align="center" width="500" border="1" cellspacing="0" cellpadding="0">
 		<input type="hidden" name="memberType" value="0"/>
 		<tr height="30">
+			<td align="center">문의유형</td>
+			<td align="center">
+				<select name="qType">
+					<option value="0">선택</option>
+					<option value="1">자바(Java)</option>
+					<option value="2">파이썬(Python)</option>
+					<option value="3">자바스크립트(JavaScript)</option>
+					<option value="4">신고하기</option>
+					<option value="5">제휴 및 문의하기</option>
+				</select>
+			</td>
+		</tr>
+		<tr height="30">
 			<td align="center" width="150">아이디</td>
 			<td><input type="text" name="id" size="50"/>
 		</tr>
