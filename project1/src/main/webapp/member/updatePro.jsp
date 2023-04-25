@@ -10,9 +10,10 @@
 	
 	MemberDAO manager = MemberDAO.getInstance();
 	manager.updateMember(member);
-
+	
+	response.sendRedirect("user_mypage_form.jsp?id="+id);
 %>
 <script>
 	alert("수정이 완료 되었습니다.");
 </script>
-<meta http-equiv="Refresh" content="0;url=user_mypage_form.jsp" >
+

@@ -1,5 +1,5 @@
 <%@page import="member.MemberDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  
 <%request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
@@ -20,18 +20,18 @@ nav {
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none; /* 목록 점 제거 */
+  list-style: none;
 }
 
 nav li {
-  float: left; /* 목록 항목을 좌측으로 정렬 */
+  float: left; 
   width: 150px;
   height:60px;
 }
 
 nav a {
   display: flex;
-  color: #fff; /* 링크 텍스트 색상 */
+  color: #fff;
   text-align: center;
   padding: 14px 16px; /* 링크 내부 여백 */
   text-decoration: none;
@@ -83,7 +83,7 @@ nav ul ul ul {
 %>
 <body>
 <nav>
-	<a href="main.jsp">CODENEWS</a>
+	<a href="/project1/news/main.jsp">CODENEWS</a>
   <ul>
     <li><a href="#">회사소개</a>
       <ul>
@@ -109,8 +109,7 @@ nav ul ul ul {
     <li><a href="#">고객센터</a>
       <ul>
       	<li><a href="#">Q&A</a></li>
-        <li><a href="#">1:1문의하기</a></li>
-        <li><a href="#">신고하기</a></li>
+        <li><a href="#">1:1문의하기</a></li>    
         <li><a href="#">기자신청</a></li>
       </ul>
     </li>
@@ -131,8 +130,8 @@ nav ul ul ul {
   	<div><a href="/project1/member/inputForm.jsp">회원가입</a></div>
   </div>
   <%}else{ %>
-  <div class="flex-wrap">
- 	<div><a href="/project1/profile/user_mypage_form.jsp?id=<%=id%>">마이페이지</a></div>
+  <div class="flex-wrap"> 	
+ 	<div><a href="/project1/member/user_mypage_form.jsp?id=<%=id%>">마이페이지</a></div>
   	<div><a href="/project1/member/logout.jsp">로그아웃</a></div>
   </div>
   <%} %>

@@ -1,3 +1,4 @@
+<%@page import="member.MemberDTO"%>
 <%@page import="member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -7,26 +8,13 @@
 <meta charset="UTF-8">
 <title>유저 프로필 폼</title>
 </head>
+
 <%
 String id = (String) session.getAttribute("memId");
 String id2 = request.getParameter("id");
-String fileName = "";
 
 %>
-<script>
-	function setThumbnail(event){
-		var reader = new FileReader();
-		
-		reader.onload = function(event){
-			var img = document.createElement("img");
-			img.setAttribute("src", event.target.result);
-			img.setAttribute("class", "rounded-circle");
-			document.querySelector("div#image_container").appendChild(img);
-		};
-		
-		reader.readAsDataURL(event.target.files[0]);
-	}
-	</script>
+
 <body>
 
 	<div class="card">
@@ -34,13 +22,8 @@ String fileName = "";
 			<%-- 자식요소들을 정렬 --%>
 			<div class="d-flex flex-column align-items-center text-center">
 				<%-- 이미지 가져오고 크기 조정 --%>
-				<div id="image_container"></div>
-				 <%-- <img src="<%=선택한 이미지가 있는 파일의 경로 필요%>" class="rounded-circle" width="150">--%>
-				<form action="imgUpload.jsp" method="post"
-					enctype="multipart/form-data">
-					<input type="file"	name="save" id="profile-pic" onchange="setThumbnail(event)"> 
-					<input type="submit" value="업로드">
-				</form>
+				<img src="/project1/resource/img/profile.png" class="rounded-circle" width="150">
+				
 
 				<%-- 이름, 나머지 글자들 크기 및 글자색 조정 --%>
 				<div class="mt-3">

@@ -97,6 +97,8 @@
 					<%} %>
 				</div>
 			</div>
+			<input type="hidden" name="membertype"
+							value="<%=member.getMemberType()%>">
 		</div>
 
 		<%
@@ -168,13 +170,14 @@
 							value="<%=member.getBirthdate()%>">
 					</div>
 				</div>
-
+				<input type="hidden" name="memberType"
+							value="<%=member.getMemberType()%>">
 				<hr>
 				<%-- 프로필 편집 --%>
 				<div class="row">
 					<div class="col-sm-12">
 						<input type="submit" class="btn btn-info" name="update" value="적용" />
-						<a class="btn btn-info" onclick="location='user_mypage_form.jsp'">취소</a>
+						<a class="btn btn-info" onclick="location='user_mypage_form.jsp?id=<%=id%>'">취소</a>
 					</div>
 				</div>
 			</div>

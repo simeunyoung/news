@@ -60,7 +60,7 @@ public class MemberDAO extends OracleServer {
 		public void insertMember(MemberDTO member) {
 			try {
 				conn = getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,'0',?,null,null,null,sysdate)");
+				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,'1',?,null,null,null,sysdate,null)");
 				pstmt.setString(1, member.getId());
 				pstmt.setString(2, member.getPw());
 				pstmt.setString(3, member.getName());
@@ -133,6 +133,7 @@ public class MemberDAO extends OracleServer {
 					member.setBirthdate(rs.getString("birthdate"));
 					member.setReg(rs.getTimestamp("reg"));
 					member.setMemberType(rs.getString("memberType"));
+					member.setImg(rs.getString("img"));
 				}
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -208,6 +209,47 @@ public class MemberDAO extends OracleServer {
 			return result;
 		}
 		
+        public void updateImg(String sysName, String id) {
+            try {
+                conn = getConnection();
+                sql ="update member set img = ? where id = ?";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, sysName);
+                pstmt.setString(2, id);
+                pstmt.executeUpdate();
+            }catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                oracleClose();
+            }
+        }
+        
+        public List getSearchList(String search) throws Exception {
+            List searchList=null;
+            try {
+               conn = getConnection();
+               pstmt = conn.prepareStatement(
+                     "SELECT * FROM news WHERE title LIKE '%' || ? || '%'");
+                     pstmt.setString(1, search);
+                     rs = pstmt.executeQuery();
+                     if (rs.next()) {
+                    	 searchList = new ArrayList(); 
+                        do{ 
+                           MemberDTO dto= new MemberDTO();
+                           dto.setId(rs.getString("id"));
+
+                           searchList.add(dto); 
+                        }while(rs.next());
+                     }
+            } catch(Exception ex) {
+               ex.printStackTrace();
+            } finally {
+            oracleClose();
+            }
+
+            
+            return searchList;
+         }
 		// company
 		  public TreeSet<String> selectPress() {
 			  	TreeSet<String> list = new TreeSet<>();

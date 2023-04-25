@@ -17,6 +17,7 @@ public class MemberDTO {
 	private String pressSubcribe;
 	private String reporterSubcribe;
 	private String ip;
+	private String img;
 	
 	public String getId() {
 		return id;
@@ -95,5 +96,11 @@ public class MemberDTO {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 }
