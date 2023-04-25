@@ -110,7 +110,6 @@ td {
 				<tr>
 					<td><h1>
 							<a href="pressPage.jsp?press=<%=element%>"><%=element.toUpperCase()%><br />
-							<button class="btn btn-primary">구독하기</button></a>
 						</h1></td>
 					<td>
 						<%
