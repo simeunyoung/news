@@ -15,7 +15,7 @@ NewsDTO text = method.getRecon(num);
 변경하실 댓글 내용<br /><input type="text" class="textarea_box" name="recon" value="<%=text.getRecon()%>"><br />
 <div align="right">
 <input type="submit" class="submit_button" value="변경하기">&nbsp;
-<input type="button" class="submit_button" value="목록보기" onclick="location='testlist.jsp'">&nbsp;
+<input type="button" class="submit_button" value="목록보기" onclick="location='list.jsp'">&nbsp;
 </div></form>
 
 

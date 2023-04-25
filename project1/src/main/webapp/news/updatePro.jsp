@@ -16,7 +16,7 @@
 	
     
 if(updateClear == 1){
-	  response.sendRedirect("testlist.jsp");
+	  response.sendRedirect("list.jsp");
 	  
 }else{%>
       <script language="JavaScript">          

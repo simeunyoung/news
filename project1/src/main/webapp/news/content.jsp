@@ -22,12 +22,12 @@ String con = text.getCon();
 <div class="content_box">
 <div class="con1"><div class="conl"><b>뉴스 종류 : </b><%=text.getNewstype()%></div><div class="conr"><b>조회수 : </b><%=text.getViews()%></div></div>
 <div class="con1"><b>Title : </b><%=text.getTitle()%></div>
-<div class="con1"><div class="conl"><b>작성자 : </b><%=text.getId()%>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
+<div class="con1"><div class="conl"><b>작성자 : </b><a href = "/project1/member/user_mypage_form.jsp?id=<%=text.getId()%>"><%=text.getNick()%></a>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
 <div class="con1"><b>내용 : </b><%=text.getCon()%></div><br />
 <div align="right">
 <input type="button" class="button" value="수정하기" onclick="location='updateForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
-<input type="button" class="button" value="돌아가기" onclick="location='testlist.jsp'">
+<input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
 </div>
 <br />
 

@@ -11,7 +11,7 @@ NewsDAO method = NewsDAO.getInstance();
 int formcheck = method.deleteNews(num,pw);
 
 if(formcheck == 1) {
-response.sendRedirect("testlist.jsp");
+response.sendRedirect("list.jsp");
 } else {%>
 <script>       
 alert("비밀번호가 맞지 않습니다");

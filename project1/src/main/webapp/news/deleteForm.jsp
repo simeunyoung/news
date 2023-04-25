@@ -14,7 +14,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 <input type="text" name="pw">
 <input type="hidden" name="num" value="<%=num%>"><br /><br />
 <input class="button" type="submit" value="해당 기사 삭제" >&nbsp;&nbsp;
-<input class="button" type="button" value="목록으로 돌아가기" onclick="location='testlist.jsp'">
+<input class="button" type="button" value="목록으로 돌아가기" onclick="location='list.jsp'">
 </form>
 </center>
 </div>
