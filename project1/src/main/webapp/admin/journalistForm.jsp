@@ -23,4 +23,4 @@
 	<input type="hidden" name="memberType" value="<%=dto.getMemberType()%>" />
 	<input type="hidden" name="email" value="<%=dto.getEmail()%>" />
 	<input type="submit" value="전송">
-</form> 
+</form>
