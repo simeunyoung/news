@@ -11,7 +11,7 @@ public class AdminDAO extends OracleServer {
 	private AdminDAO() {} // 기본생성자 사용불가
 
 	// 매개변수인 id를 통해 db를 검색
-	// 검색된 정보에서 type이 0이면 -1로 변경하는 메서드
+	// 검색된 정보에서 type이 1이면 -1로 변경하는 메서드
 	// journalistListPro.jsp
 	// 4.25 수정
 	public String changeType(String id) {
@@ -22,17 +22,27 @@ public class AdminDAO extends OracleServer {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
 			if(rs.next()) {
 				result = rs.getString("membertype");
 			}
-			if(result.equals("0")) {
+			if(result.equals("1")) {
 				sql = "update member set membertype=-1 where id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
 				pstmt.executeUpdate();
 				result = "-1";
-			}
+			} // member mebertype 변경부분
+			
+			sql = "select * from jas where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sql = "update jas set resulttype=1 where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+			} // jas resulttype 변경부분
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -56,7 +66,6 @@ public class AdminDAO extends OracleServer {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto.setId(rs.getString("id"));
-				dto.setEmail(rs.getString("email"));
 				dto.setMemberType(rs.getString("memberType"));
 			}
 		} catch(Exception e) {
@@ -74,7 +83,7 @@ public class AdminDAO extends OracleServer {
 	public void insertJas(AdminDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into jas values(?,?,?,?,?,sysdate)";
+			sql = "insert into jas values('0',?,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getMemberType());
@@ -98,7 +107,7 @@ public class AdminDAO extends OracleServer {
 		int result = 0;
 		try {
 			conn = getConnection();
-			sql = "select count(*) from jas";
+			sql = "select count(*) from jas where resulttype=0";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -127,6 +136,7 @@ public class AdminDAO extends OracleServer {
 			
 			while(rs.next()) {
 				AdminDTO dto = new AdminDTO();
+				dto.setResultType(rs.getString("resultType"));
 				dto.setId(rs.getString("id"));
 				dto.setMemberType(rs.getString("memberType"));
 				dto.setEmail(rs.getString("email"));
@@ -151,7 +161,7 @@ public class AdminDAO extends OracleServer {
 		boolean result = false;
 		try {
 			conn = getConnection();
-			sql = "insert into oneonone values(qna_seq.nextval,?,?,?,?,?,?,?,?,sysdate)";
+			sql = "insert into oneonone values(oneonone_seq.nextval,?,?,?,?,?,?,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getName());
@@ -159,8 +169,10 @@ public class AdminDAO extends OracleServer {
 			pstmt.setString(4, dto.getTel());
 			pstmt.setString(5, dto.getTitle());
 			pstmt.setString(6, dto.getCon());
-			pstmt.setString(7, dto.getMemberType());
-			pstmt.setString(8, dto.getIp());
+			pstmt.setString(7, dto.getQuestionType());
+			pstmt.setString(8, dto.getMemberType());
+			pstmt.setString(9, dto.getImg());
+			pstmt.setString(10, dto.getIp());
 			pstmt.executeUpdate();
 			result = true;
 		} catch(Exception e) {
@@ -220,6 +232,7 @@ public class AdminDAO extends OracleServer {
 				dto.setTel(rs.getString("tel"));
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
+				dto.setQuestionType(rs.getString("questionType"));
 				dto.setMemberType(rs.getString("memberType"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
@@ -253,6 +266,7 @@ public class AdminDAO extends OracleServer {
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
 				dto.setMemberType(rs.getString("memberType"));
+				dto.setQuestionType(rs.getString("questionType"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
 			}

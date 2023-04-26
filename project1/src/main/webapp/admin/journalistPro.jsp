@@ -14,4 +14,3 @@
 
 dto.getId() : <%=dto.getId()%><br />
 dto.getType() : <%=dto.getMemberType()%><br />
-dto.getEmail() : <%=dto.getEmail()%><br />

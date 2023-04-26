@@ -37,9 +37,14 @@
 <hr />
 
 <center><h3>글목록(<%=count%>)</h3></center>
+<table align="center" width="1030">
+	<tr>
+		<td align="right"><input type="button" value="글쓰기" onclick="location='1-1Write.jsp'" /></td>
+	</tr>
+</table>
 
 <%	if(count == 0){%>
-	<table align="center" width="700" border="1" cellspacing="0" cellpadding="0">
+	<table align="center" width=1030 border="1" cellspacing="0" cellpadding="0">
 		<tr height="30">
 			<td align="center">게시판에 저장된 글이 없습니다.</td>
 		</tr>
@@ -49,6 +54,7 @@
 	<table align="center" border="1" cellspacing="0" cellpadding="0">
 		<tr height="30">
 			<td align="center" width="50">순번</td>
+			<td align="center" width="150">문의유형</td>
 			<td align="center" width="80">고유번호</td>
 			<td align="center" width="250">제목</td>
 			<td align="center" width="150">작성자</td>
@@ -59,6 +65,27 @@
 		AdminDTO dto = (AdminDTO)oneononeList.get(i);%>
 		<tr height="30">
 			<td align="center"><%=number--%></td>
+			<td align="center">
+				<%
+				if(dto.getQuestionType().equals("1")) {
+					out.println("자바");
+				} else if(dto.getQuestionType().equals("2")) {
+				  	out.println("파이썬");
+				} else if(dto.getQuestionType().equals("3")) {
+					out.println("자바스크립트");
+				} else if(dto.getQuestionType().equals("4")) {
+					out.println("신고");
+				} else if(dto.getQuestionType().equals("5")) {
+					out.println("제휴 및 일반문의");
+				} else if(dto.getQuestionType().equals("6")) {
+					out.println("뉴스 제보하기");
+				} else if(dto.getQuestionType().equals("0")) {
+					out.println("미선택");
+				} else {
+					out.println("오류오류오류오류오류오류");
+				}
+				%>
+			</td>
 			<td align="center"><%=dto.getNum()%></td>
 			<td align="center"><a href="1-1Content.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>"><%=dto.getTitle()%></a></td>
 			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>)</td>

@@ -21,6 +21,5 @@
 <form method="post" action="journalistPro.jsp">
 	<input type="hidden" name="id" value="<%=dto.getId()%>" />
 	<input type="hidden" name="memberType" value="<%=dto.getMemberType()%>" />
-	<input type="hidden" name="email" value="<%=dto.getEmail()%>" />
 	<input type="submit" value="전송">
 </form>

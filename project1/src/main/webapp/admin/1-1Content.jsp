@@ -24,7 +24,30 @@
 <form>
 	<table align="center" width="800" border="1" cellspacing="0">
 		<tr height="30">
-			<td align="center" colspan="4"><%=dto.getTitle()%></td>
+			<td align="center" colspan="2">문의유형 : 
+				<%
+				if(dto.getQuestionType().equals("1")) {
+					out.println("자바");
+				} else if(dto.getQuestionType().equals("2")) {
+				  	out.println("파이썬");
+				} else if(dto.getQuestionType().equals("3")) {
+					out.println("자바스크립트");
+				} else if(dto.getQuestionType().equals("4")) {
+					out.println("뉴스 제보하기");
+				} else if(dto.getQuestionType().equals("5")) {
+					out.println("제휴 및 일반문의");
+				} else if(dto.getQuestionType().equals("6")) {
+					out.println("신고하기");
+				} else if(dto.getQuestionType().equals("0")) {
+					out.println("미선택");
+				} else {
+					out.println("오류오류오류오류오류오류");
+				}
+				%>
+			</td>
+		</tr>
+		<tr height="30">
+			<td align="center" colspan="4">(<%=dto.getNum()%>) <%=dto.getTitle()%></td>
 		</tr>
 		<tr height="30">
 			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>)</td>

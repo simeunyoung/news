@@ -8,6 +8,7 @@
 <%
 	AdminDAO dao = AdminDAO.getInstance();
 	dao.changeType(dto.getId());
+	response.sendRedirect("journalistList.jsp");
 %>
 
 dto.getId() : <%=dto.getId()%><br />

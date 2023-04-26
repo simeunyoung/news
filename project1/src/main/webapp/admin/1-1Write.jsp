@@ -17,23 +17,24 @@
 		<tr height="30">
 			<td align="center">문의유형</td>
 			<td align="center">
-				<select name="qType">
-					<option value="0">선택</option>
-					<option value="1">자바(Java)</option>
-					<option value="2">파이썬(Python)</option>
-					<option value="3">자바스크립트(JavaScript)</option>
-					<option value="4">신고하기</option>
-					<option value="5">제휴 및 문의하기</option>
+				<select name="questionType">
+					<option value='0'>선택</option>
+					<option value='1'>자바(Java)</option>
+					<option value='2'>파이썬(Python)</option>
+					<option value='3'>자바스크립트(JavaScript)</option>
+					<option value='4'>뉴스 제보하기</option>
+					<option value='5'>제휴 및 문의하기</option>
+					<option value='6'>신고하기</option>
 				</select>
 			</td>
 		</tr>
 		<tr height="30">
 			<td align="center" width="150">아이디</td>
-			<td><input type="text" name="id" size="50"/>
+			<td><input type="text" name="id" size="50"/></td>
 		</tr>
 		<tr height="30">
 			<td align="center">작성자</td>
-			<td><input type="text" name="name" size="50" />
+			<td><input type="text" name="name" size="50" /></td>
 		</tr>
 		<tr height="30">
 			<td align="center">이메일(선택사항)</td>
@@ -53,12 +54,16 @@
 			<td align="center" colspan="2">문의내용</td>
 		</tr>
 		<tr>
-			<td colspan="2"><textarea cols="70" rows="10" name="con"></textarea>
+			<td colspan="2"><textarea cols="70" rows="10" name="con"></textarea></td>
 		</tr>
 		<tr height="20">
 			<td colspan="2">
 			문의내용 n/1000자 입력 확인기능 구현요망
 			</td>
+		</tr>
+		<tr height="30">
+			<td align="center">첨부</td>
+			<td align="center"><input type="button" value="첨부파일 추가" onclick="imgUpload.jsp">
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
