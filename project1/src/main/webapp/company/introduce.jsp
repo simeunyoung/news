@@ -116,7 +116,7 @@ td {
 						ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
 						for (int z = 0; z < reporterList.size(); z++) {
 						%> <a
-						href="journalist_mypage_form.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
+						href="/project1/member/journalist.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
 						<%
 						}
 						%>

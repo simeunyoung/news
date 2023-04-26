@@ -36,7 +36,28 @@
             <li class="tab-menu" data-tab="tab02">기자 구독목록</li>
             <li class="tab-menu" data-tab="tab03">스크랩목록</li>
 </ul>
-             <div class="tab-content active" id="tab01">1
+             <div class="tab-content active" id="tab01"><table>
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <%
+      // 반복문을 사용하여 데이터를 동적으로 출력
+      for (int i = 0; i < 3; i++) {
+    %>
+    <tr>
+      <td>데이터1</td>
+      <td>
+        <input type="checkbox" name="선택한_데이터[]" value="data" />
+      </td>
+    </tr>
+    <%
+      }
+    %>
+  </tbody>
+</table>
+
              </div>
              <div class="tab-content active" id="tab02">2
              </div>

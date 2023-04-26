@@ -4,17 +4,55 @@
 <%@ page import = "member.MemberDTO" %>
 <%@ page import = "java.util.*" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
-<%@ page import = "revalue.RevalueDAO"%>
-<%@ page import = "revalue.RevalueDTO"%>
+<%@ page import = "news.NewsDTO"%>
+<%@ page import = "news.NewsDAO"%>
 <% MemberDAO dao = MemberDAO.getInstance(); %>
 <% String press = request.getParameter("press");%>
-<<<<<<< Updated upstream
-<% RevalueDAO rv = RevalueDAO.getInstance();%>
-<% String id = (String)session.getAttribute("memId");%>
+<% NewsDAO rv = NewsDAO.getInstance();%>
+<% String id = "test";//(String)session.getAttribute("memId");%>
+<% String exist = dao.selectExist(id);%>
+<% if(exist == null){exist = "";}%>
+<%=exist%>
+<% String[] parts = exist.split("@");
+	boolean include = false;
+	for (String part : parts) {
+    if (part.equals(press)) {
+        include = true;
+        break;
+    }
+}
+%>
+<script>
+function deletePageHistoryAndRedirect() {
+	  // 쿠키에서 현재 페이지 방문 기록 삭제
+	  var cookies = document.cookie.split(';');
+	  for (var i = 0; i < cookies.length; i++) {
+	    var cookie = cookies[i].trim();
+	    if (cookie.startsWith('pageHistory=')) {
+	      document.cookie = cookie.split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+	      break;
+	    }
+	  }
 
+	  // 다음 페이지로 이동
+	  location.replace('pressPro.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>');
+	}
+function deletePageHistoryAndRedirect1() {
+	  // 쿠키에서 현재 페이지 방문 기록 삭제
+	  var cookies = document.cookie.split(';');
+	  for (var i = 0; i < cookies.length; i++) {
+	    var cookie = cookies[i].trim();
+	    if (cookie.startsWith('pageHistory=')) {
+	      document.cookie = cookie.split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+	      break;
+	    }
+	  }
 
-=======
+	  // 다음 페이지로 이동
+	  location.replace('pressDelete.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>');
+	}
 
+</script>
 <html>
 <head>
 <%-- css파일 경로 지정 --%>
@@ -35,7 +73,6 @@
               <li class="breadcrumb-item active" aria-current="page">언론사페이지</li>
             </ol>
           </nav>
-          
           <%-- 열과 열 사이의 간격 조정 --%>
           <div class="row gutters-sm">
           	<%-- col-mb-4 = mb는 중간 크기 화면 4는 가로크기, mb-3 = 하단 여백 --%>
@@ -46,19 +83,14 @@
                 	<%-- 자식요소들을 정렬 --%>
                   <div class="d-flex flex-column align-items-center text-center">
                     <%-- 이미지 가져오고 크기 조정 --%>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <%-- 이름, 나머지 글자들 크기 및 글자색 조정 --%>
                     <div class="mt-3">
                       <h4><%=press.toUpperCase()%></h4>
-<<<<<<< Updated upstream
-                      <button class="btn btn-primary">구독하기</button>
-=======
                       <% if(!include){%>
-                      <button class="btn btn-primary" onclick= "window.location.href='pressPro.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>'">구독하기</button>
+                      <button class="btn btn-primary" onclick= "deletePageHistoryAndRedirect()">구독하기</button>
                       <%}else{%>
-                      <button class="btn btn-primary" onclick= "window.location.href='pressDelete.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>'">구독취소</button>
+                      <button class="btn btn-primary" onclick= "deletePageHistoryAndRedirect1()">구독취소</button>
                       <%}%>
->>>>>>> Stashed changes
                     </div>
                   </div>
                 </div>
@@ -76,9 +108,9 @@
                       <h6 class="mb-0">기자목록</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
+                    <%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
 					for(int z = 0 ; z < reporterList.size() ; z++){%>
-					<a href="journalist_mypage_form.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
+					<a href="/project1/member/journalist.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
 					<%} %>
                     </div>
                   </div>
@@ -99,14 +131,12 @@
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-5">관련 기사</i></h6>
                       <%
-                      // 임시 !!!
-                      List articleList = new ArrayList();
-                      	int count = 0;
-                      	int number = 0;
-                      	int currentPage = 0;
-                      	int pageSize = 0;
+                      //
+                      ArrayList<NewsDTO> articleList = rv.selectArticle(press);				
+                      	int count = articleList.size();
+
                       %>
-                    	<i class="material-icons text-info mr-2">내가 쓴 댓글(<%=count %>)</i>
+                    	<i class="material-icons text-info mr-2">관련 기사 수(<%=count %>)</i>
                     	<%if(count == 0){ %>
 										<div>
 											저장된 댓글이 없습니다.
@@ -117,54 +147,24 @@
 												<th>NO</th>
 												<th>ID</th>
 												<th>TITLE</th>
-												<th>CONTENTS</th>
-												<th>RECONTENTS</th>
-												<th>IP</th>
+												<th>PRESS</th>
 												<th>DATE</th>												
 											</tr>
-											<%
-											if(articleList != null){
-												for(int i = 0; i < articleList.size(); i++){
-													RevalueDTO article = (RevalueDTO)articleList.get(i);
-											%>
+											<%for(int i = 0 ; i < articleList.size() ; i++){%>
 												<tr>
-													<td><%=number-- %></td>
-													<td><%=article.getId() %></td>
+													<td><%=articleList.get(i).getNum() %></td>
 													<td>
-														<a href="news.jsp?num<%=article.getNum()%>&pageNum=<%=currentPage%>">
-															<%=article.getTitle() %>
+														<a href="/project1/news/content.jsp?num=<%=articleList.get(i).getNum()%>">
+															<%=articleList.get(i).getTitle() %>
 														</a>
 													</td>
-													<td><%=article.getCon() %></td>
-													<td><%=article.getReCon() %></td>
-													<td><%=article.getIp() %></td>
+													<td><%=articleList.get(i).getId() %></td>
+													<td><%=press.toUpperCase()%></td>
+													<td><%=articleList.get(i).getReg() %></td>
 													<%-- 임시 !!<td><%=sdf.format(article.getReg()) %></td> --%>											
 												</tr>
-											<%} %>
 										</table>
-									<%}} %>
-									<%
-										if(count > 0){
-											// 하단 페이지 목록 번호 갯수 정하기
-											int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-											
-											int startPage = (int)(currentPage/10) * 10 + 1;
-											int pageBlock = 10;
-											int endPage = startPage + pageBlock - 1;
-											if(endPage > pageCount) { endPage = pageCount;}
-											
-											if(startPage > 10){ %>
-												<a href="user_mypage_form.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
-											<%} 
-											for(int i = startPage; i <= endPage; i++){%>
-												<a href="user_mypage_form.jsp?pageNum=<%=i %>">[<%=i %>]</a>
-											<%} 
-											if(endPage < pageCount){%>
-												<a href="user_mypage_form.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-											<%
-										}
-										}
-									%>
+										<%}} %>
                     </div>
                   </div>
                 </div>

@@ -13,7 +13,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%dao.savePress(exist, press, id);%>
-<%response.sendRedirect("/project1/company/pressPage.jsp?press=" + press); %>
+<%String url = dao.savePress(exist, press, id);
+	if(url != null){ %>
+		<script>
+			location.replace("/project1/company/pressPage.jsp?press=<%=press%>"); 
+		</script>	
+<%}
+%>
+
+
+
+<%//response.sendRedirect("/project1/company/pressPage.jsp?press=" + press); %>
 </body>
 </html>
