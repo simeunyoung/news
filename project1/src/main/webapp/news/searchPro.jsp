@@ -10,15 +10,24 @@
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 
-<%   String search = request.getParameter("search");
+<%  
+String search = request.getParameter("search");
 
+
+String startDate = request.getParameter("startDate");
+String endDate = request.getParameter("endDate");
 
     List searchList = null;
 
     NewsDAO dao = NewsDAO.getInstance();
 
+    if(search != null){
     searchList = dao.getSearchList(search);
+    }else if(startDate != null && endDate != null){
+    	searchList = dao.getSearchDateList(startDate, endDate);	
+    }
 %>
+<!DOCTYPE>
 <html>
 <head>
 <title>게시판</title>
@@ -26,13 +35,15 @@
 </head>
 
 <body>
+<jsp:include page="/member/header.jsp" />
+<br>
    <% try{%>
 <b>검색결과: <%=searchList.size()%>개</b>
    
 <% 
    if (searchList.size() == 0) {
 %>
-<table width="700" border="1" cellpadding="0" cellspacing="0">
+<table>
 <tr>
     <td align="center">
     게시판에 저장된 글이 없습니다.
@@ -42,6 +53,7 @@
 <%  } else {    %>
 <table border="1" width="700" cellpadding="0" cellspacing="0" align="center"> 
     <tr height="30"> 
+          <td align="center"  width="250" >날짜</td> 
       <td align="center"  width="250" >아이디</td> 
       <td align="center"  width="100" >타입</td>
       <td align="center"  width="150" >제목</td> 
@@ -52,18 +64,25 @@
           NewsDTO dto = (NewsDTO)searchList.get(i);
 %>
    <tr height="30">
-
+ <td align="center"  width="50"><%=dto.getReg()%></td>
     <td align="center"  width="50"><%=dto.getId()%></td>
     <td align="center"  width="50"><%=dto.getNewstype()%></td>
     <td align="center" width="100" >
-    <% String search2 = dto.getTitle().replace(search,"@"+search+"@");%>
-           <% String[] spl = search2.split("@"); %>
-           <a><%for(int z = 0 ; z < spl.length; z++)
-           {if(!search.equals(spl[z])){   
-              out.print(spl[z].trim());
-           }else{%>
-                <strong><%out.print(spl[z].trim());%></strong>
-          <%}}%></a>
+ <%if(search != null){ %>
+	<%String search2 = dto.getTitle().replace(search, "@"+search+"@");%>
+	<%String[] spl = search2.split("@");%>
+	<a>
+	<%for(int z = 0 ; z < spl.length; z++){
+		if(!search.equals(spl[z])){
+			out.print(spl[z]);
+		}else{
+			%><span style="font-weight:bold"><%out.print(spl[z]);%></span><%
+		}
+		}%>
+	</a>
+<%} else if(startDate != null && endDate != null){%>
+   <td align="center"  width="50"><%=dto.getTitle()%></td>
+<%} %>
     </td>
 
   </tr>

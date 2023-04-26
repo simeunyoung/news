@@ -545,6 +545,34 @@ public class NewsDAO extends OracleServer {
         return searchList;
     }
     
+    public List getSearchDateList(String startDate, String endDate) {
+    	List searchDateList = null;
+    	try {
+    		conn = getConnection();
+    		sql = "select * from news where reg between ? and ?";
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setString(1, startDate);
+    		pstmt.setString(2, endDate);
+    		rs = pstmt.executeQuery();
+    		if (rs.next()) {
+    			searchDateList = new ArrayList();
+    			do {
+    			NewsDTO dto = new NewsDTO();
+    			dto.setId(rs.getString("id"));
+                dto.setNewstype(rs.getString("newstype"));
+                dto.setTitle(rs.getString("title"));
+                dto.setReg(rs.getTimestamp("reg"));
+                searchDateList.add(dto); 
+    			}while(rs.next());
+    		}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+    	return searchDateList;
+    }
 }
 
 
