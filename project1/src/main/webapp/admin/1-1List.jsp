@@ -2,7 +2,8 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List"%>
 <%@ page import="admin.AdminDAO"%>
-<%@ page import="admin.AdminDTO" %>
+<%@ page import="admin.AdminDTO"%>
+<%@ page import="member.MemberDTO"%>
 
 <%	
 	int pageSize = 20; // 한 페이지에서 보여줄 게시물 수
@@ -20,6 +21,9 @@
 	List oneononeList = null; // 게시물 목록을 보여줄 리스트 선언
 	
 	AdminDAO dao = AdminDAO.getInstance(); // dao 객체 불러옴
+	String memId = (String)session.getAttribute("memId");
+	MemberDTO dto2 = dao.setMember(memId);
+	if(memId == null) {dto2.setMemberType("0");}
 	int count = dao.oneononeCount(); // db에 있는 게시물 수
 	// 게시물이 있으면 목록 가져옴 1, 20 / 21, 40
 	if(count > 0) {
@@ -30,7 +34,7 @@
 %>
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
-<title>1:1 문의내역(관리자)</title>
+<title>1:1 문의내역</title>
 
 <center><h2>1:1 문의내역(관리자)</h2></center>
 
@@ -59,7 +63,10 @@
 			<td align="center" width="250">제목</td>
 			<td align="center" width="150">작성자</td>
 			<td align="center" width="200">작성일</td>
+			<td align="center" width="80">조회수</td>
+			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center" width="150">IP</td>
+			<%}%>
 		</tr>
 <%	for(int i = 0; i < oneononeList.size(); i++) {
 		AdminDTO dto = (AdminDTO)oneononeList.get(i);%>
@@ -74,11 +81,11 @@
 				} else if(dto.getQuestionType().equals("3")) {
 					out.println("자바스크립트");
 				} else if(dto.getQuestionType().equals("4")) {
-					out.println("신고");
+					out.println("뉴스제보");
 				} else if(dto.getQuestionType().equals("5")) {
 					out.println("제휴 및 일반문의");
 				} else if(dto.getQuestionType().equals("6")) {
-					out.println("뉴스 제보하기");
+					out.println("신고");
 				} else if(dto.getQuestionType().equals("0")) {
 					out.println("미선택");
 				} else {
@@ -88,11 +95,14 @@
 			</td>
 			<td align="center"><%=dto.getNum()%></td>
 			<td align="center"><a href="1-1Content.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>"><%=dto.getTitle()%></a></td>
-			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>)</td>
+			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>님)</td>
 			<td align="center"><%=sdf.format(dto.getReg())%></td>
+			<td align="center"><%=dto.getReadCount()%>
+			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center"><%=dto.getIp()%></td>
+			<%}%>
 		</tr>
-<%	}%>		
+<%	}%>
 	</table>
 </form>
 

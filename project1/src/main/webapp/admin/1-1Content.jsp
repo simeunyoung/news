@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="admin.AdminDAO" %>
-<%@ page import="admin.AdminDTO" %>
-
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
-
-<title>1:1 문의 게시판</title>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="admin.AdminDAO"%>
+<%@ page import="admin.AdminDTO"%>
+<%@ page import="member.MemberDTO"%>
 
 <%
 	// request.getParameter는 리턴타입이 String이라서 Integer를 이용해서 숫자로 변환
@@ -13,8 +10,15 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	AdminDAO dao = AdminDAO.getInstance();
+	String memId = (String)session.getAttribute("memId");
 	AdminDTO dto = dao.oneononeGet(num);
+	MemberDTO dto2 = dao.setMember(memId);
+	if(memId == null) {dto2.setMemberType("0");}
 %>
+
+<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+
+<title>1:1 문의 게시판</title>
 
 <center><h3>1:1 문의내용</h3></center>
 
@@ -23,6 +27,10 @@
 
 <form>
 	<table align="center" width="800" border="1" cellspacing="0">
+		<tr height="30">
+			<td align="center" width="400">글 고유번호 : <%=dto.getNum()%></td>
+			<td align="center">조회수 : <%=dto.getReadCount()%></td>
+		</tr>
 		<tr height="30">
 			<td align="center" colspan="2">문의유형 : 
 				<%
@@ -47,14 +55,17 @@
 			</td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="4">(<%=dto.getNum()%>) <%=dto.getTitle()%></td>
+			<td align="center" colspan="4">제목 : <%=dto.getTitle()%></td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>)</td>
+			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>님)</td>
 		</tr>
+		<%if(dto2.getMemberType().equals("2")) {%>
 		<tr height="30">
 			<td align="center" width="400">이메일 : <%=dto.getEmail()%></td>
 			<td align="center">연락처 : <%=dto.getTel()%></td>
+		</tr>
+		<%}%>
 		<tr height="200">
 			<td align="center" colspan="2"><%=dto.getCon()%></td>
 		</tr>

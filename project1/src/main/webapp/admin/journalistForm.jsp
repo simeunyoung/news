@@ -5,8 +5,7 @@
 <%
 	AdminDAO dao = AdminDAO.getInstance();
 	String memId = (String)session.getAttribute("memId");
-	MemberDTO dto = null;
-	dto = dao.setMember(memId);
+	MemberDTO dto = dao.setMember(memId);
 %>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />

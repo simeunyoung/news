@@ -66,6 +66,10 @@ public class AdminDAO extends OracleServer {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setNick(rs.getString("nick"));
+				dto.setEmail(rs.getString("email"));
+				dto.setTel(rs.getString("tel"));
 				dto.setMemberType(rs.getString("memberType"));
 			}
 		} catch(Exception e) {
@@ -161,7 +165,7 @@ public class AdminDAO extends OracleServer {
 		boolean result = false;
 		try {
 			conn = getConnection();
-			sql = "insert into oneonone values(oneonone_seq.nextval,?,?,?,?,?,?,?,?,?,?,sysdate)";
+			sql = "insert into oneonone values(oneonone_seq.nextval,?,?,?,?,?,?,0,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getName());
@@ -169,8 +173,8 @@ public class AdminDAO extends OracleServer {
 			pstmt.setString(4, dto.getTel());
 			pstmt.setString(5, dto.getTitle());
 			pstmt.setString(6, dto.getCon());
-			pstmt.setString(7, dto.getQuestionType());
-			pstmt.setString(8, dto.getMemberType());
+			pstmt.setString(7, dto.getMemberType());
+			pstmt.setString(8, dto.getQuestionType());
 			pstmt.setString(9, dto.getImg());
 			pstmt.setString(10, dto.getIp());
 			pstmt.executeUpdate();
@@ -232,6 +236,7 @@ public class AdminDAO extends OracleServer {
 				dto.setTel(rs.getString("tel"));
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
+				dto.setReadCount(rs.getInt("readCount"));
 				dto.setQuestionType(rs.getString("questionType"));
 				dto.setMemberType(rs.getString("memberType"));
 				dto.setIp(rs.getString("ip"));
@@ -252,6 +257,11 @@ public class AdminDAO extends OracleServer {
 		AdminDTO dto = null;
 		try {
 			conn = getConnection();
+			sql = "update oneonone set readcount=readcount+1 where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
 			sql = "select * from oneonone where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -265,6 +275,7 @@ public class AdminDAO extends OracleServer {
 				dto.setTel(rs.getString("tel"));
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
+				dto.setReadCount(rs.getInt("readCount"));
 				dto.setMemberType(rs.getString("memberType"));
 				dto.setQuestionType(rs.getString("questionType"));
 				dto.setIp(rs.getString("ip"));
@@ -372,12 +383,18 @@ public class AdminDAO extends OracleServer {
 	} // public int typeChk(String id) {
 	
 	// num을 이용하여 Q&A 정보를 dto에 set하는 메서드
+	// 4.27 확인필요
 	public AdminDTO getQna(int num) {
 		AdminDTO dto = null;
 		try {
+			sql = "update qna set readcount=readcount+1 where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
 			conn = getConnection();
 			sql = "select * from qna where num=?";
-			pstmt= conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
@@ -385,8 +402,13 @@ public class AdminDAO extends OracleServer {
 				dto = new AdminDTO();
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
+				dto.setReadCount(rs.getInt("readCount"));
+				dto.setMemberType(rs.getString("memberType"));
+				dto.setQuestionType(rs.getString("questionType"));
+				dto.setImg(rs.getString("img"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
 			}
@@ -397,5 +419,6 @@ public class AdminDAO extends OracleServer {
 		}
 		return dto;
 	} // public AdminDTO getQna(int num) {
+	
 
 } // public class AdminDAO extends OracleServer {

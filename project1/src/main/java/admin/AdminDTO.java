@@ -6,14 +6,15 @@ public class AdminDTO {
 	private int num;
 	private String id;
 	private String pw;
+	private String name;
 	private String email;
 	private String tel;
-	private String name;
-	private String questionType;
-	private String memberType;
-	private String resultType;
 	private String title;
 	private String con;
+	private int readCount;
+	private String memberType;
+	private String questionType;
+	private String resultType;
 	private String img;
 	private String ip;
 	private Timestamp reg;
@@ -36,6 +37,12 @@ public class AdminDTO {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -48,30 +55,6 @@ public class AdminDTO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getQuestionType() {
-		return questionType;
-	}
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
-	}
-	public String getMemberType() {
-		return memberType;
-	}
-	public void setMemberType(String memberType) {
-		this.memberType = memberType;
-	}
-	public String getResultType() {
-		return resultType;
-	}
-	public void setResultType(String resultType) {
-		this.resultType = resultType;
-	}
 	public String getTitle() {
 		return title;
 	}
@@ -83,6 +66,30 @@ public class AdminDTO {
 	}
 	public void setCon(String con) {
 		this.con = con;
+	}
+	public int getReadCount() {
+		return readCount;
+	}
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+	public String getMemberType() {
+		return memberType;
+	}
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
+	}
+	public String getQuestionType() {
+		return questionType;
+	}
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+	public String getResultType() {
+		return resultType;
+	}
+	public void setResultType(String resultType) {
+		this.resultType = resultType;
 	}
 	public String getImg() {
 		return img;

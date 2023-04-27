@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.List"%>
 <%@ page import="admin.AdminDAO"%>
-<%@ page import="admin.AdminDTO" %>
+<%@ page import="admin.AdminDTO"%>
+<%@ page import="member.MemberDTO"%>
+
 <%
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
 	List jList = null;
 
 	AdminDAO dao = AdminDAO.getInstance();
+	String memId = (String)session.getAttribute("memId");
+	MemberDTO dto2 = dao.setMember(memId);
+	if(memId == null) {dto2.setMemberType("0");}
+	if(!(dto2.getMemberType().equals("2"))) {response.sendRedirect("siteMap.jsp");}
 	int count = dao.getJCount();
 	
 	jList = dao.getJList();

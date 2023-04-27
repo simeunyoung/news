@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="admin.AdminDAO"%>
+<%@ page import="member.MemberDTO"%>
+
+<%
+	AdminDAO dao = AdminDAO.getInstance();
+	String memId = (String)session.getAttribute("memId");
+	MemberDTO dto = dao.setMember(memId);
+	if(memId == null) {dto.setMemberType("0");}
+%>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
@@ -13,7 +22,6 @@
 <body onload="begin()">
 <form method="post" name="qnaform" action="1-1Pro.jsp" onsubmit="return check()">
 	<table align="center" width="500" border="1" cellspacing="0" cellpadding="0">
-		<input type="hidden" name="memberType" value="0"/>
 		<tr height="30">
 			<td align="center">문의유형</td>
 			<td align="center">
@@ -28,22 +36,47 @@
 				</select>
 			</td>
 		</tr>
+		<%if(memId == null) {%>
 		<tr height="30">
 			<td align="center" width="150">아이디</td>
-			<td><input type="text" name="id" size="50"/></td>
+			<td align="center">
+				<input type="hidden" name="id" value="비회원">비회원
+				<input type="hidden" name="memberType" value="0" />
+			</td>
 		</tr>
 		<tr height="30">
 			<td align="center">작성자</td>
-			<td><input type="text" name="name" size="50" /></td>
+			<td><input type="text" name="name" size="50" placeholder="이름" /></td>
 		</tr>
 		<tr height="30">
-			<td align="center">이메일(선택사항)</td>
-			<td><input type="text" name="email" size="50" /></td>
+			<td align="center">이메일</td>
+			<td><input type="text" name="email" size="50" placeholder="이메일" /></td>
 		</tr>
 		<tr height="30">
 			<td align="center">연락처(선택사항)</td>
-			<td><input type="text" name="tel" size="50" /></td>
+			<td><input type="text" name="tel" size="50" placeholder="연락처" /></td>
 		</tr>
+		<%} else {%>
+		<tr height="30">
+			<td align="center" width="150">아이디</td>
+			<td align="center">
+				<input type="hidden" name="id" value="<%=dto.getId()%>" /><%=dto.getId()%>
+				<input type="hidden" name="memberType" value="<%=dto.getMemberType()%>" />
+			</td>
+		</tr>
+		<tr height="30">
+			<td align="center">작성자</td>
+			<td align="center"><input type="hidden" name="name" value="<%=dto.getName()%>" /><%=dto.getName()%></td>
+		</tr>
+		<tr height="30">
+			<td align="center">이메일</td>
+			<td><input type="text" name="email" value="<%=dto.getEmail()%>" size="50" /></td>
+		</tr>
+		<tr height="30">
+			<td align="center">연락처(선택사항)</td>
+			<td><input type="text" name="tel" value="<%=dto.getTel()%>" size="50" /></td>
+		</tr>
+		<%}%>
 		<tr height="30">
 			<td align="center" colspan="2">제목</td>
 		</tr>
