@@ -492,13 +492,13 @@ public class NewsDAO extends OracleServer {
 	}
 
 	// member
-	public int getMyNewsCount(String nick) { // 기자 자신의 기사 카운트 메서드
+	public int getMyNewsCount(String id) { // 기자 자신의 기사 카운트 메서드
 		int x = 0;
 		try {
 			conn = getConnection();
-			sql = "select count(*) from news where nick = ?";
+			sql = "select count(*) from news where id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nick);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				x = rs.getInt(1);
@@ -511,13 +511,13 @@ public class NewsDAO extends OracleServer {
 		return x;
 	} // public int getMyNewsCount(String id) {
 
-	public List getMyNewsList(String nick, int startNum, int endNum) { // 기자 자신의 기사 리스트
+	public List getMyNewsList(String id, int startNum, int endNum) { // 기자 자신의 기사 리스트
 		List newsList = new ArrayList();
 		try {
 			conn = getConnection();
-			sql = "select * from (select e.*,rownum r from (select * from news where nick = ? order by num)e) where r >= ? and r <= ?";
+			sql = "select * from (select e.*,rownum r from (select * from news where id = ? order by num)e) where r >= ? and r <= ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, nick);
+			pstmt.setString(1, id);
 			pstmt.setInt(2, startNum);
 			pstmt.setInt(3, endNum);
 			rs = pstmt.executeQuery();
