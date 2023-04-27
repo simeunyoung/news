@@ -670,6 +670,28 @@ public class NewsDAO extends OracleServer {
 		}
     	return searchTodayList;
     }
+    public ArrayList<NewsDTO> selectArticle(String press) {
+		ArrayList<NewsDTO> list = new ArrayList<>();
+		conn = getConnection();
+		String sql = "select * from news where press = ? ";
+		try { 	pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, press);
+		 		rs = pstmt.executeQuery();
+			while(rs.next()) {
+		 		NewsDTO dto = new NewsDTO();
+		 		dto.setNum(rs.getInt("num"));
+				dto.setId(rs.getString("id"));
+				dto.setTitle(rs.getString("title"));
+				dto.setReg(rs.getTimestamp("reg"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return list;
+	}
    
 }
 
