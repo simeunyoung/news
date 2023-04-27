@@ -3,7 +3,7 @@
 <%@ page import = "helper.SvcenterDAO"%>
 <%@ page import = "java.sql.Timestamp"%>
 <%request.setCharacterEncoding("UTF-8");%>
-
+<%-- 1대1문의글 삭제 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
@@ -13,7 +13,7 @@
 	int check = svDAO.deleteSvcenter(num, pw); 
 	
 	if(check == 1){%>
-		<meta http-equiv="Refresh" content="0;url=svmain.jsp?pageNum=<%=pageNum%>">
+		<meta http-equiv="Refresh" content="0;url=qalist.jsp?pageNum=<%=pageNum%>">
 	<%}else{%>
 		<script language = "JavaScript">
 			alert("비밀번호가 맞지 않습니다.");

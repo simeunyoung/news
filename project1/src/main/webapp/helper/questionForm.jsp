@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "member.MemberDTO"%>
+<%@ page import = "member.MemberDAO"%>
+<%-- 1대1 문의 글작성 페이지 --%>
+<%if(session.getAttribute("memId") == null){%>
+	<script>
+		alert("로그인을 해주십시오");
+		location = "/jsp/member/loginForm.jsp";
+	</script>
+<%}%>
 
+<%
+	String id = (String)session.getAttribute("memId");
+
+	MemberDAO mbDAO = MemberDAO.getInstance();
+	MemberDTO mbdto = mbDAO.getMember(id);
+
+try{
+%>
 <center><b>글쓰기</b></center>
 <br>
 <form method = "post" name = "questionForm" action = "questionPro.jsp">
@@ -8,7 +25,7 @@
 <table width = "1000" height = "800" border = "1" cellspacing = "0" cellpadding = "0" align = "center">
 	<tr height = "30">
 		<td width = "80" align = "center">이 름</td>
-		<td width = "330"><input type = "text" size = "10" maxlength = "30" name = "id"></td>
+		<td width = "330"><%=mbdto.getId()%></td>
 	</tr>
 	
 	<tr height = "30">
@@ -39,5 +56,5 @@
 		</td>
 	</tr>
 </table>
-
 </form>
+<%}catch(Exception e){}%>

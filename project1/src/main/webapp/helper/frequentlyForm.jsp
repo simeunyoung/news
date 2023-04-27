@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import = "member.MemberDTO"%>
+<%@page import = "member.MemberDAO"%>
+
+<%
+	String id = (String)session.getAttribute("memId");
+
+	MemberDAO mbDAO = MemberDAO.getInstance();
+	MemberDTO mbdto = mbDAO.getMember(id);
+	
+	try{
+%>
+<%-- 자주묻는질문 작성페이지 --%>
 <center><b>글쓰기</b></center>
 <br>
 <form method = "post" name = "frequentlyForm" action = "frequentlyPro.jsp">
@@ -8,7 +20,7 @@
 <table width = "1000" height = "800" border = "1" cellspacing = "0" cellpadding = "0" align = "center">
 	<tr height = "30">
 		<td width = "80" align = "center">아이디</td>
-		<td width = "330"><input type = "text" size = "" maxlength = "30" name = "id"></td>
+		<td width = "330"><%=mbdto.getId()%></td>
 	</tr>
 	
 	<tr height = "30">
@@ -25,9 +37,9 @@
 		<td colspan = "2" align = "center">
 			<input type = "submit" value = "작 성">
 			<input type = "reset" value = "다시작성">
-			<input type = button value = "취 소" onclick = "location = 'frequentlymain.jsp'">
+			<input type = button value = "취 소" onclick = "location = 'svmain.jsp'">
 		</td>
 	</tr>
 </table>
-
 </form>
+<%}catch(Exception e){}%>

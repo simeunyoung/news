@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%-- 자주묻는질문 글 삭제 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pagaNum");
@@ -18,7 +18,7 @@
 		<tr heigth = "30">
 			<td align = "center">
 				<input type = "submit" value = "글삭제">
-				<input type = "button" value = "목록으로" onclick = "location.href='frequentlyMain.jsp?pageNum=<%=pageNum%>'">
+				<input type = "button" value = "목록으로" onclick = "location.href='svmain.jsp?pageNum=<%=pageNum%>'">
 				<input type = "hidden" name = "num" value = "<%=num%>">
 			</td>
 		</tr>

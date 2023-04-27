@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "member.MemberDAO"%>
 <%@ page import = "member.MemberDTO" %>
-<%-- 기자신청 --%>
+<%-- 기자신청 페이지 --%>
 
 <%
 	String id = (String)session.getAttribute("memId");

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "svcenter.GijaDAO"%>
-<%@ page import = "svcenter.GijaDTO"%>
+<%@ page import = "helper.GijaDAO"%>
+<%@ page import = "helper.GijaDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.List"%>
 
+<%-- 계획대로라면 신청이 들어온게 여기에 게시판처럼 나와야함 --%>
 <%!
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");

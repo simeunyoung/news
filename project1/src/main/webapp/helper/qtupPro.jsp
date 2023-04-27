@@ -3,7 +3,7 @@
 <%@ page import = "helper.SvcenterDAO"%>
 <%@ page import = "java.sql.Timestamp"%>
 <% request.setCharacterEncoding("UTF-8");%>
-
+<%-- 1대1 문의글 수정 --%>
 <jsp:useBean id = "svdto" scope = "page" class = "helper.SvcenterDTO">
 	<jsp:setProperty name = "svdto" property = "*"/>
 </jsp:useBean>
@@ -15,7 +15,7 @@
 	int check = svdao.updateSvcenter(svdto); 
 	
 	if(check == 1){%>
-	<meta http-equiv="Refresh" content="0;url=svmain.jsp?pageNum=<%=pageNum%>">
+	<meta http-equiv="Refresh" content="0;url=qalist.jsp?pageNum=<%=pageNum%>">
 <%}else{%>
 	<script language = "JavaScript">
 	<!-- 

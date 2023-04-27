@@ -3,7 +3,7 @@
 <%@ page import = "helper.Svcenter1DAO"%>
 <%@ page import = "java.sql.Timestamp"%>
 <%request.setCharacterEncoding("UTF-8");%>
-
+<%-- 자주묻는질문 글 삭제 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
@@ -11,5 +11,5 @@
 	Svcenter1DAO svdao1 = Svcenter1DAO.getInstance();
 	svdao1.deleteSvcenter1(num); 
 	
-	response.sendRedirect("frequentlyMain.jsp");
+	response.sendRedirect("svmain.jsp");
 %>

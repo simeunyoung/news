@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "svcenter.GijaDTO"%>
-<%@ page import = "svcenter.GijaDAO"%>
+<%@ page import = "helper.GijaDTO"%>
+<%@ page import = "helper.GijaDAO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
-
+<%-- 신청이 들어온 것을 보고 승락을 하면 바뀌는 구조로 할려고 했었음 --%>
 <%
+	String id = (String)session.getAttribute("memId");
+	
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
 	
@@ -49,11 +51,12 @@
 		
 		<tr>
 			<td colspan = "4" align = "right">
-				<%
-					
-				%>
+				<%if(id != null){
+					if(id.equals("admin")){%>
 			<input type = "submit" value = "승인">
 			<input type = "button" value = "거절" onclick = "">
+			<%}%>
+		<%}%>
 		</td>
 	</tr>		
 	</table>

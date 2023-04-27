@@ -1,24 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "svcenter.GijaDAO"%>
-<%-- 신청받은 것을 임시테이블에 저장 후 게시판으로 이동 --%>
+<%@ page import = "helper.GijaDAO"%>
+<%request.setCharacterEncoding("UTF-8");%>
+<%-- 신청받은 것을 임시테이블에 저장 후 게시판으로 이동을 해야하는데 아직 미완성 --%>
 
-<jsp:useBean id = mbDTO scope = "page" class = "member.MemberDTO">
-	<jsp:setProperty name = "mbDTO" property = "*"/>
+<jsp:useBean id = "gdto" scope = "page" class = "helper.GijaDTO">
+	<jsp:setProperty name = "gdto" property = "*"/>
 </jsp:useBean>
 
-<jsp:useBean id = "gdto" class = "svcenter.GijaDTO"/>
+<%		
+	String id = (String)session.getAttribute("memId");
+	gdto.setId(id);
 
-<%	
-	gdto.setId(mbDTO.getId());
-	gdto.setName(mbDTO.getName());
-	gdto.setPress(mbDTO.getPress());
-	gdto.setEmail(mbDTO.getEmail());
-	gdto.setTel(mbDTO.getTel());
-	//gdto.setMembertype(mbDTO.getMembertype());
-	
 	GijaDAO gdao = GijaDAO.getInstance();
-	gdao.insertGija(gdto);
+	gdao.insertGija(id, gdto); 
 	
 	response.sendRedirect("gijaapList.jsp");
 %>

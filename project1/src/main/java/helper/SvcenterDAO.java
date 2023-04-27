@@ -128,7 +128,7 @@ public class SvcenterDAO extends OracleServer{
 		
 		try {
 			conn = getConnection();
-			sql = "select * from(select e.*, rownum r from(select * from svcenter order by reg desc)e) where r >= ? and r <= ?";
+			sql = "select * from(select e.*, rownum r from(select * from svcenter where id = ? order by reg desc)e) where r >= ? and r <= ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start);
