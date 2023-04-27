@@ -630,7 +630,49 @@ public class NewsDAO extends OracleServer {
 		}
     	return searchDateList;
     }
+    
+    public List getSearchTodayList(String date) {
+    	List searchTodayList = null;
+    	try {
+			conn = getConnection();
+			sql = "select * from news where";
+			switch(date) {
+			case "today" : 
+				sql +=" trunc(reg) = trunc(sysdate) ";
+				break;
+			case "week" : 
+				sql +=" reg between trunc(sysdate - 7) and trunc(sysdate - 1) ";
+				break;
+			case "month" : 
+				sql +=" reg >= add_months(sysdate , -1) and reg < sysdate";
+				break;
+			case "year" : 
+				sql +=" REG BETWEEN TRUNC(SYSDATE - 365) AND TRUNC(SYSDATE)";
+				break;
+			}
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				searchTodayList = new ArrayList();
+				while(rs.next()) {
+					NewsDTO dto = new NewsDTO();
+					dto.setId(rs.getString("id"));
+					dto.setNewstype(rs.getString("newstype"));
+					dto.setTitle(rs.getString("title"));
+					dto.setReg(rs.getTimestamp("reg"));
+					searchTodayList.add(dto);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+    	return searchTodayList;
+    }
+   
 }
+
 
 
  // public class NewsDAO {

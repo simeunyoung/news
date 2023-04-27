@@ -257,25 +257,7 @@ int check = manager.typeCheck(id);
 		}
 		%>
 	</nav>
-	<script>
-	function changeSelection(){
-		var selectedElement = document.getElementById("search-select");
-	    
-	    // 선택한 option의 value, 텍스트
-	    var optionVal = selectedElement.options[selectedElement.selectedIndex].value;
-	  	if(optionVal == "all"){
-	  		document.getElementById("all-search").style.display ="block";
-	  		document.getElementById("date-search-form").style.display ="none";
-	  		
-	  		
-	  	}else if(optionVal == "date"){
-	  		document.getElementById("date-search-form").style.display ="flex";
-	  		document.getElementById("all-search").style.display ="none";
-	  		
-	  	}
-	}
-	document.getElementById('startDate').valueAsDate = new Date();
-	</script>
+
 
 	<select id="search-select" onchange="changeSelection()">
 		<option value="all">통합검색</option>
@@ -294,28 +276,58 @@ int check = manager.typeCheck(id);
 			<span class="title">조회기간</span>
 			<div class="row-mobile">
 				<div class="form-input-group">
-					<input type="date" name="startDate" id="startDate">
+					<input type="date" name="startDate" id="startDate" 
+					value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>"
+					 >
 				</div>
 				<span class="date-division">~</span>
 				<div class="form-input-group">
-					<input type="date" name="endDate" id="endDate">
+					<input type="date" name="endDate" id="endDate" value="<%= java.time.LocalDate.now() %>" min="<%= java.time.LocalDate.now() %>">
 				</div>
 			</div>
 			<div class="form-input-group radio-group">
 				<div class="square-radio-group">
-					<input type="radio" id="today" value="" name="radio-group"
-						> <label class="first" for="today"><span>오늘</span></label>
-					<input type="radio" id="7" value="" name="radio-group"> <label
-						for="7"><span>7일</span></label> <input type="radio" id="30"
-						value="" name="radio-group"> <label for="30"><span>30일</span></label>
-					<input type="radio" id="90" value="" name="radio-group"> <label
-						for="90"><span>90일</span></label> <input type="radio" id="180"
-						value="" name="radio-group"> <label class="last" for="180"><span>180일</span></label>
+					<a href="/project1/news/searchPro.jsp?date=today">오늘</a>
+					<a href="/project1/news/searchPro.jsp?date=week">일주일</a>
+					<a href="/project1/news/searchPro.jsp?date=month">한달</a>
+					<a href="/project1/news/searchPro.jsp?date=year">일년</a>
 				</div>
 			</div>
 			<input type="submit" value="검색">
 		</div>
 		</form>
 	</div>
+		<script>
+	function changeSelection(){
+		var selectedElement = document.getElementById("search-select");
+	    
+	    // 선택한 option의 value, 텍스트
+	    var optionVal = selectedElement.options[selectedElement.selectedIndex].value;
+	  	if(optionVal == "all"){
+	  		document.getElementById("all-search").style.display ="block";
+	  		document.getElementById("date-search-form").style.display ="none";
+	  		
+	  		
+	  	}else if(optionVal == "date"){
+	  		document.getElementById("date-search-form").style.display ="flex";
+	  		document.getElementById("all-search").style.display ="none";
+	  		
+	  	}
+	}
+	function checkDate() {
+		  var myDate = document.getElementById("startDate").value;
+		  var minDate = document.getElementById("startDate").min;
+		  
+		  if (myDate < minDate) {
+		    document.getElementById("startDate").value = minDate;
+		  }
+		}
+	  // 오늘 날짜를 구합니다.
+	  var toDate = new Date();
+	  // 오늘 이전 날짜를 선택하지 못하게 합니다.
+	  var inputDate = document.getElementById('endDate');
+	  inputDate.min = toDate.toISOString().split('T')[0];
+	
+	</script>
 </body>
 </html>

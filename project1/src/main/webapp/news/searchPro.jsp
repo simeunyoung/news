@@ -17,15 +17,27 @@ String search = request.getParameter("search");
 String startDate = request.getParameter("startDate");
 String endDate = request.getParameter("endDate");
 
+String date = request.getParameter("date");
+out.println(date);
+
     List searchList = null;
 
     NewsDAO dao = NewsDAO.getInstance();
 
     if(search != null){
-    searchList = dao.getSearchList(search);
+    	searchList = dao.getSearchList(search);
     }else if(startDate != null && endDate != null){
     	searchList = dao.getSearchDateList(startDate, endDate);	
+    }else if(date.equals("today")){
+    	searchList = dao.getSearchTodayList(date);
+    }else if(date.equals("week")){
+    	searchList = dao.getSearchTodayList(date);
+    }else if(date.equals("month")){
+    	searchList = dao.getSearchTodayList(date);
+    }else if(date.equals("year")){
+    	searchList = dao.getSearchTodayList(date);
     }
+    
 %>
 <!DOCTYPE>
 <html>
