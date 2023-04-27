@@ -60,7 +60,7 @@ public class MemberDAO extends OracleServer {
 		public void insertMember(MemberDTO member) {
 			try {
 				conn = getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?,?,'1',?,null,null,null,sysdate,null)");
+				pstmt = conn.prepareStatement("insert into member(id,pw,name,nick,email,tel,birthdate,memberType,press,reg) values(?,?,?,?,?,?,?,'1',?,sysdate)");
 				pstmt.setString(1, member.getId());
 				pstmt.setString(2, member.getPw());
 				pstmt.setString(3, member.getName());
@@ -142,7 +142,37 @@ public class MemberDAO extends OracleServer {
 			}
 			return member;
 		}
-
+		
+		public MemberDTO getmember(String id) { 
+			// this method used to news file which made by hyoung joo kim [Do not Delete]
+			// method which didn't same as getMember(String id)
+			MemberDTO member = null;
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement("select * from member where id = ?");
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) { // from session to get all data into list
+					member = new MemberDTO();
+					member.setId(rs.getString("id"));
+					member.setPw(rs.getString("pw"));
+					member.setName(rs.getString("name"));
+					member.setNick(rs.getString("nick"));
+					member.setEmail(rs.getString("email"));
+					member.setTel(rs.getString("tel"));
+					member.setBirthdate(rs.getString("birthdate"));
+					member.setReg(rs.getTimestamp("reg"));
+					member.setMemberType(rs.getString("memberType"));
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+			return member;
+		} // public MemberDTO getmember(String id) { this is only for news file
+			
+		
 		public void updateMember(MemberDTO member) {
 			try {
 				conn = getConnection();

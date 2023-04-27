@@ -1,13 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<jsp:include page="header2.jsp"></jsp:include>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="member.MemberDTO" %>
+<%@ page import="member.MemberDAO" %> 
+<jsp:include page="/member/header.jsp"></jsp:include>
 <%-- 액션태그 include를 사용하여 writeForm페이지에 header페이지를 상단으로 불러온다. --%>
 <title>기사 작성</title>
-<%request.setCharacterEncoding("UTF-8"); %>
-<%
 
-//String id = request.getParameter("id");
-%>
+<%request.setCharacterEncoding("UTF-8"); 
+
+String loginuser = (String)session.getAttribute("memId");
+MemberDTO userinfo = null;
+String usernick = null;
+MemberDAO memdao = MemberDAO.getInstance();
+
+if(session.getAttribute("memId")!=null) { 
+userinfo = memdao.getmember(loginuser);
+usernick = userinfo.getNick();
+} 
+if(session.getAttribute("memId")==null){%>
+<Script>
+alert("[에러 발생] 권한을 가지고 있지 않은 사용자 접근 시도를 하였습니다. 로그인을 하고 접근하여 주시기 바랍니다.");
+</Script>
+<%response.sendRedirect("list.jsp");
+} %>
 <body>
 	<Script>
 		function option_check() {
@@ -18,17 +32,16 @@
 			}
 		} // 폼 태그에 newstype 값을 선택하지 않을 때 알림창으로 알려준다.
 	</Script>
-
-	<form action="writePro.jsp" name="write"
-		onsubmit="return option_check()">
+접속자 정보 : <%= loginuser%>
+	<form action="writePro.jsp" name="write" onsubmit="return option_check()">
 			
-		<input type="hidden" name="id" value="Tester"><%--<%=id%> --%>
+		<input type="hidden" name="id" value="<%=loginuser%>" >
+		<input type="hidden" name="nick" value="<%=usernick%>">
 		<%-- 작성자 --%>
 		<%-- 글을 작성할 때 직접 입력하면 안되는 부분을 히든 값으로 넘겨서 기록하기 --%>
 		<div class="form_box">
-			<h3>게시글 작성</h3>
-			작성자 : Tester
-			<%--<%=id%>--%><br />
+			<h3>게시글 작성</h3><br />
+			작성자 : <%=usernick%>
 			<br /> TOPIC : <select class="select_box" name="newstype">
 				<option value="x">종류를 정해주세요.</option>
 				<option value="Python">Python</option>

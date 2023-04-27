@@ -40,15 +40,15 @@ public class NewsDAO extends OracleServer {
 	public void insert(NewsDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into news(num,pw,title,con,newstype,ip,reg,nick) values(news_seq.nextval,?,?,?,?,?,?,?)";
+			sql = "insert into news(num,nick,title,con,reg,pw,ip,id) values(news_seq.nextval,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getPw());
+			pstmt.setString(1, dto.getNick());
 			pstmt.setString(2, dto.getTitle());
 			pstmt.setString(3, dto.getCon());
-			pstmt.setString(4, dto.getNewstype());
-			pstmt.setString(5, dto.getIp());
-			pstmt.setTimestamp(6, dto.getReg());
-			pstmt.setString(7, dto.getNick());
+			pstmt.setTimestamp(4, dto.getReg());
+			pstmt.setString(5, dto.getPw());
+			pstmt.setString(6, dto.getIp());
+			pstmt.setString(7, dto.getId());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,7 +62,7 @@ public class NewsDAO extends OracleServer {
 			conn = getConnection();
 			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getNick());
+			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getTitle());
 			pstmt.setString(3, dto.getCon());
 			pstmt.setString(4, dto.getRecon());
@@ -150,7 +150,7 @@ public class NewsDAO extends OracleServer {
 			if (rs.next()) { // 게시글 번호에 맞는 정보를 찾기
 				info = new NewsDTO();
 				info.setNum(rs.getInt("num"));
-				info.setNick(rs.getString("nick"));
+				info.setId(rs.getString("id"));
 				info.setTitle(rs.getString("title"));
 				info.setCon(rs.getString("con"));
 				info.setRecon(rs.getString("recon"));
@@ -247,7 +247,7 @@ public class NewsDAO extends OracleServer {
 		return textList;
 	} // public List getTexts(int start, int end) throws Exception {
 
-	public List getRecon(String title, String con) throws Exception {
+	public List getrecon(String title, String con) throws Exception {
 		List textList = null;
 		try {
 			conn = getConnection();
@@ -261,7 +261,7 @@ public class NewsDAO extends OracleServer {
 				do {
 					NewsDTO info = new NewsDTO();
 					info.setNum(rs.getInt("num"));
-					info.setNick(rs.getString("nick"));
+					info.setId(rs.getString("id"));
 					info.setTitle(rs.getString("title"));
 					info.setCon(rs.getString("con"));
 					info.setReg(rs.getTimestamp("reg"));
@@ -277,6 +277,41 @@ public class NewsDAO extends OracleServer {
 		}
 		return textList;
 	} // public List getRecon(String title,String con) throws Exception {
+	
+	public List getRecon(String title,String con,int a, int b) throws Exception {
+		List textList = null;
+		try {
+			conn = getConnection();
+			sql = "select * from (select e.*,rownum r from (select * from revalue where title=? and con=? order by reg desc) e )"
+					+ " where r >= ? and r <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, con);
+			pstmt.setInt(3, a);
+			pstmt.setInt(4, b);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				textList = new ArrayList(b); 
+				NewsDTO allinfo = new NewsDTO();
+				do {
+					allinfo = new NewsDTO();
+					allinfo.setNum(rs.getInt("num"));
+					allinfo.setId(rs.getString("id"));
+					allinfo.setTitle(rs.getString("title"));
+					allinfo.setCon(rs.getString("con"));
+					allinfo.setReg(rs.getTimestamp("reg"));
+					allinfo.setIp(rs.getString("ip"));
+					allinfo.setRecon(rs.getString("recon"));
+					textList.add(allinfo);
+				} while (rs.next()); 
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return textList;
+	} // public List getRecon(String title,String con,int a, int b) throws Exception { a ~ b get to recon from revalue table which get to work
 
 	public int deleteNews(int num, String pw) throws Exception { // 게시글 삭제 메소드
 		String sqlpw = "";
@@ -319,7 +354,28 @@ public class NewsDAO extends OracleServer {
 		}
 
 	} // public void deleteRecon(int num) throws Exception {
+	
+	public int getReconCount(String title,String con) throws Exception {
+		int x = 0;
 
+		try {
+			conn = getConnection();
+			sql = "select count(*) from revalue where title=? and con=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, con);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x = rs.getInt(1);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return x;
+	}
+	
 	// news2
 	// 게시글 수를 구하는 메서드
 	public int getNewsCount() throws Exception {
@@ -366,6 +422,7 @@ public class NewsDAO extends OracleServer {
 				article.setViews(rs.getInt("views"));
 				article.setPress(rs.getString("press"));
 				article.setIp(rs.getString("ip"));
+				article.setId(rs.getString("id"));
 				newsList.add(article);
 			}
 		} catch (Exception ex) {

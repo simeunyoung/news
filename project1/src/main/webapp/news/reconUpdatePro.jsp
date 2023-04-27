@@ -6,11 +6,11 @@
 <jsp:useBean id="data" class="news.NewsDTO"/>
 <jsp:setProperty name="data" property="*" />
 <% 
+int connum = Integer.parseInt(request.getParameter("connum"));
 NewsDAO method = NewsDAO.getInstance();
 method.reconupdate(data);
+
+response.sendRedirect("content.jsp?num="+connum);
 %>
-<script>
-history.go(-2);
-</script>
-<meta http-equiv="Refresh" >
+
 

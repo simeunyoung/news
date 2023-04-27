@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\rivaq\Desktop\clone\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+4245629688.index
+1192831860.index
+1291502886.index
+3540839101.index
+3980758095.index
+2374648584.index

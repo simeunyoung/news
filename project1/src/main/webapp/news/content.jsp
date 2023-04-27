@@ -3,10 +3,15 @@
 <%@ page import="news.NewsDTO" %>
 <%@ page import="news.NewsDAO" %>
 <%@ page import="java.util.*" %>
-<jsp:include page="header2.jsp"></jsp:include>
+<%@ page import="member.MemberDTO" %>
+<%@ page import="member.MemberDAO" %>
 
+<jsp:include page="/member/header.jsp"></jsp:include>
+<jsp:useBean id="dto" class="member.MemberDTO" />
 <title>글 확인</title>
 <%
+String loginuser = (String)session.getAttribute("memId");
+
 request.setCharacterEncoding("UTF-8");
 
 int num = Integer.parseInt(request.getParameter("num")); //list에서 파라미터 값으로 게시글 보게 설정하기
@@ -18,6 +23,7 @@ NewsDTO text = method.getCon(num);
 String title = text.getTitle();
 String con = text.getCon();
 %>
+접속자 정보 : <%= loginuser%><br /><br /><hr />
 
 <div class="content_box">
 <div class="con1"><div class="conl"><b>뉴스 종류 : </b><%=text.getNewstype()%></div><div class="conr"><b>조회수 : </b><%=text.getViews()%></div></div>
@@ -25,44 +31,29 @@ String con = text.getCon();
 <div class="con1"><div class="conl"><b>작성자 : </b><a href = "/project1/member/user_mypage_form.jsp?id=<%=text.getId()%>"><%=text.getNick()%></a>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
 <div class="con1"><b>내용 : </b><%=text.getCon()%></div><br />
 <div align="right">
-<input type="button" class="button" value="수정하기" onclick="location='updateForm.jsp?num=<%=text.getNum()%>'">
+<%if(session.getAttribute("memId") == null) {%>
+<input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
+<%}else if(loginuser.equals("admin")){%>
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
+<%}else if(loginuser.equals(text.getId())){ %>
+<input type="button" class="button" value="수정하기" onclick="location='updateForm.jsp?num=<%=text.getNum()%>'">
+<input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
+<input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">	
+<%}%>
+
 </div>
 <br />
 
 <%-- ========================= 경계선 ========================= --%>
 
 <div class="recon_box">
-<b>댓글</b><br /><br />
-<div align="right"><button  onClick="window.location.reload()">새로고침</button></div>
-<% 
-List recons = method.getRecon(title,con);
-if(recons != null){
-for(int rnum=0 ; rnum< recons.size() ; rnum++) {	
-NewsDTO recontext = (NewsDTO) recons.get(rnum); //Object(list)형 --> DTO형으로 꺼내주고 있다. 	 
-%>
-<div align="right">
-<%=recontext.getReg()%>&nbsp;&nbsp;
-<a href="reconUpdateForm.jsp?num=<%=recontext.getNum()%>" ><font color="#808080">수정</font></a>&nbsp;
-/&nbsp;<a href="reconDeletePro.jsp?num=<%=recontext.getNum()%>"><font color="#808080">삭제</font></a>
-</div>
-<b><%= recontext.getId()%></b><font color="#808080">#<%=recontext.getNum() %></font> [ IP : <%= recontext.getIp() %> ]
-<br />&nbsp;&nbsp;&nbsp;&nbsp;<%=recontext.getRecon()%>
-			
-<hr />		
-<%} }else{%>
-<center><br /><br /> 현재 존재하는 댓글이 없습니다. <br /><br /><br /><br /></center>
-<%}%>
-
-
-
-<br /><form action="reconwritePro.jsp" method="post" class="flexthing">
-<input type="hidden" name="id" >
-<input type="hidden" name="title" value="<%=text.getTitle()%>" >
-<input type="hidden" name="con" value="<%=text.getCon()%>" >
-<b>댓글 작성</b>&nbsp;&nbsp;<textarea class="textarea_box" name="recon" placeholder="댓글 내용을 입력해주세요."></textarea>
-&nbsp;&nbsp;<input type="submit" value="입력" class="submit_button"></form></div></div>
+<jsp:include page="recon.jsp">
+<jsp:param value="<%=text.getTitle()%>" name="title"/>
+<jsp:param value="<%=text.getCon()%>" name="con"/>
+<jsp:param value="<%=num%>" name="num"/>
+</jsp:include>
+</div></div>
  
 
 <style>

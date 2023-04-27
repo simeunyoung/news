@@ -10,7 +10,7 @@
 <jsp:setProperty property="*" name="dto" />
 
 <%
-
+	int num = Integer.parseInt(request.getParameter("contentpage"));
     dto.setReg(new Timestamp(System.currentTimeMillis())); //날짜 가져오기
 	dto.setIp(request.getRemoteAddr()); // ip 가져오기
 	String id = request.getParameter("id");
@@ -18,12 +18,10 @@
 
     NewsDAO news = NewsDAO.getInstance();
     news.insertRecon(dto);
-  
+    
+    response.sendRedirect("content.jsp?num="+num);
 %>
  <script language="JavaScript">      
              
-         alert("댓글이 작성되었습니다.");
-         history.go(-1);
-       
+         alert("댓글이 작성되었습니다.");       
  </script>
- <meta http-equiv="Refresh" >

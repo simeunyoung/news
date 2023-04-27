@@ -6,12 +6,14 @@
 <%
 request.setCharacterEncoding("UTF-8");
 int num = Integer.parseInt(request.getParameter("num"));
+int connum = Integer.parseInt(request.getParameter("connum"));
 NewsDAO method = NewsDAO.getInstance();
 NewsDTO text = method.getRecon(num);
 %>
 <form action="reconUpdatePro.jsp" method="post">
 	<h3>작성한 댓글 수정</h3>
 <input type="hidden" name="num" value="<%=text.getNum()%>">
+<input type="hidden" name="connum" value="<%=connum%>">
 변경하실 댓글 내용<br /><input type="text" class="textarea_box" name="recon" value="<%=text.getRecon()%>"><br />
 <div align="right">
 <input type="submit" class="submit_button" value="변경하기">&nbsp;

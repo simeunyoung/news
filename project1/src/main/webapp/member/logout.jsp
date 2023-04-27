@@ -19,5 +19,5 @@
 		}
 	}
 	session.invalidate();
-	response.sendRedirect("/project1/profile/main.jsp");
+	response.sendRedirect("/project1/news/main.jsp");
 %>

@@ -3,7 +3,7 @@
 <%@ page import="news.NewsDAO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<jsp:include page="header2.jsp"></jsp:include>
+<jsp:include page="/member/header.jsp"></jsp:include>
 <title>CodeNews에 오신걸 환영합니다.</title>
 <%-- main에서 사용될 코드
 1. main의 div에서 내부 div 태그를 이용해서 영역을 4가지로 분리
@@ -18,6 +18,9 @@ div 4 : company 기자.jsp <재가공 예정>
 2.
  --%>
 <%request.setCharacterEncoding("UTF-8");
+
+String loginuser = (String)session.getAttribute("memId");
+
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -34,6 +37,8 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 %>
 
 <input type="button" value="리스트로 이동" onClick="location='list.jsp'" >
+<input type="button" value="sessionTest" onClick="location='sessiontest.jsp'" >
+접속자 정보 : <%= loginuser%>
 <div class="main_box">
 <div class="left_box">
 <div class="topic_box">
