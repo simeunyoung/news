@@ -432,6 +432,39 @@ public class NewsDAO extends OracleServer {
 		}
 		return newsList;
 	}
+	
+	public List getNews7days() throws Exception {
+
+		List newsList = new ArrayList();
+
+		try {
+			conn = getConnection();
+			sql = "select * from news where reg between trunc(sysdate - 6) and trunc(sysdate)";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				NewsDTO article = new NewsDTO();
+				article.setNum(rs.getInt("num"));
+				article.setNick(rs.getString("nick"));
+				article.setNewstype(rs.getString("newstype"));
+				article.setTitle(rs.getString("title"));
+				article.setCon(rs.getString("con"));
+				article.setReg(rs.getTimestamp("reg"));
+				article.setPw(rs.getString("pw"));
+				article.setViews(rs.getInt("views"));
+				article.setPress(rs.getString("press"));
+				article.setIp(rs.getString("ip"));
+				article.setId(rs.getString("id"));
+				newsList.add(article);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return newsList;
+	}
 
 	// 뉴스 타입별로 수를 구하는 메서드
 	public int getNewstypeCount(String newstype) throws Exception {
