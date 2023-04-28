@@ -12,174 +12,7 @@ request.setCharacterEncoding("UTF-8");
 <title>header</title>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <style>
-nav {
-	background-color: #333; /* 네비게이션 바 배경색 */
-	height: 60px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
 
-nav ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-nav li {
-	float: left;
-	width: 150px;
-	height: 60px;
-}
-
-nav a {
-	display: flex;
-	color: #fff;
-	text-align: center;
-	padding: 14px 16px; /* 링크 내부 여백 */
-	text-decoration: none;
-	height: 100%;
-	box-sizing: border-box;
-	align-items: center;
-	justify-content: center;
-}
-
-nav a:hover {
-	text-decoration: underline;
-	color: #fff; /* 링크 텍스트 색상 변경 */
-}
-
-nav ul ul {
-	display: none; /* 하위 메뉴 숨김 */
-	position: absolute; /* 절대 위치 지정 */
-	top: 60px; /* 부모 요소 아래에 배치 */
-	z-index: 1;
-}
-
-nav ul li:hover>ul {
-	display: inherit; /* 부모 항목에 마우스 오버 시 하위 메뉴 표시 */
-}
-
-nav ul ul li {
-	float: none; /* 하위 메뉴를 좌측 정렬 */
-	position: relative; /* 상대 위치 지정 */
-	background: #111;
-}
-
-nav ul ul ul {
-	position: absolute;
-	left: 100%; /* 하위 하위 메뉴를 오른쪽으로 이동 */
-	top: 0;
-}
-
-.container {
-	margin-top: 20px;
-}
-
-.main-breadcrumb {
-	display: none;
-}
-
-/* header */
-.search-wrap {
-	position: relative;
-}
-
-.search-input {
-	width: 100%;
-	height: 50px;
-	font-size: 28px;
-}
-
-input[type="submit"].search-btn {
-	background: url("/project1/resource/img/ico-search.png") no-repeat
-		center/contain;
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	padding: 0;
-	border: 0;
-	cursor: pointer;
-	font-size: 0;
-}
-input[type="date"]{border:0;height:38px;}
-input::-webkit-search-decoration, input::-webkit-search-cancel-button,
-	input::-webkit-search-results-button, input::-webkit-search-results-decoration
-	{
-	display: none;
-}
-.input-row{
-    display: flex;
-   
-    align-items: center;
-    
-    justify-content: flex-start;
-    width: 100%;
-    min-height: 38px;
-}
-.input-row .row-mobile{
-    display: flex;
-  
-    align-items: center;
-   
-    justify-content: center;
-}
-.input-row .form-input-group{
-    height: 38px;
-    border: solid 1px #bcbfc7;
-    border-radius: 4px;
-    background: #ffffff;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  
-    align-items: center;
-    
-    justify-content: space-between;
-    position: relative;
-}
-.input-row .form-input-group .square-radio-group{
-    display: flex;
-    
-    align-items: center;
-    
-    justify-content: center;
-    height: 100%;
-    border-radius: 0 4px 4px 0;
-}
-.input-row .form-input-group .square-radio-group [type="radio"] {
-    display: none;
-}
-.input-row .form-input-group .square-radio-group [type="radio"] + label, .square-radio-group [type="radio"]+label {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-   
-    align-items: center;
-    
-    justify-content: center;
-    width: 70px;
-    height: 100%;
-    border: 1px solid #bcbfc7;
-    margin-left: -1px;
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-}
-.input-row .form-input-group .square-radio-group [type="radio"]:checked + label {
-    z-index: 10;
-    border: solid 1px #ec2741;
-    margin-left: -1px;
-    }
-    .input-row .form-input-group .square-radio-group [type="radio"] + label:hover {
-    background-color: rgba(242,152,134,0.5);
-    border: solid 1px #ec2741;
-    transition: 0.1s linear;
-    z-index: 10;
-    }
-    #date-search-form{display:none;}
 </style>
 </head>
 <%
@@ -188,6 +21,7 @@ String id = (String) session.getAttribute("memId");
 int check = manager.typeCheck(id);
 %>
 <body>
+<header>
 	<nav>
 		<a href="/project1/news/main.jsp">CODENEWS</a>
 		<ul>
@@ -257,47 +91,61 @@ int check = manager.typeCheck(id);
 		}
 		%>
 	</nav>
-
-
-	<select id="search-select" onchange="changeSelection()">
-		<option value="all">통합검색</option>
-		<option value="date">날짜별</option>
-	</select>
-
-	<div>
-		<form action="/project1/news/searchPro.jsp" method="get">
-			<div class="search-wrap" id="all-search">
-				<input type="search" name="search" class="search-input" /> <input
-					type="submit" class="search-btn" />
-			</div>
-		</form>
-		<form action="/project1/news/searchPro.jsp" method="get">
-		<div class="input-row" id="date-search-form">
-			<span class="title">조회기간</span>
-			<div class="row-mobile">
-				<div class="form-input-group">
-					<input type="date" name="startDate" id="startDate" 
-					value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>"
-					 >
+	
+	<div class="search-wrap">
+		<!-- 검색 select -->
+		<select id="search-select" onchange="changeSelection()">
+			<option value="all">통합검색</option>
+			<option value="date">날짜별</option>
+		</select>
+	
+		<div class="search-form-wrap">
+			<!-- 통합검색 -->
+			<form action="/project1/news/searchPro.jsp" method="get">
+				<div class="search-all-wrap" id="all-search">
+					<input type="search" name="search" class="search-input" /> <input
+						type="submit" class="search-btn" />
 				</div>
-				<span class="date-division">~</span>
-				<div class="form-input-group">
-					<input type="date" name="endDate" id="endDate" value="<%= java.time.LocalDate.now() %>" min="<%= java.time.LocalDate.now() %>">
+			</form>
+			<!-- 날짜별검색 -->
+			<form action="/project1/news/searchPro.jsp" method="get">
+			<div class="input-row" id="date-search-form">
+				<span class="title">조회기간</span>
+				<div class="row-mobile">
+					<div class="form-input-group">
+						<input type="date" class="date" name="startDate" id="startDate" 
+						value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>"
+						 >
+					</div>
+					<span class="date-division">~</span>
+					<div class="form-input-group">
+						<input type="date" class="date" name="endDate" id="endDate" value="<%= java.time.LocalDate.now() %>" min="<%= java.time.LocalDate.now() %>">
+					</div>
 				</div>
-			</div>
-			<div class="form-input-group radio-group">
-				<div class="square-radio-group">
-					<a href="/project1/news/searchPro.jsp?date=today">오늘</a>
-					<a href="/project1/news/searchPro.jsp?date=week">일주일</a>
-					<a href="/project1/news/searchPro.jsp?date=month">한달</a>
-					<a href="/project1/news/searchPro.jsp?date=year">일년</a>
+				<div class="form-input-group radio-group">
+					<div class="square-radio-group">
+						<a href="/project1/news/searchPro.jsp?date=today">오늘</a>
+						<a href="/project1/news/searchPro.jsp?date=week">일주일</a>
+						<a href="/project1/news/searchPro.jsp?date=month">한달</a>
+						<a href="/project1/news/searchPro.jsp?date=year">일년</a>
+					</div>
 				</div>
+				<div class="submit-wrap">
+					<input type="submit" class="search-btn">
+				</div>
+				
 			</div>
-			<input type="submit" value="검색">
+			</form>
 		</div>
-		</form>
 	</div>
 		<script>
+		
+		  // 오늘 날짜를 구합니다.
+		  var toDate = new Date();
+		  // 오늘 이전 날짜를 선택하지 못하게 합니다.
+		  var inputDate = document.getElementById('endDate');
+		  inputDate.min = toDate.toISOString().split('T')[0];
+		
 	function changeSelection(){
 		var selectedElement = document.getElementById("search-select");
 	    
@@ -322,12 +170,8 @@ int check = manager.typeCheck(id);
 		    document.getElementById("startDate").value = minDate;
 		  }
 		}
-	  // 오늘 날짜를 구합니다.
-	  var toDate = new Date();
-	  // 오늘 이전 날짜를 선택하지 못하게 합니다.
-	  var inputDate = document.getElementById('endDate');
-	  inputDate.min = toDate.toISOString().split('T')[0];
-	
+
 	</script>
+	</header>
 </body>
 </html>

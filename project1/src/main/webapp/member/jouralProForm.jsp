@@ -72,6 +72,13 @@
 						<%if(id.equals(id2)){%>
 					<button class="btn btn-outline-primary"
 						onclick="location='deleteForm.jsp'">탈퇴하기</button>
+						<%}else{ %>
+						 	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp'">구독하기</button>
+							 <%--<% if(include == 1){%>
+		                      	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp'">구독하기</button>
+		                      <%}else{%>
+		                      	<button class="btn btn-primary" onclick="location='bookcenclePro.jsp'">구독취소</button>
+                      <%}%>--%>
 						<%} %>
 				</div>
 			</div>

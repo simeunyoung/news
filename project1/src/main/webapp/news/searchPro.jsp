@@ -18,7 +18,6 @@ String startDate = request.getParameter("startDate");
 String endDate = request.getParameter("endDate");
 
 String date = request.getParameter("date");
-out.println(date);
 
     List searchList = null;
 
