@@ -33,8 +33,7 @@
 	}
 	number = count - (currentPage - 1) * pageSize;
 %>
-
-< 
+ 
 <center><b>내문의목록(전체 글 : <%=count%>)</b>
 <table width = "700">
 	<tr>
