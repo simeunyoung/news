@@ -25,6 +25,7 @@
 			<td align="center" width="100">작성자</td>
 			<td align="center">
 				<input type="hidden" name="id" value="<%=dto.getId()%>" /><%=dto.getId()%>(<%=dto.getName()%>님)
+				<input type="hidden" name="name" value="<%=dto.getName()%>" />
 				<input type="hidden" name="questionType" value="5" />
 				<input type="hidden" name="memberType" value="<%=dto.getMemberType()%>" />
 			</td>

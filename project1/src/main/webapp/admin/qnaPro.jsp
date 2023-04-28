@@ -12,5 +12,5 @@
 
 	AdminDAO dao = AdminDAO.getInstance();
 	dao.qnaInsert(dto);
-	response.sendRedirect("qnaWrite.jsp");
+	response.sendRedirect("qnaList.jsp");
 %>

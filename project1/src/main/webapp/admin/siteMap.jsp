@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<title>사이트맵</title>
 <center><h2>사이트맵(테스트페이지)</h2></center>
 
 <%String memId = (String)session.getAttribute("memId");%>

@@ -13,7 +13,7 @@
 
 <script src="helper.js"></script>
 <title>1:1 문의하기</title>
-
+memId = <%=memId%>
 <center><h2>1:1 문의하기</h2></center>
 
 <hr />

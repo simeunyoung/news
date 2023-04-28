@@ -165,7 +165,7 @@ public class AdminDAO extends OracleServer {
 		boolean result = false;
 		try {
 			conn = getConnection();
-			sql = "insert into oneonone values(oneonone_seq.nextval,?,?,?,?,?,?,0,?,?,?,?,sysdate)";
+			sql = "insert into oneonone values(0,oneonone_seq.nextval,?,?,?,?,?,?,0,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getName());
@@ -229,6 +229,7 @@ public class AdminDAO extends OracleServer {
 			
 			while(rs.next()) {
 				AdminDTO dto = new AdminDTO();
+				dto.setResultType(rs.getString("resultType"));
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
@@ -255,6 +256,7 @@ public class AdminDAO extends OracleServer {
 	// 
 	public AdminDTO oneononeGet(int num) {
 		AdminDTO dto = null;
+		int count = 0;
 		try {
 			conn = getConnection();
 			sql = "update oneonone set readcount=readcount+1 where num=?";
@@ -262,12 +264,27 @@ public class AdminDAO extends OracleServer {
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			
+			sql = "select readcount from oneonone where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+				if(count >= 100) {
+					sql = "update oneonone set resultType=1 where num=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, num);
+					pstmt.executeUpdate();
+				}
+			}
+		
 			sql = "select * from oneonone where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto = new AdminDTO();
+				dto.setResultType(rs.getString("resultType"));
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
@@ -278,6 +295,7 @@ public class AdminDAO extends OracleServer {
 				dto.setReadCount(rs.getInt("readCount"));
 				dto.setMemberType(rs.getString("memberType"));
 				dto.setQuestionType(rs.getString("questionType"));
+				dto.setImg(rs.getString("img"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
 			}
@@ -294,14 +312,16 @@ public class AdminDAO extends OracleServer {
 		boolean result = false;
 		try {
 			conn = getConnection();
-			sql = "insert into qna values(qna_seq.nextval,?,?,?,?,?,?,sysdate)";
+			sql = "insert into qna values(oneonone_seq.nextval,?,?,?,?,0,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getPw());
-			pstmt.setString(3, dto.getMemberType());
-			pstmt.setString(4, dto.getTitle());
-			pstmt.setString(5, dto.getCon());
-			pstmt.setString(6, dto.getIp());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getTitle());
+			pstmt.setString(4, dto.getCon());
+			pstmt.setString(5, dto.getMemberType());
+			pstmt.setString(6, dto.getQuestionType());
+			pstmt.setString(7, dto.getImg());
+			pstmt.setString(8, dto.getIp());
 			pstmt.executeUpdate();
 			result = true;
 		} catch(Exception e) {
@@ -327,8 +347,13 @@ public class AdminDAO extends OracleServer {
 				AdminDTO dto = new AdminDTO();
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
+				dto.setReadCount(rs.getInt("readCount"));
+				dto.setMemberType(rs.getString("memberType"));
+				dto.setQuestionType(rs.getString("questionType"));
+				dto.setImg(rs.getString("img"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
 				qnaList.add(dto);
@@ -384,15 +409,15 @@ public class AdminDAO extends OracleServer {
 	
 	// num을 이용하여 Q&A 정보를 dto에 set하는 메서드
 	// 4.27 확인필요
-	public AdminDTO getQna(int num) {
+	public AdminDTO qnaGet(int num) {
 		AdminDTO dto = null;
 		try {
+			conn = getConnection();
 			sql = "update qna set readcount=readcount+1 where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			
-			conn = getConnection();
 			sql = "select * from qna where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);

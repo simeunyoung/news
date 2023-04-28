@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="admin.AdminDAO"%>
-<%@ page import="admin.AdminDTO" %>
+<%@ page import="admin.AdminDTO"%>
 <%request.setCharacterEncoding("UTF-8");%>
 
 <jsp:useBean id="dto" class="admin.AdminDTO"/>

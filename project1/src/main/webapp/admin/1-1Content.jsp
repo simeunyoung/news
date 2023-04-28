@@ -66,7 +66,7 @@
 			<td align="center">연락처 : <%=dto.getTel()%></td>
 		</tr>
 		<%}%>
-		<tr height="200">
+		<tr height="300">
 			<td align="center" colspan="2"><%=dto.getCon()%></td>
 		</tr>
 		<tr height="30">

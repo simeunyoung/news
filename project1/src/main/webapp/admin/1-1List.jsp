@@ -35,20 +35,21 @@
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
 <title>1:1 문의내역</title>
-
+memId = <%=memId%>
 <center><h2>1:1 문의내역(관리자)</h2></center>
 
 <hr />
 
 <center><h3>글목록(<%=count%>)</h3></center>
-<table align="center" width="1030">
+
+<table align="center" width="1000">
 	<tr>
 		<td align="right"><input type="button" value="글쓰기" onclick="location='1-1Write.jsp'" /></td>
 	</tr>
 </table>
 
 <%	if(count == 0){%>
-	<table align="center" width=1030 border="1" cellspacing="0" cellpadding="0">
+	<table align="center" width="1000" border="1" cellspacing="0" cellpadding="0">
 		<tr height="30">
 			<td align="center">게시판에 저장된 글이 없습니다.</td>
 		</tr>
@@ -66,9 +67,60 @@
 			<td align="center" width="80">조회수</td>
 			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center" width="150">IP</td>
+			<td align="center" width="100">블라인드</td>
 			<%}%>
 		</tr>
-<%	for(int i = 0; i < oneononeList.size(); i++) {
+<%if(dto2.getMemberType().equals("0") || dto2.getMemberType().equals("1") || dto2.getMemberType().equals("-1")) {%>
+  	<%for(int i = 0; i < oneononeList.size(); i++) {
+		AdminDTO dto = (AdminDTO)oneononeList.get(i);%>
+		<%if(dto.getResultType().equals("0")) {%>
+		<tr height="30">
+			<td align="center"><%=number--%></td>
+			<td align="center">
+				<%
+				if(dto.getQuestionType().equals("1")) {
+					out.println("자바");
+				} else if(dto.getQuestionType().equals("2")) {
+				  	out.println("파이썬");
+				} else if(dto.getQuestionType().equals("3")) {
+					out.println("자바스크립트");
+				} else if(dto.getQuestionType().equals("4")) {
+					out.println("뉴스제보");
+				} else if(dto.getQuestionType().equals("5")) {
+					out.println("제휴 및 일반문의");
+				} else if(dto.getQuestionType().equals("6")) {
+					out.println("신고");
+				} else if(dto.getQuestionType().equals("0")) {
+					out.println("미선택");
+				} else {
+					out.println("오류오류오류오류오류오류");
+				}
+				%>
+			</td>
+			<td align="center"><%=dto.getNum()%></td>
+			<td align="center"><a href="1-1Content.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>"><%=dto.getTitle()%></a></td>
+			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>님)</td>
+			<td align="center"><%=sdf.format(dto.getReg())%></td>
+			<td align="center"><%=dto.getReadCount()%></td>
+			<%if(dto2.getMemberType().equals("2")) {%>
+			<td align="center"><%=dto.getIp()%></td>
+			<td align="center">
+				<%
+				if(dto.getResultType().equals("0")) {
+					out.println("X");
+				} else if(dto.getResultType().equals("1")) {
+					out.println("O");
+				} else {
+					out.println("오류오류오류오류");
+				}
+				%>
+			</td>
+			<%}%>
+		</tr>
+		<%}%>
+	<%}%>
+<%} else if(dto2.getMemberType().equals("2")) {%>
+	<%for(int i = 0; i < oneononeList.size(); i++) {
 		AdminDTO dto = (AdminDTO)oneononeList.get(i);%>
 		<tr height="30">
 			<td align="center"><%=number--%></td>
@@ -97,12 +149,24 @@
 			<td align="center"><a href="1-1Content.jsp?num=<%=dto.getNum()%>&pageNum=<%=currentPage%>"><%=dto.getTitle()%></a></td>
 			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>님)</td>
 			<td align="center"><%=sdf.format(dto.getReg())%></td>
-			<td align="center"><%=dto.getReadCount()%>
+			<td align="center"><%=dto.getReadCount()%></td>
 			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center"><%=dto.getIp()%></td>
+			<td align="center">
+				<%
+				if(dto.getResultType().equals("0")) {
+					out.println("X");
+				} else if(dto.getResultType().equals("1")) {
+					out.println("O");
+				} else {
+					out.println("오류오류오류오류");
+				}
+				%>
+			</td>
 			<%}%>
 		</tr>
-<%	}%>
+	<%}%>
+<%}%>
 	</table>
 </form>
 

@@ -9,7 +9,7 @@
 %>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
-
+memId = <%=memId%>
 <title>기자신청</title>
 
 <center><h2>기자신청</h2></center>
