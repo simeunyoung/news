@@ -55,7 +55,7 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 		<div class="main-card main_list">
 			<div class="title-box">
 				<p class="title">오늘의 뉴스</p>
-				<a href="list.jsp">더보기</a>
+				<a href="list.jsp" class="more">더보기</a>
 			</div>	
 			<div class="list-card">
 				<%
@@ -69,7 +69,7 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 						<span><%=article.getId()%> 기자</span>
 						<div><%=article.getCon()%></div>
 					</div>				
-					<p>작성일자 : <%=sdf.format(article.getReg())%></p>
+					<p class="cont-date">작성일자 : <%=sdf.format(article.getReg())%></p>
 				</div>
 				<%
 				}
@@ -81,13 +81,13 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 		<div class="main-card jn_bookmark">
 			<div class="title-box">
 				<p class="title">구독한 기자</p>
-				<a href="list.jsp">더보기</a>
+				<a href="list.jsp" class="more">더보기</a>
 			</div>
 		</div>
 		<div class="main-card press_bookmark">
 			<div class="title-box">
 				<p class="title">구독한 언론사</p>
-				<a href="list.jsp">더보기</a>
+				<a href="list.jsp" class="more">더보기</a>
 			</div>
 		</div>
 	</div>	

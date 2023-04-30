@@ -31,7 +31,7 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 	<div class="hot-box">
 		<div class="title-box">
 			<p class="title">Hot TOPIC</p>
-			<a href="list.jsp">더보기</a>
+			<a href="list.jsp" class="more">더보기</a>
 		</div>
 		<div class="card topic-card">
 			<%
@@ -47,7 +47,7 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 						<span><%=topic.getId()%> 기자</span>
 						<div><%=topic.getCon()%></div>
 					</div>				
-					<p>작성일자 : <%=sdf.format(topic.getReg())%></p>
+					<p class="cont-date">작성일자 : <%=sdf.format(topic.getReg())%></p>
 				</div>
 		</div>
 			<%
