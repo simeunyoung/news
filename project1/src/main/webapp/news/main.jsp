@@ -35,134 +35,63 @@ List newsList = null;
 NewsDAO newsPro = NewsDAO.getInstance();
 newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 %>
+<!-- header -->
 <jsp:include page="/member/header.jsp"></jsp:include>
-<input type="button" value="리스트로 이동" onClick="location='list.jsp'">
-<input type="button" value="sessionTest"
-	onClick="location='sessiontest.jsp'">
-접속자 정보 :
-<%=loginuser%>
+
+<!-- 테스트 !! -->
+ <div>
+	<input type="button" value="리스트로 이동" onClick="location='list.jsp'">
+	<input type="button" value="sessionTest"
+		onClick="location='sessiontest.jsp'">
+	접속자 정보 :
+	<%=loginuser%>
+</div>
+
 <div class="main_box">
 	<div class="left_box">
-		<div class="topic_box">
-			토픽 공간 시작<br />
-			<div class="boxname_link">
-				<div class="boxname">
-					<h2>
-						<font color="#708090"><b>Hot TOPIC</b></font>
-					</h2>
-				</div>
-				<div align="right" class="boxname">
-					<a href="list.jsp"><font color="#808080"><b>더 많은 인기
-								뉴스 보러가기&nbsp;&nbsp;</b></font></a>
-				</div>
-			</div>
-			<div>
-				<div class="boxname_link">
-					for문 시작 - 1
-					<%-- 조회수 타이틀 내용 기자이름 뉴스타입 날짜 --%>
-
-					<div class="topic_onlyone"></div>
-					<div class="boxname">
-						2~5
-						<div class="topic_other"></div>
-						for문 끝
-					</div>
-				</div>
-			</div>
-
-
-
-			<div></div>
-
-
-
-
-
-			토픽공간 끝
+		<div class="main-card hot_topic">
+			<jsp:include page="hotTopic.jsp" />
 		</div>
-		<div class="list_box">
-			<div class="boxname_link">
-				<div class="boxname">
-					<h2>
-						<font color="#708090"><b>모든 뉴스 ( 최신순 )</b></font>
-					</h2>
-				</div>
-				<div align="right" class="boxname">
-					<a href="list.jsp"><font color="#808080"><b>더 많은 뉴스
-								보러가기&nbsp;&nbsp;</b></font></a>
-				</div>
-			</div>
-			<br />
-			<div class="list_group">
+		<div class="main-card main_list">
+			<div class="title-box">
+				<p class="title">오늘의 뉴스</p>
+				<a href="list.jsp">더보기</a>
+			</div>	
+			<div class="list-card">
 				<%
 				for (int i = 0; i < newsList.size(); i++) {
 					NewsDTO article = (NewsDTO) newsList.get(i);
 				%>
-				<a href="content.jsp?num=<%=article.getNum()%>"><div
-						class="list_showcase">
-
-						<div align="right">
-							<font color="#a9a9a9"><b><%=article.getNewstype()%>&nbsp;뉴스</b></font>
-						</div>
-						<b><font size="5px" color="#696969"><%=article.getTitle()%></font></b><br />
-						<b><font size="4px" color="#778899"><%=article.getId()%>
-								기자</font></b><br />
-						<br />
-						<div class="make_short">
-							&nbsp;&nbsp;<font color="#000000"><%=article.getCon()%>
-						</div>
-						<br />
-						<br />
-						<div align="right">
-							<b>작성일자 : <%=sdf.format(article.getReg())%></b>
-						</div>
-						</font>
-
-					</div></a>
+				<div class="card cont-box">
+					<p><%=article.getNewstype()%> 뉴스 </p>
+					<div>
+						<h4 class="cont-title" onclick="location='content.jsp?num=<%=article.getNum()%>'"><%=article.getTitle()%></h4>
+						<span><%=article.getId()%> 기자</span>
+						<div><%=article.getCon()%></div>
+					</div>				
+					<p>작성일자 : <%=sdf.format(article.getReg())%></p>
+				</div>
 				<%
 				}
 				%>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<div class="right_box">
-		<div class="companyc_box">
-			<div class="boxname_link">
-				<div class="boxname">
-					<h2>
-						<font color="#708090"><b>함께하는 기자</b></font>
-					</h2>
-				</div>
-				<div align="right" class="boxname">
-					<a href="list.jsp"><font color="#808080"><b>더 많은 기자
-								보러가기&nbsp;&nbsp;</b></font></a>
-				</div>
+		<div class="main-card jn_bookmark">
+			<div class="title-box">
+				<p class="title">구독한 기자</p>
+				<a href="list.jsp">더보기</a>
 			</div>
-			<br /> for문 시작 (기자이름 언론사 작성한글수량(타입별) 해당기자프로필로이동링크 구독버튼)
-			<div class="rightbox_list"></div>
 		</div>
-
-
-		<div class="companyw_box">
-			<div class="boxname_link">
-				<div class="boxname">
-					<h2>
-						<font color="#708090"><b>함께하는 언론사</b></font>
-					</h2>
-				</div>
-				<div align="right" class="boxname">
-					<a href="list.jsp"><font color="#808080"><b>더 많은 언론사
-								보러가기&nbsp;&nbsp;</b></font></a>
-				</div>
+		<div class="main-card press_bookmark">
+			<div class="title-box">
+				<p class="title">구독한 언론사</p>
+				<a href="list.jsp">더보기</a>
 			</div>
-			<br /> for문 시작 (언론사 활동중인기자인원 해당언론사소속기자전체작성글수량(타입별) 구독버튼)
-			<div class="rightbox_list"></div>
-
 		</div>
-	</div>
-
+	</div>	
 </div>
+
+<!-- footer -->
 <jsp:include page="/member/footer.jsp"></jsp:include>
-<style>
-}
-</style>
