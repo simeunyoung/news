@@ -12,6 +12,8 @@
 <%
 String id = (String) session.getAttribute("memId");
 String id2 = request.getParameter("id");
+MemberDAO dao = MemberDAO.getInstance();
+int check = dao.typeCheck(id);
 
 %>
 
@@ -36,6 +38,10 @@ String id2 = request.getParameter("id");
 					%>
 					<button class="btn btn-outline-primary"
 						onclick="location='deleteForm.jsp'">탈퇴하기</button>
+						<%if(check == -1){ %>
+						<button class="btn btn-outline-primary"
+						onclick="location='user_mypage_form.jsp?id=<%=id%>&pageType=2'">기자프로필</button>
+						<%} %>
 					<%
 					}
 					%>

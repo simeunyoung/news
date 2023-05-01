@@ -14,7 +14,7 @@
 	String id2 = request.getParameter("id");
 	
 	MemberDAO user = MemberDAO.getInstance();
-	MemberDTO member = user.getMember(id);
+	MemberDTO member = user.getMember(id2);
 
 	int check = user.typeCheck(id);
 

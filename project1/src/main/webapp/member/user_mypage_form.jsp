@@ -18,6 +18,7 @@
 <%
 String id = (String) session.getAttribute("memId");
 String pageNum = request.getParameter("pageNum");
+String pageType = request.getParameter("pageType");
 String num = request.getParameter("num");
 
 MemberDAO manager = MemberDAO.getInstance();
@@ -42,7 +43,7 @@ if (id == null) {
 	<div class="container">
 	
 		<%
-		if (check == 0 || check == 1) {
+		if (pageType.equals("1")) {
 		%>
 
 		<div class="main-body">
@@ -68,7 +69,7 @@ if (id == null) {
 		</div>
 	</div>
 	<%
-	} else if (check == 0 || check == -1 || check == 1) {
+	} else if (pageType.equals("2")) {
 	%>
 	<div class="main-body">
 		<nav aria-label="breadcrumb" class="main-breadcrumb">

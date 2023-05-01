@@ -43,7 +43,7 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 <%=loginuser%>
 <div class="main_box">
 	<div class="left_box">		
-		<jsp:include page="mainHot.jsp" />
+		
 		<div class="list_box">
 			<div class="boxname_link">
 				<div class="boxname">

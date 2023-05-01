@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="member.MemberDTO"%>
 <%@page import="member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,7 +17,23 @@
 	MemberDAO dao = MemberDAO.getInstance();
 	dto = dao.getMember(id);
 	
+	// 구독하기
+	String bookList = dao.selectBookList(id);
+
+	if(bookList == null){bookList = "";}
+
+	String [] books = bookList.split("@");
+	
+		boolean include = false;
+		for(String book : books){
+			if(book.equals(id2)){
+				include = true;
+				break;
+			}
+		}
+
 %>
+
 <style>
 .imgUpdate{display:none;}
 </style>
@@ -73,12 +90,11 @@
 					<button class="btn btn-outline-primary"
 						onclick="location='deleteForm.jsp'">탈퇴하기</button>
 						<%}else{ %>
-						 	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp'">구독하기</button>
-							 <%--<% if(!include){%>
-		                      	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp'">구독하기</button>
+							 <% if(!include){%>
+		                      	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독하기</button>
 		                      <%}else{%>
 		                      	<button class="btn btn-primary" onclick="location='bookcenclePro.jsp'">구독취소</button>
-                      <%}%>--%>
+                      <%}%>
 						<%} %>
 				</div>
 			</div>

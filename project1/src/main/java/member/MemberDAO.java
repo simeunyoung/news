@@ -264,7 +264,8 @@ public class MemberDAO extends OracleServer {
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 					MemberDTO dto = new MemberDTO();
-					dto.setReporterSubcribe(rs.getString("reportersubcribe"));
+					dto.setReporterSubcribe(rs.getString("reportersubscribe"));
+					result = dto.getReporterSubcribe();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -274,6 +275,30 @@ public class MemberDAO extends OracleServer {
         	return result;
         }
      
+        public void bookMarkInsert(String id, String id2, String books) {        
+        	String[] parts = books.split("@");
+        		boolean include = false;
+		    	for (String part : parts) {
+		    	    if (part.equals(id2)) {
+		    	        include = true;
+		    	        break;
+		    	    }
+		    	}
+        	try {
+				conn = getConnection();
+				sql="update member set reportersubscribe = ? where id =?";
+				pstmt = conn.prepareStatement(sql);
+				  if(!include) {
+				pstmt.setString(1, books + "@" + id2);
+				pstmt.setString(2, id);
+				  }
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+        }
 		// company
 		  public TreeSet<String> selectPress() {
 			  	TreeSet<String> list = new TreeSet<>();
