@@ -13,17 +13,18 @@ memId = <%=memId%>
 <a href="journalistPro.jsp">기자신청 프로 v</a> &nbsp; <br />
 <a href="journalistList.jsp">기자변경 리스트 v</a> &nbsp;
 <a href="journalistListPro.jsp">기자변경 리스트 프로 v</a> &nbsp;
+기자신청 거절v
 
 
 <hr>
 
 <h3>문의</h3>
-<a href="qnaWrite.jsp">QNA 작성 v</a> &nbsp;
-<a href="qnaList.jsp">QNA 목록 v</a> &nbsp;
-<a href="qnaContent.jsp?num=59&pageNum=1">QNA 내용 v</a> &nbsp; <br />
-<a href="1-1Write.jsp">1:1 문의작성 v</a> &nbsp;
-<a href="1-1List.jsp">1:1 문의목록 v</a> &nbsp;
-<a href="1-1Content.jsp?num=43&pageNum=1">1:1 내용 v</a>
+<a href="faqWrite.jsp">FAQ 작성 v</a> &nbsp;
+<a href="faqList.jsp">FAQ 목록 v</a> &nbsp;
+<a href="faqContent.jsp?num=5&pageNum=1">FAQ 내용 v</a> &nbsp; <br />
+<a href="qnaWrite.jsp">Q&A 작성 v</a> &nbsp;
+<a href="qnaList.jsp">Q&A 문의목록 v</a> &nbsp;
+<a href="qnaContent.jsp?num=1&pageNum=1">Q&A 내용 v</a>
 
 <hr>
 

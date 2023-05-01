@@ -157,15 +157,31 @@ public class AdminDAO extends OracleServer {
 		return JList;
 	} // public List getJList() {
 	
+	public int deleteJas(MemberDTO dto) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "delete from jas where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	}
+	
 	// 1-1Form에서 보내온 정보를 받음
 	// 해당 정보를 db에 추가후 result에 true 대입 및 리턴
 	// 1-1Pro.jsp
 	// 4.25 수정
-	public boolean oneononeInsert(AdminDTO dto) {
+	public boolean qnaInsert(AdminDTO dto) {
 		boolean result = false;
 		try {
 			conn = getConnection();
-			sql = "insert into oneonone values(0,oneonone_seq.nextval,?,?,?,?,?,?,0,?,?,?,?,sysdate)";
+			sql = "insert into qna values(0,qna_seq.nextval,?,?,?,?,?,?,0,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getName());
@@ -191,11 +207,30 @@ public class AdminDAO extends OracleServer {
 	// result에 대입 및 리턴
 	// 1-1List.jsp
 	// 4.25 수정
-	public int oneononeCount() {
+	public int qnaCount() {
 		int result = 0;
 		try {
 			conn = getConnection();
-			sql = "select count(*) from oneonone";
+			sql = "select count(*) from qna";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	} // public int oneononeCount() {
+	
+	public int qnaCount2() {
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "select count(*) from qna where resultType=0";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -217,11 +252,11 @@ public class AdminDAO extends OracleServer {
 	// dto가 저장된 리스트를 리턴
 	// 1-1List.jsp
 	// 4.25 수정
-	public List oneononeList(int start, int end) {
-		List oneononeList = new ArrayList();
+	public List qnaList(int start, int end) {
+		List qnaList = new ArrayList();
 		try {
 			conn = getConnection();
-			sql = "select * from (select e.*, rownum r from (select * from oneonone order by num desc) e) where r >=? and r <=?";
+			sql = "select * from (select e.*, rownum r from (select * from qna order by num desc) e) where r >=? and r <=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
@@ -242,43 +277,43 @@ public class AdminDAO extends OracleServer {
 				dto.setMemberType(rs.getString("memberType"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
-				oneononeList.add(dto);
+				qnaList.add(dto);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			oracleClose();
 		}
-		return oneononeList;
+		return qnaList;
 	} // public List oneononeList(int start, int end) {
 
 	// 
 	// 
-	public AdminDTO oneononeGet(int num) {
+	public AdminDTO qnaGet(int num) {
 		AdminDTO dto = null;
 		int count = 0;
 		try {
 			conn = getConnection();
-			sql = "update oneonone set readcount=readcount+1 where num=?";
+			sql = "update qna set readcount=readcount+1 where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			
-			sql = "select readcount from oneonone where num=?";
+			sql = "select readcount from qna where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt(1);
 				if(count >= 100) {
-					sql = "update oneonone set resultType=1 where num=?";
+					sql = "update qna set resultType=1 where num=?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, num);
 					pstmt.executeUpdate();
 				}
 			}
 		
-			sql = "select * from oneonone where num=?";
+			sql = "select * from qna where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -308,11 +343,11 @@ public class AdminDAO extends OracleServer {
 	} // public AdminDTO oneononeGet(int num) {
 		
 	// Q&A db에 데이터를 입력하는 메서드
-	public boolean qnaInsert(AdminDTO dto) {
+	public boolean faqInsert(AdminDTO dto) {
 		boolean result = false;
 		try {
 			conn = getConnection();
-			sql = "insert into qna values(oneonone_seq.nextval,?,?,?,?,0,?,?,?,?,sysdate)";
+			sql = "insert into faq values(qna_seq.nextval,?,?,?,?,0,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getName());
@@ -333,11 +368,11 @@ public class AdminDAO extends OracleServer {
 	} // public boolean qnaInsert(AdminDTO dto) {
 	
 	// 시작값과 끝값을 입력하여 1~10 11~20등 특정 형식에 맞게 db 내 데이터를 List로 꺼내는 메서드
-	public List qnaList(int start, int end) {
-		List qnaList = new ArrayList();
+	public List faqList(int start, int end) {
+		List faqList = new ArrayList();
 		try {
 			conn = getConnection();
-			sql = "select * from (select e.*, rownum r from (select * from qna order by num desc) e) where r >=? and r <=?";
+			sql = "select * from (select e.*, rownum r from (select * from faq order by num desc) e) where r >=? and r <=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
@@ -356,25 +391,24 @@ public class AdminDAO extends OracleServer {
 				dto.setImg(rs.getString("img"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
-				qnaList.add(dto);
+				faqList.add(dto);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			oracleClose();
 		}
-		return qnaList;
+		return faqList;
 	} // public List qnaList(int start, int end) {
 	
 	// Q&A의 갯수를 확인하는 메서드
-	public int getQnaCount() {
+	public int getfaqCount() {
 		int result = 0;
 		try {
 			conn = getConnection();
-			sql ="select count(*) from qna";
+			sql ="select count(*) from faq";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
 			if(rs.next()) {
 				result = rs.getInt(1);
 			}
@@ -409,16 +443,16 @@ public class AdminDAO extends OracleServer {
 	
 	// num을 이용하여 Q&A 정보를 dto에 set하는 메서드
 	// 4.27 확인필요
-	public AdminDTO qnaGet(int num) {
+	public AdminDTO faqGet(int num) {
 		AdminDTO dto = null;
 		try {
 			conn = getConnection();
-			sql = "update qna set readcount=readcount+1 where num=?";
+			sql = "update faq set readcount=readcount+1 where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			
-			sql = "select * from qna where num=?";
+			sql = "select * from faq where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();

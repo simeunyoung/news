@@ -5,22 +5,21 @@
 <%@ page import="member.MemberDTO"%>
 
 <%
-	// request.getParameter는 리턴타입이 String이라서 Integer를 이용해서 숫자로 변환
 	int num = Integer.parseInt(request.getParameter("num"));
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	AdminDAO dao = AdminDAO.getInstance();
 	String memId = (String)session.getAttribute("memId");
-	AdminDTO dto = dao.oneononeGet(num);
+	AdminDTO dto = dao.faqGet(num);
 	MemberDTO dto2 = dao.setMember(memId);
-	if(memId == null) {dto2.setMemberType("0");}
+	if(memId == null) {dto.setMemberType("0");}
 %>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
-<title>1:1 문의 게시판</title>
-
-<center><h3>1:1 문의내용</h3></center>
+<title>Q&A 게시판</title>
+이전글 다음글 기능 추가요망
+<center><h3>Q&A</h3></center>
 
 <hr />
 <br />
@@ -55,17 +54,11 @@
 			</td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="4">제목 : <%=dto.getTitle()%></td>
+			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>님)
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>님)</td>
+			<td align="center" colspan="2">제목 : <%=dto.getTitle()%></td>
 		</tr>
-		<%if(dto2.getMemberType().equals("2")) {%>
-		<tr height="30">
-			<td align="center" width="400">이메일 : <%=dto.getEmail()%></td>
-			<td align="center">연락처 : <%=dto.getTel()%></td>
-		</tr>
-		<%}%>
 		<tr height="300">
 			<td align="center" colspan="2"><%=dto.getCon()%></td>
 		</tr>
@@ -73,10 +66,10 @@
 			<td align="center" colspan="2">작성일자 : <%=sdf.format(dto.getReg())%></td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="3">
-				<input type="button" value="목록" onclick="location='1-1List.jsp'" />
-				<input type="button" value="수정" onclick="location='1-1List.jsp'" />
-				<input type="button" value="삭제" onclick="location='1-1List.jsp'" />
+			<td align="center" colspan="2">
+				<input type="button" value="목록" onclick="location='faqList.jsp'" />
+				<input type="button" value="수정" onclick="location='faqList.jsp'" />
+				<input type="button" value="삭제" onclick="location='faqList.jsp'" />
 			</td>
 		</tr>
 	</table>
