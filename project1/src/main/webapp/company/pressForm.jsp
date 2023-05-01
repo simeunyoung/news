@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "member.MemberDAO"%>
+<%@ page import = "java.util.*"%>
+<% String id = "test";//(String) session.getAttribute("memId"); %>
+<% MemberDAO dao = MemberDAO.getInstance();%>
+<% TreeSet<String> pressSet = dao.selectPress();%>
+<% String exist = dao.selectExist(id);%>
+<% String[] pressNames = pressSet.toArray(new String[pressSet.size()]);%>
+<% String[] existArray = exist.split("@");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,39 +40,39 @@
 </style>
 <body>
  <ul class="tab">
-            <li class="tab-menu active" data-tab="tab01">언론사 구독목록</li>
-            <li class="tab-menu" data-tab="tab02">기자 구독목록</li>
-            <li class="tab-menu" data-tab="tab03">스크랩목록</li>
-</ul>
-             <div class="tab-content active" id="tab01"><table>
-  <thead>
-    <tr>
-    </tr>
-  </thead>
-  <tbody>
-    <%
-      // 반복문을 사용하여 데이터를 동적으로 출력
-      for (int i = 0; i < 3; i++) {
-    %>
-    <tr>
-      <td>데이터1</td>
-      <td>
-        <input type="checkbox" name="선택한_데이터[]" value="data" />
-      </td>
-    </tr>
-    <%
-      }
-    %>
-  </tbody>
-</table>
-
-             </div>
-             <div class="tab-content active" id="tab02">2
-             </div>
-             <div class="tab-content active" id="tab03">3
-             </div>
-
+    <li class="tab-menu active" data-tab="tab01">언론사 구독목록</li>
+    <li class="tab-menu" data-tab="tab02">기자 구독목록</li>
+    <li class="tab-menu" data-tab="tab03">스크랩목록</li>
+ </ul>
+ <div class="tab-content active" id="tab01">
+    <form action="pressFormPro.jsp?id=<%=id%>" method="get">
+      <table>
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+        <% boolean isChecked = false;
+          for(int i = 0 ; i < pressNames.length ; i++){
+            isChecked = false;
+            for(int z = 0 ; z < existArray.length ; z++){
+              isChecked = pressNames[i].equals(existArray[z]);
+              if(isChecked){%>
+                <%=pressNames[i]%><input type="checkbox" name= "<%=i%>" value="<%=pressNames[i]%>" checked = "true">
+              <%break; }
+            }
+            if(!isChecked){%>
+              <%=pressNames[i]%><input type="checkbox" name= "<%=i%>" value="<%=pressNames[i]%>"/>
+            <% }
+          }%>	
+          <input type="hidden" name="id" value="<%=id%>">
+          <input type="submit" value="선택완료">
+        </tbody>
+      </table>
+    </form>
+ </div>
 </body>
+
 <script>
 const li = document.querySelectorAll(".tab .tab-menu");
 

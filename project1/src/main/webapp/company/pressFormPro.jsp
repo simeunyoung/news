@@ -5,16 +5,15 @@
 <% String id = request.getParameter("id");%>
 <% int size = request.getParameterMap().size()-1;%>
 <% StringBuilder sb = new StringBuilder(); %>
-<%for (int i = 0; i <= size + 1; i++) {
+<%for (int i = 0; i <= size; i++) {
   if (request.getParameter(Integer.toString(i)) != null) {
     sb.append("@" + request.getParameter(Integer.toString(i)));
   }
 }
 String result = sb.toString();%>
-<%=result %>
-<% dao.changeSubscribe(result, id);%>
+<% dao.PSubscribe(id, result);%>
 		<script>
-			location.replace("/project1/company/pressForm.jsp?id=<%=id%>"); 
+			location.replace("/project1/company/pressForm.jsp?id=<%=id%>");
 		</script>
 
 
