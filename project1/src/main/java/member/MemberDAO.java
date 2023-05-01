@@ -254,6 +254,25 @@ public class MemberDAO extends OracleServer {
             }
         }
         
+        public String selectBookList(String id) {
+        	String result = "";
+        	try {
+				conn = getConnection();
+				sql="select reportersubscribe from member where id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					MemberDTO dto = new MemberDTO();
+					dto.setReporterSubcribe(rs.getString("reportersubcribe"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+        	return result;
+        }
      
 		// company
 		  public TreeSet<String> selectPress() {

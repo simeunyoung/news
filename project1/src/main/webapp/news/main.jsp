@@ -62,10 +62,10 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 				for (int i = 0; i < newsList.size(); i++) {
 					NewsDTO article = (NewsDTO) newsList.get(i);
 				%>
-				<div class="card cont-box">
+				<div class="card cont-box" onclick="location='content.jsp?num=<%=article.getNum()%>'">
 					<p><%=article.getNewstype()%> 뉴스 </p>
 					<div>
-						<h4 class="cont-title" onclick="location='content.jsp?num=<%=article.getNum()%>'"><%=article.getTitle()%></h4>
+						<h4 class="cont-title" ><%=article.getTitle()%></h4>
 						<span><%=article.getId()%> 기자</span>
 						<div><%=article.getCon()%></div>
 					</div>				

@@ -74,7 +74,7 @@
 						onclick="location='deleteForm.jsp'">탈퇴하기</button>
 						<%}else{ %>
 						 	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp'">구독하기</button>
-							 <%--<% if(include == 1){%>
+							 <%--<% if(!include){%>
 		                      	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp'">구독하기</button>
 		                      <%}else{%>
 		                      	<button class="btn btn-primary" onclick="location='bookcenclePro.jsp'">구독취소</button>

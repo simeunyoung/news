@@ -12,7 +12,7 @@
 <html>
 <head>
 <%-- css파일 경로 지정 --%>
-<link href="/project1/resource/css/mypage.css" rel="stylesheet">
+<!-- <link href="/project1/resource/css/mypage.css" rel="stylesheet"> -->
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 
 <%
@@ -55,12 +55,12 @@ if (id == null) {
 				</ol>
 			</nav>
 			<div class="row gutters-sm">
-				<div class="col-md-4 mb-3">
+				<div class="userform-wrap">
 					<jsp:include page="userProForm.jsp" />
 				</div>
-				<div class="col-md-8">
+				<div class="infoform-wrap">
 					<jsp:include page="infoForm.jsp" />
-					<div class="card">
+					<div class="card userlist-wrap">
 						<jsp:include page="userlist.jsp" />
 					</div>
 				</div>
@@ -80,12 +80,12 @@ if (id == null) {
 			</ol>
 		</nav>
 		<div class="row gutters-sm">
-			<div class="col-md-4 mb-3">
+			<div class="jouralform-wrap">
 				<jsp:include page="jouralProForm.jsp" />
 			</div>
-			<div class="col-md-8">
+			<div class="infoform-wrap">
 				<jsp:include page="infoForm.jsp" />
-				<div class="card">
+				<div class="journalist-wrap">
 					<jsp:include page="journalist.jsp" />
 				</div>
 			</div>

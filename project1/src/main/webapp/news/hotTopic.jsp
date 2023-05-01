@@ -40,10 +40,10 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 				if (i == 0) {
 			%>
 			
-				<div class="cont-box topic-only">
+				<div class="cont-box topic-only" onclick="location='content.jsp?num=<%=topic.getNum()%>'">
 					<p><%=topic.getNewstype()%> 뉴스 / 조회수 : <%=topic.getViews()%></p>
 					<div>
-						<h3 class="cont-title" onclick="location='content.jsp?num=<%=topic.getNum()%>'"><%=topic.getTitle()%></h3>
+						<h3 class="cont-title"><%=topic.getTitle()%></h3>
 						<span><%=topic.getId()%> 기자</span>
 						<div><%=topic.getCon()%></div>
 					</div>				
@@ -54,20 +54,22 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 			} else {
 			%>
 			<div class="card topic-card">
-				<div class="topic-box">
+				<div class="topic-box" onclick="location='content.jsp?num=<%=topic.getNum()%>'">
 					<p><%=topic.getNewstype()%> 뉴스 / 조회수 : <%=topic.getViews()%></p>
 					<div>
-						<h3 class="cont-title" onclick="location='content.jsp?num=<%=topic.getNum()%>'"><%=topic.getTitle()%></h3>
+						<h3 class="cont-title" ><%=topic.getTitle()%></h3>
 						<span><%=topic.getId()%> 기자</span>
 						<div><%=topic.getCon()%></div>
 					</div>				
 					<p>작성일자 : <%=sdf.format(topic.getReg())%></p>
 				</div>
 			</div>
-			<%
+						<%
 				}
 			}
 			%>
+			
+
 	</div>
 </body>
 </html>
