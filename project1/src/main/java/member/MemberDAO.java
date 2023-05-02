@@ -299,6 +299,33 @@ public class MemberDAO extends OracleServer {
 				oracleClose();
 			}
         }
+        
+        public void bookMarkDelete(String id, String id2, String books) {        
+        	String[] parts = books.split("@");
+        		boolean include = false;
+		    	for (String part : parts) {
+		    	    if (part.equals(id2)) {
+		    	        include = true;
+		    	        break;
+		    	    }
+		    	}
+        	try {
+				conn = getConnection();
+				sql="update member set reportersubscribe = ? where id =?";
+				pstmt = conn.prepareStatement(sql);
+				  if(include) {
+					 String bmDelete = "@"+id2;
+					 String aId = books.replace(bmDelete, "");
+				pstmt.setString(1, aId);
+				pstmt.setString(2, id);
+				  }
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				oracleClose();
+			}
+        }
 		// company
 		  public TreeSet<String> selectPress() {
 			  	TreeSet<String> list = new TreeSet<>();

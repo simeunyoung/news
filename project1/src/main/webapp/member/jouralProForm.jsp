@@ -93,7 +93,7 @@
 							 <% if(!include){%>
 		                      	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독하기</button>
 		                      <%}else{%>
-		                      	<button class="btn btn-primary" onclick="location='bookcenclePro.jsp'">구독취소</button>
+		                      	<button class="btn btn-primary" onclick="location='bookmarkDelete.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독취소</button>
                       <%}%>
 						<%} %>
 				</div>
