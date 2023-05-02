@@ -2,11 +2,13 @@
 <%@ page import="admin.AdminDAO"%>
 <%request.setCharacterEncoding("UTF-8");%>
 
-<jsp:useBean id="dto" class="member.MemberDTO" />
+<jsp:useBean id="dto" class="admin.AdminDTO"/>
 <jsp:setProperty property="*" name="dto" />
 
 <%
+	String pageNum = request.getParameter("pageNum");
 	AdminDAO dao = AdminDAO.getInstance();
-	int result = dao.denyJas(dto);
-	response.sendRedirect("journalistList.jsp");
+	int result = dao.qnaUpdate(dto);
+	
+	response.sendRedirect("qnaList.jsp");
 %>

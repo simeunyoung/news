@@ -17,9 +17,9 @@
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
-<title>Q&A 게시판</title>
+<title>FAQ 게시판</title>
 이전글 다음글 기능 추가요망
-<center><h3>Q&A</h3></center>
+<center><h3>FAQ</h3></center>
 
 <hr />
 <br />

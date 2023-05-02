@@ -7,6 +7,7 @@
 <%
 	// request.getParameter는 리턴타입이 String이라서 Integer를 이용해서 숫자로 변환
 	int num = Integer.parseInt(request.getParameter("num"));
+	String pageNum = request.getParameter("pageNum");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	AdminDAO dao = AdminDAO.getInstance();
@@ -75,9 +76,9 @@
 		<tr height="30">
 			<td align="center" colspan="3">
 				<input type="button" value="목록" onclick="location='qnaList.jsp'" />
-				<%if(dto2.getMemberType().equals("2")) {%>
-				<input type="button" value="수정" onclick="location='qnaList.jsp'" />
-				<input type="button" value="삭제" onclick="location='qnaList.jsp'" />
+				<%if(dto.getId().equals(dto2.getId()) || dto2.getMemberType().equals("2")) {%>
+				<input type="button" value="수정" onclick="location='qnaUpdateForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
+				<input type="button" value="삭제" onclick="location='qnaDelete.jsp'" />
 				<%}%>
 			</td>
 		</tr>

@@ -157,11 +157,11 @@ public class AdminDAO extends OracleServer {
 		return JList;
 	} // public List getJList() {
 	
-	public int deleteJas(MemberDTO dto) {
+	public int denyJas(MemberDTO dto) {
 		int result = 0;
 		try {
 			conn = getConnection();
-			sql = "delete from jas where id=?";
+			sql = "update jas set resultType=2 where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			result = pstmt.executeUpdate();
@@ -286,9 +286,7 @@ public class AdminDAO extends OracleServer {
 		}
 		return qnaList;
 	} // public List oneononeList(int start, int end) {
-
-	// 
-	// 
+	
 	public AdminDTO qnaGet(int num) {
 		AdminDTO dto = null;
 		int count = 0;
@@ -341,6 +339,59 @@ public class AdminDAO extends OracleServer {
 		}
 		return dto;
 	} // public AdminDTO oneononeGet(int num) {
+	
+	public AdminDTO qnaUpdateGet(int num) {
+		AdminDTO dto = null;
+		int count = 0;
+		try {
+			conn = getConnection();
+			sql = "select * from qna where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto = new AdminDTO();
+				dto.setResultType(rs.getString("resultType"));
+				dto.setNum(rs.getInt("num"));
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setTel(rs.getString("tel"));
+				dto.setTitle(rs.getString("title"));
+				dto.setCon(rs.getString("con"));
+				dto.setReadCount(rs.getInt("readCount"));
+				dto.setMemberType(rs.getString("memberType"));
+				dto.setQuestionType(rs.getString("questionType"));
+				dto.setImg(rs.getString("img"));
+				dto.setIp(rs.getString("ip"));
+				dto.setReg(rs.getTimestamp("reg"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return dto;
+	} // public AdminDTO oneononeGet(int num) {
+	
+	public int qnaUpdate(AdminDTO dto) {
+	int result = 0;
+	try {
+		conn = getConnection();
+		sql = "update qna set questionType=?,title=?,con=? where num=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, dto.getQuestionType());
+		pstmt.setString(2, dto.getTitle());
+		pstmt.setString(3, dto.getCon());
+		pstmt.setInt(4, dto.getNum());
+		result = pstmt.executeUpdate();
+	} catch(Exception e) {
+		e.printStackTrace();
+	} finally {
+		oracleClose();
+	}
+	return result;
+	}
 		
 	// Q&A db에 데이터를 입력하는 메서드
 	public boolean faqInsert(AdminDTO dto) {

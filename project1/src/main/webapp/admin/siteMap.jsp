@@ -24,7 +24,8 @@ memId = <%=memId%>
 <a href="faqContent.jsp?num=5&pageNum=1">FAQ 내용 v</a> &nbsp; <br />
 <a href="qnaWrite.jsp">Q&A 작성 v</a> &nbsp;
 <a href="qnaList.jsp">Q&A 문의목록 v</a> &nbsp;
-<a href="qnaContent.jsp?num=1&pageNum=1">Q&A 내용 v</a>
+<a href="qnaContent.jsp?num=1&pageNum=1">Q&A 내용 v</a> &nbsp;
+<a href="qnaUpdateForm.jsp">Q&A 수정 v</a>
 
 <hr>
 
