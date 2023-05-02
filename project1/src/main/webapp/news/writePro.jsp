@@ -9,6 +9,7 @@
 <jsp:setProperty property="*" name="dto" />
 
 <%
+
     dto.setReg(new Timestamp(System.currentTimeMillis())); //날짜 가져오기
 	dto.setIp(request.getRemoteAddr()); // ip 가져오기
 	

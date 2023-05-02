@@ -9,7 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>header</title>
+
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <style>
 

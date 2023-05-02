@@ -42,7 +42,7 @@ response.sendRedirect("list.jsp");
 	접속자 정보 :
 	<%=loginuser%>
 	<form action="writePro.jsp" name="write"
-		onsubmit="return option_check()">
+		onsubmit="return submitPost()">
 
 		<input type="hidden" name="id" value="<%=loginuser%>"> <input
 			type="hidden" name="nick" value="<%=usernick%>">
@@ -59,10 +59,10 @@ response.sendRedirect("list.jsp");
 				<option value="JavaScript">JavaScript</option>
 			</select><br /> 제목 : <input class="input_box" name="title" type="text"
 				placeholder="제목을 입력해주세요."><br /> 내용<br />
-			<textarea id="contents" class="textarea_box" name="contents" placeholder="내용을 입력해주세요."></textarea>
+			<div id="smartEditor"><textarea id="editorTxt" class="textarea_box" name="con" placeholder="내용을 입력해주세요."></textarea></div>
 			<br /> 비밀번호 : <input class="short_box" name="pw" type="text"
 				placeholder="게시글 비밀번호를 입력해주세요.">&nbsp;&nbsp;&nbsp; <input
-				type="submit" class="submit_button" value="작성완료" />
+				type="submit" class="submit_button" value="작성완료"  />
 		</div>
 	</form>
 
@@ -122,24 +122,35 @@ response.sendRedirect("list.jsp");
 }
 </style>
 <script>
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
- oAppRef: oEditors,
- elPlaceHolder: "contents",
- sSkinURI: "/project1/resource/static/smarteditor/SmartEditor2Skin.html",
- fCreator: "createSEditor2"
-});
+let oEditors = []
 
-function submitContents(elClickedObj) {
-	// 에디터의 내용이 textarea에 적용된다.
-	oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-
-	// 에디터의 내용에 대한 값 검증은 이곳에서
-	// document.getElementById("contents").value를 이용해서 처리한다.
-
-	try {
-	 elClickedObj.form.submit();
-	} catch(e) {}
+smartEditor = function() {
+  console.log("Naver SmartEditor")
+  nhn.husky.EZCreator.createInIFrame({
+    oAppRef: oEditors,
+    elPlaceHolder: "editorTxt",
+    sSkinURI: "/project1/resource/static/smarteditor/SmartEditor2Skin.html",
+    fCreator: "createSEditor2"
+  })
 }
+
+$(document).ready(function() {
+  smartEditor()
+})
+
+submitPost = function() {
+  oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
+  let content = document.getElementById("editorTxt").value;
+
+  if(content == '') {
+    alert("내용을 입력해주세요.")
+    oEditors.getById["editorTxt"].exec("FOCUS")
+    return false;
+  } else {
+    console.log(content)
+    return true;
+  }
+}
+
 </script>
 </body>
