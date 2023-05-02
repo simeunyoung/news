@@ -41,15 +41,14 @@ int check = manager.typeCheck(id);
 				</ul></li>
 			<li><a href="/project1/company/">파트너십</a>
 				<ul>
-					<li><a href="/project1/company/pressPage.jsp">언론사리스트</a></li>
-					<li><a href="/project1/company/introduce.jsp?pageNum=2">기자리스트</a></li>
-					<li><a href="/project1/company/">제보하기</a></li>
+					<li><a href="/project1/company/introduce.jsp?pageNum=2">언론사리스트/<br>기자리스트</a></li>
+					<li><a href="/project1/admin/qnaList.jsp">제보하기</a></li>
 				</ul></li>
 			<li><a href="/project1/helper/svmain.jsp">고객센터</a>
 				<ul>
-					<li><a href="/project1/helper/qalist.jsp">Q&A</a></li>
-					<li><a href="/project1/helper/questionForm.jsp">1:1문의하기</a></li>
-					<li><a href="/project1/helper/">기자신청</a></li>
+					<li><a href="/project1/admin/faqList.jsp">FAQ</a></li>
+					<li><a href="/project1/admin/qnaList.jsp">Q&A</a></li>
+					<li><a href="/project1/admin/journalistForm.jsp">기자신청</a></li>
 				</ul></li>
 			<%
 			if (check == 1) {
