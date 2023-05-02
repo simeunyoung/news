@@ -31,6 +31,19 @@ String con = text.getCon();
 <div class="con1"><div class="conl"><b>작성자 : </b><a href = "/project1/member/user_mypage_form.jsp?id=<%=text.getId()%>"><%=text.getNick()%></a>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
 <div class="con1"><b>내용 : </b><%=text.getCon()%></div><br />
 <div align="right">
+<%if(loginuser != null){%>
+<form>
+<table align = "center" width = "500" height = "60" border = "1" cellspacing =  "0" sellpadding = "0">
+	<tr>
+		<td align = "center" colspan = "2">
+			<input type = "button" name = "good" value = "좋아요" onclick = "location.href='gisagood.jsp?num=<%=text.getNum()%>'">		
+		<td align = "center" colspan = "2">
+			<input type = "button" name = "bad" value = "싫어요" onclick = "location.href='gisabad.jsp?num=<%=text.getNum()%>'">
+		</td>
+	</tr>
+</table>
+</form>
+<%}%>
 <%if(session.getAttribute("memId") == null) {%>
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
 <%}else if(loginuser.equals("admin")){%>
