@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import member.MemberDTO;
+
 import java.util.ArrayList;
 
 public class NewsDAO extends OracleServer {
@@ -725,6 +728,79 @@ public class NewsDAO extends OracleServer {
 		}
 		return list;
 	}
+    
+    public String newsscrap(String id) {
+        String scrap = "";
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement("select scrap from member where id = ?");
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+            MemberDTO dto = new MemberDTO();
+            dto.setScrap(rs.getString("scrap"));
+            scrap = dto.getScrap();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            oracleClose();
+        }
+        return scrap;
+    }
+    
+    public void save_news(String news_scrap, int num, String loginuser) {
+    	String[] parts = news_scrap.split("@");
+    	boolean include = false;
+    	for (String part : parts) {
+    	    if (part.equals(num)) {
+    	        include = true;
+    	        break;
+    	    }
+    	}
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement("update member set scrap=? where id=?");
+            if(!include) {
+            pstmt.setString(1, news_scrap+"@"+num);
+            pstmt.setString(2, loginuser);
+            }
+            pstmt.executeUpdate();
+            }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            oracleClose();
+        }
+    }
+    
+    public void unsave_news(String news_scrap, int num, String loginuser) {
+    	String[] parts = news_scrap.split("@");
+    	String wPress = "";
+    	boolean include = false;
+    	for (String part : parts) {
+    	    if (part.equals(Integer.toString(num))) {
+    	        include = true;
+    	        break;
+    	    }
+    	}
+        try {
+            conn = getConnection();
+            sql="update member set scrap=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            if(include) {
+	            String aPress = "@"+num;
+	            wPress = news_scrap.replace(aPress , "");
+	            pstmt.setString(1, wPress);
+	            pstmt.setString(2, loginuser);
+            }
+            pstmt.executeUpdate();
+            }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            oracleClose();
+        }
+        
+    }
    
 }
 

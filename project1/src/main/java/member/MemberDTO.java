@@ -18,6 +18,7 @@ public class MemberDTO {
 	private String reporterSubcribe;
 	private String ip;
 	private String img;
+	private String scrap;
 	
 	public String getId() {
 		return id;
@@ -102,5 +103,11 @@ public class MemberDTO {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getScrap() {
+		return scrap;
+	}
+	public void setScrap(String scrap) {
+		this.scrap = scrap;
 	}
 }
