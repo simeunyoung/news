@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <%
 	String id = (String)session.getAttribute("memId");

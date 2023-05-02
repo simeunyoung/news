@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>유저 프로필 폼</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 
 <%

@@ -4,7 +4,8 @@
 
 <jsp:useBean id="member" class="member.MemberDTO" />
 <jsp:setProperty property="*" name="member" />
-
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <%
 	MemberDAO manager = MemberDAO.getInstance();
 	String result = manager.pwFind(member);

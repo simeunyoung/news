@@ -13,3 +13,4 @@ function loginCheck() {
 		return false;
 	}
 }
+

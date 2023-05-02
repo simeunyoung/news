@@ -1,7 +1,8 @@
 <%@page import="member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <jsp:useBean id="member" class="member.MemberDTO" />
 <jsp:setProperty property="*" name="member" />
 

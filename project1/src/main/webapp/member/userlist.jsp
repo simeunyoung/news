@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>유저 댓글 리스트</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <%
 String id = (String)session.getAttribute("memId");

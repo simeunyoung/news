@@ -12,8 +12,9 @@
 <html>
 <head>
 <%-- css파일 경로 지정 --%>
-<!-- <link href="/project1/resource/css/mypage.css" rel="stylesheet"> -->
 <link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 
 <%
 String id = (String) session.getAttribute("memId");
@@ -96,8 +97,10 @@ if (id == null) {
 	<%
 	}
 	%>
+	<%}%>
+	
 </body>
-
+<jsp:include page="/member/footer.jsp"></jsp:include>
 </html>
-<%}%>
+
 

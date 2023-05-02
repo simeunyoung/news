@@ -304,6 +304,7 @@ input[type="submit"].search-btn {
 .container {
     max-width: 1140px;
     margin: 0 auto;
+    height:100%;
 }
 .row {
    

@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link href="/project1/resource/css/style.css" rel="stylesheet"/>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <script>
 	function start(){
 		document.userinput.id.focus();

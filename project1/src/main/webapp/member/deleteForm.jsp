@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원탈퇴</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <body>
 	<form action="deletePro.jsp" method="post">

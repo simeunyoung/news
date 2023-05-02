@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>기자 프로필 폼</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <%
 	String id = (String) session.getAttribute("memId");
@@ -68,7 +70,7 @@
 				<div id="image_container">
 				<button type="button" onclick="imgUpdate()">img수정</button>
 				<%if(dto.getImg()==null){ %>
-					<img src="/project1/resource/img/profile.png" class="rounded-circle" width="150">
+					<img src="/project1/resource/img/profile01.jpg" class="rounded-circle" width="150">
 				<%}else{ %>
 					<img src="/project1/resource/img/<%=dto.getImg()%>" class="rounded-circle" width="150">	
 				<%}%>				
