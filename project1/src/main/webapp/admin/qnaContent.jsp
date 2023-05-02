@@ -78,7 +78,7 @@
 				<input type="button" value="목록" onclick="location='qnaList.jsp'" />
 				<%if(dto.getId().equals(dto2.getId()) || dto2.getMemberType().equals("2")) {%>
 				<input type="button" value="수정" onclick="location='qnaUpdateForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
-				<input type="button" value="삭제" onclick="location='qnaDelete.jsp'" />
+				<input type="button" value="삭제" onclick="location='qnaDeleteForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
 				<%}%>
 			</td>
 		</tr>

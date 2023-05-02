@@ -13,7 +13,7 @@ memId = <%=memId%>
 <a href="journalistPro.jsp">기자신청 프로 v</a> &nbsp; <br />
 <a href="journalistList.jsp">기자변경 리스트 v</a> &nbsp;
 <a href="journalistListPro.jsp">기자변경 리스트 프로 v</a> &nbsp;
-기자신청 거절v
+기자신청 거절 v
 
 
 <hr>
@@ -25,11 +25,12 @@ memId = <%=memId%>
 <a href="qnaWrite.jsp">Q&A 작성 v</a> &nbsp;
 <a href="qnaList.jsp">Q&A 문의목록 v</a> &nbsp;
 <a href="qnaContent.jsp?num=1&pageNum=1">Q&A 내용 v</a> &nbsp;
-<a href="qnaUpdateForm.jsp">Q&A 수정 v</a>
+<a href="qnaUpdateForm.jsp">Q&A 수정 v</a> &nbsp;
+Q&A 삭제 v
 
 <hr>
 
 <h3>로그인</h3>
 <a href="/project1/member/inputForm.jsp">회원가입 v</a> &nbsp;
 <a href="/project1/member/loginForm.jsp">로그인 v</a> &nbsp;
-<a href="/project1/member/logout.jsp">로그아웃 v</a>
+<a href="/project1/member/logout.jsp">로그아웃 v</a> &nbsp;

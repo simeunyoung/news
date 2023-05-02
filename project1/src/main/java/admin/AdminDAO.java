@@ -10,10 +10,11 @@ public class AdminDAO extends OracleServer {
 	public static AdminDAO getInstance() {return instance;} // 인스턴스 객체 리턴
 	private AdminDAO() {} // 기본생성자 사용불가
 
-	// 매개변수인 id를 통해 db를 검색
-	// 검색된 정보에서 type이 1이면 -1로 변경하는 메서드
-	// journalistListPro.jsp
-	// 4.25 수정
+	// 매개변수인 id를 통해 member 테이블에서 레코드값 검색
+	// 검색된 정보에서 membertype을 result에 대입
+	// 대입된 값이 1(회원)이면 -1(기자)로 변경
+	// 이후 매개변수인 id를 통해 jas 테이블에서 레코드값 검색
+	// 
 	public String changeType(String id) {
 		String result = "";
 		try {
@@ -55,7 +56,6 @@ public class AdminDAO extends OracleServer {
 	// 검색된 정보중 아이디, 이메일, 타입을 dto에 set
 	// dto를 리턴
 	// journalistForm.jsp
-	// 4.25 수정
 	public MemberDTO setMember(String sid) {
 		MemberDTO dto = new MemberDTO();
 		try {
@@ -83,7 +83,6 @@ public class AdminDAO extends OracleServer {
 	// journalistForm에서 전달받은 내용을
 	// 데이터베이스에 추가
 	// journalistPro.jsp
-	// 4.25 수정
 	public void insertJas(AdminDTO dto) {
 		try {
 			conn = getConnection();
@@ -106,7 +105,6 @@ public class AdminDAO extends OracleServer {
 	// db에 총 몇줄의 데이터가 있는지 검색
 	// 반환된 데이터를 result에 대입 및 리턴
 	// journalistList.jsp
-	// 4.25 수정
 	public int getJCount() {
 		int result = 0;
 		try {
@@ -129,7 +127,6 @@ public class AdminDAO extends OracleServer {
 	// 검색된 데이터를 dto에 대입
 	// dto를 리스트에 대입 및 리턴
 	// journalistList.jsp
-	// 4.25 수정
 	public List getJList() {
 		List JList = new ArrayList();
 		try {
@@ -176,23 +173,23 @@ public class AdminDAO extends OracleServer {
 	// 1-1Form에서 보내온 정보를 받음
 	// 해당 정보를 db에 추가후 result에 true 대입 및 리턴
 	// 1-1Pro.jsp
-	// 4.25 수정
 	public boolean qnaInsert(AdminDTO dto) {
 		boolean result = false;
 		try {
 			conn = getConnection();
-			sql = "insert into qna values(0,qna_seq.nextval,?,?,?,?,?,?,0,?,?,?,?,sysdate)";
+			sql = "insert into qna values(0,qna_seq.nextval,?,?,?,?,?,?,?,0,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getName());
-			pstmt.setString(3, dto.getEmail());
-			pstmt.setString(4, dto.getTel());
-			pstmt.setString(5, dto.getTitle());
-			pstmt.setString(6, dto.getCon());
-			pstmt.setString(7, dto.getMemberType());
-			pstmt.setString(8, dto.getQuestionType());
-			pstmt.setString(9, dto.getImg());
-			pstmt.setString(10, dto.getIp());
+			pstmt.setString(2, dto.getPw());
+			pstmt.setString(3, dto.getName());
+			pstmt.setString(4, dto.getEmail());
+			pstmt.setString(5, dto.getTel());
+			pstmt.setString(6, dto.getTitle());
+			pstmt.setString(7, dto.getCon());
+			pstmt.setString(8, dto.getMemberType());
+			pstmt.setString(9, dto.getQuestionType());
+			pstmt.setString(10, dto.getImg());
+			pstmt.setString(11, dto.getIp());
 			pstmt.executeUpdate();
 			result = true;
 		} catch(Exception e) {
@@ -206,7 +203,6 @@ public class AdminDAO extends OracleServer {
 	// db에 데이터 몇줄인지 검색
 	// result에 대입 및 리턴
 	// 1-1List.jsp
-	// 4.25 수정
 	public int qnaCount() {
 		int result = 0;
 		try {
@@ -251,7 +247,6 @@ public class AdminDAO extends OracleServer {
 	// 입력된 dto를 리스트에 저장하는 작업을 반복
 	// dto가 저장된 리스트를 리턴
 	// 1-1List.jsp
-	// 4.25 수정
 	public List qnaList(int start, int end) {
 		List qnaList = new ArrayList();
 		try {
@@ -320,6 +315,7 @@ public class AdminDAO extends OracleServer {
 				dto.setResultType(rs.getString("resultType"));
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
 				dto.setEmail(rs.getString("email"));
 				dto.setTel(rs.getString("tel"));
@@ -354,6 +350,7 @@ public class AdminDAO extends OracleServer {
 				dto.setResultType(rs.getString("resultType"));
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
 				dto.setEmail(rs.getString("email"));
 				dto.setTel(rs.getString("tel"));
@@ -378,12 +375,13 @@ public class AdminDAO extends OracleServer {
 	int result = 0;
 	try {
 		conn = getConnection();
-		sql = "update qna set questionType=?,title=?,con=? where num=?";
+		sql = "update qna set questionType=?,title=?,pw=?,con=? where num=?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, dto.getQuestionType());
 		pstmt.setString(2, dto.getTitle());
-		pstmt.setString(3, dto.getCon());
-		pstmt.setInt(4, dto.getNum());
+		pstmt.setString(3, dto.getPw());
+		pstmt.setString(4, dto.getCon());
+		pstmt.setInt(5, dto.getNum());
 		result = pstmt.executeUpdate();
 	} catch(Exception e) {
 		e.printStackTrace();
@@ -392,6 +390,23 @@ public class AdminDAO extends OracleServer {
 	}
 	return result;
 	}
+	
+	public int qnaDelete(AdminDTO dto) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "delete from qna where num=? and pw=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			pstmt.setString(2, dto.getPw());
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	} // public int qnaDelete(AdminDTO dto) {
 		
 	// Q&A db에 데이터를 입력하는 메서드
 	public boolean faqInsert(AdminDTO dto) {

@@ -56,10 +56,6 @@ memId = <%=memId%>
 			<td align="center">연락처(선택사항)</td>
 			<td><input type="text" name="tel" size="50" placeholder="연락처" /></td>
 		</tr>
-		<tr height="30">
-			<td align="center">글 비밀번호</td>
-			<td><input type="password" name="pw" size="50" placeholer="글 비밀번호" /></td>
-		</tr>
 		<%} else {%>
 		<tr height="30">
 			<td align="center" width="150">아이디</td>
@@ -86,6 +82,10 @@ memId = <%=memId%>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="text" name="title" size="70" /></td>
+		</tr>
+		<tr height="30">
+			<td align="center">글 비밀번호</td>
+			<td><input type="password" name="pw" size="50" placeholer="글 비밀번호" /></td>
 		</tr>
 		<tr height="30">
 			<td align="center" colspan="2">문의내용</td>

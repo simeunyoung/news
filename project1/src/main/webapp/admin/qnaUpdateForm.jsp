@@ -49,6 +49,9 @@ memId = <%=memId%>
 			<td align="center" colspan="4">제목 : <input type="text" name="title" value="<%=dto.getTitle()%>" size="70" /></td>
 		</tr>
 		<tr height="30">
+			<td align="center" colspan="2">비밀번호 : <input type="password" name="pw" value="<%=dto.getPw()%>" size="70" /></td>
+		</tr>
+		<tr height="30">
 			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>님)</td>
 		</tr>
 		<tr height="300">

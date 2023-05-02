@@ -5,6 +5,9 @@
 <%@ page import="admin.AdminDTO"%>
 <%@ page import="member.MemberDTO"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%	
 	int pageSize = 20; // 한 페이지에서 보여줄 게시물 수
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss"); // 작성일자 양식
@@ -33,6 +36,7 @@
 	
 	int number = count - (currentPage-1) * pageSize;
 %>
+<jsp:include page="/member/header.jsp" />
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
 <title>Q&A 목록</title>
@@ -198,3 +202,4 @@ memId = <%=memId%>
 <%		}
 	}%>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>
