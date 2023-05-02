@@ -11,7 +11,15 @@
 
 <body>
 	<footer>
-	푸터입니다.
+		<ul>
+			<li><a href="/project1/member/loginForm.jsp">로그인</a></li>
+			<li><a href="/project1/sitemap/sitemapmain.jsp">전체서비스</a></li>
+		</ul>
+		<ul>
+			<li>이용약관</li>
+			<li>개인정보처리방침</li>
+			<li>서비스안내</li>
+		</ul>
 	</footer>
 </body>
 </html>
