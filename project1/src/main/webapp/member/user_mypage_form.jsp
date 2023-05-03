@@ -25,6 +25,8 @@ String num = request.getParameter("num");
 MemberDAO manager = MemberDAO.getInstance();
 MemberDTO member = manager.getMember(id);
 
+// String pageType2 = (String)session.getAttribute("pageType2");
+
 int check = manager.typeCheck(id);
 
 if (id == null) {

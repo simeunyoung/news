@@ -9,6 +9,7 @@
 <%@ page import="java.sql.*" %>
 
 <%
+	String pageType = request.getParameter("pageType");
 	String id = (String)session.getAttribute("memId");
 	String dir = request.getRealPath("resource/img");
 	out.println(dir);
@@ -20,7 +21,7 @@
     MemberDAO member = MemberDAO.getInstance();
     member.updateImg(sysName, id);
     
-    response.sendRedirect("user_mypage_form.jsp?id="+id);
+    response.sendRedirect("user_mypage_form.jsp?id="+id+"&pageType="+pageType);
 %>
 
 <title>Insert title here</title>

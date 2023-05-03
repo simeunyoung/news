@@ -5,13 +5,14 @@
 <jsp:setProperty property="*" name="member" />
 
 <%
+	String pageType = request.getParameter("pageType");
 	String id = (String)session.getAttribute("memId");
 	member.setId(id);
 	
 	MemberDAO manager = MemberDAO.getInstance();
 	manager.updateMember(member);
 	
-	response.sendRedirect("user_mypage_form.jsp?id="+id);
+	response.sendRedirect("user_mypage_form.jsp?id="+id+"&pageType="+pageType);
 %>
 <script>
 	alert("수정이 완료 되었습니다.");

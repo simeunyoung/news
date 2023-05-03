@@ -14,10 +14,15 @@
 	String id = (String)session.getAttribute("memId");
 	String num = request.getParameter("num");
 	String id2 = request.getParameter("id");
-	
+	String pageType = request.getParameter("pageType");
 	MemberDAO user = MemberDAO.getInstance();
 	MemberDTO member = user.getMember(id2);
 
+// 	if(member.getMemberType().equals("-1")) {
+// 		session.setAttribute("pageType2", "2");
+// 		String pageType2 = (String)session.getAttribute("pageType2");
+// 	}
+		
 	int check = user.typeCheck(id);
 
 %>
@@ -93,9 +98,10 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-				<%if(id.equals(id2)){%>
+				<%if(id.equals(id2)){
+				%>
 					<a class="btn btn-info edit-button"
-						onclick="location='user_mypage_form.jsp?num=1'">수정하기</a>
+						onclick="location='user_mypage_form.jsp?num=1&id=<%=id%>&pageType=<%=pageType%>'">수정하기</a>
 					<%} %>
 				</div>
 			</div>
@@ -179,6 +185,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<input type="submit" class="btn btn-info" name="update" value="적용" />
+						<input type="hidden" name="pageType" value="<%=pageType%>">
 						<a class="btn btn-info" onclick="location='user_mypage_form.jsp?id=<%=id%>'">취소</a>
 					</div>
 				</div>

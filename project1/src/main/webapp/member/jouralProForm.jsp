@@ -15,6 +15,7 @@
 	String id = (String) session.getAttribute("memId");
 	String id2 = request.getParameter("id");
 	String num = request.getParameter("num");
+	String pageType = request.getParameter("pageType");
 	MemberDTO dto = new MemberDTO();
 	MemberDAO dao = MemberDAO.getInstance();
 	dto = dao.getMember(id);
@@ -76,7 +77,7 @@
 				<%}%>				
 				</div>
 				<div class="imgUpdate">
-				<form action="imgUpload.jsp" method="post" 
+				<form action="imgUpload.jsp?pageType=<%=pageType %>" method="post" 
 					enctype="multipart/form-data">
 					<input type="file"	name="save" id="profile-pic" onchange="setThumbnail(event)"> 
 					<input type="submit" value="업로드">

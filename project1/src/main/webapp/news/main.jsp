@@ -83,13 +83,23 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 			<div class="title-box">
 				<p class="title">구독한 기자</p>
 				<a href="list.jsp" class="more">더보기</a>
+				
 			</div>
+			<div>
+					강기자<br>
+					김기자<br>
+				</div>
 		</div>
 		<div class="main-card press_bookmark">
 			<div class="title-box">
 				<p class="title">구독한 언론사</p>
 				<a href="list.jsp" class="more">더보기</a>
+				
 			</div> 	
+			<div>
+					aaa<br>
+					bbb<br>
+				</div>
 		</div>
 	</div>	
 </div>

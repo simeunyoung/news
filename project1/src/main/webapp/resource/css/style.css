@@ -265,6 +265,7 @@ input[type="submit"].search-btn {
 .list-card{
 	display:flex;
 	justify-content:space-between;
+	height:230px;
 	}
 .list-card .cont-box{width:19%;}
 /************** hotTopic ***************/
