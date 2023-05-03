@@ -57,8 +57,11 @@ function deletePageHistoryAndRedirect1() {
 <head>
 <%-- css파일 경로 지정 --%>
 <link href = "mypage.css" rel = "stylesheet" type = "text/css">
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <body>
+<jsp:include page="/member/header.jsp" />
 <%-- 컨텐츠의 너비를 조정, 페이지의 레이아웃 조절 --%>
 <div class="container">
 	<%-- 페이지에서 메인 컨텐츠를 감싸는 역할 --%>
@@ -173,5 +176,6 @@ function deletePageHistoryAndRedirect1() {
           </div>
         </div>
     </div>
+    <jsp:include page="/member/footer.jsp"></jsp:include>
 </body>
 </html>

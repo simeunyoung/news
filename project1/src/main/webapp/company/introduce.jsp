@@ -4,17 +4,32 @@
 <%@ page import="member.MemberDAO"%>
 <%@ page import="member.MemberDTO"%>
 
-
 <%
 MemberDAO dao = MemberDAO.getInstance();
 %>
 
 <%--회사소개 페이지--%>
-<link href="/project1/resource/css/style.css" rel="stylesheet">
-<script src="/project1/resource/js/script.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="/member/header.jsp"></jsp:include>
+<head>
+<meta charset="UTF-8">
+<title>회사 이름 - 소개</title>
+<link rel="stylesheet" href="style.css">
+<link href="mypage.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="main.jsp">홈</a></li>&nbsp;
+				<li><a href="introduce.jsp">사이트소개</a></li>&nbsp;
+				<li><a href="introduce.jsp?pageNum=1">팀원소개</a></li>&nbsp;
+				<li><a href="introduce.jsp?pageNum=2">언론사/기자</a></li>
+				<li><a href="#">고객센터</a></li>
+			</ul>
+		</nav>
+	</header>
 	<%
 	String pageNum = request.getParameter("pageNum");
 	if (pageNum == null) {
@@ -115,7 +130,11 @@ td {
 	<%
 	}
 	%>
-<jsp:include page="/member/footer.jsp"></jsp:include>
+	<footer>
+		<p>Copyright &copy; 1조</p>
+	</footer>
+
+	<script src="script.js"></script>
 
 </body>
 </html>

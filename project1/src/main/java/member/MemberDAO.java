@@ -471,5 +471,57 @@ public class MemberDAO extends OracleServer {
 		        }
 		        return "window.location.href='pressPage.jsp?press="+press+"'";
 		    }
-
+		    public ArrayList<MemberDTO> memForType(String type) {
+				ArrayList<MemberDTO> set = new ArrayList<>();
+				conn = getConnection();
+				String sql = "select * from member where membertype=?";
+				try { 	pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, type);
+				 		rs = pstmt.executeQuery();
+					while(rs.next()) {
+				 		MemberDTO dto = new MemberDTO();
+						dto.setId(rs.getString("id"));
+						dto.setName(rs.getString("name"));
+						dto.setReporterSubcribe(rs.getString("reportersubscribe"));
+						set.add(dto);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					oracleClose();
+				}
+				return set;
+			}
+		    public String subscribeR(String id) {
+		    	String sub = "1212";
+		        try {
+		            conn = getConnection();
+		            pstmt = conn.prepareStatement("select reportersubscribe from member where id = ?");
+		            pstmt.setString(1, id);
+		            rs = pstmt.executeQuery();
+		            if (rs.next()) {
+		            MemberDTO dto = new MemberDTO();
+		            dto.setReporterSubcribe(rs.getString("reportersubscribe"));
+		            sub = dto.getReporterSubcribe();
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		            oracleClose();
+		        }
+		        return sub;
+		    }
+		    public void RSubscribe(String id, String result) {
+		    	try {
+					conn = getConnection();
+					pstmt = conn.prepareStatement("update member set reportersubscribe=? where id=?");
+					pstmt.setString(1, result);
+					pstmt.setString(2, id);
+					pstmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					oracleClose();
+				}
+			}
 }
