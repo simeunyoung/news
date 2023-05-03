@@ -18,7 +18,8 @@
 	<meta http-equiv="Refresh" content="0;url=content.jsp?num=<%=num%>">
 <%}else{%>
 	<script language = "JavaScript">
-		alert("한번만 평가 하실 수 있습니다");
-		history.go(-1);
+		alert("평가가 취소되었습니다");		
 	</script>
-<%}%>
+<% response.sendRedirect("content.jsp?num="+num+"");
+
+}%>

@@ -75,7 +75,6 @@ for(String part : parts){
 </form>
 	<%}%>
 <%}%>
-	<%if(Count != 0 && rDTO != null){%>
 <table align = "right" width = "100" height = "60" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr>
 		<td align = "right" colspan = "0" width = "2" height = "10">
@@ -91,7 +90,6 @@ for(String part : parts){
 		</td>
 	</tr>
 </table>
-<%}%>
 <% if(!include){%>
 <button onclick= "location='news_scrap.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>'">스크랩 하기</button>
 <%}else if(include){%>

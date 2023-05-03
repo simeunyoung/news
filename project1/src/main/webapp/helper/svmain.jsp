@@ -49,7 +49,7 @@
 		
 	<%if(id != null){%>
 		<td align = "center" colspan = "2">
-			<a href = "">기자신청하기</a>
+			<a href = "/project1/admin/journalistForm.jsp">기자신청하기</a>
 		</td>
 	<%}%>	
 		<td align = "center" colspan = "2">

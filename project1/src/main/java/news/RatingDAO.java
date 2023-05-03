@@ -28,6 +28,11 @@ public class RatingDAO extends OracleServer {
 			}
 			
 			if(dbid.equals(id)) {									//세션에서 받아온 id와 평점 테이블을 검색해서 같은 id가 있는지 확인
+				sql = "delete from rating where id = ? and num = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setInt(2, num);
+				pstmt.executeUpdate();
 				result = 0;
 			}else{
 				sql = "insert into rating values(?,?,?,?,?)";
@@ -62,6 +67,11 @@ public class RatingDAO extends OracleServer {
 			if(rs.next()) {dbid = rs.getString("id");}
 				
 			if(dbid.equals(id)) {
+				sql = "delete from rating where id = ? and num = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setInt(2, num);
+				pstmt.executeUpdate();
 				result = 0;
 			}else{
 				sql = "insert into rating values(?,?,?,?,?)";
