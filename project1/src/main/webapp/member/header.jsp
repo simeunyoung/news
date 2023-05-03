@@ -25,7 +25,7 @@ int check = manager.typeCheck(id);
 	<nav>
 		<a href="/project1/news/main.jsp">CODENEWS</a>
 		<ul>
-			<li><a href="/project1/company/">회사소개</a>
+			<li><a href="/project1/company/introduce.jsp">회사소개</a>
 				<ul>
 					<li><a href="/project1/company/introduce.jsp">사이트 소개</a></li>
 					<li><a href="/project1/company/introduce.jsp?pageNum=1">팀원

@@ -9,7 +9,7 @@
 <% MemberDAO dao = MemberDAO.getInstance(); %>
 <% String press = request.getParameter("press");%>
 <% NewsDAO rv = NewsDAO.getInstance();%>
-<% String id = "test";//(String)session.getAttribute("memId");%>
+<% String id = (String)session.getAttribute("memId");%>
 <% String exist = dao.selectExist(id);%>
 <% if(exist == null){exist = "";}%>
 <%=exist%>
