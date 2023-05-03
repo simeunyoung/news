@@ -3,6 +3,7 @@ package admin;
 import java.util.ArrayList;
 import java.util.List;
 import member.MemberDTO;
+import server.OracleServer;
 
 public class AdminDAO extends OracleServer {
 	

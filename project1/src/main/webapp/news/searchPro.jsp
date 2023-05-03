@@ -74,8 +74,8 @@ String date = request.getParameter("date");
         	
           NewsDTO dto = (NewsDTO)searchList.get(i);
 %>
-   <tr height="30" onclick="content.jsp?num=<%=dto.getNum()%>">
- <td align="center"  width="50"><%=number++%></td>
+   <tr height="30" onclick="location='content.jsp?num=<%=dto.getNum()%>'">
+ <td align="center"  width="50"><%=dto.getNum()%></td>
     <td align="center" width="100" >
  <%if(search != null){ %>
 	<%String search2 = dto.getTitle().replace(search, "@"+search+"@");%>

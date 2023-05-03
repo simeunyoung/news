@@ -3,7 +3,7 @@ package revalue;
 import java.util.ArrayList;
 import java.util.List;
 
-import admin.OracleServer;
+import server.OracleServer;
 
 
 public class RevalueDAO extends OracleServer {

@@ -1,6 +1,8 @@
 package member;
 import java.util.*;
 
+import server.OracleServer;
+
 public class MemberDAO extends OracleServer {
 
 		private static MemberDAO instance = new MemberDAO();

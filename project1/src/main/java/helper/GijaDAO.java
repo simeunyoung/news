@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import admin.OracleServer;
+import server.OracleServer;
 import helper.GijaDTO;
 
 public class GijaDAO extends OracleServer {

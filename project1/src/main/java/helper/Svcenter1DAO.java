@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import admin.OracleServer;
+import server.OracleServer;
 
 
 public class Svcenter1DAO extends OracleServer {

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import server.OracleServer;
+
 public class RatingDAO extends OracleServer {
 	
 	private static RatingDAO instance = new RatingDAO();

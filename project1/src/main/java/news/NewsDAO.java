@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import member.MemberDTO;
+import server.OracleServer;
 
 import java.util.ArrayList;
 
