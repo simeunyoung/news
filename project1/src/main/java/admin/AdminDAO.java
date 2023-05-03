@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import member.MemberDTO;
 import server.OracleServer;
+import server.OracleServer2;
 
-public class AdminDAO extends OracleServer {
+public class AdminDAO extends OracleServer2 {
 	
 	private static AdminDAO instance = new AdminDAO(); // 인스턴스 객체 생성
 	public static AdminDAO getInstance() {return instance;} // 인스턴스 객체 리턴
@@ -80,7 +81,8 @@ public class AdminDAO extends OracleServer {
 	} // public MemberDTO setMember(String sid) {
 	
 	// dto를 매개변수로 받아 jas 테이블에 insert
-	public void insertJas(AdminDTO dto) {
+	public int insertJas(AdminDTO dto) {
+		int result = 0;
 		try {
 			conn = getConnection();
 			sql = "insert into jas values('0',?,?,?,?,?,sysdate)";
@@ -90,13 +92,14 @@ public class AdminDAO extends OracleServer {
 			pstmt.setString(3, dto.getEmail());
 			pstmt.setString(4, dto.getTel());
 			pstmt.setString(5, dto.getIp());
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			oracleClose();
 		}
+		return result;
 	} // public void insertJas(MemberDTO dto) {
 
 	// jas 테이블에 총 몇줄의 레코드가 있는지 검색, result에 대입 후 return

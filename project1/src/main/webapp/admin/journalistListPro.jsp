@@ -7,10 +7,18 @@
 
 <%
 	AdminDAO dao = AdminDAO.getInstance();
-	dao.changeType(dto.getId());
-	response.sendRedirect("journalistList.jsp");
-%>
-
+	String result = dao.changeType(dto.getId());
+	if(result.equals("-1")) {%>
+	<script>
+		alert("기자변경 완료");
+		window.location.href = "/project1/admin/journalistList.jsp";
+	</script>
+	<%} else {%>
+	<script>
+		alert("기자변경 실패");
+		window.location.href = "/project1/admin/journalistList.jsp";
+	</script>
+	<%}%>
 dto.getId() : <%=dto.getId()%><br />
 dto.getMemberType() : <%=dto.getMemberType()%><br />
 dto.getEmail() : <%=dto.getEmail()%><br />

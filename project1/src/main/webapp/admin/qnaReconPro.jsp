@@ -6,9 +6,12 @@
 <jsp:setProperty property="*" name="dto" />
 
 <%
+	int num = (int)session.getAttribute("num");
+	String title = (String)session.getAttribute("title");
+	
 	dto.setIp(request.getRemoteAddr());
 	
 	AdminDAO dao = AdminDAO.getInstance();
-	dao.qnaReconInsert(dto);
-	
+	dao.qnaReconInsert(dto);%>
+	response.sendRedirect("qnaContent.jsp?num=<%%>");
 %>
