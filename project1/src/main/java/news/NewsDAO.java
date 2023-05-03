@@ -43,7 +43,7 @@ public class NewsDAO extends OracleServer {
 	public void insert(NewsDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into news(num,nick,title,con,reg,pw,ip,id) values(news_seq.nextval,?,?,?,?,?,?,?)";
+			sql = "insert into news(num,nick,title,con,reg,pw,ip,id,newstype) values(news_seq.nextval,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getNick());
 			pstmt.setString(2, dto.getTitle());
@@ -52,6 +52,7 @@ public class NewsDAO extends OracleServer {
 			pstmt.setString(5, dto.getPw());
 			pstmt.setString(6, dto.getIp());
 			pstmt.setString(7, dto.getId());
+			pstmt.setString(8, dto.getNewstype());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,7 +94,8 @@ public class NewsDAO extends OracleServer {
 			if (rs.next()) { // 게시글 번호에 맞는 정보를 찾기
 				info = new NewsDTO();
 				info.setNum(rs.getInt("num"));
-				info.setNick(rs.getString("nick"));
+				info.setId(rs.getString("id"));
+				info.setNick(rs.getString("Nick"));
 				info.setNewstype(rs.getString("newstype"));
 				info.setTitle(rs.getString("title"));
 				info.setCon(rs.getString("con"));

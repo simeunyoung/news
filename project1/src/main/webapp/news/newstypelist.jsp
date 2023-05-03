@@ -4,6 +4,10 @@
 <%@ page import="news.NewsDAO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
+<jsp:include page="/member/header.jsp"></jsp:include>
 
 <%
 	int pageSize = 10;
@@ -97,5 +101,6 @@
 
 
 </center>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 </body>
 </html>

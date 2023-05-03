@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="news.NewsDTO"%>
 <%@ page import="news.NewsDAO"%>
-<jsp:include page="header2.jsp"></jsp:include>
+<jsp:include page="/member/header.jsp"></jsp:include>
 <title>기사 수정</title>
 <%
 request.setCharacterEncoding("UTF-8");

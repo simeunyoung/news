@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="news.NewsDTO"%>
 <%@ page import="news.NewsDAO"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
+<jsp:include page="/member/header.jsp" />
 <title>댓글 수정</title>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -19,6 +23,7 @@ NewsDTO text = method.getRecon(num);
 <input type="submit" class="submit_button" value="변경하기">&nbsp;
 <input type="button" class="submit_button" value="목록보기" onclick="location='list.jsp'">&nbsp;
 </div></form>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 
 
 

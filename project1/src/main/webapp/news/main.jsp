@@ -5,6 +5,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <title>CodeNews에 오신걸 환영합니다.</title>
 <%-- main에서 사용될 코드
 1. main의 div에서 내부 div 태그를 이용해서 영역을 4가지로 분리
@@ -88,7 +89,7 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 			<div class="title-box">
 				<p class="title">구독한 언론사</p>
 				<a href="list.jsp" class="more">더보기</a>
-			</div>
+			</div> 	
 		</div>
 	</div>	
 </div>

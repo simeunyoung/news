@@ -5,12 +5,15 @@
 <%@ page import="java.util.*" %>
 <%@ page import="member.MemberDTO" %>
 <%@ page import="member.MemberDAO" %>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 
 <jsp:include page="/member/header.jsp"></jsp:include>
 <jsp:useBean id="dto" class="member.MemberDTO" />
+
 <title>글 확인</title>
 <%
-String loginuser = (String)session.getAttribute("memId");
+String loginuser = (String) session.getAttribute("memId");
 
 request.setCharacterEncoding("UTF-8");
 
@@ -42,7 +45,7 @@ for(String part : parts){
 <div class="content_box">
 <div class="con1"><div class="conl"><b>뉴스 종류 : </b><%=text.getNewstype()%></div><div class="conr"><b>조회수 : </b><%=text.getViews()%></div></div>
 <div class="con1"><b>Title : </b><%=text.getTitle()%></div>
-<div class="con1"><div class="conl"><b>작성자 : </b><a href = "/project1/member/user_mypage_form.jsp?id=<%=text.getId()%>"><%=text.getNick()%></a>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
+<div class="con1"><div class="conl"><b>작성자 : </b><a href = "/project1/member/user_mypage_form.jsp?id=<%=text.getId()%>&pageType=2"><%=text.getNick()%></a>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
 <div class="con1"><b> 글자 크기 </b></div><br />	
 <div align="left">
 <button type="button" class="button" onclick="changeFontSize('small')">작게</button>
@@ -70,6 +73,7 @@ for(String part : parts){
 <button onclick= "location='news_scrap_delete.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>'">스크랩 취소</button>
 <%}%>
 <button id="copyButton">URL 복사</button>
+
 <%if(session.getAttribute("memId") == null) {%>
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
 <%}else if(loginuser.equals("admin")){%>
@@ -93,6 +97,7 @@ for(String part : parts){
 <jsp:param value="<%=num%>" name="num"/>
 </jsp:include>
 </div></div>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 
 <script>
 function changeFontSize(size) {

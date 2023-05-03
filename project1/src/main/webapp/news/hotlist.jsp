@@ -4,9 +4,13 @@
 <%@ page import = "news.NewsDAO" %>
 <%@ page import = "java.util.List" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
+<jsp:include page="/member/header.jsp" />
 
 <%
-	int pageSize = 5;
+	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	String pageNum = request.getParameter("pageNum");
@@ -85,7 +89,7 @@
 			}
 			if(startPage > 5){
 	%>
-		<a href = "hotlist.jsp?pageNum=<%=startPage - 5%>"></a>
+		<a href = "hotlist.jsp?pageNum=<%=startPage - 10%>"></a>
 	<%
 			}
 		for(int i = startPage; i <= endPage; i++){
@@ -95,11 +99,12 @@
 		}
 		if(endPage < pageCount){
 	%>
-		<a href = "hotlist.jsp?pageNum=<%=startPage + 5%>"></a>
+		<a href = "hotlist.jsp?pageNum=<%=startPage + 10%>"></a>
 	<%
 			}
 		}
 	%>
 	</div>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 	</body>
 </html>

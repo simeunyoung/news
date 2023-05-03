@@ -31,7 +31,7 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 	<div class="hot-box">
 		<div class="title-box">
 			<p class="title">Hot TOPIC</p>
-			<a href="list.jsp" class="more">더보기</a>
+			<a href="hotlist.jsp" class="more">더보기</a>
 		</div>
 		<div class="card topic-card">
 			<%

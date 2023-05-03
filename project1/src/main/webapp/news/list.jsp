@@ -7,6 +7,8 @@
 <%@ page import="member.MemberDTO" %>
 <%@ page import="member.MemberDAO" %>  
 <title>기존 리스트 파일 div태그 활용하여 리메이크</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <jsp:include page="/member/header.jsp"></jsp:include>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -49,6 +51,8 @@ number = newscount - (currentPage - 1) * pageSize;
 
 접속자 정보 : <%= loginuser%>
 
+
+<body>
 <div class="form_box">
 <div class="boxname_link">
 <div class="boxname"><h3>모든 뉴스(둘러보기)</h3></div>
@@ -92,6 +96,7 @@ NewsDTO article = (NewsDTO)newsList.get(i); %>
 <div class="five_box" align="center"><%=sdf.format(article.getReg()) %> </div>
 <div class="six_box" align="center"><%=article.getViews() %> </div>
 </div></font></a></div>
+
 <% if(i != newsList.size()){ %>
 
 <%} } } %>
@@ -114,7 +119,8 @@ if(startPage > 10){%>
 <a href="list.jsp?pageNum=<%=startPage + 10%>"> [다 음]</a>
 <% } } %>
 </div>
-
+<jsp:include page="/member/footer.jsp"></jsp:include>
+</body>
 
 
 <style>

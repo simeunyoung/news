@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
+<jsp:include page="/member/header.jsp" />
 
 <title>게시글 삭제 확인</title>
 
@@ -18,6 +22,8 @@ int num = Integer.parseInt(request.getParameter("num"));
 </form>
 </center>
 </div>
+
+<jsp:include page="/member/footer.jsp"></jsp:include>
 
 <style>
 .button {

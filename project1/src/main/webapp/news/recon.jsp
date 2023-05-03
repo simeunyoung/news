@@ -7,7 +7,6 @@
 <%@ page import="member.MemberDAO" %>
     
 <b>댓글</b><br /><br />
-<div align="right"><button  onClick="window.location.reload()">새로고침</button></div>
 <%
 String loginuser = (String)session.getAttribute("memId");
 int num = Integer.parseInt(request.getParameter("num"));

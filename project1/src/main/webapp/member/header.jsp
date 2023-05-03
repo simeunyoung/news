@@ -34,7 +34,7 @@ int check = manager.typeCheck(id);
 			<li><a href="/project1/news/list.jsp">뉴스</a>
 				<ul>
 					<li><a href="/project1/news/list.jsp">전체</a></li>
-					<li><a href="/project1/news/newstypelist.jsp?newstype=Java">자바</a></li>
+					<li><a href="/project1/news/newstypelist.jsp?newstype=java">자바</a></li>
 					<li><a href="/project1/news/newstypelist.jsp?newstype=Python">파이썬</a></li>
 					<li><a
 						href="/project1/news/newstypelist.jsp?newstype=JavaScript">자바스크립트</a></li>
