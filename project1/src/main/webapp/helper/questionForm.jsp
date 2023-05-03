@@ -5,7 +5,7 @@
 <%if(session.getAttribute("memId") == null){%>
 	<script>
 		alert("로그인을 해주십시오");
-		location = "/jsp/member/loginForm.jsp";
+		location = "/project1/member/loginForm.jsp";
 	</script>
 <%}%>
 

@@ -71,7 +71,7 @@
 
 <% }else{ %>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<center><b>문의목록</b></center>
+<center><b>자주묻는질문</b></center>
 <table align = "center" width = "800" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr height = "30">
 		<td align = "center" width = "50">번 호</td>

@@ -36,7 +36,7 @@ public class RatingDAO extends OracleServer {
 				pstmt.setString(2, id);
 				pstmt.setInt(3, rDTO.getGood()+1);
 				pstmt.setInt(4, rDTO.getBad());
-				pstmt.setInt(5, rDTO.getTotal());
+				pstmt.setInt(5, rDTO.getTotal()+1);
 				pstmt.executeUpdate();
 				result = 1;
 			}
@@ -70,7 +70,7 @@ public class RatingDAO extends OracleServer {
 				pstmt.setString(2, id);
 				pstmt.setInt(3, rDTO.getGood());
 				pstmt.setInt(4, rDTO.getBad()-1);
-				pstmt.setInt(5, rDTO.getTotal());
+				pstmt.setInt(5, rDTO.getTotal()-1);
 				pstmt.executeUpdate();
 				result = 1;
 				}
@@ -108,7 +108,7 @@ public class RatingDAO extends OracleServer {
 		
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select sum(good),sum(bad) from rating where num = ?");
+			pstmt = conn.prepareStatement("select sum(good),sum(bad),sum(total) from rating where num = ?");
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
@@ -116,6 +116,7 @@ public class RatingDAO extends OracleServer {
 				rdto = new RatingDTO();
 				rdto.setGood(rs.getInt("sum(good)"));
 				rdto.setBad(rs.getInt("sum(bad)"));
+				rdto.setTotal(rs.getInt("sum(total)"));
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();

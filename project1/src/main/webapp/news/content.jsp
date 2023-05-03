@@ -87,7 +87,7 @@ for(String part : parts){
 		<td align = "right">
 			<td align = "center"><%=rDTO.getGood()%>
 			<td align = "center"><%=rDTO.getBad()%>
-			<td align = "center"><%=Count%>
+			<td align = "center"><%=rDTO.getTotal()%>
 		</td>
 	</tr>
 </table>
