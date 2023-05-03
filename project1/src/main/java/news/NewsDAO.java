@@ -626,9 +626,12 @@ public class NewsDAO extends OracleServer {
                     searchList = new ArrayList(); 
                     do{ 
                        NewsDTO dto= new NewsDTO();
-                       dto.setId(rs.getString("id"));
-                       dto.setNewstype(rs.getString("newstype"));
+                       dto.setNum(rs.getInt("num"));
                        dto.setTitle(rs.getString("title"));
+                       dto.setId(rs.getString("id"));
+                       dto.setPress(rs.getString("press"));
+                       dto.setReg(rs.getTimestamp("reg"));                       
+                       dto.setViews(rs.getInt("views"));
                        searchList.add(dto); 
                     }while(rs.next());
                  }
@@ -653,6 +656,7 @@ public class NewsDAO extends OracleServer {
     			searchDateList = new ArrayList();
     			do {
     			NewsDTO dto = new NewsDTO();
+    			dto.setNum(rs.getInt("num"));
     			dto.setId(rs.getString("id"));
                 dto.setNewstype(rs.getString("newstype"));
                 dto.setTitle(rs.getString("title"));
@@ -694,10 +698,12 @@ public class NewsDAO extends OracleServer {
 				searchTodayList = new ArrayList();
 				while(rs.next()) {
 					NewsDTO dto = new NewsDTO();
-					dto.setId(rs.getString("id"));
-					dto.setNewstype(rs.getString("newstype"));
-					dto.setTitle(rs.getString("title"));
-					dto.setReg(rs.getTimestamp("reg"));
+			        dto.setNum(rs.getInt("num"));
+			        dto.setTitle(rs.getString("title"));
+                    dto.setId(rs.getString("id"));
+                    dto.setPress(rs.getString("press"));
+                    dto.setReg(rs.getTimestamp("reg"));                       
+                    dto.setViews(rs.getInt("views"));
 					searchTodayList.add(dto);
 				}
 			}
