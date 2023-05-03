@@ -117,7 +117,7 @@
 		</div>
 		<div>
 			<input type="submit" value="회원가입" />
-			<input type="button" value="취소" onclick="location=''"/>
+			<input type="button" value="취소" onclick="location='/project1/news/main.jsp'"/>
 		</div>
 	</form>
 </body>
