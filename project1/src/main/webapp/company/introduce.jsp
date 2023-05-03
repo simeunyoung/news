@@ -19,17 +19,8 @@ MemberDAO dao = MemberDAO.getInstance();
 <link href="mypage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<header>
-		<nav>
-			<ul>
-				<li><a href="main.jsp">홈</a></li>&nbsp;
-				<li><a href="introduce.jsp">사이트소개</a></li>&nbsp;
-				<li><a href="introduce.jsp?pageNum=1">팀원소개</a></li>&nbsp;
-				<li><a href="introduce.jsp?pageNum=2">언론사/기자</a></li>
-				<li><a href="#">고객센터</a></li>
-			</ul>
-		</nav>
-	</header>
+<jsp:include page="/member/header.jsp" />
+	
 	<%
 	String pageNum = request.getParameter("pageNum");
 	if (pageNum == null) {
@@ -130,9 +121,7 @@ td {
 	<%
 	}
 	%>
-	<footer>
-		<p>Copyright &copy; 1조</p>
-	</footer>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 
 	<script src="script.js"></script>
 

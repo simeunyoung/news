@@ -43,6 +43,7 @@ int check = manager.typeCheck(id);
 				<ul>
 					<li><a href="/project1/company/introduce.jsp?pageNum=2">언론사리스트/<br>기자리스트</a></li>
 					<li><a href="/project1/admin/qnaList.jsp">제보하기</a></li>
+					<li><a href="/project1/company/pressForm.jsp">구독현황</a></li>
 				</ul></li>
 			<li><a href="/project1/helper/svmain.jsp">고객센터</a>
 				<ul>
