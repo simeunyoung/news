@@ -6,17 +6,15 @@
 
 
 <%!
+	
     int pageSize = 10;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 
 <%  
 String search = request.getParameter("search");
-
-
 String startDate = request.getParameter("startDate");
 String endDate = request.getParameter("endDate");
-
 String date = request.getParameter("date");
 
     List searchList = null;
@@ -37,27 +35,6 @@ String date = request.getParameter("date");
     	searchList = dao.getSearchTodayList(date);
     }
     
-%>
-<%
-String pageNum = request.getParameter("pageNum");
-if(pageNum == null){ pageNum = "1"; }
-
-int pageSize = 10;
-int currentPage = Integer.parseInt(pageNum);
-int startRow = (currentPage - 1) * pageSize + 1;
-int endRow = currentPage * pageSize;
-int newscount = 0;
-int number = 0;
-
-List newsList = null;
-NewsDAO newsPro = NewsDAO.getInstance();
-newscount = newsPro.getNewsCount(); // 추가 DAO
-
-if(newscount > 0){
-newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
-}
-
-number = newscount - (currentPage - 1) * pageSize;
 %>
 <!DOCTYPE>
 <html>
@@ -83,29 +60,23 @@ number = newscount - (currentPage - 1) * pageSize;
 </table>
 
 <%  } else {    %>
-<div class="table_box">
-<div class="one_box" align="center"><b>작성 번호</b></div>
-<div class="two_box" align="center"><b>뉴스(내용)</b></div>
-<div class="three_box" align="center"><b>작성자</b></div>
-<div class="four_box" align="center"><b>언론사</b></div>
-<div class="five_box" align="center"><b>작성일</b></div>
-<div class="six_box" align="center"><b>조회수</b></div>
-</div>
-<% 
+<table border="1" width="700" cellpadding="0" cellspacing="0" align="center"> 
+    <tr height="30"> 
+      <td align="center"  width="250" >NO</td> 
+      <td align="center"  width="250" >제목</td> 
+      <td align="center"  width="100" >작성자</td>
+      <td align="center"  width="150" >언론사</td> 
+      <td align="center"  width="150" >작성일</td> 
+      <td align="center"  width="150" >조회수</td>         
+    </tr>
+<% int number = 1;
         for (int i = 0 ; i < searchList.size() ; i++) {
+        	
           NewsDTO dto = (NewsDTO)searchList.get(i);
 %>
-<div>
-<a href="content.jsp?num=<%=dto.getNum()%>"><font color="#000000">
-<div class="text_box">
-<div class="one_box" align="center"><%=number--%></div>
-<div class="two_see" >
-<b><font size="4px" color="#000000"><%=dto.getTitle() %></font></b><br /><br />&nbsp;&nbsp;<%=dto.getCon() %></div>
-<div class="three_box" align="center"><%=dto.getId() %></div>
-<div class="four_box" align="center"><%=dto.getPress() %> </div>
-<div class="five_box" align="center"><%=sdf.format(dto.getReg()) %> </div>
-<div class="six_box" align="center"><%=dto.getViews() %> </div>
-</div></font></a></div>
+   <tr height="30" onclick="content.jsp?num=<%=dto.getNum()%>">
+ <td align="center"  width="50"><%=number++%></td>
+    <td align="center" width="100" >
  <%if(search != null){ %>
 	<%String search2 = dto.getTitle().replace(search, "@"+search+"@");%>
 	<%String[] spl = search2.split("@");%>
@@ -122,7 +93,10 @@ number = newscount - (currentPage - 1) * pageSize;
    <td align="center"  width="50"><%=dto.getTitle()%></td>
 <%} %>
     </td>
-
+ <td align="center"  width="50"><%=dto.getId()%></td>
+    <td align="center"  width="50"><%=dto.getPress()%></td>
+    <td align="center"  width="50"><%=sdf.format(dto.getReg())%></td>
+    <td align="center"  width="50"><%=dto.getViews()%></td>
   </tr>
      <%}%>
 </table>
