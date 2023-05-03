@@ -207,7 +207,7 @@ public class MemberDAO extends OracleServer {
 				if(rs.next()) {
 					String dbpw=rs.getString("pw");
 					if(dbpw.equals(pw)) {
-						pstmt = conn.prepareStatement("update member set nick ='404', pw='' where id = ?");
+						pstmt = conn.prepareStatement("update member set nick ='404', pw='null' where id = ?");
 						pstmt.setString(1, id);
 						pstmt.executeUpdate();
 						x = 1;

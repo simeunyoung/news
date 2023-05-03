@@ -52,7 +52,7 @@ int check = manager.typeCheck(id);
 					<li><a href="/project1/admin/journalistForm.jsp">기자신청</a></li>
 				</ul></li>
 			<%
-			if (check == 1) {
+			if (check == 2) {
 			%>
 			<li><a href="#">관리자</a>
 				<ul>

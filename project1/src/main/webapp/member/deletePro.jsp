@@ -13,7 +13,7 @@
 	
 	MemberDAO manager = MemberDAO.getInstance();
 	int check = manager.deleteMember(id, pw);
-	
+
 	if(check == 1){
 		session.invalidate();
 	%>
