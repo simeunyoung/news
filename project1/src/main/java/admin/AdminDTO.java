@@ -11,6 +11,7 @@ public class AdminDTO {
 	private String tel;
 	private String title;
 	private String con;
+	private String recon;
 	private int readCount;
 	private String memberType;
 	private String questionType;
@@ -66,6 +67,12 @@ public class AdminDTO {
 	}
 	public void setCon(String con) {
 		this.con = con;
+	}
+	public String getRecon() {
+		return recon;
+	}
+	public void setRecon(String recon) {
+		this.recon = recon;
 	}
 	public int getReadCount() {
 		return readCount;

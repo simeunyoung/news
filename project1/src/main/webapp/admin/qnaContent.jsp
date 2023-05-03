@@ -3,6 +3,7 @@
 <%@ page import="admin.AdminDAO"%>
 <%@ page import="admin.AdminDTO"%>
 <%@ page import="member.MemberDTO"%>
+<%@ page import="java.util.List"%>
 
 <%
 	// request.getParameter는 리턴타입이 String이라서 Integer를 이용해서 숫자로 변환
@@ -12,9 +13,29 @@
 	
 	AdminDAO dao = AdminDAO.getInstance();
 	String memId = (String)session.getAttribute("memId");
+	
 	AdminDTO dto = dao.qnaGet(num);
 	MemberDTO dto2 = dao.setMember(memId);
 	if(memId == null) {dto2.setMemberType("0");}
+	
+	int pageSize = 20;
+	
+	if(pageNum == null) {
+		pageNum = "1";
+	}
+	
+	int currentPage = Integer.parseInt(pageNum);
+	int startRow = (currentPage - 1) * pageSize + 1;
+	int endRow = currentPage * pageSize;
+	
+	List qnaReconList = null;
+	int count = dao.qnaReconCount();
+	if(count > 0) {
+		qnaReconList = dao.qnaReconList(startRow, endRow);
+	}
+	session.setAttribute("title", dto.getTitle());
+	session.setAttribute("con", dto.getCon());
+	session.setAttribute("num", dto.getNum());
 %>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
@@ -84,3 +105,5 @@
 		</tr>
 	</table>
 </form>
+
+<jsp:include page="qnaReconForm.jsp" />

@@ -15,7 +15,7 @@ public class AdminDAO extends OracleServer {
 	// 검색된 정보에서 membertype을 result에 대입
 	// 대입된 값이 1(회원)이면 -1(기자)로 변경
 	// 이후 매개변수인 id를 통해 jas 테이블에서 레코드값 검색
-	// 
+	// 값이 있으면 해당 레코드의 resulttype을 1로 변경 
 	public String changeType(String id) {
 		String result = "";
 		try {
@@ -53,10 +53,8 @@ public class AdminDAO extends OracleServer {
 		return result;
 	} // public String changeType(String id) {
 	
-	// 매개변수인 id를 통해 db를 검색
-	// 검색된 정보중 아이디, 이메일, 타입을 dto에 set
-	// dto를 리턴
-	// journalistForm.jsp
+	// id를 통해 member테이블에서 검색
+	// 검색된 레코드값 중 id, name, nick, email, tel, membertype을 dto에 set
 	public MemberDTO setMember(String sid) {
 		MemberDTO dto = new MemberDTO();
 		try {
@@ -81,9 +79,7 @@ public class AdminDAO extends OracleServer {
 		return dto;
 	} // public MemberDTO setMember(String sid) {
 	
-	// journalistForm에서 전달받은 내용을
-	// 데이터베이스에 추가
-	// journalistPro.jsp
+	// dto를 매개변수로 받아 jas 테이블에 insert
 	public void insertJas(AdminDTO dto) {
 		try {
 			conn = getConnection();
@@ -102,10 +98,8 @@ public class AdminDAO extends OracleServer {
 			oracleClose();
 		}
 	} // public void insertJas(MemberDTO dto) {
-	
-	// db에 총 몇줄의 데이터가 있는지 검색
-	// 반환된 데이터를 result에 대입 및 리턴
-	// journalistList.jsp
+
+	// jas 테이블에 총 몇줄의 레코드가 있는지 검색, result에 대입 후 return
 	public int getJCount() {
 		int result = 0;
 		try {
@@ -124,10 +118,7 @@ public class AdminDAO extends OracleServer {
 		return result;
 	} // public int getJCount() {
 	
-	// db에 총 몇줄의 데이터가 있는지 검색
-	// 검색된 데이터를 dto에 대입
-	// dto를 리스트에 대입 및 리턴
-	// journalistList.jsp
+	// jas 테이블 매 레코드마다 dto를 만들고 레코드의 값을 dto에 set한 후 JList에 add
 	public List getJList() {
 		List JList = new ArrayList();
 		try {
@@ -155,6 +146,7 @@ public class AdminDAO extends OracleServer {
 		return JList;
 	} // public List getJList() {
 	
+	// id를 통해 jas테이블의 레코드를 검색, 해당하는 레코드가 있으면 resulttype을 2로 수정
 	public int denyJas(MemberDTO dto) {
 		int result = 0;
 		try {
@@ -171,9 +163,7 @@ public class AdminDAO extends OracleServer {
 		return result;
 	}
 	
-	// 1-1Form에서 보내온 정보를 받음
-	// 해당 정보를 db에 추가후 result에 true 대입 및 리턴
-	// 1-1Pro.jsp
+	// 매개변수로 받은 dto의 데이터를 qna 테이블에 insert
 	public boolean qnaInsert(AdminDTO dto) {
 		boolean result = false;
 		try {
@@ -200,10 +190,8 @@ public class AdminDAO extends OracleServer {
 		}
 		return result;
 	} // public boolean oneononeInsert(AdminDTO dto) {
-		
-	// db에 데이터 몇줄인지 검색
-	// result에 대입 및 리턴
-	// 1-1List.jsp
+	
+	// qna 테이블에 레코드 갯수를 세고 result에 대입 및 return
 	public int qnaCount() {
 		int result = 0;
 		try {
@@ -223,6 +211,7 @@ public class AdminDAO extends OracleServer {
 		return result;
 	} // public int oneononeCount() {
 	
+	// qna 테이블에서 resultType이 0인 레코드의 갯수를 result에 대입 및 return
 	public int qnaCount2() {
 		int result = 0;
 		try {
@@ -247,7 +236,6 @@ public class AdminDAO extends OracleServer {
 	// 새로운 dto를 생성하고 해당하는 로우넘 번호 한 줄마다 dto에 입력
 	// 입력된 dto를 리스트에 저장하는 작업을 반복
 	// dto가 저장된 리스트를 리턴
-	// 1-1List.jsp
 	public List qnaList(int start, int end) {
 		List qnaList = new ArrayList();
 		try {
@@ -283,6 +271,8 @@ public class AdminDAO extends OracleServer {
 		return qnaList;
 	} // public List oneononeList(int start, int end) {
 	
+	// qna 테이블에서 num값으로 레코드를 찾고 readcount에 1을 더하고
+	// 다시 qna 테이블에서 num값으로 레코드를 검색한 후 값이 있으면 resulttype에 readcount를 대입 // 5.2 5:37
 	public AdminDTO qnaGet(int num) {
 		AdminDTO dto = null;
 		int count = 0;
@@ -342,25 +332,18 @@ public class AdminDAO extends OracleServer {
 		int count = 0;
 		try {
 			conn = getConnection();
-			sql = "select * from qna where num=?";
+			sql = "select * from qnaRecon where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				dto = new AdminDTO();
-				dto.setResultType(rs.getString("resultType"));
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
-				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
-				dto.setEmail(rs.getString("email"));
-				dto.setTel(rs.getString("tel"));
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
-				dto.setReadCount(rs.getInt("readCount"));
-				dto.setMemberType(rs.getString("memberType"));
-				dto.setQuestionType(rs.getString("questionType"));
-				dto.setImg(rs.getString("img"));
+				dto.setRecon(rs.getString("recon"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
 			}
@@ -546,5 +529,72 @@ public class AdminDAO extends OracleServer {
 		return dto;
 	} // public AdminDTO getQna(int num) {
 	
-
+	public int qnaReconCount() {
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "select count(*) from qnaRecon";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	} // public int qnaReconCount() {
+	
+	public List qnaReconList(int start, int end) {
+		List qnaReconList = new ArrayList();
+		try {
+			conn = getConnection();
+			sql = "select * from (select e.*, rownum r from (select * from qnaRecon order by num desc) e) where r >=? and r <=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				AdminDTO dto = new AdminDTO();
+				dto.setNum(rs.getInt("num"));
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setTitle(rs.getString("title"));
+				dto.setCon(rs.getString("con"));
+				dto.setRecon(rs.getString("recon"));
+				dto.setIp(rs.getString("ip"));
+				dto.setReg(rs.getTimestamp("reg"));
+				qnaReconList.add(dto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return qnaReconList;
+	} // public List oneononeList(int start, int end) {
+	
+	public void qnaReconInsert(AdminDTO dto) {
+		try {
+			conn = getConnection();
+			sql = "insert into qnaRecon values(qnaRecon_seq.nextval,?,?,?,?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getTitle());
+			pstmt.setString(4, dto.getCon());
+			pstmt.setString(5, dto.getRecon());
+			pstmt.setString(6, dto.getIp());
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+	} // public void qnaReconInsert(AdminDTO dto) {
+	
 } // public class AdminDAO extends OracleServer {
