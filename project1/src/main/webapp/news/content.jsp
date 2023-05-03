@@ -5,6 +5,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="member.MemberDTO" %>
 <%@ page import="member.MemberDAO" %>
+<%@ page import="news.RatingDAO" %>
+<%@ page import="news.RatingDTO" %>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 
@@ -26,6 +28,11 @@ NewsDTO text = method.getCon(num);
 String title = text.getTitle();
 String con = text.getCon();
 String news_scrap = method.newsscrap(loginuser);
+
+int Count = 0;
+RatingDAO rDAO = RatingDAO.getInstance();
+Count = rDAO.ratingcount(num); 
+RatingDTO rDTO = rDAO.getRatingDTO(num); 
 %>
 <%
 if(news_scrap == null){
@@ -55,17 +62,35 @@ for(String part : parts){
 <div id = "content"><%=text.getCon()%></div>
 <div align="right">
 <%if(loginuser != null){%>
+<%if(!loginuser.equals(text.getId())){%>
 <form>
-<table align = "center" width = "500" height = "60" border = "1" cellspacing =  "0" sellpadding = "0">
+<table align = "right" width = "500" height = "60" border = "1" cellspacing =  "0" cellpadding = "0">
 	<tr>
-		<td align = "center" colspan = "2">
+		<td align = "right" colspan = "0">
 			<input type = "button" name = "good" value = "좋아요" onclick = "location.href='gisagood.jsp?num=<%=text.getNum()%>'">		
-		<td align = "center" colspan = "2">
 			<input type = "button" name = "bad" value = "싫어요" onclick = "location.href='gisabad.jsp?num=<%=text.getNum()%>'">
 		</td>
 	</tr>
-</table>
+	</table>
 </form>
+	<%}%>
+<%}%>
+	<%if(Count != 0 && rDTO != null){%>
+<table align = "right" width = "100" height = "60" border = "1" cellspacing = "0" cellpadding = "0">
+	<tr>
+		<td align = "right" colspan = "0" width = "2" height = "10">
+			<td align = "center" width = "10" height = "10">좋아요</td>
+			<td align = "center" width = "10" height = "10">싫어요</td>
+			<td align = "center" width = "10" height = "10">총 점</td>
+	</tr>
+	<tr>
+		<td align = "right">
+			<td align = "center"><%=rDTO.getGood()%>
+			<td align = "center"><%=rDTO.getBad()%>
+			<td align = "center"><%=Count%>
+		</td>
+	</tr>
+</table>
 <%}%>
 <% if(!include){%>
 <button onclick= "location='news_scrap.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>'">스크랩 하기</button>

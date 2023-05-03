@@ -18,4 +18,5 @@ public class RatingDTO {
 	public int getGood() {return good;}
 	public int getBad() {return bad;}
 	public int getTotal() {return total;}
+	
 }
