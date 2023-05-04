@@ -90,11 +90,23 @@ for(String part : parts){
 		</td>
 	</tr>
 </table>
-<% if(!include){%>
-<button onclick= "location='news_scrap.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>'">스크랩 하기</button>
-<%}else if(include){%>
-<button onclick= "location='news_scrap_delete.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>'">스크랩 취소</button>
-<%}%>
+<%
+if(!include){
+	if(session.getAttribute("memId") == null) {
+%>
+<button onclick="alert('로그인 후 사용 가능합니다.');">스크랩 하기</button>
+<%
+	}else{
+%>
+<button onclick="alert('스크립트 되었습니다.'); location='news_scrap.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>';">스크랩 하기</button>
+<%
+	}
+}else if(include){
+%>
+<button onclick="alert('스크립트 취소 되었습니다.'); location='news_scrap_delete.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>';">스크랩 취소</button>
+<%
+}
+%>
 <button id="copyButton">URL 복사</button>
 
 <%if(session.getAttribute("memId") == null) {%>
