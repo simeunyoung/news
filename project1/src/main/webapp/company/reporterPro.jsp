@@ -16,6 +16,7 @@
 String result = sb.toString();%>
 <% dao.RSubscribe(id, result);%>
 		<script>
+			alert("구독완료");
 			location.replace("/project1/company/pressForm.jsp?id=<%=id %>");
 		</script>
 

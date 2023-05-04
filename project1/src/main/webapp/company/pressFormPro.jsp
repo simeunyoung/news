@@ -13,6 +13,7 @@
 String result = sb.toString();%>
 <% dao.PSubscribe(id, result);%>
 		<script>
+			alert("구독완료");
 			location.replace("/project1/company/pressForm.jsp?id=<%=id%>");
 		</script>
 
