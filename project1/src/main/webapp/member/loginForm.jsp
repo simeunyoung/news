@@ -18,9 +18,10 @@
 	}
 %>
 <body onload="start()">
+	<div class="login-wrap">
 	<form action="loginPro.jsp" method="get" name="myform" onsubmit="return loginCheck();">
-		<h2>로그인</h2>
-		<div>
+		<h2 class="login-logo">CODENEWS</h2>
+		<div class="login-table">
 		<table>
 			<tr>
 				<td>
@@ -45,12 +46,13 @@
 			</tr>
 		</table>
 		</div>
-		<input type="submit" value="로그인" />
+		<input type="submit" value="로그인" class="login-btn" />
 	</form>
-	<ul class="loginList">
+	<ul class="login-list">
 		<li><a href="pwFindForm.jsp">비밀번호 찾기</a></li>
 		<li><a href="idFindForm.jsp">아이디 찾기</a></li>
 		<li><a href="inputForm.jsp">회원가입</a></li>
 	</ul>
+	</div>
 </body>
 </html>
