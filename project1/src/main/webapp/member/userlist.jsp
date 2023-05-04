@@ -15,6 +15,7 @@
 <%
 String id = (String)session.getAttribute("memId");
 String pageNum = request.getParameter("pageNum");
+String nick = (String)session.getAttribute("nick");
 
 int pageSize = 10; // 한 페이지에 보여줄 목록의 수
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -28,7 +29,7 @@ int endNum = crtPage * pageSize;
 
 RevalueDAO rv = RevalueDAO.getInstance();
 
-int count = rv.getMyReconCount(id);
+int count = rv.getMyReconCount(nick);
 
 if(count > 0){
 	userList = rv.getMyReconList(id, startNum, endNum);

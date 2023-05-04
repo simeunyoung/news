@@ -18,6 +18,7 @@ request.setCharacterEncoding("UTF-8");
 <%
 MemberDAO manager = MemberDAO.getInstance();
 String id = (String) session.getAttribute("memId");
+String num = request.getParameter("num");
 int check = manager.typeCheck(id);
 
 // session.setAttribute("pageType", "1");
@@ -27,6 +28,7 @@ int check = manager.typeCheck(id);
 <body>
 <header>
 	<nav>
+	<%=num %>
 		<a href="/project1/news/main.jsp">CODENEWS</a>
 		<ul>
 			<li><a href="/project1/company/introduce.jsp">회사소개</a>
@@ -43,17 +45,21 @@ int check = manager.typeCheck(id);
 					<li><a
 						href="/project1/news/newstypelist.jsp?newstype=JavaScript">자바스크립트</a></li>
 				</ul></li>
-			<li><a href="/project1/company/">파트너십</a>
+			<li><a href="/project1/company/introduce.jsp?pageNum=2">파트너십</a>
 				<ul>
 					<li><a href="/project1/company/introduce.jsp?pageNum=2">언론사리스트/<br>기자리스트</a></li>
-					<li><a href="/project1/admin/qnaList.jsp">제보하기</a></li>
-					<li><a href="/project1/company/pressForm.jsp">구독현황</a></li>
+					<%if(id != null){ %>
+						<li><a href="/project1/company/pressForm.jsp">구독현황</a></li>
+					<%}else{ %>
+					<li><a href="/project1/member/loginForm.jsp?loNum=1">구독현황</a></li>
+					<%} %>
 				</ul></li>
 			<li><a href="/project1/helper/svmain.jsp">고객센터</a>
 				<ul>
 					<li><a href="/project1/admin/faqList.jsp">FAQ</a></li>
 					<li><a href="/project1/admin/qnaList.jsp">Q&A</a></li>
 					<li><a href="/project1/admin/journalistForm.jsp">기자신청</a></li>
+					<li><a href="/project1/admin/qnaList.jsp">제보하기</a></li>
 				</ul></li>
 			<%
 			if (check == 2) {

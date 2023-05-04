@@ -5,6 +5,8 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String auto = request.getParameter("auto");
+	String loNum = request.getParameter("loNum");
+
 	
 	Cookie [] cookies = request.getCookies();
 	for(Cookie c : cookies){
@@ -29,7 +31,12 @@
 			response.addCookie(coo2);
 			response.addCookie(coo3);
 		}
-		response.sendRedirect("/project1/news/main.jsp"); // 김형주 변경 /member/main.jsp -> /news/main.jsp
+		
+		if(loNum.equals("null")){
+			response.sendRedirect("/project1/news/main.jsp");
+		}else{
+			response.sendRedirect("/project1/company/pressForm.jsp"); 
+		}
 	} else if(check == 0){ %>
 		<script>
 			alert("비밀번호가 맞지 않습니다.");
@@ -41,3 +48,4 @@
 			history.go(-1);
 		</script>
 	<%}%>
+	<%=loNum%>

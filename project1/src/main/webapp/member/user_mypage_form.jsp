@@ -61,6 +61,7 @@ if (id == null) {
 			<div class="row gutters-sm">
 				<div class="userform-wrap">
 					<jsp:include page="userProForm.jsp" />
+					<button type="button" onclick="location='/project1/company/pressForm.jsp'">구독현황 보러가기</button>
 				</div>
 				<div class="infoform-wrap">
 					<jsp:include page="infoForm.jsp" />
@@ -86,6 +87,7 @@ if (id == null) {
 		<div class="row gutters-sm">
 			<div class="jouralform-wrap">
 				<jsp:include page="jouralProForm.jsp" />
+				<button type="button" onclick="location='/project1/company/pressForm.jsp'">구독현황 보러가기</button>
 			</div>
 			<div class="infoform-wrap">
 				<jsp:include page="infoForm.jsp" />

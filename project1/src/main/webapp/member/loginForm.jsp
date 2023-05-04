@@ -6,7 +6,9 @@
 <link href="/project1/resource/css/style.css" rel="stylesheet"/>
 <script src="/project1/resource/js/script.js"></script>
 </head>
+
 <%
+	String loNum = request.getParameter("loNum");
 	String cooId = null;
 	Cookie [] cookies = request.getCookies();
 	for(Cookie c : cookies){
@@ -16,12 +18,13 @@
 	}
 %>
 <body onload="start()">
-	<form action="loginPro.jsp" method="post" name="myform" onsubmit="return loginCheck();">
+	<form action="loginPro.jsp" method="get" name="myform" onsubmit="return loginCheck();">
 		<h2>로그인</h2>
 		<div>
 		<table>
 			<tr>
 				<td>
+					<input type="hidden"  name="loNum" value="<%=loNum%>">
 				<% if(cooId == null){ %>
 					<input type="text" id="id" name="id" placeholder="아이디" >
 				<%} else { %>
