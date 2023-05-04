@@ -203,7 +203,7 @@ nameArray[i] = reporterName;
 					</tr>
 					<tr>
 						<td>
-							<%
+					<%
 					for (int i = 0; i < subscribe2.length; i++) {
 						boolean isChecked2 = false;
 						for (int z = 0; z < subscribe.length; z++) {
@@ -238,6 +238,9 @@ nameArray[i] = reporterName;
 	%>
 	<%
 	String newsString = ndao.newsscrap(id);
+	if(newsString == null){
+		newsString = "";
+	}
 	%>
 	<%-- DAO 만들어야됨 (구독한기사 출력)--%>
 	<%
