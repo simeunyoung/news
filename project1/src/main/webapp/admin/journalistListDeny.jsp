@@ -8,5 +8,14 @@
 <%
 	AdminDAO dao = AdminDAO.getInstance();
 	int result = dao.denyJas(dto);
-	response.sendRedirect("journalistList.jsp");
-%>
+	if(result == 1) {%>
+	<script>
+		alert("해당신청을 반려하였습니다");
+		window.location.href = "/project1/admin/journalistList.jsp";
+	</script>
+	<%} else {%>
+	<script>
+		alert("기자거절 실패");
+		window.location.href = "/project1/admin/journalistList.jsp";
+	</script>
+	<%}%>

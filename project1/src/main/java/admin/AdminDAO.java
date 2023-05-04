@@ -550,23 +550,21 @@ public class AdminDAO extends OracleServer2 {
 		return result;
 	} // public int qnaReconCount() {
 	
-	public List qnaReconList(int start, int end) {
+	public List qnaReconList(String num2, int start, int end) {
 		List qnaReconList = new ArrayList();
 		try {
 			conn = getConnection();
-			sql = "select * from (select e.*, rownum r from (select * from qnaRecon order by num desc) e) where r >=? and r <=?";
+			sql = "select * from (select e.*, rownum r from (select * from qnaRecon where num2=? order by num desc) e) where r >=? and r <=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setString(1, num2);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()) {
 				AdminDTO dto = new AdminDTO();
-				dto.setNum(rs.getInt("num"));
+				dto.setNum2(rs.getInt("num2"));
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
-				dto.setTitle(rs.getString("title"));
-				dto.setCon(rs.getString("con"));
 				dto.setRecon(rs.getString("recon"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
@@ -583,14 +581,13 @@ public class AdminDAO extends OracleServer2 {
 	public void qnaReconInsert(AdminDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into qnaRecon values(qnaRecon_seq.nextval,?,?,?,?,?,?,sysdate)";
+			sql = "insert into qnaRecon values(qnaRecon_seq.nextval,?,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getName());
-			pstmt.setString(3, dto.getTitle());
-			pstmt.setString(4, dto.getCon());
-			pstmt.setString(5, dto.getRecon());
-			pstmt.setString(6, dto.getIp());
+			pstmt.setInt(1, dto.getNum2());
+			pstmt.setString(2, dto.getId());
+			pstmt.setString(3, dto.getName());
+			pstmt.setString(4, dto.getRecon());
+			pstmt.setString(5, dto.getIp());
 			pstmt.executeUpdate();
 			
 		} catch(Exception e) {

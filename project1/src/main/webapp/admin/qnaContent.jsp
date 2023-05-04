@@ -28,14 +28,11 @@
 	int startRow = (currentPage - 1) * pageSize + 1;
 	int endRow = currentPage * pageSize;
 	
-	List qnaReconList = null;
+	/* List qnaReconList = null;
 	int count = dao.qnaReconCount();
 	if(count > 0) {
 		qnaReconList = dao.qnaReconList(startRow, endRow);
-	}
-	session.setAttribute("title", dto.getTitle());
-	session.setAttribute("con", dto.getCon());
-	session.setAttribute("num", dto.getNum());
+	} */
 %>
 
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />

@@ -12,13 +12,23 @@
 	AdminDAO dao = AdminDAO.getInstance();
 	String memId = (String)session.getAttribute("memId");
 	MemberDTO dto2 = dao.setMember(memId);
-	if(memId == null) {dto2.setMemberType("0");}
-	if(!(dto2.getMemberType().equals("2"))) {response.sendRedirect("siteMap.jsp");}
+	
 	int count = dao.getJCount();
 	
 	jList = dao.getJList();
-%>
-
+	
+	if(dto2.getMemberType() == null) {%>
+	<script>
+		alert("비정상적인 접근입니다.");
+		history.go(-1);
+	</script>
+	<%} else if(dto2.getMemberType().equals("2")) {%>	
+	<%} else {%>
+	<script>
+		alert("비정상적인 접근입니다.");
+		history.go(-1);
+	</script>
+	<%}%>
 <a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
 <title>기자신청 리스트</title>

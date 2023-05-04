@@ -10,7 +10,7 @@
 	String result = dao.changeType(dto.getId());
 	if(result.equals("-1")) {%>
 	<script>
-		alert("기자변경 완료");
+		alert("해당신청을 승인하였습니다");
 		window.location.href = "/project1/admin/journalistList.jsp";
 	</script>
 	<%} else {%>
@@ -19,6 +19,6 @@
 		window.location.href = "/project1/admin/journalistList.jsp";
 	</script>
 	<%}%>
-dto.getId() : <%=dto.getId()%><br />
+<%-- dto.getId() : <%=dto.getId()%><br />
 dto.getMemberType() : <%=dto.getMemberType()%><br />
-dto.getEmail() : <%=dto.getEmail()%><br />
+dto.getEmail() : <%=dto.getEmail()%><br /> --%>
