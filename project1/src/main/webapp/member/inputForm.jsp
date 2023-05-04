@@ -9,7 +9,7 @@
 <script src="/project1/resource/js/script.js"></script>
 </head>
 
-<body onload="start()">
+<body>
 	<form action="inputPro.jsp" method="post" name="userinput" onsubmit="return inputCheck();">
 		<h2>회원가입</h2>
 		<div>
