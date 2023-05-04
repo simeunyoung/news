@@ -12,7 +12,6 @@
 <% String id = (String)session.getAttribute("memId");%>
 <% String exist = dao.selectExist(id);%>
 <% if(exist == null){exist = "";}%>
-<%=exist%>
 <% String[] parts = exist.split("@");
 	boolean include = false;
 	for (String part : parts) {

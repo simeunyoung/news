@@ -16,6 +16,7 @@
 <%String url = dao.savePress(exist, press, id);
 	if(url != null){ %>
 		<script>
+			alert("구독되었습니다");
 			location.replace("/project1/company/pressPage.jsp?press=<%=press%>"); 
 		</script>	
 <%}

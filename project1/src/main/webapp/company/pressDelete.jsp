@@ -15,7 +15,8 @@
 <body>
 <%String url = dao.unSavePress(exist, press, id);
 if(url != null){ %>
-		<script>
+		<script>		
+			alert("구독이 취소되었습니다");
 			location.replace("/project1/company/pressPage.jsp?press=<%=press%>"); 
 		</script>	
 <%}
