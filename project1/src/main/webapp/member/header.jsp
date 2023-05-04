@@ -70,7 +70,7 @@ int check = manager.typeCheck(id);
 			%>
 		</ul>
 		<%
-		if (id == null) {
+		if (id ==  null) {
 		%>
 		<div class="flex-wrap">
 			<div>
