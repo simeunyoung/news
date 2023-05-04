@@ -66,13 +66,14 @@ int check = manager.typeCheck(id);
 				<%
 				if (check == 2) {
 				%>
-				<li><a href="#">관리자</a>
-					<ul>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-					</ul></li>
+				<li><a href="/project1/admin/journalistList.jsp">기자신청 현황</a>
+<!-- 					<ul> -->
+<!-- 						<li><a href="/project1/admin/journalistList.jsp">기자신청 현황</a></li> -->
+<!-- 						<li><a href="#">2</a></li> -->
+<!-- 						<li><a href="#">3</a></li> -->
+<!-- 						<li><a href="#">4</a></li> -->
+<!-- 					</ul> -->
+				</li>
 				<%
 				}
 				%>
@@ -81,6 +82,7 @@ int check = manager.typeCheck(id);
 			if (id == null) {
 			%>
 			<div class="flex-wrap">
+			
 				<div>
 					<a href="/project1/member/loginForm.jsp">로그인</a>
 				</div>
@@ -92,6 +94,9 @@ int check = manager.typeCheck(id);
 			} else {
 			%>
 			<div class="flex-wrap">
+				<div>
+					<a href="javascript:;">ID: <%=id %></a>
+				</div>
 				<div>
 					<a
 						href="/project1/member/user_mypage_form.jsp?id=<%=id%>&pageType=1">마이페이지</a>

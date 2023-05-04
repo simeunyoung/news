@@ -19,7 +19,9 @@
 	MemberDTO member = user.getMember(id2);
 		
 	int check = user.typeCheck(id);
-
+	if(id == null){
+		id = "";
+	}
 %>
 <body>
 	<div class="card mb-3">

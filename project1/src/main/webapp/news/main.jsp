@@ -35,8 +35,12 @@ int startRow = (currentPage - 1) * pageSize + 1;
 int endRow = currentPage * pageSize;
 
 List newsList = null;
+List newsList2 = null;
 NewsDAO newsPro = NewsDAO.getInstance();
 newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
+
+newsList2 = newsPro.getNews7days(); // list 페이지 자료 수집
+int listnumber = newsList2.size();
 %>
 <%-- 구독목록 --%>
 <% 	MemberDAO dao = MemberDAO.getInstance();
@@ -81,12 +85,14 @@ if (exist == null) {
 		<div class="main-card main_list">
 			<div class="title-box">
 				<p class="title">오늘의 뉴스</p>
+				<button  onClick="window.location.reload()">새로고침</button>
 				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
 			</div>	
 			<div class="list-card">
 				<%
 				for (int i = 0; i < newsList.size(); i++) {
-					NewsDTO article = (NewsDTO) newsList.get(i);
+					int random = (int)(Math.random()*(listnumber-1));
+					NewsDTO article = (NewsDTO) newsList2.get(random);
 				%>
 				<div class="card cont-box" onclick="location='content.jsp?num=<%=article.getNum()%>'">
 					<p><%=article.getNewstype()%> 뉴스 </p>

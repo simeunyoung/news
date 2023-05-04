@@ -11,7 +11,9 @@
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 </head>
+
 <%
+
 	String id = (String) session.getAttribute("memId");
 	String id2 = request.getParameter("id");
 	String num = request.getParameter("num");
@@ -19,7 +21,10 @@
 	MemberDTO dto = new MemberDTO();
 	MemberDAO dao = MemberDAO.getInstance();
 	dto = dao.getMember(id);
-	
+	if(id == null){
+		id = "";
+	}
+    
 	// 구독하기
 	String bookList = dao.selectBookList(id);
 
@@ -70,11 +75,15 @@
 				<%-- 이미지 가져오고 크기 조정 --%>
 				<div id="image_container">
 				<button type="button" onclick="imgUpdate()">img수정</button>
+				
+				<%if(dto == null) {
+				} else {%>
 				<%if(dto.getImg()==null){ %>
 					<img src="/project1/resource/img/profile01.jpg" class="rounded-circle" width="150">
 				<%}else{ %>
 					<img src="/project1/resource/img/<%=dto.getImg()%>" class="rounded-circle" width="150">	
-				<%}%>				
+				<%}%>		
+				<%}%>
 				</div>
 				<div class="imgUpdate">
 				<form action="imgUpload.jsp?pageType=<%=pageType %>" method="post" 
@@ -89,7 +98,7 @@
 					<h4>기자</h4>
 					<p class="text-secondary mb-1">Full Stack Developer</p>
 					<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-						<%if(id.equals(id2)){%>
+						<%if(id != null && id.equals(id2)){%>
 					<button class="btn btn-outline-primary"
 						onclick="location='deleteForm.jsp'">탈퇴하기</button>
 						<%}else{ %>
@@ -97,7 +106,7 @@
 		                      	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독하기</button>
 		                      <%}else{%>
 		                      	<button class="btn btn-primary" onclick="location='bookmarkDelete.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독취소</button>
-                      <%}%>
+                      		<%}%>
 						<%} %>
 				</div>
 			</div>

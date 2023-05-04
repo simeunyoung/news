@@ -25,12 +25,12 @@ String num = request.getParameter("num");
 MemberDAO manager = MemberDAO.getInstance();
 MemberDTO member = manager.getMember(id);
 
-// String pageType2 = (String)session.getAttribute("pageType2");
 
 int check = manager.typeCheck(id);
 
-if (id == null) {
+if (id == null && pageType.equals("1")) {
 %>
+
 <script>
 	location = '/project1/member/loginForm.jsp';
 </script>
