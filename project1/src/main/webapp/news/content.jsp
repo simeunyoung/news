@@ -21,6 +21,14 @@ request.setCharacterEncoding("UTF-8");
 
 int num = Integer.parseInt(request.getParameter("num")); //list에서 파라미터 값으로 게시글 보게 설정하기
 String currentPage = request.getParameter("currentPage");
+// 추가 시킨 곳
+MemberDAO memdao = MemberDAO.getInstance();
+MemberDTO userinfo = memdao.getmember(loginuser);
+String usertype = userinfo.getMemberType(); 
+
+String admin = "2";
+String normaluser = "1";
+// 끝난 곳
 
 NewsDAO method = NewsDAO.getInstance();
 NewsDTO text = method.getCon(num);
@@ -61,8 +69,9 @@ for(String part : parts){
 <div class="con1"><b>내용 : </b></div><br />
 <div id = "content"><%=text.getCon()%></div>
 <div align="right">
-<%if(loginuser != null){%>
-<%if(!loginuser.equals(text.getId())){%>
+<%if(loginuser != null){
+ 
+if(!loginuser.equals(text.getId())){%>
 <form>
 <table align = "right" width = "500" height = "60" border = "1" cellspacing =  "0" cellpadding = "0">
 	<tr>
@@ -109,9 +118,9 @@ if(!include){
 %>
 <button id="copyButton">URL 복사</button>
 
-<%if(session.getAttribute("memId") == null) {%>
+<%if(session.getAttribute("memId") == null || usertype.equals(normaluser)) {%>
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
-<%}else if(loginuser.equals("admin")){%>
+<%}else if(usertype.equals(admin)){%>
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
 <%}else if(loginuser.equals(text.getId())){ %>

@@ -30,15 +30,7 @@ response.sendRedirect("list.jsp");
 }
 %>
 <body>
-	<Script>
-		function option_check() {
-			var newstype = document.write.newstype.value;
-			if (newstype == "x") {
-				alert("뉴스의 종류가 선택되지 않았습니다.");
-				return false
-			}
-		} // 폼 태그에 newstype 값을 선택하지 않을 때 알림창으로 알려준다.
-	</Script>
+	
 	접속자 정보 :
 	<%=loginuser%>
 	<form action="writePro.jsp" name="write"
@@ -141,16 +133,22 @@ $(document).ready(function() {
 submitPost = function() {
   oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
   let content = document.getElementById("editorTxt").value;
-
+  var newstype = document.write.newstype.value;
+  
   if(content == '') {
     alert("내용을 입력해주세요.")
     oEditors.getById["editorTxt"].exec("FOCUS")
     return false;
+  }else if(newstype == "x"){ // 폼 태그에 newstype 값을 선택하지 않을 때 알림창으로 알려준다.
+	alert("뉴스의 종류가 선택되지 않았습니다.");
+	return false  
   } else {
     console.log(content)
     return true;
   }
 }
+
+ 
 
 </script>
 </body>
