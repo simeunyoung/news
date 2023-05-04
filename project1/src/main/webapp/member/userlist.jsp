@@ -29,7 +29,7 @@ int endNum = crtPage * pageSize;
 
 RevalueDAO rv = RevalueDAO.getInstance();
 
-int count = rv.getMyReconCount(nick);
+int count = rv.getMyReconCount(id);
 
 if(count > 0){
 	userList = rv.getMyReconList(id, startNum, endNum);
