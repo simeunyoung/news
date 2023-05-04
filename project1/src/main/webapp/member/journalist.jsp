@@ -15,6 +15,7 @@
 <%
 String id = (String) session.getAttribute("memId");
 String pageNum = request.getParameter("pageNum");
+String pageType = request.getParameter("pageType");
 
 int pageSize = 5;
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -101,17 +102,17 @@ int number = count - (crtPage -1) * pageSize;
 
 				if (startPage > 10) {
 			%>
-				<a href="journalist.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
+				<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage - 10%>">[이전]</a>
 			<%
 				} // end if
 				for (int i = startPage; i <= endPage; i++) {
 			%>
-				<a href="journalist.jsp?pageNum=<%=i%>">[<%=i%>]</a>
+				<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=i%>">[<%=i%>]</a>
 			<%
 				}// end for
 				if (endPage < pageCount) {
 			%>
-				<a href="journalist.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
+				<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage + 10%>">[다음]</a>
 			<%
 				} // end if
 				}// end if(count)
