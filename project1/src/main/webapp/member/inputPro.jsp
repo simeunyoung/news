@@ -10,7 +10,17 @@
 <%
 	member.setReg(new Timestamp(System.currentTimeMillis()));
 	MemberDAO manager = MemberDAO.getInstance();
-	manager.insertMember(member);
-	
+	int result = manager.insertMember(member);
+	if(result == 0){
+		%>
+		<script>
+		alert("이미 가입되어 있는 아이디입니다.");
+		history.go(-1);
+		</script>
+		<%
+			
+	}
+		
 	response.sendRedirect("loginForm.jsp");
 %>
+<%=result%>

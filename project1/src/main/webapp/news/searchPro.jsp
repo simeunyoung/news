@@ -62,12 +62,12 @@ String date = request.getParameter("date");
 <%  } else {    %>
 <table border="1" width="700" cellpadding="0" cellspacing="0" align="center"> 
     <tr height="30"> 
-      <td align="center"  width="250" >NO</td> 
-      <td align="center"  width="250" >제목</td> 
-      <td align="center"  width="100" >작성자</td>
-      <td align="center"  width="150" >언론사</td> 
-      <td align="center"  width="150" >작성일</td> 
-      <td align="center"  width="150" >조회수</td>         
+      <th align="center"  width="250" >NO</th> 
+      <th align="center"  width="250" >제목</th> 
+      <th align="center"  width="100" >작성자</th>
+      <th align="center"  width="150" >언론사</th> 
+      <th align="center"  width="150" >작성일</th> 
+      <th align="center"  width="150" >조회수</th>         
     </tr>
 <% int number = 1;
         for (int i = 0 ; i < searchList.size() ; i++) {
