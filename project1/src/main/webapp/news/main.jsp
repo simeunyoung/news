@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="news.NewsDTO"%>
 <%@ page import="news.NewsDAO"%>
+<%@ page import="member.MemberDAO"%>
+<%@ page import="member.MemberDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
@@ -36,6 +38,29 @@ List newsList = null;
 NewsDAO newsPro = NewsDAO.getInstance();
 newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 %>
+<%-- 구독목록 --%>
+<% 	MemberDAO dao = MemberDAO.getInstance();
+	String exist = dao.selectExist(loginuser);
+	String[] existArray = null;
+	
+if (exist == null) {
+	existArray = new String[1];
+	existArray[0] = "-";
+} else {
+	existArray = exist.split("@");
+}
+	String reporter = dao.subscribeR(loginuser);
+	String[] reporterArray = null;
+	if (reporter == null) {
+		reporterArray = new String[1];
+		reporterArray[0] = "-";
+	} else {
+		reporterArray = reporter.split("@");
+	}
+	String[] nameArray = new String[existArray.length];
+	
+	
+%>
 <!-- header -->
 <jsp:include page="/member/header.jsp"></jsp:include>
 
@@ -56,7 +81,7 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 		<div class="main-card main_list">
 			<div class="title-box">
 				<p class="title">오늘의 뉴스</p>
-				<a href="list.jsp" class="more">더보기</a>
+				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
 			</div>	
 			<div class="list-card">
 				<%
@@ -81,25 +106,28 @@ newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 	<div class="right_box">
 		<div class="main-card jn_bookmark">
 			<div class="title-box">
-				<p class="title">구독한 기자</p>
-				<a href="list.jsp" class="more">더보기</a>
+				<p class="title">구독한 언론사</p>
+				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
 				
 			</div>
 			<div>
-					강기자<br>
-					김기자<br>
-				</div>
+				<% for(int i = 1 ; i < existArray.length ; i++){%>
+				<a href ="pressPage.jsp?press=<%= existArray[i] %>"><%= existArray[i] %></a><br>
+				<% }%>
+			</div>
 		</div>
 		<div class="main-card press_bookmark">
 			<div class="title-box">
-				<p class="title">구독한 언론사</p>
+				<p class="title">구독한 기자</p>
 				<a href="list.jsp" class="more">더보기</a>
 				
 			</div> 	
 			<div>
-					aaa<br>
-					bbb<br>
-				</div>
+				<% for(int i = 1 ; i < reporterArray.length ; i++){%>
+				<% MemberDTO mem = dao.getMember(reporterArray[i]); %>
+				<a href ="/project1/member/user_mypage_form.jsp?pageType=2&id=<%= reporterArray[i] %>"><%= mem.getNick() %></a><br>
+				<% }%>
+			</div>
 		</div>
 	</div>	
 </div>
