@@ -65,7 +65,7 @@ NewsDAO newsPro = NewsDAO.getInstance();
 newsList = newsPro.getNews7days(); // list 페이지 자료 수집
 
 int listnumber = newsList.size();
-int random = (int)((Math.random()*10)*listnumber);
+
 %>
 <div align="right"><button  onClick="window.location.reload()">새로고침</button></div>
 <div class="boxname_link">
@@ -73,7 +73,10 @@ int random = (int)((Math.random()*10)*listnumber);
 <div align="right" class="boxname"><a href="list.jsp"><font color="#808080"><b>더 많은 뉴스 보러가기&nbsp;&nbsp;</b></font></a></div>
 </div><br />
 <div class="list_group">
-<% for(int i = 0; i < 5; i++){ NewsDTO article = (NewsDTO)newsList.get(random); %>
+<% for(int i = 0; i < 5; i++){
+	
+int random = (int)(Math.random()*(listnumber-1));
+NewsDTO article = (NewsDTO) newsList.get(random); %>
 
 <a href="content.jsp?num=<%=article.getNum()%>"><div class="list_showcase">
 <div align="right"><font color="#a9a9a9"><b><%=article.getNewstype() %>&nbsp;뉴스</b></font></div>
@@ -82,7 +85,7 @@ int random = (int)((Math.random()*10)*listnumber);
 <div class="make_short">&nbsp;&nbsp;<font color="#000000"><%=article.getCon() %></div><br /><br />
 <div align="right"><b>작성일자 : <%=sdf.format(article.getReg()) %></b></div></font>
 
-</div></a><%}%></div>
+</div></a><% }%></div>
  
 <style>
 *{

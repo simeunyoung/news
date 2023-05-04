@@ -460,11 +460,13 @@ public class NewsDAO extends OracleServer {
 	
 	public List getNews7days() throws Exception {
 
-		List newsList = new ArrayList();
+		List newsList = new ArrayList(38);
 
 		try {
 			conn = getConnection();
-			sql = "select * from news where reg between trunc(sysdate - 6) and trunc(sysdate)";
+			sql = "select * from(select e.*, rownum r from"
+					+ "(select * from news where reg between trunc(sysdate - 6) and trunc(sysdate)) e)"
+					+ " where r >= 1 and r <= 38";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
