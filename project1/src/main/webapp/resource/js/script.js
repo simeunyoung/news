@@ -65,13 +65,14 @@ function inputCheck() {
 // 아이디 중복 검사
 	function openConfirmId(userinput){
 		// 아이디 입력했는지 검사
-		if(userinput.id.value == ""){
+		var id = userinput.id.value;
+		if(id == ""){
 			alert("아이디를 입력하세요.")
 			return;
 		}
 		
 		// url과 사용자 입력 id를 조합
-		url = "confirmId.jsp?id="+userinput.id.value;
+		url = "confirmId.jsp?id="+id;
 		
 		// 새로운 윈도우를 열기
 		open(url, "confirm" , "toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizeble=no,width=300,height=200");
