@@ -639,7 +639,7 @@ public class NewsDAO extends OracleServer {
         try {
            conn = getConnection();
            pstmt = conn.prepareStatement(
-                 "SELECT * FROM news WHERE title LIKE '%' || ? || '%'");
+                 "SELECT * FROM news WHERE title LIKE '%' || ? || '%' order by reg desc");
                  pstmt.setString(1, search);
                  rs = pstmt.executeQuery();
                  if (rs.next()) {
