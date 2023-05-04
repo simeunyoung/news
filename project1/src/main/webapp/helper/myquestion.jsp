@@ -4,7 +4,7 @@
 <%@ page import = "helper.SvcenterDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.List"%>
-<%-- 내 문의글 목록보는 곳 --%>
+<%-- 1대1문의를 작성했을 시 따로 내 문의글만 따로 목록으로 출력하는 게시판 --%>
 <%!
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -27,19 +27,19 @@
 	
 	List svcenterList = null;
 	SvcenterDAO svDAO = SvcenterDAO.getInstance();
-	count = svDAO.getMySvcenterCount(id);
-	if(count > 0){
-		svcenterList = svDAO.getMySvcenter(id,startRow,endRow); 
+	count = svDAO.getMySvcenterCount(id);							//세션에서 받아온 id가 작성한 글이 테이블에 몇개가 있는지 확인 있다면 1 없으면 0
+	if(count > 0){													//글이 있는 경우 작동
+		svcenterList = svDAO.getMySvcenter(id,startRow,endRow); 	//
 	}
 	number = count - (currentPage - 1) * pageSize;
 %>
  
-<center><b>내문의목록(전체 글 : <%=count%>)</b>
+<center><b>내문의목록(전체 글 : <%=count%>)</b>	<%-- 본인이 작성한 글이 있다면 몇개가 있는지 나타냄 --%>
 <table width = "700">
 	<tr>
 		<td align = "right">
 		<%if(session.getAttribute("memId") == null){%>
-			<a href = "/project1/member/loginForm.jsp">로그인</a>
+			<a href = "/project1/member/loginForm.jsp">로그인</a>		<%-- 만약 로그인 상태가 아니면 전체글 목록은 0으로 표시가 될 것이고 로그인을 할 수 있게 만들어 둠 --%>
 		<%}else{%>
 			<a href = "questionForm.jsp">글쓰기</a>
 			<a href = "/project1/member/logout.jsp">로그아웃</a>
@@ -49,14 +49,14 @@
 </table>
 
 
-<%if(count == 0){%>
+<%if(count == 0){%>						<%-- 작성한 글이 없을 시 해당 페이지에 출력하는 곳 --%>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <table align = "center" width = "700" border = "1" cellpadding = "0" cellspacing = "0">
 	<tr>
 		<td align = "center">작성하신 글이 없습니다.</td>
 </table>
 
-<%}else{%>
+<%}else{%>								<%-- 작성한 글이 있을 경우 게시판을 만들고 출력 --%>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <center><b>내문의목록</b>
 <table ailgn = "center" width = "800" border = "1" cellspacing = "0" cellpadding = "0">
@@ -67,7 +67,7 @@
 		<td align = "center" width = "100">문의날짜</td>
 		
 	<%
-		for(int i = 0 ; i < svcenterList.size() ; i++){
+		for(int i = 0 ; i < svcenterList.size() ; i++){						//위에서 검색한 값이 리스트에 저장이 되어있기에 반복문을 사용해서 리스트에 저장된 값으 수만큼 반복하여 하나씩 꺼내서 svdto에 저장
 			SvcenterDTO svdto = (SvcenterDTO)svcenterList.get(i);
 	%>
 	

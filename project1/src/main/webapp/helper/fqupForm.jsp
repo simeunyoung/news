@@ -9,7 +9,7 @@
 	
 	try{
 		Svcenter1DAO svdao1 = Svcenter1DAO.getInstance();
-		Svcenter1DTO svdto1 = svdao1.updateGetSvcenter1(num); 
+		Svcenter1DTO svdto1 = svdao1.updateGetSvcenter1(num); 		//해당 글번호를 받아와서 대입하고 해당 글의 데이터를 꺼내오는중
 %>
 
 <center><b>글수정</b>
@@ -18,7 +18,7 @@
 		<table width = "1000" height = "800" border = "1" cellspacing = "0" cellpadding = "0" align = "center">
 			<tr heigth = "30">
 				<td width = "80" align = "center">작성자</td>
-				<td align = "left" width = "330"><%=svdto1.getId()%>
+				<td align = "left" width = "330"><%=svdto1.getId()%>			<%-- 아이디는 로그인을 한 상태이고 해당 페이지는 관리자만 작성 수정이 가능하기에 admin 고정이기에 DB에서 꺼내와 대입 --%>
 					<input type = "hidden" name = "num" value = "<%=svdto1.getNum()%>"></td>
 			</tr>
 			<tr height = "30">

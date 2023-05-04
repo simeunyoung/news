@@ -57,12 +57,14 @@
 				<%
 					String id = (String)session.getAttribute("memId");
 					if(id != null){
-						if(id.equals(svDTO.getId()) || id.equals("admin")){
+						if(id.equals(svDTO.getId())){			//본인 글만 수정 삭제가능하게 설정
 				%>
 			<input type = "button" value = "글수정" onclick = "location.href='qtupForm.jsp?num=<%=svDTO.getNum1()%>&pageNum=<%=pageNum%>'">
 				&nbsp;&nbsp;&nbsp;&nbsp;
+				<%if(id.equals("admin")){%>						<%-- 관리자일 경우엔 글삭제가 가능하게 만듬 --%>
 			<input type = "button" value = "글삭제" onclick = "location.href='qtdeleForm.jsp?num=<%=svDTO.getNum1()%>&pageNum=<%=pageNum%>'">
 				&nbsp;&nbsp;&nbsp;&nbsp;
+					<%}%>
 				<%}%>
 			<%}%>
 			<input type = "button" value = "글목록" onclick = "location.href='qalist.jsp?pageNum=<%=pageNum%>'">

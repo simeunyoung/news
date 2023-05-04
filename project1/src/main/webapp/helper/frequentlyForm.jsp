@@ -4,10 +4,10 @@
 <%@page import = "member.MemberDAO"%>
 
 <%
-	String id = (String)session.getAttribute("memId");
+	String id = (String)session.getAttribute("memId"); //세션값으로 admin 아이디를 id에 대입
 
 	MemberDAO mbDAO = MemberDAO.getInstance();
-	MemberDTO mbdto = mbDAO.getMember(id);
+	MemberDTO mbdto = mbDAO.getMember(id);				//관리자 아이디를 메소드에 대입하여 관리자의 정보를 멤버 테이블에서 검색하여 꺼내옴
 	
 	try{
 %>

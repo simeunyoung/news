@@ -13,7 +13,7 @@
 <form method = "post" name = "fqdeleForm" action = "fqdelePro.jsp?pageNum=<%=pageNum%>">
 	<table border = "1" align = "center" cellspacing = "0" cellpadding = "0" width = "360">
 		<tr heigth = "30">
-			<td align = "center"><b>현재글을 삭제하시겠습니까?</b></td>
+			<td align = "center"><b>현재글을 삭제하시겠습니까?</b></td>					<%-- 잘못눌러서 글이 바로 삭제되는것을 방지하기 위해서 재차 묻게 해놓음 --%>
 		</tr>
 		<tr heigth = "30">
 			<td align = "center">

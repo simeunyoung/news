@@ -14,7 +14,7 @@
 	
 	try{
 		Svcenter1DAO svdao1 = Svcenter1DAO.getInstance();
-		Svcenter1DTO svdto1 = svdao1.getSvdto1(num);	
+		Svcenter1DTO svdto1 = svdao1.getSvdto1(num);			//해당 게시글 번호를 가지고 DB에 대입하여 검색
 %>
 
 <center><b>내 용</b></center>
@@ -47,7 +47,7 @@
 			<td colspan = "4" align = "right">
 			
 			<%if(id != null){
-				if(id.equals("admin")){%>
+				if(id.equals("admin")){%>		<%-- 세션에서 받아온 id 값이 있어야 되고 그 아이디가 관리자일 경우에만 보이게 설정 --%>
 
 			<input type = "button" value = "글수정" onclick = "location.href='fqupForm.jsp?num=<%=svdto1.getNum()%>&pageNum<%=pageNum%>'">
 			&nbsp;&nbsp;&nbsp;&nbsp;

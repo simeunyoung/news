@@ -82,13 +82,11 @@ if(!loginuser.equals(text.getId())){%>
 		<td align = "right" colspan = "0" width = "2" height = "10">
 			<td align = "center" width = "10" height = "10">좋아요</td>
 			<td align = "center" width = "10" height = "10">싫어요</td>
-			<td align = "center" width = "10" height = "10">총 점</td>
 	</tr>
 	<tr>
 		<td align = "right">
 			<td align = "center"><%=rDTO.getGood()%>
 			<td align = "center"><%=rDTO.getBad()%>
-			<td align = "center"><%=rDTO.getTotal()%>
 		</td>
 	</tr>
 </table>

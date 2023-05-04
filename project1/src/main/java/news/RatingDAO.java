@@ -64,7 +64,9 @@ public class RatingDAO extends OracleServer {
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 				
-			if(rs.next()) {dbid = rs.getString("id");}
+			if(rs.next()) {
+				dbid = rs.getString("id");
+			}
 				
 			if(dbid.equals(id)) {
 				sql = "delete from rating where id = ? and num = ?";
@@ -79,7 +81,7 @@ public class RatingDAO extends OracleServer {
 				pstmt.setInt(1, num);
 				pstmt.setString(2, id);
 				pstmt.setInt(3, rDTO.getGood());
-				pstmt.setInt(4, rDTO.getBad()-1);
+				pstmt.setInt(4, rDTO.getBad()+1);
 				pstmt.setInt(5, rDTO.getTotal()-1);
 				pstmt.executeUpdate();
 				result = 1;
@@ -92,7 +94,7 @@ public class RatingDAO extends OracleServer {
 		return result;
 	}
 	
-	public int ratingcount(int num) throws Exception{				//좋아요 싫어요를 합쳐서 뉴스 content.jsp의 Count에 대입을 함
+	public int ratingcount(int num) throws Exception{				
 		int x = 0;
 		
 		try {
@@ -113,7 +115,7 @@ public class RatingDAO extends OracleServer {
 		return x;
 	}
 	
-	public RatingDTO getRatingDTO(int num) throws Exception{
+	public RatingDTO getRatingDTO(int num) throws Exception{				//테이블에 해당 기사의 좋아요와 싫어요 총점을 더함
 		RatingDTO rdto = null;
 		
 		try {

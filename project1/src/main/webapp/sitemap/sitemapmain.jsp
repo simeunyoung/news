@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%String id = (String)session.getAttribute("memId");
-	if(id == null){%>
+	if(id == null || id != null){%>
 <center><b>사이트맵</b></center>
 <table align = "center" width = "800" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr height = "30">

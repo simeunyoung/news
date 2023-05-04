@@ -4,7 +4,7 @@
 <%@ page import = "helper.SvcenterDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.List"%>
-<%--1대1 문의 게시판 --%>
+<%--1대1 문의를 했을 경우 1대1문의가 들어온 전체를 게시판으로 출력 --%>
 <%!
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -26,15 +26,15 @@
 	
 	List svcenterList = null;
 	SvcenterDAO svDAO = SvcenterDAO.getInstance();
-	count = svDAO.getSvcenterCount();
+	count = svDAO.getSvcenterCount();							//1대1 문의가 들어온게 있는지 확인 있으면 몇개인지 검색하고 count에 저장 글이 있다면 1 없다면 0
 	if(count > 0){
-		svcenterList = svDAO.getSvcenter(startRow, endRow);
+		svcenterList = svDAO.getSvcenter(startRow, endRow);		//글이 있을 경우 검색하고 리스트에 저장
 	}
 	
 	number = count - (currentPage - 1) * pageSize;
 %>
 
-<%if(count == 0){%>
+<%if(count == 0){%>												<%-- 글이 없을때만 동작 --%>
 &nbsp;&nbsp;&nbsp;&nbsp;
 	<table align = "center" width = "700" border = "1" cellspacing = "0" cellpadding = "0">
 		<tr>
@@ -52,8 +52,8 @@
 			<td align = "center" width = "100">작성일</td>
 			
 		<%
-			for(int i = 0 ; i < svcenterList.size() ; i++){
-				SvcenterDTO svdto = (SvcenterDTO)svcenterList.get(i);
+			for(int i = 0 ; i < svcenterList.size() ; i++){				
+				SvcenterDTO svdto = (SvcenterDTO)svcenterList.get(i);			//글이 있을 경우 테이블을 생성하고 위에서 검색한 내용이 리스트에 저장되어있기에 저장되어있는 값만큼 반복하여 값을 하나씩 꺼냄
 		%>
 		
 		<tr heigth = "20">

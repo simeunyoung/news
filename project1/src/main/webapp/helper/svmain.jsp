@@ -7,13 +7,15 @@
 <%@ page import = "java.util.List"%>
 
 <%-- 고객센터 메인페이지 --%>
+<%String id = (String)session.getAttribute("memId");
+	if(id == null || id != null){%>
 <%!
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 
 <%
-	String id = (String)session.getAttribute("memId");
+	
 
 	String pageNum = request.getParameter("pageNum");
 	if(pageNum == null){
@@ -39,15 +41,18 @@
 <center><b>고객센터</b></center>
 <table align = "center" width = "500" height = "60" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr>
+	<%if(id != null){%>
+		<%if(id.equals("admin")){ %>
 		<td align = "center" colspan = "2">
 			<a href = "questionForm.jsp">1대1문의하기</a>
 		</td>
-		
+		<%}%>
+	<%}%>
 		<td align = "center" colspan = "2">
 			<a href = "qalist.jsp">문의목록</a>
 		</td>
 		
-	<%if(id != null){%>
+	<%if(id != null && id.equals("admin")){%>
 		<td align = "center" colspan = "2">
 			<a href = "/project1/admin/journalistForm.jsp">기자신청하기</a>
 		</td>
@@ -132,3 +137,4 @@
 	<%}%>
 		</table>
 	</form>
+<%}%>
