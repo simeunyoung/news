@@ -38,6 +38,7 @@
 %>
 
 <title>고객센터</title>
+<jsp:include page="/member/header.jsp" />
 <center><b>고객센터</b></center>
 <table align = "center" width = "500" height = "60" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr>
@@ -138,3 +139,4 @@
 		</table>
 	</form>
 <%}%>
+<jsp:include page="/member/footer.jsp"></jsp:include>

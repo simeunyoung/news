@@ -39,7 +39,6 @@
 
 <html>
 <body>
-<center>
 	<h2><%= newsType %>
 		뉴스
 	</h2>
@@ -69,7 +68,7 @@
 		</tbody>
 	</table>
 	<br>
-	<div align="center">
+	<div>
 		<% if (newsList != null && newsList.size() > 0) {
                 int pageCount = (newscount / pageSize) + (newscount % pageSize == 0 ? 0 : 1);
                 int startPage = ((currentPage - 1) / 10) * 10 + 1;
@@ -81,26 +80,23 @@
 
                 if (startPage > 1) { %>
 		<a
-			href="newstypelist.jsp?pageNum=<%= startPage - 1 %>&newsType=<%= newsType %>">[이전]</a>
+			href="newstypelist.jsp?pageNum=<%=startPage - 1 %>&newstype=<%=newsType %>">[이전]</a>
 		<% }
 
                 for (int i = startPage; i <= endPage; i++) { %>
 		<% if (i == currentPage) { %>
 		<%= i %>
 		<% } else { %>
-		<a href="newstypelist.jsp?pageNum=<%= i %>&newsType=<%= newsType %>"><%= i %></a>
+		<a href="newstypelist.jsp?pageNum=<%=i %>&newstype=<%= newsType %>"><%=i %></a>
 		<% } %>
 		<% }
 
                 if (endPage < pageCount) { %>
 		<a
-			href="newstypelist.jsp?pageNum=<%= endPage + 1 %>&newsType=<%= newsType %>">[다음]</a>
+			href="newstypelist.jsp?pageNum=<%=endPage + 1 %>&newstype=<%=newsType %>">[다음]</a>
 		<% }
             } %>
 	</div>
-
-
-</center>
 <jsp:include page="/member/footer.jsp"></jsp:include>
 </body>
 </html>

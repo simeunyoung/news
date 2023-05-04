@@ -33,7 +33,7 @@
 	
 	number = count - (currentPage - 1) * pageSize;
 %>
-
+<jsp:include page="/member/header.jsp" />
 <%if(count == 0){%>												<%-- 글이 없을때만 동작 --%>
 &nbsp;&nbsp;&nbsp;&nbsp;
 	<table align = "center" width = "700" border = "1" cellspacing = "0" cellpadding = "0">
@@ -95,3 +95,4 @@
 	<%}%>
 <%}%>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>
