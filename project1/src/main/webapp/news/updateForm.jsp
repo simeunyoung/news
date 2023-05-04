@@ -11,7 +11,7 @@ NewsDAO method = NewsDAO.getInstance();
 NewsDTO text = method.getdata(num);
 %>
 
-<form action="updatePro.jsp" name="write">
+<form action="updatePro.jsp" name="write" onsubmit="return submitPost()">
 	<div class="form_box">
 		<h3>게시글 수정</h3>
 		작성자 :
@@ -35,6 +35,8 @@ NewsDTO text = method.getdata(num);
 			onclick="location='list.jsp'">
 	</div>
 </form>
+
+
 
 <style>
 .form_box {

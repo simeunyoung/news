@@ -134,18 +134,28 @@ submitPost = function() {
   oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
   let content = document.getElementById("editorTxt").value;
   var newstype = document.write.newstype.value;
-  
-  if(content == '') {
+  var title = document.write.title.value;
+  var pw = document.write.pw.value;
+
+  if(newstype == "x"){ // 폼 태그에 newstype 값을 선택하지 않을 때 알림창으로 알려준다.
+		alert("뉴스의 종류가 선택되지 않았습니다.");
+		return false  
+	  }else if(title == ''){
+		  alert("제목을 입력하세요.");
+			return false
+	  }else if(pw == '') {
+		alert("비밀번호를 입력하세요.");
+		return false
+	  }else if(content == '') {
     alert("내용을 입력해주세요.")
     oEditors.getById["editorTxt"].exec("FOCUS")
     return false;
-  }else if(newstype == "x"){ // 폼 태그에 newstype 값을 선택하지 않을 때 알림창으로 알려준다.
-	alert("뉴스의 종류가 선택되지 않았습니다.");
-	return false  
   } else {
     console.log(content)
     return true;
   }
+  
+
 }
 
  

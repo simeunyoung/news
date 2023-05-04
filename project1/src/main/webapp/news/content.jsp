@@ -118,11 +118,11 @@ String usertype = userinfo.getMemberType();
 
 String admin = "2";
 String normaluser = "1";
-if(usertype.equals(admin)){%>
+if(loginuser.equals(text.getId())){%>
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
-<input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
-<%}else if(loginuser.equals(text.getId())){ %>
 <input type="button" class="button" value="수정하기" onclick="location='updateForm.jsp?num=<%=text.getNum()%>'">
+<input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
+<%}else if(usertype.equals(admin)){ %>
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">	
 <%}else if(usertype.equals(normaluser)){%>
