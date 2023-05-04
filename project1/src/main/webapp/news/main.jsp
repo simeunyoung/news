@@ -68,14 +68,6 @@ if (exist == null) {
 <!-- header -->
 <jsp:include page="/member/header.jsp"></jsp:include>
 
-<!-- 테스트 !! -->
- <div>
-	<input type="button" value="리스트로 이동" onClick="location='list.jsp'">
-	<input type="button" value="sessionTest"
-		onClick="location='sessiontest.jsp'">
-	접속자 정보 :
-	<%=loginuser%>
-</div>
 
 <div class="main_box">
 	<div class="left_box">
@@ -86,7 +78,7 @@ if (exist == null) {
 			<div class="title-box">
 				<p class="title">오늘의 뉴스</p>
 				<button  onClick="window.location.reload()">새로고침</button>
-				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
+				<a href="/project1/news/main_list.jsp" class="more">더보기</a>
 			</div>	
 			<div class="list-card">
 				<%
