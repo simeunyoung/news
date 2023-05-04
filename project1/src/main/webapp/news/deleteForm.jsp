@@ -22,7 +22,7 @@ String usertype = userinfo.getMemberType();
 
 String admin = "2";
 if(usertype.equals(admin)){
-response.sendRedirect("deletePro.jsp?num="+num);	
+response.sendRedirect("deleteAdminPro.jsp?num="+num);	
 }else{ %>	
 <center>
 <h2>해당 기사를 삭제하기 위해서는 기사에 저장된 비밀번호가 필요합니다.</h2>

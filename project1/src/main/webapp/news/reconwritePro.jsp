@@ -13,7 +13,11 @@
 	int num = Integer.parseInt(request.getParameter("contentpage"));
     dto.setReg(new Timestamp(System.currentTimeMillis())); //날짜 가져오기
 	dto.setIp(request.getRemoteAddr()); // ip 가져오기
-
+	String id = request.getParameter("id");
+	String nick = request.getParameter("nick");
+	dto.setId(id);
+	dto.setNick(nick);
+	
     NewsDAO news = NewsDAO.getInstance();
     news.insertRecon(dto);
     

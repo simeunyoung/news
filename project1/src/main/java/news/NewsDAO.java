@@ -67,13 +67,13 @@ public class NewsDAO extends OracleServer {
 			conn = getConnection();
 			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getId());
 			pstmt.setString(1, dto.getNick());
 			pstmt.setString(2, dto.getTitle());
 			pstmt.setString(3, dto.getCon());
 			pstmt.setString(4, dto.getRecon());
 			pstmt.setString(5, dto.getIp());
 			pstmt.setTimestamp(6, dto.getReg());
+			pstmt.setString(7, dto.getId());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -306,7 +306,7 @@ public class NewsDAO extends OracleServer {
 					allinfo = new NewsDTO();
 					allinfo.setNum(rs.getInt("num"));
 					allinfo.setId(rs.getString("id"));
-					allinfo.setId(rs.getString("nick"));
+					allinfo.setNick(rs.getString("nick"));
 					allinfo.setTitle(rs.getString("title"));
 					allinfo.setCon(rs.getString("con"));
 					allinfo.setReg(rs.getTimestamp("reg"));
@@ -348,7 +348,22 @@ public class NewsDAO extends OracleServer {
 		}
 		return result;
 	} // public int deleteNews(int num, String pw) throws Exception {
+	
+	public void deleteAdminNews(int num) throws Exception { // 운영자 게시글 삭제 메소드
 
+		try {
+			conn = getConnection();
+			sql = "delete from news where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+	} // public int deleteAdminNews(int num) throws Exception {
+	
 	public void deleteRecon(int num) throws Exception { // 댓글 삭제 메소드
 		try {
 			conn = getConnection();
