@@ -75,25 +75,28 @@ String date = request.getParameter("date");
           NewsDTO dto = (NewsDTO)searchList.get(i);
 %>
    <tr height="30" onclick="location='content.jsp?num=<%=dto.getNum()%>'">
- <td align="center"  width="50"><%=dto.getNum()%></td>
-    <td align="center" width="100" >
- <%if(search != null){ %>
-	<%String search2 = dto.getTitle().replace(search, "@"+search+"@");%>
-	<%String[] spl = search2.split("@");%>
-	<a>
-	<%for(int z = 0 ; z < spl.length; z++){
-		if(!search.equals(spl[z])){
-			out.print(spl[z]);
-		}else{
-			%><span style="font-weight:bold"><%out.print(spl[z]);%></span><%
-		}
-		}%>
-	</a>
-<%} else if(startDate != null && endDate != null){%>
-   <td align="center"  width="50"><%=dto.getTitle()%></td>
-<%} %>
-    </td>
- <td align="center"  width="50"><%=dto.getId()%></td>
+ 	<td align="center"  width="50"><%=dto.getNum()%></td>
+  
+	 <%if(search != null){ %>
+	   <td align="center" width="100" >
+		<%String search2 = dto.getTitle().replace(search, "@"+search+"@");%>
+		<%String[] spl = search2.split("@");%>
+		<a>
+		<%for(int z = 0 ; z < spl.length; z++){
+			if(!search.equals(spl[z])){
+				out.print(spl[z]);
+			}else{
+				%><span style="font-weight:bold"><%out.print(spl[z]);%></span><%
+			}
+			}%>
+		</a>
+	    </td>
+	<%}else{ %>
+	<td align="center"  width="50"><%=dto.getTitle()%></td>
+	<%} %>
+
+   
+ 	<td align="center"  width="50"><%=dto.getId()%></td>
     <td align="center"  width="50"><%=dto.getPress()%></td>
     <td align="center"  width="50"><%=sdf.format(dto.getReg())%></td>
     <td align="center"  width="50"><%=dto.getViews()%></td>

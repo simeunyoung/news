@@ -17,11 +17,6 @@
 	String pageType = request.getParameter("pageType");
 	MemberDAO user = MemberDAO.getInstance();
 	MemberDTO member = user.getMember(id2);
-
-// 	if(member.getMemberType().equals("-1")) {
-// 		session.setAttribute("pageType2", "2");
-// 		String pageType2 = (String)session.getAttribute("pageType2");
-// 	}
 		
 	int check = user.typeCheck(id);
 

@@ -19,7 +19,7 @@
 	%>
 	<script>
 		alert("탈퇴되었습니다.");
-		location="main.jsp";
+		location="/project1/news/main.jsp";
 	</script>
 	<%}else { %>
 		<script>

@@ -12,7 +12,7 @@
 	if(result == null){
 %>
 	<script>
-		alert("아이디를 찾을 수 없습니다.");
+		alert("이름 또는 생년월일이 일치하지 않습니다.");
 		history.go(-1);
 	</script>
 <%} else {%>

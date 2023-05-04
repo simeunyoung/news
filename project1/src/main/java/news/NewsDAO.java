@@ -667,7 +667,7 @@ public class NewsDAO extends OracleServer {
     	List searchDateList = null;
     	try {
     		conn = getConnection();
-    		sql = "select * from news where reg between ? and ?";
+    		sql = "select * from news where reg between ? and ? order by reg desc";
     		pstmt = conn.prepareStatement(sql);
     		pstmt.setString(1, startDate);
     		pstmt.setString(2, endDate);
@@ -712,18 +712,18 @@ public class NewsDAO extends OracleServer {
 				sql +=" REG BETWEEN TRUNC(SYSDATE - 365) AND TRUNC(SYSDATE)";
 				break;
 			}
+			sql += " order by reg desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				searchTodayList = new ArrayList();
 				while(rs.next()) {
 					NewsDTO dto = new NewsDTO();
-			        dto.setNum(rs.getInt("num"));
-			        dto.setTitle(rs.getString("title"));
-                    dto.setId(rs.getString("id"));
-                    dto.setPress(rs.getString("press"));
-                    dto.setReg(rs.getTimestamp("reg"));                       
-                    dto.setViews(rs.getInt("views"));
+					dto.setNum(rs.getInt("num"));
+	    			dto.setId(rs.getString("id"));
+	                dto.setNewstype(rs.getString("newstype"));
+	                dto.setTitle(rs.getString("title"));
+	                dto.setReg(rs.getTimestamp("reg"));
 					searchTodayList.add(dto);
 				}
 			}
