@@ -107,19 +107,26 @@ if (exist == null) {
 		<div class="main-card jn_bookmark">
 			<div class="title-box">
 				<p class="title">구독한 언론사</p>
+				<% if(loginuser == null){ %>
+				<a href="/project1/member/loginForm.jsp" class="more">더보기</a>
+				<% }else{ %>
 				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
-				
+				<% }%>
 			</div>
 			<div>
 				<% for(int i = 1 ; i < existArray.length ; i++){%>
-				<a href ="pressPage.jsp?press=<%= existArray[i] %>"><%= existArray[i] %></a><br>
+				<a href ="/project1/company/pressPage.jsp?press=<%= existArray[i] %>"><%= existArray[i] %></a><br>
 				<% }%>
 			</div>
 		</div>
 		<div class="main-card press_bookmark">
 			<div class="title-box">
 				<p class="title">구독한 기자</p>
-				<a href="list.jsp" class="more">더보기</a>
+				<% if(loginuser == null){ %>
+				<a href="/project1/member/loginForm.jsp" class="more">더보기</a>
+				<% }else{ %>
+				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
+				<% }%>
 				
 			</div> 	
 			<div>
