@@ -65,9 +65,10 @@ public class NewsDAO extends OracleServer {
 	public void insertRecon(NewsDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?)";
+			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
+			pstmt.setString(1, dto.getNick());
 			pstmt.setString(2, dto.getTitle());
 			pstmt.setString(3, dto.getCon());
 			pstmt.setString(4, dto.getRecon());
@@ -157,6 +158,7 @@ public class NewsDAO extends OracleServer {
 				info = new NewsDTO();
 				info.setNum(rs.getInt("num"));
 				info.setId(rs.getString("id"));
+				info.setId(rs.getString("nick"));
 				info.setTitle(rs.getString("title"));
 				info.setCon(rs.getString("con"));
 				info.setRecon(rs.getString("recon"));
@@ -268,6 +270,7 @@ public class NewsDAO extends OracleServer {
 					NewsDTO info = new NewsDTO();
 					info.setNum(rs.getInt("num"));
 					info.setId(rs.getString("id"));
+					info.setId(rs.getString("nick"));
 					info.setTitle(rs.getString("title"));
 					info.setCon(rs.getString("con"));
 					info.setReg(rs.getTimestamp("reg"));
@@ -303,6 +306,7 @@ public class NewsDAO extends OracleServer {
 					allinfo = new NewsDTO();
 					allinfo.setNum(rs.getInt("num"));
 					allinfo.setId(rs.getString("id"));
+					allinfo.setId(rs.getString("nick"));
 					allinfo.setTitle(rs.getString("title"));
 					allinfo.setCon(rs.getString("con"));
 					allinfo.setReg(rs.getTimestamp("reg"));

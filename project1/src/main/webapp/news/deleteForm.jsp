@@ -8,10 +8,13 @@
 <title>게시글 삭제 확인</title>
 
 <%
+
+
 int num = Integer.parseInt(request.getParameter("num"));
 %>
 
 <div align="center">
+
 <center>
 <h2>해당 기사를 삭제하기 위해서는 기사에 저장된 비밀번호가 필요합니다.</h2>
 <form method="post" align="center" action="deletePro.jsp?num=<%=num%>">

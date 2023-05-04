@@ -55,7 +55,7 @@ NewsDTO recontext = (NewsDTO) recons.get(rnum); //Object(list)형 --> DTO형으로 �
 <a href="reconDeletePro.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><font color="#808080">삭제</font></a> <%-- not fixed --%>
 <%} %>
 </div>
-<b><%= recontext.getId()%></b><font color="#808080">#<%=recontext.getNum() %></font> [ IP : <%= recontext.getIp() %> ]
+<b><%= recontext.getNick()%></b><font color="#808080">#<%=recontext.getId() %></font> [ IP : <%= recontext.getIp() %> ]
 <br />&nbsp;&nbsp;&nbsp;&nbsp;<%=recontext.getRecon()%>
 			
 <hr />		
@@ -87,7 +87,8 @@ if(startPage > 10){%>
     
  <%}else{ %>   
  <br /><form action="reconwritePro.jsp" method="post" class="flexthing">
-<input type="hidden" name="id" value="<%=userinfo.getNick() %>" >
+<input type="hidden" name="id" value="<%=loginuser%>" >
+<input type="hidden" name="nick" value="<%=userinfo.getNick() %>" >
 <input type="hidden" name="title" value="<%=title%>" >
 <input type="hidden" name="con" value="<%=con%>" >
 <input type="hidden" name="contentpage" value="<%=num%>" >
