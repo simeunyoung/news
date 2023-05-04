@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="member.MemberDTO" %>
+<%@ page import="member.MemberDAO" %>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 
@@ -8,13 +9,21 @@
 <title>게시글 삭제 확인</title>
 
 <%
-
+String loginuser = (String) session.getAttribute("memId");
 
 int num = Integer.parseInt(request.getParameter("num"));
 %>
 
 <div align="center">
+<%if(loginuser != null){ 
+MemberDAO memdao = MemberDAO.getInstance();
+MemberDTO userinfo = memdao.getmember(loginuser);
+String usertype = userinfo.getMemberType(); 
 
+String admin = "2";
+if(usertype.equals(admin)){
+response.sendRedirect("deletePro.jsp?num="+num);	
+}else{ %>	
 <center>
 <h2>해당 기사를 삭제하기 위해서는 기사에 저장된 비밀번호가 필요합니다.</h2>
 <form method="post" align="center" action="deletePro.jsp?num=<%=num%>">
@@ -24,6 +33,7 @@ int num = Integer.parseInt(request.getParameter("num"));
 <input class="button" type="button" value="목록으로 돌아가기" onclick="location='list.jsp'">
 </form>
 </center>
+<%} } %>
 </div>
 
 <jsp:include page="/member/footer.jsp"></jsp:include>
