@@ -88,7 +88,9 @@ function deletePageHistoryAndRedirect1() {
                     <%-- 이름, 나머지 글자들 크기 및 글자색 조정 --%>
                     <div class="mt-3">
                       <h4><%=press.toUpperCase()%></h4>
-                      <% if(!include){%>
+                      <% if(id == null){%>
+                      <button class="btn btn-primary" onclick= "location.href='/project1/member/loginForm.jsp'">구독하기</button>
+                      <% }else if(!include){%>
                       <button class="btn btn-primary" onclick= "deletePageHistoryAndRedirect()">구독하기</button>
                       <%}else{%>
                       <button class="btn btn-primary" onclick= "deletePageHistoryAndRedirect1()">구독취소</button>
