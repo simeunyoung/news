@@ -20,6 +20,4 @@
 	<script language = "JavaScript">
 		alert("평가가 취소되었습니다");		
 	</script>
-<% response.sendRedirect("content.jsp?num="+num+"");
-
-}%>
+<% response.sendRedirect("content.jsp?num="+num+"");}%>

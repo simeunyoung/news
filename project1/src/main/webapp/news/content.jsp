@@ -30,10 +30,8 @@ String title = text.getTitle();
 String con = text.getCon();
 String news_scrap = method.newsscrap(loginuser);
 
-int Count = 0;
 RatingDAO rDAO = RatingDAO.getInstance();
-Count = rDAO.ratingcount(num); 
-RatingDTO rDTO = rDAO.getRatingDTO(num); 
+RatingDTO rDTO = rDAO.getRatingDTO(num); 					//기사평점 테이블의 good과 bad 그리고 total의 값을 각각 합쳐서 값을 꺼내옴
 %>
 <%
 if(news_scrap == null){
@@ -62,8 +60,7 @@ for(String part : parts){
 <div class="con1"><b>내용 : </b></div><br />
 <div id = "content"><%=text.getCon()%></div>
 <div align="right">
-<%if(loginuser != null){
- 
+<%if(loginuser != null){ 
 if(!loginuser.equals(text.getId())){%>
 <form>
 <table align = "right" width = "500" height = "60" border = "1" cellspacing =  "0" cellpadding = "0">

@@ -13,35 +13,47 @@ public class RatingDAO extends OracleServer {
 	public static RatingDAO getInstance() {return instance;}
 	private RatingDAO() {}
 	
-	public int goodinsert(String id , int num , RatingDTO rDTO) throws Exception{	//좋아요를 눌렀을때 동작하는 메소드
+	public int goodinsert(String id , int num , RatingDTO dto) throws Exception{	//좋아요를 눌렀을때 동작하는 메소드
 		String dbid = "";
+		int x = 0;
 		int result = -1;
 		try {
 			conn = getConnection();					
-			sql = "select id from rating where num = ?";			//넘겨받은 글번호를 넣고 테이블에 id를 검색
+			sql = "select * from rating where num = ?";			//넘겨받은 글번호를 넣고 테이블에 id를 검색
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 				
 			if(rs.next()) {
 				dbid = rs.getString("id");
+				x = rs.getInt("bad");
 			}
-			
-			if(dbid.equals(id)) {									//세션에서 받아온 id와 평점 테이블을 검색해서 같은 id가 있는지 확인
+			if(dbid.equals(id) && x != 0) {
+				sql = "update rating set good = ?, bad = ?,total = ? where num = ? and id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, dto.getGood()+1);
+				pstmt.setInt(2, dto.getBad()+0);
+				pstmt.setInt(3, dto.getTotal());
+				pstmt.setInt(4, num);
+				pstmt.setString(5, id);
+				pstmt.executeUpdate();
+				
+			}else if(dbid.equals(id)) {									//세션에서 받아온 id와 평점 테이블을 검색해서 같은 id가 있는지 확인
 				sql = "delete from rating where id = ? and num = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
 				pstmt.setInt(2, num);
 				pstmt.executeUpdate();
 				result = 0;
+				
 			}else{
 				sql = "insert into rating values(?,?,?,?,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				pstmt.setString(2, id);
-				pstmt.setInt(3, rDTO.getGood()+1);
-				pstmt.setInt(4, rDTO.getBad());
-				pstmt.setInt(5, rDTO.getTotal()+1);
+				pstmt.setInt(3, dto.getGood()+1);
+				pstmt.setInt(4, dto.getBad());
+				pstmt.setInt(5, dto.getTotal()+1);
 				pstmt.executeUpdate();
 				result = 1;
 			}
@@ -52,29 +64,42 @@ public class RatingDAO extends OracleServer {
 		}
 	return result;
 	}
-
+	
 	public int badinsert(String id, int num, RatingDTO rDTO) throws Exception{
 		String dbid = "";
+		int x = 0;
 		int result = -1;
 		
 		try {
 			conn = getConnection();
-			sql = "select id from rating where num = ?";
+			sql = "select * from rating where num = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 				
 			if(rs.next()) {
 				dbid = rs.getString("id");
+				x = rs.getInt("good");
 			}
+			
+			if(dbid.equals(id) && x != 0) {
+				sql = "update rating set good = ?,bad = ?,total = ? where num = ? and id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, rDTO.getGood()+0);
+				pstmt.setInt(2, rDTO.getBad()+1);
+				pstmt.setInt(3, rDTO.getTotal());
+				pstmt.setInt(4, num);
+				pstmt.setString(5, id);
+				pstmt.executeUpdate();
 				
-			if(dbid.equals(id)) {
+			}else if(dbid.equals(id)) {
 				sql = "delete from rating where id = ? and num = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
 				pstmt.setInt(2, num);
 				pstmt.executeUpdate();
 				result = 0;
+				
 			}else{
 				sql = "insert into rating values(?,?,?,?,?)";
 				pstmt = conn.prepareStatement(sql);
@@ -92,27 +117,6 @@ public class RatingDAO extends OracleServer {
 			oracleClose();
 		}
 		return result;
-	}
-	
-	public int ratingcount(int num) throws Exception{				
-		int x = 0;
-		
-		try {
-			conn = getConnection();
-			sql = "select sum(good + bad) from rating where num = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			rs = pstmt.executeQuery();
-			
-		if(rs.next()) {
-			x = rs.getInt(1);
-		}
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}finally {
-			oracleClose();
-		}
-		return x;
 	}
 	
 	public RatingDTO getRatingDTO(int num) throws Exception{				//테이블에 해당 기사의 좋아요와 싫어요 총점을 더함
