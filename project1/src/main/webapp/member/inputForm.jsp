@@ -12,7 +12,7 @@
 <body>
 <div class="join-wrap">
 	<form action="inputPro.jsp" method="post" name="userinput" onsubmit="return inputCheck();">
-		<h2>CODENEWS</h2>
+		<h2 class="login-logo" onclick="location='/project1/news/main.jsp'">CODENEWS</h2>
 		<div>
 			<table>
 				<tr>

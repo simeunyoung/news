@@ -213,6 +213,12 @@ table tr td{
 
 
 /* login */
+#lang-select{
+	position: absolute;
+    top: 50px;
+    right: 300px;
+    height:30px;
+}
 .login-table {
 	width: 450px;
     border: 1px solid #ddd;
@@ -223,6 +229,9 @@ table tr td{
 .login-table table{
 	border: 0;
 }
+.login-table table tr td{
+	border:0;
+}
 .login-btn{
 	width: 100%;
     padding: 13px 0 13px;
@@ -232,7 +241,9 @@ table tr td{
     font-size:18px;
     margin-top:20px;
 }
-
+.login-btn:hover{
+	background-color:#008bfd;
+}
 .login-wrap{
 	height:100vh;
 	text-align: center;
@@ -264,7 +275,7 @@ table tr td{
 }
 .login-list {
 	display: flex;
-	
+	justify-content:center;
     margin-top: 20px;
 }
 .login-list li::after{
@@ -283,12 +294,21 @@ table tr td{
 .login-logo{
 	font-size:32px;
 	margin-bottom:20px;
+	cursor:pointer;
+	
 }
 .login-table td:first-child{
 	padding-bottom:0;
 }
 .login-table td:last-child{
 	padding-top:0;
+}
+.pw-wrap p{
+	font-size:14px;
+	color:#888;
+}
+.pw-wrap tr:last-child input[type="text"]{
+	border-radius: 0px 0px 6px 6px;
 }
 
 /* join */

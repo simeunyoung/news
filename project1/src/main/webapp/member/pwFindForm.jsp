@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +9,23 @@
 <script src="/project1/resource/js/script.js"></script>
 </head>
 <body>
-	<div>
-		<h2>비밀번호 찾기</h2>
+	<div class="login-wrap pw-wrap">
+		<h2 class="login-logo" onclick="location='/project1/news/main.jsp'">비밀번호 찾기</h2>
 		<form action="pwFind.jsp" method="post">
-			아이디 : <input type="text" name="id" /><br />
-			이메일 : <input type="text" name="email" /><button>인증번호 받기</button><br />
-					<input type="text" name="ccNum" disabled /><br>
-					<input type="submit" value="비밀번호찾기" />
+			<div class="login-table">
+				<table>
+					<tr>
+						<td><input type="text" name="id" placeholder="아이디" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="email" placeholder="이메일" /></td>
+					</tr>
+
+				</table>
+				<input type="submit" class="login-btn" value="비밀번호 찾기" />
+			</div>
 		</form>
+		<p>아이디가 기억나지 않는다면? <span><a href="/project1/member/idFindForm.jsp">아이디 찾기</a></span></p>
 	</div>
 </body>
 </html>

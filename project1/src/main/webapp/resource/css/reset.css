@@ -115,6 +115,7 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 input[type="date"]{border:0;min-height:38px;width: 100%;}
 input[type="text"],input[type="password"]{
 	padding:0 14px;
+	box-sizing:border-box
 }
 input[type="text"]::placeholder,input[type="password"]::placeholder{
 	color:#c0c0c0;

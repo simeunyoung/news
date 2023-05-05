@@ -11,8 +11,7 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="UTF-8">
 
 <link href="/project1/resource/css/style.css" rel="stylesheet">
-<style>
-</style>
+
 </head>
 <%
 MemberDAO manager = MemberDAO.getInstance();
