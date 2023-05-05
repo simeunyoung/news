@@ -11,12 +11,12 @@ MemberDAO dao = MemberDAO.getInstance();
 <%--회사소개 페이지--%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>회사 이름 - 소개</title>
-<link rel="stylesheet" href="style.css">
-<link href="mypage.css" rel="stylesheet" type="text/css">
+<title>CODENEWS</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <body>
 <jsp:include page="/member/header.jsp" />
@@ -28,7 +28,7 @@ MemberDAO dao = MemberDAO.getInstance();
 	}
 	if (pageNum.equals("0")) {
 	%>
-	<main>
+	<main class="page-wrap">
 		<section id="intro">
 			<h1>사이트소개</h1>
 		</section>
@@ -75,18 +75,13 @@ MemberDAO dao = MemberDAO.getInstance();
 	<%
 	} else if (pageNum.equals("2")) {
 	%>
-	<main>
+	<div class="page-wrap">
 		<section id="intro">
-			<h1>언론사/기자</h1>
-			<style>
-td {
-	text-align: center;
-}
-</style>
-			<table border="1">
+			<h1>전체 목록</h1>
+			<table>
 				<tr>
-					<td width=300px>언론사</td>
-					<td width=800px>기자</td>
+					<th width=300px>언론사</th>
+					<th width=800px>기자</th>
 				</tr>
 
 				<%
@@ -99,9 +94,9 @@ td {
 					element = press;
 				%>
 				<tr>
-					<td><h1>
-							<a href="pressPage.jsp?press=<%=element%>"><%=element.toUpperCase()%><br />
-						</h1></td>
+					<td>
+						<a href="pressPage.jsp?press=<%=element%>"><%=element.toUpperCase()%></a>
+					</td>
 					<td>
 						<%
 						ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
@@ -117,14 +112,12 @@ td {
 				}
 				%>
 			</table>
-	</main>
+		</section>
+	</div>
 	<%
 	}
 	%>
 <jsp:include page="/member/footer.jsp"></jsp:include>
-
-	<script src="script.js"></script>
-
 </body>
 </html>
 

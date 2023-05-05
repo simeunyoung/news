@@ -8,7 +8,8 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
-<title>CodeNews에 오신걸 환영합니다.</title>
+<script src="https://kit.fontawesome.com/dbaea98925.js" crossorigin="anonymous"></script>
+<title>CODENEWS</title>
 <%-- main에서 사용될 코드
 1. main의 div에서 내부 div 태그를 이용해서 영역을 4가지로 분리
 div 1 div 2
@@ -76,9 +77,11 @@ if (exist == null) {
 		</div>
 		<div class="main-card main_list">
 			<div class="title-box">
-				<p class="title">오늘의 뉴스</p>
-				<button  onClick="window.location.reload()">새로고침</button>
-				<a href="/project1/news/main_list.jsp" class="more">더보기</a>
+				<div class="row">
+					<p class="title">오늘의 뉴스</p>
+					<button type="button" class="white-btn" onClick="window.location.reload()"><i class="fa-solid fa-rotate-right"></i>새로보기</button>
+				</div>
+				<a href="/project1/news/main_list.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
 			</div>	
 			<div class="list-card">
 				<%
@@ -87,13 +90,9 @@ if (exist == null) {
 					NewsDTO article = (NewsDTO) newsList2.get(random);
 				%>
 				<div class="card cont-box" onclick="location='content.jsp?num=<%=article.getNum()%>'">
-					<p><%=article.getNewstype()%> 뉴스 </p>
-					<div>
-						<h4 class="cont-title" ><%=article.getTitle()%></h4>
-						<span><%=article.getId()%> 기자</span>
-						<div><%=article.getCon()%></div>
-					</div>				
-					<p class="cont-date">작성일자 : <%=sdf.format(article.getReg())%></p>
+					<h4 class="cont-title" ><%=article.getTitle()%></h4>
+					<div class="cont-txt"><%=article.getCon()%></div>				
+					<p class="cont-date"><%=article.getNewstype()%> | <%=article.getId()%> | <%=sdf.format(article.getReg())%> </p>
 				</div>
 				<%
 				}
@@ -106,32 +105,36 @@ if (exist == null) {
 			<div class="title-box">
 				<p class="title">구독한 언론사</p>
 				<% if(loginuser == null){ %>
-				<a href="/project1/member/loginForm.jsp" class="more">더보기</a>
+				<a href="/project1/member/loginForm.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
 				<% }else{ %>
-				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
+				<a href="/project1/company/pressForm.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
 				<% }%>
 			</div>
-			<div>
-				<% for(int i = 1 ; i < existArray.length ; i++){%>
-				<a href ="/project1/company/pressPage.jsp?press=<%= existArray[i] %>"><%= existArray[i] %></a><br>
-				<% }%>
+			<div class="book-wrap">
+				<div class="row">
+					<% for(int i = 1 ; i < existArray.length ; i++){%>
+					<div class="card"><a href ="/project1/company/pressPage.jsp?press=<%= existArray[i] %>"><%= existArray[i] %></a></div>
+					<% }%>
+				</div>
 			</div>
 		</div>
 		<div class="main-card press_bookmark">
 			<div class="title-box">
 				<p class="title">구독한 기자</p>
 				<% if(loginuser == null){ %>
-				<a href="/project1/member/loginForm.jsp" class="more">더보기</a>
+				<a href="/project1/member/loginForm.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
 				<% }else{ %>
-				<a href="/project1/company/pressForm.jsp" class="more">더보기</a>
+				<a href="/project1/company/pressForm.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
 				<% }%>
 				
 			</div> 	
-			<div>
+			<div class="book-wrap">
+			<div class="row">
 				<% for(int i = 1 ; i < reporterArray.length ; i++){%>
 				<% MemberDTO mem = dao.getMember(reporterArray[i]); %>
-				<a href ="/project1/member/user_mypage_form.jsp?pageType=2&id=<%= reporterArray[i] %>"><%= mem.getNick() %></a><br>
+				<div class="card"><a href ="/project1/member/user_mypage_form.jsp?pageType=2&id=<%= reporterArray[i] %>"><%= mem.getNick() %></a></div>
 				<% }%>
+			</div>
 			</div>
 		</div>
 	</div>	

@@ -4,10 +4,16 @@
 <%@ page import="news.NewsDAO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CODENEWS</title>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
+</head>
+<body>
 
-<jsp:include page="/member/header.jsp"></jsp:include>
 
 <%
 	int pageSize = 10;
@@ -37,8 +43,8 @@
 	number = newscount - (currentPage - 1) * pageSize;
 %>
 
-<html>
-<body>
+<jsp:include page="/member/header.jsp"></jsp:include>
+<div class="page-wrap">
 	<h2><%= newsType %>
 		뉴스
 	</h2>
@@ -68,7 +74,7 @@
 		</tbody>
 	</table>
 	<br>
-	<div>
+	<div class="pagination">
 		<% if (newsList != null && newsList.size() > 0) {
                 int pageCount = (newscount / pageSize) + (newscount % pageSize == 0 ? 0 : 1);
                 int startPage = ((currentPage - 1) / 10) * 10 + 1;
@@ -85,9 +91,9 @@
 
                 for (int i = startPage; i <= endPage; i++) { %>
 		<% if (i == currentPage) { %>
-		<%= i %>
+		<a>[<%=i %>]</a>
 		<% } else { %>
-		<a href="newstypelist.jsp?pageNum=<%=i %>&newstype=<%= newsType %>"><%=i %></a>
+		<a href="newstypelist.jsp?pageNum=<%=i %>&newstype=<%= newsType %>">[<%=i %>]</a>
 		<% } %>
 		<% }
 
@@ -97,6 +103,8 @@
 		<% }
             } %>
 	</div>
-<jsp:include page="/member/footer.jsp"></jsp:include>
+</div>
+
 </body>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 </html>

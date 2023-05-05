@@ -6,7 +6,7 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="member.MemberDTO"%>
 <%@ page import="member.MemberDAO"%>
-<title>기존 리스트 파일 div태그 활용하여 리메이크</title>
+<title>CODENEWS</title>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 <jsp:include page="/member/header.jsp"></jsp:include>
@@ -51,28 +51,24 @@ if (newscount > 0) {
 number = newscount - (currentPage - 1) * pageSize;
 %>
 
-접속자 정보 :
-<%=loginuser%>
-
-
 <body>
-	<div class="form_box">
+	<div class="page-wrap">
 		<div class="boxname_link">
 			<div class="boxname">
-				<h3>모든 뉴스(둘러보기)</h3>
+				<h3>전체 뉴스</h3>
 			</div>
 			<div align="right" class="boxname">
 				<%
 				if (memtype.equals("2")) {
 				%>
 				<button class="button" onclick="location='writeForm.jsp'">
-					<b>글쓰기</b>
+					<b class="white-btn">글쓰기</b>
 				</button>
 				<%
 				} else if (memtype.equals("-1")) {
 				%>
 				<button class="button" onclick="location='writeForm.jsp'">
-					<b>글쓰기</b>
+					<b class="white-btn">글쓰기</b>
 				</button>
 				<%
 				} else if (memtype.equals("0")) {
@@ -124,8 +120,8 @@ number = newscount - (currentPage - 1) * pageSize;
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-		</table>
-		<table>
+		
+		
 		<%
 		for (int i = 0; i < newsList.size(); i++) {
 			NewsDTO article = (NewsDTO) newsList.get(i);
@@ -154,7 +150,7 @@ number = newscount - (currentPage - 1) * pageSize;
 		<%
 		}
 		%>
-		<div align="center">
+		<div class="pagination">
 			<%
 			if (newscount > 0) {
 				int pageCount = newscount / pageSize + (newscount % pageSize == 0 ? 0 : 1);
@@ -171,8 +167,7 @@ number = newscount - (currentPage - 1) * pageSize;
 			}
 			for (int i = startPage; i <= endPage; i++) {
 			%>
-			<a href="list.jsp?pageNum=<%=i%>"> [<%=i%>]
-			</a>
+			<a href="list.jsp?pageNum=<%=i%>">[<%=i%>]</a>
 			<%
 			}
 			if (endPage < pageCount) {
@@ -182,6 +177,7 @@ number = newscount - (currentPage - 1) * pageSize;
 			}
 			}
 			%>
+		</div>
 		</div>
 		<jsp:include page="/member/footer.jsp"></jsp:include>
 </body>

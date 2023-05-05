@@ -17,6 +17,6 @@
 		<p>찾으려는 페이지의 주소가 잘못 입력되었거나,</p>
 		<p>주소의 변경 혹은 삭제로 인해 사용하실 수 없습니다.</p>
 		<p>입력하신 페이지의 주소가 정확한지 다시 한번 확인해 주세요.</p>
-		<button type="button" onclick="location='/project1/news/main.jsp'">홈으로</button>
+		<button type="button" class="white-btn" onclick="location='/project1/news/main.jsp'">홈으로</button>
 	</div>
 </body>

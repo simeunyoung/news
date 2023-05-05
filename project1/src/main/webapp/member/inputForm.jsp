@@ -10,15 +10,16 @@
 </head>
 
 <body>
+<div class="join-wrap">
 	<form action="inputPro.jsp" method="post" name="userinput" onsubmit="return inputCheck();">
-		<h2>회원가입</h2>
+		<h2>CODENEWS</h2>
 		<div>
-			<table align="center">
+			<table>
 				<tr>
 					<td>아이디</td>
 					<td>
 						<input type="text" name="id">
-						<input type="button" name="confirmId" value="중복확인" onclick="openConfirmId(this.form)">
+						<input type="button" class="check-btn" name="confirmId" value="중복확인" onclick="openConfirmId(this.form)">
 					</td>
 				</tr>
 				<tr>
@@ -51,10 +52,11 @@
 				</tr>
 			</table>
 		</div>
-		<div>
-			<input type="submit" value="회원가입" />
-			<input type="button" value="취소" onclick="location='/project1/news/main.jsp'"/>
+		<div class="buttom-wrap">
+			<input type="submit" class="submit-btn" value="회원가입" />
+			<input type="button" class="white-btn" value="취소" onclick="location='/project1/news/main.jsp'"/>
 		</div>
 	</form>
+	</div>
 </body>
 </html>

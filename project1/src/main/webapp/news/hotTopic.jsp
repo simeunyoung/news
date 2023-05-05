@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>핫토픽</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 </head>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -31,7 +33,7 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 	<div class="hot-box">
 		<div class="title-box">
 			<p class="title">Hot TOPIC</p>
-			<a href="hotlist.jsp" class="more">더보기</a>
+			<a href="hotlist.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
 		</div>
 		<div class="card topic-card">
 			<%
@@ -41,13 +43,9 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 			%>
 			
 				<div class="cont-box topic-only" onclick="location='content.jsp?num=<%=topic.getNum()%>'">
-					<p><%=topic.getNewstype()%> 뉴스 / 조회수 : <%=topic.getViews()%></p>
-					<div>
-						<h3 class="cont-title"><%=topic.getTitle()%></h3>
-						<span><%=topic.getId()%> 기자</span>
-						<div><%=topic.getCon()%></div>
-					</div>				
-					<p class="cont-date">작성일자 : <%=sdf.format(topic.getReg())%></p>
+					<h3 class="cont-title"><%=topic.getTitle()%></h3>
+					<div class="cont-txt"><%=topic.getCon()%></div>
+					<span><%=topic.getNewstype()%> | <%=sdf.format(topic.getReg())%> | <%=topic.getViews()%></span>			
 				</div>
 		</div>
 			<%
@@ -55,13 +53,10 @@ topicList = newsPro.gethotNews(startRow, endRow); // hotlist 페이지 자료 �
 			%>
 			<div class="card topic-card">
 				<div class="topic-box" onclick="location='content.jsp?num=<%=topic.getNum()%>'">
-					<p><%=topic.getNewstype()%> 뉴스 / 조회수 : <%=topic.getViews()%></p>
-					<div>
-						<h3 class="cont-title" ><%=topic.getTitle()%></h3>
-						<span><%=topic.getId()%> 기자</span>
-						<div><%=topic.getCon()%></div>
-					</div>				
-					<p>작성일자 : <%=sdf.format(topic.getReg())%></p>
+					<h3 class="cont-title" ><%=topic.getTitle()%></h3>
+<%-- 						<span><%=topic.getId()%> 기자</span> --%>
+					<div class="cont-txt"><%=topic.getCon()%></div>
+					<span><%=topic.getNewstype()%> | <%=sdf.format(topic.getReg())%> | <%=topic.getViews()%></span>
 				</div>
 			</div>
 						<%

@@ -100,40 +100,12 @@ nameArray[i] = reporterName;
 					}
 				</script>
 <style>
-.tab {
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid #e6e8ea;
-	margin-bottom: 30px;
-}
 
-.tab-menu {
-	width: 100%;
-	padding: 0 10px 6px 10px;
-	font-size: 15px;
-	color: rgba(20, 31, 64, 0.8);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-}
-
-.tab-menu.active {
-	font-size: 15px;
-	color: #00aace;
-	border-bottom: 2px solid #1bc1db;
-}
-
-.tab-content {
-	display: none;
-}
-
-.tab-content.active {
-	display: block;
-}
 </style>
 <body>
 	<jsp:include page="/member/header.jsp" />
+	<div class="page-wrap">
+	
 	<ul class="tab">
 		<li class="tab-menu active" data-tab="tab01">언론사 구독목록</li>
 		<li class="tab-menu" data-tab="tab02">기자 구독목록</li>
@@ -283,6 +255,7 @@ nameArray[i] = reporterName;
 				%>
 			</tbody>
 		</table>
+	</div>
 	</div>
 	<jsp:include page="/member/footer.jsp"></jsp:include>
 </body>

@@ -15,6 +15,6 @@
 	<div class="error-wrap">
 		<h3>500</h3>
 		<h2>페이지가 작동하지 않습니다.</h2>
-		<button type="button" onclick="location='/project1/news/main.jsp'">홈으로</button>
+		<button type="button" class="white-btn" onclick="location='/project1/news/main.jsp'">홈으로</button>
 	</div>
 </body>

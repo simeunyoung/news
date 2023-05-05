@@ -40,13 +40,16 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="checkbox" id="auto" name="auto" value="1">
-					<label for="auto">로그인 상태 유지</label>
+					<div class="row">
+						<input type="checkbox" id="auto" name="auto" value="1">
+						<label for="auto">로그인 상태 유지</label>
+					</div>				
 				</td>
 			</tr>
 		</table>
-		</div>
 		<input type="submit" value="로그인" class="login-btn" />
+		</div>
+		
 	</form>
 	<ul class="login-list">
 		<li><a href="pwFindForm.jsp">비밀번호 찾기</a></li>
