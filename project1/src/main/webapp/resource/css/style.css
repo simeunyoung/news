@@ -3,6 +3,11 @@
 @import 'reset.css';
 
 /* 공통 */
+.center{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
 .hidden {
 	display: hidden;
 }
@@ -127,8 +132,8 @@ main{
 
 .tab-menu.active {
 	font-size: 15px;
-	color: #00aace;
-	border-bottom: 2px solid #1bc1db;
+	color: #111;
+	border-bottom: 2px solid #111;
 }
 
 .tab-content {
@@ -721,7 +726,49 @@ input[type="submit"].search-btn {
 	min-width: 70px;
     height: 30px;
 }
-
+/************************************
+************** press ***************
+*************************************/
+.press-table tr:last-child td{
+	border-bottom:0;
+}
+.press-table tr td{
+	padding:30px 10px;
+}
+.press-chk{
+	border: 1px solid #ddd;
+	border-radius:4px;
+	width:120px;
+	height:100px;
+	
+}
+.press-chk input[type="checkbox"]{
+	display:none;
+}
+.press-chk input[type="checkbox"] + label::before{
+	content:'✔';
+	width:100%;
+	height:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	border-top:1px solid #ddd;
+	color:#eee;
+	cursor:pointer;
+}
+.press-chk input[type="checkbox"]:checked + label::before{
+	content:'✔';
+	color:#111;
+}
+.press-chk div:first-child{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:60%;
+}
+.press-chk div:last-child{
+	height:40%;
+}
 /************************************
 ************** footer ***************
 *************************************/

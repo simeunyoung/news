@@ -113,7 +113,7 @@ nameArray[i] = reporterName;
 	</ul>
 	<div class="tab-content active" id="tab01">
 		<form action="pressFormPro.jsp?id=<%=id%>" method="get">
-			<table>
+			<table class="press-table">
 				<tbody>
 					<tr>
 						<td>
@@ -123,6 +123,7 @@ nameArray[i] = reporterName;
 					</tr>
 					<tr>
 						<td>
+						<div class="row center">
 							<%
 					boolean isChecked = false;
 					for (int i = 0; i < pressNames.length; i++) {
@@ -131,26 +132,46 @@ nameArray[i] = reporterName;
 							isChecked = pressNames[i].equals(existArray[z]);
 							if (isChecked) {
 					%>
-					<%=pressNames[i]%><input type="checkbox" name="<%=i%>"
-						value="<%=pressNames[i]%>" checked />
+					<div class="press-chk">
+						<div><%=pressNames[i]%></div>
+						<div>
+							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=pressNames[i]%>" checked />
+							<label for="chk<%=i%>"></label>
+						</div>
+					</div>
+<%-- 					<%=pressNames[i]%><input type="checkbox" name="<%=i%>" --%>
+<%-- 						value="<%=pressNames[i]%>" checked /> --%>
 					<%
 					break;
 					}
 					}
 					if (!isChecked) {
 					%>
-					<%=pressNames[i]%><input type="checkbox" name="<%=i%>"
-						value="<%=pressNames[i]%>" />
+					<div class="press-chk">
+						<div><%=pressNames[i]%></div>
+						<div>
+							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=pressNames[i]%>">
+							<label for="chk<%=i%>"></label>
+						</div>
+					</div>
+<%-- 					<%=pressNames[i]%><input type="checkbox" name="<%=i%>" --%>
+<%-- 						value="<%=pressNames[i]%>" /> --%>
 					<%
 					}
 					}
 					%>
 					<input type="hidden" name="id" value="<%=id%>">
-					<input type="submit" value="선택완료">
-			
+			</div>
 						</td>
 					</tr>
-			
+					<tr>
+						<td>
+							<div class="center">
+								<input type="submit" class="submit-btn" value="적용">
+							</div>
+						</td>
+					
+					</tr>
 					
 				
 				
@@ -161,7 +182,7 @@ nameArray[i] = reporterName;
 	</div>
 	<div class="tab-content" id="tab02">
 		<form action="reporterPro.jsp?id=<%=id%>" method="get">
-			<table>
+			<table class="press-table">
 				<thead>
 					<tr>
 					</tr>
@@ -175,6 +196,7 @@ nameArray[i] = reporterName;
 					</tr>
 					<tr>
 						<td>
+						<div class="row center">
 					<%
 					for (int i = 0; i < subscribe2.length; i++) {
 						boolean isChecked2 = false;
@@ -182,22 +204,41 @@ nameArray[i] = reporterName;
 							isChecked2 = subscribe2[i].equals(subscribe[z]);
 							if (isChecked2) {
 					%>
-					<%=nameArray[i]%><input type="checkbox" name="<%=i%>"
-						value="<%=subscribe2[i]%>" checked="true">
+					<div class="press-chk">
+						<div><%=nameArray[i]%></div>
+						<div>
+							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=subscribe2[i]%>" checked />
+							<label for="chk<%=i%>"></label>
+						</div>
+					
+					</div>
 					<%
 					break;
 					}
 					}
 					if (!isChecked2) {
 					%>
-					<%=nameArray[i]%><input type="checkbox" name="<%=i%>"
-						value="<%=subscribe2[i]%>">
+					<div class="press-chk">
+						<div><%=nameArray[i]%></div>
+						<div>
+							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=subscribe2[i]%>">
+							<label for="chk<%=i%>"></label>
+						</div>
+					</div>
 					<%
 					}
 					}
 					%>
 					<input type="hidden" name="id" value="<%=id%>">
-					<input type="submit" value="선택완료">
+					
+					</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="center">
+								<input type="submit" class="submit-btn" value="선택완료">
+							</div>
 						</td>
 					</tr>
 					
