@@ -6,13 +6,18 @@
 <title>기사 수정</title>
 <%
 request.setCharacterEncoding("UTF-8");
-int num = Integer.parseInt(request.getParameter("num"));
+int num = Integer.parseInt(request.getParameter("num")); 
+// 작성된 게시글을 수정하기 위해 게시글을 작성할 때 시퀀스로 전달 받은 num의 데이터를 이용하여 
+// num과 일치하는 레코드들을 불러낸다. 이 때 데이터를 보여주는 것이 아니라 입력가능한 텍스트박스안에서 보여준다.
+
 NewsDAO method = NewsDAO.getInstance();
-NewsDTO text = method.getdata(num);
+NewsDTO text = method.getdata(num); // 데이터를 불러내는 메소드에 num의 값을 입력해서 num에 맞는 레코드를 불러낸다.
 %>
 
 <form action="updatePro.jsp" name="write" onsubmit="return submitPost()">
 	<div class="form_box">
+	<%-- form문에서 텍스트 박스에 불러낸 레코드 값들을 다시 입력할 수 있게 텍스트 박스에 넣어 수정하고 form문애소 submit하면,
+	변경한 데이터를 Pro 페이지에 전달해준다. --%>
 		<h3>게시글 수정</h3>
 		작성자 :
 		<%=text.getId()%><br /> <input type="hidden" name="id"

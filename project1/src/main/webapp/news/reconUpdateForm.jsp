@@ -9,15 +9,15 @@
 <title>댓글 수정</title>
 <%
 request.setCharacterEncoding("UTF-8");
-int num = Integer.parseInt(request.getParameter("num"));
-int connum = Integer.parseInt(request.getParameter("connum"));
+int num = Integer.parseInt(request.getParameter("num")); // recon의 번호 파라미터 가져오기
+int connum = Integer.parseInt(request.getParameter("connum")); // 게시글 파라미터 가져오기
 NewsDAO method = NewsDAO.getInstance();
 NewsDTO text = method.getRecon(num);
 %>
 <form action="reconUpdatePro.jsp" method="post">
 	<h3>작성한 댓글 수정</h3>
-<input type="hidden" name="num" value="<%=text.getNum()%>">
-<input type="hidden" name="connum" value="<%=connum%>">
+<input type="hidden" name="num" value="<%=text.getNum()%>"> <%-- 해당 recon을 삭제하기 위해 파라미터 값을 히든으로 가져간다. --%>
+<input type="hidden" name="connum" value="<%=connum%>"> <%-- 해당 recon을 삭제 후 다시 해당 게시글로 이동하기 위해 파라미터 값을 히든으로 가져온다. --%>
 변경하실 댓글 내용<br /><input type="text" class="textarea_box" name="recon" value="<%=text.getRecon()%>"><br />
 <div align="right">
 <input type="submit" class="submit_button" value="변경하기">&nbsp;

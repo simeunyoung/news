@@ -11,7 +11,7 @@
 <%
 String loginuser = (String) session.getAttribute("memId");
 
-int num = Integer.parseInt(request.getParameter("num"));
+int num = Integer.parseInt(request.getParameter("num")); // num 파라미터를 int 타입으로 변경해서 가져오기
 %>
 
 <div align="center">
@@ -26,6 +26,7 @@ response.sendRedirect("deleteAdminPro.jsp?num="+num);
 }else{ %>	
 <center>
 <h2>해당 기사를 삭제하기 위해서는 기사에 저장된 비밀번호가 필요합니다.</h2>
+<%-- 작성자가 해당 기사를 삭제하기 전에 게시물의 비밀번호를 확인하며, 삭제 의사를 다시 한번 확인한다. --%>
 <form method="post" align="center" action="deletePro.jsp?num=<%=num%>">
 <input type="text" name="pw">
 <input type="hidden" name="num" value="<%=num%>"><br /><br />

@@ -15,7 +15,7 @@
 
 <title>글 확인</title>
 <%
-String loginuser = (String) session.getAttribute("memId");
+String loginuser = (String) session.getAttribute("memId"); //loginPro에서 생성된 세션을 가져오기
 
 request.setCharacterEncoding("UTF-8");
 
@@ -23,15 +23,15 @@ int num = Integer.parseInt(request.getParameter("num")); //list에서 파라미�
 String currentPage = request.getParameter("currentPage");
 
 
-NewsDAO method = NewsDAO.getInstance();
-NewsDTO text = method.getCon(num);
+NewsDAO method = NewsDAO.getInstance(); 
+NewsDTO text = method.getCon(num); // num이라는 파라미터를 가지고 있는 레코드를 가져오는 메소드
 
-String title = text.getTitle();
-String con = text.getCon();
+String title = text.getTitle(); // 변수 선언
+String con = text.getCon(); // 변수 선언
 String news_scrap = method.newsscrap(loginuser);
 
 RatingDAO rDAO = RatingDAO.getInstance();
-RatingDTO rDTO = rDAO.getRatingDTO(num); 					//기사평점 테이블의 good과 bad 그리고 total의 값을 각각 합쳐서 값을 꺼내옴
+RatingDTO rDTO = rDAO.getRatingDTO(num); //기사평점 테이블의 good과 bad 그리고 total의 값을 각각 합쳐서 값을 꺼내옴
 %>
 <%
 if(news_scrap == null){
@@ -60,7 +60,7 @@ for(String part : parts){
 <div class="con1"><b>내용 : </b></div><br />
 <div id = "content"><%=text.getCon()%></div>
 <div align="right">
-<%if(loginuser != null){ 
+<%if(loginuser != null){ // 로그인을 했을 때
 if(!loginuser.equals(text.getId())){%>
 <form>
 <table align = "right" width = "500" height = "60" border = "1" cellspacing =  "0" cellpadding = "0">
@@ -107,27 +107,26 @@ if(!include){
 <button id="copyButton">URL 복사</button>
 
 <%
-//추가 시킨 곳
-if(loginuser != null){
+if(loginuser != null){ //로그인을 했을 때
 MemberDAO memdao = MemberDAO.getInstance();
-MemberDTO userinfo = memdao.getmember(loginuser);
-String usertype = userinfo.getMemberType(); 
+MemberDTO userinfo = memdao.getmember(loginuser); // 세션을 통해서 member 테이블의 데이터를 가져온다.
+String usertype = userinfo.getMemberType();  // 가져온 데이터 중에 맴버의 종류를 변수로 선언
 
 String admin = "2";
 String normaluser = "1";
-if(loginuser.equals(text.getId())){%>
+if(loginuser.equals(text.getId())){%> <%-- 세션과 작성자가 일치할 때 --%>
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="수정하기" onclick="location='updateForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
-<%}else if(usertype.equals(admin)){ %>
+<%}else if(usertype.equals(admin)){ %> <%-- 세션과 운영자의 종류가 일치할 때 --%>
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">	
-<%}else if(usertype.equals(normaluser)){%>
+<%}else if(usertype.equals(normaluser)){%> <%-- 세션이 일반 유저일 때 --%>
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
 <%} 
 }
 //끝난 곳
-if(session.getAttribute("memId") == null) {%>
+if(session.getAttribute("memId") == null) {%> <%-- 비로그인 일 때 --%>
 <input type="button" class="button" value="돌아가기" onclick="location='list.jsp'">
 <%} %>
 </div>
@@ -136,8 +135,8 @@ if(session.getAttribute("memId") == null) {%>
 <%-- ========================= 경계선 ========================= --%>
 
 <div class="recon_box">
-<jsp:include page="recon.jsp">
-<jsp:param value="<%=text.getTitle()%>" name="title"/>
+<jsp:include page="recon.jsp"> <%-- include 액션태그를 사용해서 JSP파일을 content와 합친다. --%>
+<jsp:param value="<%=text.getTitle()%>" name="title"/> <%-- 해당 include 액션 태그에서 사용할 파라미터를 전달하는 역활을 한다. --%>
 <jsp:param value="<%=text.getCon()%>" name="con"/>
 <jsp:param value="<%=num%>" name="num"/>
 </jsp:include>

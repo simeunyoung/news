@@ -6,9 +6,9 @@
 <jsp:useBean id="data" class="news.NewsDTO"/>
 <jsp:setProperty name="data" property="*" />
 <% 
-int connum = Integer.parseInt(request.getParameter("connum"));
+int connum = Integer.parseInt(request.getParameter("connum")); // 게시글 파라미터 값
 NewsDAO method = NewsDAO.getInstance();
-method.reconupdate(data);
+method.reconupdate(data); // usebean과 setProperty를 사용해서 가져온 값을 전부 reconupdate 메소드에 넣는다.
 
 response.sendRedirect("content.jsp?num="+connum);
 %>

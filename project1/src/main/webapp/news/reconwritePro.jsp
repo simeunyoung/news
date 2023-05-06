@@ -15,11 +15,11 @@
 	dto.setIp(request.getRemoteAddr()); // ip 가져오기
 	String id = request.getParameter("id");
 	String nick = request.getParameter("nick");
-	dto.setId(id);
-	dto.setNick(nick);
+	dto.setId(id); // 아이디를 직접 저장
+	dto.setNick(nick); // 닉네임을 직접 저장
 	
     NewsDAO news = NewsDAO.getInstance();
-    news.insertRecon(dto);
+    news.insertRecon(dto); // useBean과 setProperty를 이용해서 전달 받은 파라미터 값을 insertRecon 메소드에 전부 저장
     
     response.sendRedirect("content.jsp?num="+num);
 %>

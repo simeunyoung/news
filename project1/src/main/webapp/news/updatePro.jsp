@@ -10,7 +10,7 @@
 <jsp:useBean id="text" scope="page" class="news.NewsDTO" />
    <jsp:setProperty name="text" property="*"/>
 <%
-	
+	// form문에서 전달한 값을 useBean과 setProperty로 받아낸 뒤 update메소드에 값들을 넣어 레코드 값들을 바꿔준다.
 	NewsDAO method = NewsDAO.getInstance();
     int updateClear = method.update(text);
 	
