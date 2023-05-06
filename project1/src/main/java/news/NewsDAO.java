@@ -26,12 +26,12 @@ public class NewsDAO extends OracleServer {
 	public int CountAllList() throws Exception { // 뉴스의 작성된 글 수를 전부 읽어준다.
 		int x = 0;
 		try {
-			conn = getConnection();
-			sql = "select count(*) from news";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				x = rs.getInt(1);
+			conn = getConnection(); // java와 sql 연동 oracleserver getConnection메소드 사용
+			sql = "select count(*) from news"; // 쿼리문 작성
+			pstmt = conn.prepareStatement(sql); // 쿼리문을 getConnection에 preparestatement로 적용
+			rs = pstmt.executeQuery(); // sql에서 테이블을 사용
+			if (rs.next()) { // pstmt.executeQuery()이 해당할 때
+				x = rs.getInt(1); // pstmt.executeQuery()가 해당할 때 1을 적용
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -45,8 +45,9 @@ public class NewsDAO extends OracleServer {
 		try {
 			conn = getConnection();
 			sql = "insert into news(num,nick,title,con,reg,pw,ip,id,newstype) values(news_seq.nextval,?,?,?,?,?,?,?,?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getNick());
+			// 쿼리문 작성
+			pstmt = conn.prepareStatement(sql); // 쿼리문 적용
+			pstmt.setString(1, dto.getNick()); // ?의 순서에 맞는 데이터 적용
 			pstmt.setString(2, dto.getTitle());
 			pstmt.setString(3, dto.getCon());
 			pstmt.setTimestamp(4, dto.getReg());
@@ -54,7 +55,8 @@ public class NewsDAO extends OracleServer {
 			pstmt.setString(6, dto.getIp());
 			pstmt.setString(7, dto.getId());
 			pstmt.setString(8, dto.getNewstype());
-			pstmt.executeUpdate();
+			pstmt.executeUpdate(); 
+			//executeQuery은 테이블에 데이터를 가져오는 것/ executeUpdate는 테이블에 데이터를 적용시키는 것
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -65,7 +67,7 @@ public class NewsDAO extends OracleServer {
 	public void insertRecon(NewsDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?,?)";
+			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?,?)"; //쿼리문 작성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getNick());
 			pstmt.setString(2, dto.getTitle());
@@ -87,15 +89,15 @@ public class NewsDAO extends OracleServer {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("update news set views=views+1 where num = ?"); // 조회수가 1씩 증가한다. 게시글 번호에 맞는
-																							// 곳에서
+			// getCon()의 메소드가 작동할 때 해당 컬럼이 작동																				// 곳에서
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			pstmt = conn.prepareStatement("select * from news where num = ?"); // 게시글 번호의 정보를 찾기
-			pstmt.setInt(1, num);
+			pstmt.setInt(1, num); // 해당 num에 맞는 데이터 가져오기
 			rs = pstmt.executeQuery();
 			if (rs.next()) { // 게시글 번호에 맞는 정보를 찾기
 				info = new NewsDTO();
-				info.setNum(rs.getInt("num"));
+				info.setNum(rs.getInt("num")); // num에 맞는 데이터를 DTO에 주입
 				info.setId(rs.getString("id"));
 				info.setNick(rs.getString("Nick"));
 				info.setNewstype(rs.getString("newstype"));
@@ -178,21 +180,23 @@ public class NewsDAO extends OracleServer {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("select pw from news where num=?"); // 해당 게시글 비번을 불러와서 삭제 전 글 비번과 입력한 비번과 비교
-			pstmt.setInt(1, info.getNum());
+			pstmt.setInt(1, info.getNum()); //num에 맞는 pw컬럼의 데이터 가져오기
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				checkpw = rs.getString("pw");
-				if (checkpw.equals(info.getPw())) {
-					result = 1;
+			if (rs.next()) { // 위 쿼리문에 맞는 pw가 일치할 때 작동
+				checkpw = rs.getString("pw"); // 위 쿼리문에 일치하는 pw의 변수 선언
+				if (checkpw.equals(info.getPw())) { 
+					// 위 쿼리문의 pw와 메소드에서 가져온 값과 일치 할 때
+					result = 1; // if문에 true일 때 result의 값이 0에서 1로 변경
 					sql = "update news set nick=?,newstype=?,title=?,con=?,pw=? where num=?";
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, info.getNick());
+					// 쿼리문 작성
+					pstmt = conn.prepareStatement(sql); // 쿼리문 적용
+					pstmt.setString(1, info.getNick()); // 쿼리문에 맞는 데이터 저장
 					pstmt.setString(2, info.getNewstype());
 					pstmt.setString(3, info.getTitle());
 					pstmt.setString(4, info.getCon());
 					pstmt.setString(5, info.getPw());
 					pstmt.setInt(6, info.getNum());
-					pstmt.executeUpdate();
+					pstmt.executeUpdate(); // 해당 쿼리문에 맞는 데이터가 변경할 시 변경 내용 적용
 				}
 			}
 		} catch (Exception ex) {
@@ -225,16 +229,18 @@ public class NewsDAO extends OracleServer {
 			conn = getConnection();
 			sql = "select * from (select e.*,rownum r from (select num,nick,newstype,title,con,reg,pw,ip,views,press from news order by reg desc) e )"
 					+ " where r >= ? and r <= ?";
+			// 쿼리문 작성 rownum으로 적용된 데이터 순서 정하기
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, a);
 			pstmt.setInt(2, b);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				textList = new ArrayList(b); // end는 list의 최대 공간을 의미한다.
-				NewsDTO allinfo = new NewsDTO();
+			rs = pstmt.executeQuery(); // 데이터 가져오기
+			if (rs.next()) { // 위 쿼리문에 적용된 데이터일 때 true
+				textList = new ArrayList(b); 
+				// end는 list의 최대 공간을 의미한다. list 클래스로 집합 만들기
+				NewsDTO allinfo = new NewsDTO(); // 새 DTO 객체 생성
 				do {
 					allinfo = new NewsDTO();
-					allinfo.setNum(rs.getInt("num"));
+					allinfo.setNum(rs.getInt("num")); // DTO에 데이터 추가
 					allinfo.setNick(rs.getString("nick"));
 					allinfo.setNewstype(rs.getString("newstype"));
 					allinfo.setTitle(rs.getString("title"));
@@ -244,7 +250,7 @@ public class NewsDAO extends OracleServer {
 					allinfo.setIp(rs.getString("ip"));
 					allinfo.setViews(rs.getInt("views"));
 					allinfo.setPress(rs.getString("press"));
-					textList.add(allinfo);
+					textList.add(allinfo); // 추가한 데이터 list에 추가
 				} while (rs.next()); // while문으로 하면 최근 작성한 게시글이 나오지 않기 때문에 do-while문을 사용
 			}
 		} catch (Exception ex) {
@@ -259,15 +265,15 @@ public class NewsDAO extends OracleServer {
 		List textList = null;
 		try {
 			conn = getConnection();
-			sql = "select * from revalue where title=? and con=?";
+			sql = "select * from revalue where title=? and con=?"; // 쿼리문 작성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
 			pstmt.setString(2, con);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				textList = new ArrayList(30);
+				textList = new ArrayList(30); // list의 데이터를 30개로 제한
 				do {
-					NewsDTO info = new NewsDTO();
+					NewsDTO info = new NewsDTO(); //DTO 객체 생성
 					info.setNum(rs.getInt("num"));
 					info.setId(rs.getString("id"));
 					info.setId(rs.getString("nick"));
@@ -276,7 +282,7 @@ public class NewsDAO extends OracleServer {
 					info.setReg(rs.getTimestamp("reg"));
 					info.setIp(rs.getString("ip"));
 					info.setRecon(rs.getString("recon"));
-					textList.add(info);
+					textList.add(info); //DTO에 저장된 데이터를 list에 저장
 				} while (rs.next());
 			}
 		} catch (Exception ex) {
@@ -288,20 +294,21 @@ public class NewsDAO extends OracleServer {
 	} // public List getRecon(String title,String con) throws Exception {
 	
 	public List getRecon(String title,String con,int a, int b) throws Exception {
-		List textList = null;
+		List textList = null; // 위에 30으로 제한한 부분 수정 메소드
 		try {
 			conn = getConnection();
 			sql = "select * from (select e.*,rownum r from (select * from revalue where title=? and con=? order by reg desc) e )"
-					+ " where r >= ? and r <= ?";
+					+ " where r >= ? and r <= ?"; 
+			//직접 수기로 숫자를 제한하지 않고 rownum을 사용해서 recon의 데이터를 제한하고 저장
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
 			pstmt.setString(2, con);
 			pstmt.setInt(3, a);
 			pstmt.setInt(4, b);
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery(); // sql에서 데이터를 가져오기
 			if (rs.next()) {
-				textList = new ArrayList(b); 
-				NewsDTO allinfo = new NewsDTO();
+				textList = new ArrayList(b); //list의 데이터 생성
+				NewsDTO allinfo = new NewsDTO(); //DTO 객체 생성
 				do {
 					allinfo = new NewsDTO();
 					allinfo.setNum(rs.getInt("num"));
@@ -312,7 +319,7 @@ public class NewsDAO extends OracleServer {
 					allinfo.setReg(rs.getTimestamp("reg"));
 					allinfo.setIp(rs.getString("ip"));
 					allinfo.setRecon(rs.getString("recon"));
-					textList.add(allinfo);
+					textList.add(allinfo); //list로 DTO 데이터 저장
 				} while (rs.next()); 
 			}
 		} catch (Exception ex) {
@@ -329,15 +336,16 @@ public class NewsDAO extends OracleServer {
 		try {
 			conn = getConnection();
 			sql = "select pw from news where num = ?";
+			// 쿼리문 작성 ( 쿼리문에 적용된 pw 데이터 찾기)
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				sqlpw = rs.getString("pw");
-				if (sqlpw.equals(pw)) {
+			if (rs.next()) { //해당 num에 맞는 pw가 있을 때
+				sqlpw = rs.getString("pw"); // 위 쿼리문의 pw 데이터를 변수로 임시 선언 (if문) 
+				if (sqlpw.equals(pw)) {// 메소드의 데이터가 쿼리문 변수와 일치할 때
 					pstmt = conn.prepareStatement("delete from news where num=?");
 					pstmt.setInt(1, num);
-					pstmt.executeUpdate();
+					pstmt.executeUpdate(); // 데이터 값 변경
 					result = 1;
 				}
 			}
@@ -353,7 +361,8 @@ public class NewsDAO extends OracleServer {
 
 		try {
 			conn = getConnection();
-			sql = "delete from news where num=?";
+			sql = "delete from news where num=?"; 
+			// 위의 경우 사용자가 일치하고 비밀번호가 맞을 때 반대로 지금 메소드는 운영자의 권한을 갖고 있을 때
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -368,9 +377,10 @@ public class NewsDAO extends OracleServer {
 		try {
 			conn = getConnection();
 			sql = "delete from revalue where num=?";
+			// 댓글 삭제의 경우 내부적으로 id가 일치하는 유저에 한해서만 적용되게 유효성 검사를 하고 진행되는 메소드
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
-			pstmt.executeUpdate();
+			pstmt.executeUpdate(); // 데이터 수정
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -467,6 +477,7 @@ public class NewsDAO extends OracleServer {
 			sql = "select * from(select e.*, rownum r from"
 					+ "(select * from news where reg between trunc(sysdate - 6) and trunc(sysdate)) e)"
 					+ " where r >= 1 and r <= 38";
+			//trunc는 sysdate의 시간을 생략하는 명령어
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
