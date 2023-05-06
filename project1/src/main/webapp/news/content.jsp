@@ -133,10 +133,10 @@ if(session.getAttribute("memId") == null) {%> <%-- 비로그인 일 때 --%>
 <br />
 
 <%-- ========================= 경계선 ========================= --%>
-
+<%-- include 액션태그를 사용해서 JSP파일을 content와 합친다. --%><%-- 해당 include 액션 태그에서 사용할 파라미터를 전달하는 역활을 한다. --%>
 <div class="recon_box">
-<jsp:include page="recon.jsp"> <%-- include 액션태그를 사용해서 JSP파일을 content와 합친다. --%>
-<jsp:param value="<%=text.getTitle()%>" name="title"/> <%-- 해당 include 액션 태그에서 사용할 파라미터를 전달하는 역활을 한다. --%>
+<jsp:include page="recon.jsp"> 
+<jsp:param value="<%=text.getTitle()%>" name="title"/> 
 <jsp:param value="<%=text.getCon()%>" name="con"/>
 <jsp:param value="<%=num%>" name="num"/>
 </jsp:include>
