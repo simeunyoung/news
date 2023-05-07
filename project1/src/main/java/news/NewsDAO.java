@@ -770,6 +770,7 @@ public class NewsDAO extends OracleServer {
 		return list;
 	}
     
+    // 해당 사용자의 스크랩한 뉴스의 목록을 담고있음
     public String newsscrap(String id) {
         String scrap = "";
         try {
@@ -790,7 +791,10 @@ public class NewsDAO extends OracleServer {
         return scrap;
     }
     
+    // 스크랩 기능
     public void save_news(String news_scrap, int num, String loginuser) {
+    	// 스크랩 정보를 @로 나눠 parts에 저장
+    	// parts의 각 원소가 인자로 받은 num이랑 같은지 비교
     	String[] parts = news_scrap.split("@");
     	boolean include = false;
     	for (String part : parts) {
@@ -799,6 +803,7 @@ public class NewsDAO extends OracleServer {
     	        break;
     	    }
     	}
+    	// include가 false일때 스크랩한 뉴스 번호를 저장
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement("update member set scrap=? where id=?");
@@ -814,7 +819,10 @@ public class NewsDAO extends OracleServer {
         }
     }
     
+    // 스크랩 취소 기능
     public void unsave_news(String news_scrap, int num, String loginuser) {
+    	// 스크랩 정보를 @로 나눠 parts에 저장
+    	// num값이 포함되어 있는지 판단
     	String[] parts = news_scrap.split("@");
     	String wPress = "";
     	boolean include = false;
@@ -824,6 +832,7 @@ public class NewsDAO extends OracleServer {
     	        break;
     	    }
     	}
+    	// include가 true일때 스크랩한 뉴스 번호를 제거
         try {
             conn = getConnection();
             sql="update member set scrap=? where id=?";

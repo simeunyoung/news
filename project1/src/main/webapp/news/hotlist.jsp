@@ -10,25 +10,29 @@
 <jsp:include page="/member/header.jsp" />
 
 <%
+	//페이지에 보여줄 뉴스 개수 지정
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	String pageNum = request.getParameter("pageNum");
 	
+	// 현재 페이지 번호를 pageNum변수에 저장
+	// 값이 null일때 1로 지정
 	if(pageNum == null){
 		pageNum = "1";
 	}
 	
-	int currentPage = Integer.parseInt(pageNum);
-	int startRow = (currentPage - 1) * pageSize + 1;
-	int endRow = currentPage * pageSize;
-	int newscount = 0;
-	int number = 0;
+	int currentPage = Integer.parseInt(pageNum); // 현재 페이지 번호를 저장
+	int startRow = (currentPage - 1) * pageSize + 1; // 페이지 시작 번호
+	int endRow = currentPage * pageSize; // 페이지 끝 번호
+	int newscount = 0; // 전체 게시글 수를 저장 할 변수
+	int number = 0; // 게시글의 번호를 저장 할 변수
 	
 	List newsList = null;
 	NewsDAO newsPro = NewsDAO.getInstance();
 	newscount = newsPro.getNewsCount();
 	
+	// 조회수가 높은 게시물 저장
 	if(newscount > 0){
 		newsList = newsPro.gethotNews(startRow, endRow);
 	}

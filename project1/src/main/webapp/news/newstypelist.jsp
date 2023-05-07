@@ -16,23 +16,26 @@
 
 
 <%
+	// 페이지에 보여줄 뉴스 개수 지정
 	int pageSize = 10;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	String newsType = request.getParameter("newstype");
 	String pageNum = request.getParameter("pageNum");
 	
+	// 현재 페이지 번호를 pageNum변수에 저장
+	// 값이 null일때 1로 지정
 	if(pageNum == null){
 		pageNum = "1";
 	}
 	
-	int currentPage = Integer.parseInt(pageNum);
-	int startRow = (currentPage - 1) * pageSize + 1;
-	int endRow = currentPage * pageSize;
-	int newscount = 0;
-	int number = 0;
+	int currentPage = Integer.parseInt(pageNum); // 현재 페이지 번호를 저장
+	int startRow = (currentPage - 1) * pageSize + 1; // 페이지 시작 번호
+	int endRow = currentPage * pageSize; // 페이지 끝 번호
+	int newscount = 0; // 전체 게시글 수를 저장 할 변수
+	int number = 0; // 게시글의 번호를 저장 할 변수
 	
-	List<NewsDTO> newsList = null;
+	List<NewsDTO> newsList = null; // 뉴스 타입에 해당하는 뉴스 목록 저장
 	NewsDAO newsPro = NewsDAO.getInstance();
 	newscount = newsPro.getNewstypeCount(newsType); // 메소드
 	
@@ -40,6 +43,7 @@
 		newsList = newsPro.getNewsType(startRow, endRow, newsType); // 메소드
 	}
 	
+	// 뉴스 목록에서 역순으로 출력될 작성번호를 계산하면 가장 최신의 기사가 뜸
 	number = newscount - (currentPage - 1) * pageSize;
 %>
 
@@ -75,7 +79,9 @@
 	</table>
 	<br>
 	<div class="pagination">
+		<%-- null이 아니고, 0보다 크면 페이징 --%>
 		<% if (newsList != null && newsList.size() > 0) {
+				// 전체 페이지 수 계산
                 int pageCount = (newscount / pageSize) + (newscount % pageSize == 0 ? 0 : 1);
                 int startPage = ((currentPage - 1) / 10) * 10 + 1;
                 int endPage = startPage + 9;
@@ -88,7 +94,7 @@
 		<a
 			href="newstypelist.jsp?pageNum=<%=startPage - 1 %>&newstype=<%=newsType %>">[이전]</a>
 		<% }
-
+			// 해당 페이지 번호를 누르면 페이지로 이동하게 링크를 걸음
                 for (int i = startPage; i <= endPage; i++) { %>
 		<% if (i == currentPage) { %>
 		<a>[<%=i %>]</a>

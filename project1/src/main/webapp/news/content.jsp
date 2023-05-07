@@ -13,14 +13,14 @@
 <jsp:include page="/member/header.jsp"></jsp:include>
 <jsp:useBean id="dto" class="member.MemberDTO" />
 
-<title>글 확인</title>
+<title>CODENEWS</title>
 <%
 String loginuser = (String) session.getAttribute("memId"); //loginPro에서 생성된 세션을 가져오기
 
 request.setCharacterEncoding("UTF-8");
 
 int num = Integer.parseInt(request.getParameter("num")); //list에서 파라미터 값으로 게시글 보게 설정하기
-String currentPage = request.getParameter("currentPage");
+String currentPage = request.getParameter("currentPage"); // 현재 페이지 정보를 저장하기 위해 변수 선언
 
 
 NewsDAO method = NewsDAO.getInstance(); 
@@ -28,16 +28,21 @@ NewsDTO text = method.getCon(num); // num이라는 파라미터를 가지고 있
 
 String title = text.getTitle(); // 변수 선언
 String con = text.getCon(); // 변수 선언
-String news_scrap = method.newsscrap(loginuser);
+String news_scrap = method.newsscrap(loginuser); // 현재 로그인한 사용자의 스크랩한 뉴스목록을 가져와 변수에 저장
 
 RatingDAO rDAO = RatingDAO.getInstance();
 RatingDTO rDTO = rDAO.getRatingDTO(num); //기사평점 테이블의 good과 bad 그리고 total의 값을 각각 합쳐서 값을 꺼내옴
 %>
 <%
+// 사용자가 현재 뉴스를 스크랩한것인지 확인하는 코드
+// 스크랩이 null인경우 ""로 초기화
+// 초기화 시킨 이유는 split()을 사용할때 null인 경우에 NullPointerException이 발생함 때문에 초기화 시켜줌
 if(news_scrap == null){
 	news_scrap = "";
 }
+// @기준으로 스크랩한 뉴스 목록에서 하나의 뉴스를 구분하기 위해 @ 기준으로 분할하여 저장
 String[] parts = news_scrap.split("@");
+// parts배열의 요소인 part를 현재 뉴스 num과 비교 만약 num이 news_scrap에 포함 되어있으면 true를 반환
 boolean include = false;
 for(String part : parts){
 	if(part.equals(Integer.toString(num))){
@@ -46,7 +51,6 @@ for(String part : parts){
 	}
 }
 %>
-접속자 정보 : <%= loginuser%><br /><br /><hr />
 
 <div class="content_box">
 <div class="con1"><div class="conl"><b>뉴스 종류 : </b><%=text.getNewstype()%></div><div class="conr"><b>조회수 : </b><%=text.getViews()%></div></div>
@@ -54,6 +58,7 @@ for(String part : parts){
 <div class="con1"><div class="conl"><b>작성자 : </b><a href = "/project1/member/user_mypage_form.jsp?id=<%=text.getId()%>&pageType=2"><%=text.getNick()%></a>&nbsp;&nbsp;&nbsp;<b>언론사 : </b><%=text.getPress()%></div><div class="conr"><b>작성일 : </b><%=text.getReg()%></div></div>
 <div class="con1"><b> 글자 크기 </b></div><br />	
 <div align="left">
+<%-- 각 버튼을 누를때 글자크기 변경 --%>
 <button type="button" class="button" onclick="changeFontSize('small')">작게</button>
 <button type="button" class="button" onclick="changeFontSize('normal')">보통</button>
 <button type="button" class="button" onclick="changeFontSize('large')">크게</button>
@@ -88,22 +93,29 @@ if(!loginuser.equals(text.getId())){%>
 	</tr>
 </table>
 <%
+// include가 flase인 경우 스크랩되지 않은 뉴스이기때문에 스크랩하기 버튼 활성화
 if(!include){
+	// 세션이 없다면 버튼을 클릭했을때 메세지 창을 띄움
 	if(session.getAttribute("memId") == null) {
 %>
 <button onclick="alert('로그인 후 사용 가능합니다.');">스크랩 하기</button>
 <%
+	// 로그인이 되었을때 스크랩 가능
 	}else{
 %>
+<%-- 버튼을 누르면 메시지 출력 및 news_scrap.jsp로 이동, 각 3개의 파라미터를 함께 전달 --%>
 <button onclick="alert('스크립트 되었습니다.'); location='news_scrap.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>';">스크랩 하기</button>
 <%
 	}
+// 스크랩되었던 뉴스라면 버튼을 눌렀을때 스크랩 취소 가능
 }else if(include){
 %>
+<%-- 버튼을 누르면 메시지 출력 및 news_scrap_delete.jsp로 이동, 각 3개의 파라미터를 함께 전달 --%>
 <button onclick="alert('스크립트 취소 되었습니다.'); location='news_scrap_delete.jsp?num=<%=num%>&news_scrap=<%=news_scrap%>&loginuser=<%=loginuser%>';">스크랩 취소</button>
 <%
 }
 %>
+<%-- 버튼을 누르면 url복사 가능 --%>
 <button id="copyButton">URL 복사</button>
 
 <%
@@ -144,7 +156,10 @@ if(session.getAttribute("memId") == null) {%> <%-- 비로그인 일 때 --%>
 <jsp:include page="/member/footer.jsp"></jsp:include>
 
 <script>
+// 기사 내용 글자의 크기를 변경하는 기능
 function changeFontSize(size) {
+	// document.getElementById를 사용하여 content요소를 가지고 옴
+	// document.getElementById는 특정 ID를 가진 HTML요소를 가져오는 메서드
   var content = document.getElementById('content');
   if (size === 'small') {
     content.style.fontSize = '16px';
@@ -156,6 +171,7 @@ function changeFontSize(size) {
 }
 </script>
 
+<%-- 기본적인 기사의 글자 크기를 20px로 지정 --%>
 <style>
 #content {
   font-size: 20px;
@@ -164,7 +180,7 @@ function changeFontSize(size) {
 
 <script>
 var copyButton = document.getElementById('copyButton');
-
+// 버튼 클릭시 실행될 함수 지정
 copyButton.addEventListener('click', function() {
     var url = window.location.href;  // 현재 URL 가져오기
     var tempInput = document.createElement("input");  // 임시 input 엘리먼트 생성

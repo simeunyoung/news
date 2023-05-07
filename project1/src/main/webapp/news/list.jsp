@@ -14,9 +14,11 @@
 request.setCharacterEncoding("UTF-8");
 
 String loginuser = null;
-loginuser = (String) session.getAttribute("memId");
-String memtype = null;
+loginuser = (String) session.getAttribute("memId"); // 세션 지정
+String memtype = null; // 로그인한 유저의 멤버 타입 변수
 
+// null값은 0으로 지정
+// 로그인한 유저의 정보를 가져온 뒤 memtype변수에 저장
 if (loginuser == null) {
 	memtype = "0";
 } else {
@@ -26,28 +28,33 @@ if (loginuser == null) {
 	memtype = usertype.getMemberType();
 }
 
+// 날짜, 시간을 지정된 형식으로 변환하기 위해 객체 생성
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+// 현재 페이지 번호를 pageNum변수에 저장
+// 값이 null일때 1로 지정
 String pageNum = request.getParameter("pageNum");
 if (pageNum == null) {
 	pageNum = "1";
 }
 
-int pageSize = 10;
-int currentPage = Integer.parseInt(pageNum);
-int startRow = (currentPage - 1) * pageSize + 1;
-int endRow = currentPage * pageSize;
-int newscount = 0;
-int number = 0;
+int pageSize = 10; // 한 페이지에 표시될 게시글의 개수
+int currentPage = Integer.parseInt(pageNum); // 현재 페이지 번호를 저장
+int startRow = (currentPage - 1) * pageSize + 1; // 페이지 시작 번호
+int endRow = currentPage * pageSize; // 페이지 끝 번호
+int newscount = 0; // 전체 게시글 수를 저장 할 변수
+int number = 0; // 게시글의 번호를 저장 할 변수
 
 List newsList = null;
 NewsDAO newsPro = NewsDAO.getInstance();
 newscount = newsPro.getNewsCount(); // 추가 DAO
 
+// 게시글이 하나라도 있을 경우 해당 페이지의 게시글을 변수에 저장
 if (newscount > 0) {
 	newsList = newsPro.getNews(startRow, endRow); // 추가 DAO
 }
 
+// 현재 페이지에서 게시글 번호를 매기기 위해 변수에 게시글 번호를 저장
 number = newscount - (currentPage - 1) * pageSize;
 %>
 
@@ -59,18 +66,21 @@ number = newscount - (currentPage - 1) * pageSize;
 			</div>
 			<div align="right" class="boxname">
 				<%
+				// admin일때 글쓰기 활성화
 				if (memtype.equals("2")) {
 				%>
 				<button class="button" onclick="location='writeForm.jsp'">
 					<b class="white-btn">글쓰기</b>
 				</button>
 				<%
+				// 기자일때 글쓰기 활성화
 				} else if (memtype.equals("-1")) {
 				%>
 				<button class="button" onclick="location='writeForm.jsp'">
 					<b class="white-btn">글쓰기</b>
 				</button>
 				<%
+				// 비회원일 경우 버튼 위치에 메시지 출력
 				} else if (memtype.equals("0")) {
 				%>
 				현재 비로그인 중입니다.
@@ -123,11 +133,13 @@ number = newscount - (currentPage - 1) * pageSize;
 		
 		
 		<%
+		// newsList에서 NewsDTO에 저장되어있는 정보를 한 행씩 출력
 		for (int i = 0; i < newsList.size(); i++) {
-			NewsDTO article = (NewsDTO) newsList.get(i);
+			NewsDTO article = (NewsDTO)newsList.get(i);
 		%>
 		
 			<tr>
+				<%-- 최신글이 가장 위에 위치하도록 목록에서 역순으로 번호를 부여 --%>
 				<td><%=number--%></td>
 				<td>
 					<div onclick="location='content.jsp?num=<%=article.getNum()%>'"><%=article.getTitle()%></div>
