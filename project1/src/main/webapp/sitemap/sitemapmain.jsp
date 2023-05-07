@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp"></jsp:include>
 <%String id = (String)session.getAttribute("memId");
 	if(id == null || id != null){%>
 <center><b>사이트맵</b></center>
@@ -80,3 +84,4 @@
 	</tr>
 </table>
 <%}%>
+<jsp:include page="/member/footer.jsp"></jsp:include>

@@ -4,7 +4,9 @@
 <%@ page import="news.NewsDAO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<title>insert option for 7day random list show</title>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+<title>CODENEWS</title>
 
 <%-- 
 랜덤하게 sql 문에 가능한지 [ 자바 ] 5개가 나오게 한다.
@@ -67,6 +69,7 @@ newsList = newsPro.getNews7days(); // list 페이지 자료 수집
 int listnumber = newsList.size();
 
 %>
+<jsp:include page="/member/header.jsp"></jsp:include>
 <div align="right"><button  onClick="window.location.reload()">새로고침</button></div>
 <div class="boxname_link">
 <div class="boxname"><h2><font color="#708090"><b>모든 뉴스 ( 최신순 )</b></font></h2></div>
@@ -86,6 +89,7 @@ NewsDTO article = (NewsDTO) newsList.get(random); %>
 <div align="right"><b>작성일자 : <%=sdf.format(article.getReg()) %></b></div></font>
 
 </div></a><% }%></div>
+<jsp:include page="/member/footer.jsp"></jsp:include>
  
 <style>
 *{

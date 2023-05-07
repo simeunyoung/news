@@ -6,7 +6,7 @@
 
 <jsp:include page="/member/header.jsp" />
 
-<title>게시글 삭제 확인</title>
+<title>CODENEWS</title>
 
 <%
 String loginuser = (String) session.getAttribute("memId");

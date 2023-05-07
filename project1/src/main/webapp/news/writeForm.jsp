@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="member.MemberDTO"%>
 <%@ page import="member.MemberDAO"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <jsp:include page="/member/header.jsp"></jsp:include>
 <%-- 액션태그 include를 사용하여 writeForm페이지에 header페이지를 상단으로 불러온다. --%>
-<title>기사 작성</title>
+<title>CODENEWS</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="/project1/resource/static/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
@@ -58,6 +60,7 @@ response.sendRedirect("list.jsp");
 				type="submit" class="submit_button" value="작성완료"  />
 		</div>
 	</form>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 
 	<style>
 .form_box {

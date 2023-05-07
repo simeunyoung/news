@@ -7,6 +7,7 @@
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 
+<title>CODENEWS</title>
 <jsp:include page="/member/header.jsp" />
 
 <%

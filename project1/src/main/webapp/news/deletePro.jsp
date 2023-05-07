@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="news.NewsDAO" %>
-<title>기사 삭제 진행</title>
+<title>CODENEWS</title>
 
 <%
 int num = Integer.parseInt(request.getParameter("num")); // num 파라미터를 String에서 int 타입으로 변환 후 가져오기 

@@ -6,7 +6,7 @@
 <script src="/project1/resource/js/script.js"></script>
 
 <jsp:include page="/member/header.jsp" />
-<title>댓글 수정</title>
+<title>CODENEWS</title>
 <%
 request.setCharacterEncoding("UTF-8");
 int num = Integer.parseInt(request.getParameter("num")); // recon의 번호 파라미터 가져오기

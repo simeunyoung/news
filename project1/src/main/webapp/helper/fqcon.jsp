@@ -3,6 +3,8 @@
 <%@ page import = "helper.Svcenter1DAO"%>
 <%@ page import = "helper.Svcenter1DTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <%-- 자주묻는질문 내용보는 페이지 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
@@ -17,6 +19,8 @@
 		Svcenter1DTO svdto1 = svdao1.getSvdto1(num);			//해당 게시글 번호를 가지고 DB에 대입하여 검색
 %>
 
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp"></jsp:include>
 <center><b>내 용</b></center>
 <form>
 	<table width = "600" height = "500" border = "1" cellspacing = "0" cellpadding = "0" align = "center">
@@ -61,3 +65,4 @@
 	</table>
 <%}catch(Exception e){} %>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

@@ -58,6 +58,7 @@ function deletePageHistoryAndRedirect1() {
 <link href = "mypage.css" rel = "stylesheet" type = "text/css">
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
+<title>CODENEWS</title>
 </head>
 <body>
 <jsp:include page="/member/header.jsp" />

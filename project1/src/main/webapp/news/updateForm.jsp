@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="news.NewsDTO"%>
 <%@ page import="news.NewsDAO"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <jsp:include page="/member/header.jsp"></jsp:include>
-<title>기사 수정</title>
+<title>CODENEWS</title>
 <%
 request.setCharacterEncoding("UTF-8");
 int num = Integer.parseInt(request.getParameter("num")); 
@@ -40,6 +42,7 @@ NewsDTO text = method.getdata(num); // 데이터를 불러내는 메소드에 nu
 			onclick="location='list.jsp'">
 	</div>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 
 
 
