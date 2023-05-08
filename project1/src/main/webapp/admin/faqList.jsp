@@ -5,9 +5,12 @@
 <%@ page import="admin.AdminDTO"%>
 <%@ page import="member.MemberDTO"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%
 	int pageSize = 10; // 한 페이지에서 보여줄 게시물 수
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss"); // 날짜형식 설정
 	
 	String pageNum = request.getParameter("pageNum"); // 현재 페이지를 받아옴 request는 리턴값이 String
 	if(pageNum == null) {
@@ -19,18 +22,16 @@
 	List faqList = null; // 게시물 목록을 보여줄 리스트 선언
 	
 	AdminDAO dao = AdminDAO.getInstance(); // dao 객체 불러옴
-	String memId = (String)session.getAttribute("memId");
-	MemberDTO dto2 = dao.setMember(memId);
-	if(memId == null) {dto2.setMemberType("0");}
+	String memId = (String)session.getAttribute("memId"); // 세션정보 불러옴
+	MemberDTO dto2 = dao.setMember(memId); // 세션정보로 회원정보 불러옴
+	if(memId == null) {dto2.setMemberType("0");} // 비로그인의 경우 멤버타입 0 지정
 	int count = dao.getfaqCount(); // db 게시물 수
 	
-	faqList = dao.faqList(startRow, endRow);
+	faqList = dao.faqList(startRow, endRow); // 로우넘값을 지정해 faq를 꺼냄
 %>
-
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+<jsp:include page="/member/header.jsp" />
 
 <title>FAQ 게시판</title>
-memId = <%=memId%>
 <center><h2>FAQ 게시판</h2></center>
 
 <hr />
@@ -85,25 +86,26 @@ memId = <%=memId%>
 
 <form align="center">
 <%
-	if(count > 0) {
-		int pageCount = count / pageSize + (count % pageSize == 0? 0:1);
+	if(count > 0) { // 글이 있는지 확인
+		int pageCount = count / pageSize + (count % pageSize == 0? 0:1); // 23/10을 기준으로 2페이지는 무조건 나와야하고+(23%10이 딱 나누어 떨어지면 페이지가 더 필요없고 나머지가 있다면 페이지를 하나 더 늘려줘야해서 + 1
 		
-		int startPage = (int)(currentPage / 10) * 10 + 1;
-		int pageBlock = 10;
-		int endPage = startPage + pageBlock -1;
+		int startPage = (int)(currentPage / 10) * 10 + 1; // 현재페이지가 13이면 스타트페이지는 11
+		int pageBlock = 10; // 한 번에 보여줄 페이지 갯수
+		int endPage = startPage + pageBlock -1; // 페이지블럭이 10이면 20 
 		
-		if(endPage > pageCount) {
+		if(endPage > pageCount) { // 엔드페이지가 전체페이지보다 크면 전체페이지를 엔드페이지에 대입 (실제 전체페이지를 넘기면 안됨)
 			endPage = pageCount;
 		}
 		
-		if(startPage > 10) {%>
+		if(startPage > 10) {%><!-- start페이지가 10개가 넘어가면 이전 페이지를 볼 수 있도록함 -->
 			<a href="faqList.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
 <%		} 
-		for(int i = startPage; i <= endPage; i++) {%>
+		for(int i = startPage; i <= endPage; i++) {%><!-- 현재페이지 확인 -->
 			<a href="faqList.jsp?pageNum=<%=i%>">[<%=i%>]</a>
 <%		}
-		if(endPage < pageCount) {%>
+		if(endPage < pageCount) {%><!-- 전체페이지가 엔드페이지보다 작으면 다음 페이지를 볼 수 있도록 함 -->
 			<a href="faqList.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
 <%		}
 	}%>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

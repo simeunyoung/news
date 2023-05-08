@@ -3,6 +3,9 @@
 <%@ page import="admin.AdminDAO"%>
 <%@ page import="admin.AdminDTO"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
@@ -13,8 +16,7 @@
 
 	AdminDTO dto = dao.qnaUpdateGet(num);
 %>
-
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+<jsp:include page="/member/header.jsp" />
 
 <title>Q&A 수정</title>
 memId = <%=memId%>
@@ -68,3 +70,4 @@ memId = <%=memId%>
 		</tr>
 	</table>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

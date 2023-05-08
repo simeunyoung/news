@@ -5,6 +5,9 @@
 <%@ page import="admin.AdminDTO"%>
 <%@ page import="member.MemberDTO"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss");
 	List jList = null;
@@ -29,10 +32,10 @@
 		history.go(-1);
 	</script>
 	<%}%>
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+
+<jsp:include page="/member/header.jsp" />
 
 <title>기자신청 리스트</title>
-
 <center><h2>기자신청 리스트</h2></center>
 
 <hr />
@@ -68,3 +71,5 @@
 <%	} %>
 	</table>
 </form>
+
+<jsp:include page="/member/footer.jsp"></jsp:include>

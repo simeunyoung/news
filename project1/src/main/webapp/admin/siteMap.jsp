@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+<jsp:include page="/member/header.jsp" />
 <title>사이트맵</title>
 <center><h2>사이트맵(테스트페이지)</h2></center>
 
@@ -14,7 +17,6 @@ memId = <%=memId%>
 <a href="journalistList.jsp">기자변경 리스트 v</a> &nbsp;
 <a href="journalistListPro.jsp">기자변경 리스트 프로 v</a> &nbsp;
 기자신청 거절 v
-
 
 <hr>
 
@@ -34,3 +36,4 @@ Q&A 삭제 v
 <a href="/project1/member/inputForm.jsp">회원가입 v</a> &nbsp;
 <a href="/project1/member/loginForm.jsp">로그인 v</a> &nbsp;
 <a href="/project1/member/logout.jsp">로그아웃 v</a> &nbsp;
+<jsp:include page="/member/footer.jsp"></jsp:include>

@@ -9,6 +9,7 @@ public class AdminDTO {
 	private String pw;
 	private String name;
 	private String email;
+	private String press;
 	private String tel;
 	private String title;
 	private String con;
@@ -56,6 +57,12 @@ public class AdminDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPress() {
+		return press;
+	}
+	public void setPress(String press) {
+		this.press = press;
 	}
 	public String getTel() {
 		return tel;

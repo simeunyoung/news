@@ -2,18 +2,19 @@
 <%@ page import="member.MemberDTO"%>
 <%@ page import="admin.AdminDAO"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%
 	AdminDAO dao = AdminDAO.getInstance();
 	String memId = (String)session.getAttribute("memId");
 	MemberDTO dto = dao.setMember(memId);
 	if(memId == null) {dto.setMemberType("0");}
-	if(!(dto.getMemberType().equals("2"))) {response.sendRedirect("faqList.jsp");}
+	if(!(dto.getMemberType().equals("2"))) {response.sendRedirect("faqList.jsp");} // admin이 아니면 들어올 수 없게 막음
 %>
-
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+<jsp:include page="/member/header.jsp" />
 
 <title>FAQ 작성하기</title>
-
 <center><h2>FAQ 작성하기</h2></center>
 
 <hr />
@@ -42,10 +43,6 @@
 		<tr>
 			<td colspan="2"><textarea cols="55" rows="10" name="con" placeholder="내용"></textarea>
 		</tr>
-		<tr height="30">
-			<td align="center">첨부</td>
-			<td align="center"><input type="button" value="첨부파일 추가" onclick="imgUpload.jsp">
-		</tr>
 		<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value="작성" /><input type="button" value="취소" onclick="location='faqList.jsp'" />
@@ -53,3 +50,4 @@
 		</tr>
 	</table>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

@@ -37,10 +37,8 @@
 	int number = count - (currentPage-1) * pageSize;
 %>
 <jsp:include page="/member/header.jsp" />
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
 
 <title>Q&A 목록</title>
-memId = <%=memId%>
 <center><h2>Q&A</h2></center>
 
 <hr />
@@ -63,7 +61,7 @@ memId = <%=memId%>
 	</table>
 <%	} else {%>
 <form>
-	<table align="center" border="1" cellspacing="0" cellpadding="0">
+	<table>
 		<tr height="30">
 			<td align="center" width="50">순번</td>
 			<td align="center" width="150">문의유형</td>

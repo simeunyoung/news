@@ -21,6 +21,3 @@
 		window.location.href = "/project1/news/main.jsp";
 	</script>
 	<%}%>
-
-dto.getId() : <%=dto.getId()%><br />
-dto.getType() : <%=dto.getMemberType()%><br />

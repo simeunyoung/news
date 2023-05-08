@@ -4,21 +4,23 @@
 <%@ page import="admin.AdminDTO"%>
 <%@ page import="member.MemberDTO"%>
 
-<%
-	int num = Integer.parseInt(request.getParameter("num"));
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-	AdminDAO dao = AdminDAO.getInstance();
-	String memId = (String)session.getAttribute("memId");
-	AdminDTO dto = dao.faqGet(num);
-	MemberDTO dto2 = dao.setMember(memId);
-	if(memId == null) {dto.setMemberType("0");}
-%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+<%
+	int num = Integer.parseInt(request.getParameter("num")); // getParameter는 항상String이여서 parseInt로 변환후 대입
+	String pageNum = request.getParameter("pageNum");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 날짜형식 2023-05-01 13:00:00 형태로 변환
+	
+	AdminDAO dao = AdminDAO.getInstance(); // dao 객체 불러옴
+	String memId = (String)session.getAttribute("memId"); // memId에 세션 대입
+	AdminDTO dto = dao.faqGet(num); // num으로 faq정보 불러옴
+	MemberDTO dto2 = dao.setMember(memId); // 세션id로 회원정보 불러옴
+	if(memId == null) {dto.setMemberType("0");} // 비로그인의 경우 멤버타입 0으로 지정
+%>
+<jsp:include page="/member/header.jsp" />
 
 <title>FAQ 게시판</title>
-이전글 다음글 기능 추가요망
 <center><h3>FAQ</h3></center>
 
 <hr />
@@ -68,9 +70,12 @@
 		<tr height="30">
 			<td align="center" colspan="2">
 				<input type="button" value="목록" onclick="location='faqList.jsp'" />
-				<input type="button" value="수정" onclick="location='faqList.jsp'" />
-				<input type="button" value="삭제" onclick="location='faqList.jsp'" />
+				<!-- 글을 삭제하기위해 num과 pageNum을 보냄 -->
+				<%if(dto2.getMemberType().equals("2")) {%>
+				<input type="button" value="삭제" onclick="location='faqDelete.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
+				<%}%>
 			</td>
 		</tr>
 	</table>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

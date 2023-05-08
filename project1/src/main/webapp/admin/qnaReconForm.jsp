@@ -5,8 +5,10 @@
 <%@ page import="admin.AdminDAO"%>
 <%@ page import="member.MemberDTO"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%
-	int num2 = (int)request.getAttribute("num2");
 	int pageSize = 20; // 한 페이지에서 보여줄 게시물 수
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss"); // 작성일자 양식
 
@@ -31,6 +33,7 @@
 		qnaReconList = dao.qnaReconList(num2,startRow,endRow);
 	}
 %>
+<jsp:include page="/member/header.jsp" />
 
 <%	if(count == 0) {%>
 	<table align="center">
@@ -91,3 +94,4 @@
 		</tr>
 	</table>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

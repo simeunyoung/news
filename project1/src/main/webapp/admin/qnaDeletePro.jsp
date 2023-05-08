@@ -7,6 +7,6 @@
 
 <%
 	AdminDAO dao = AdminDAO.getInstance();
-	int result = dao.qnaDelete(dto);
+	int result = dao.qnaDelete(dto); // 글 num, pw를 확인후 삭제
 	response.sendRedirect("qnaList.jsp");
 %>

@@ -6,7 +6,7 @@ import member.MemberDTO;
 import server.OracleServer;
 import server.OracleServer2;
 
-public class AdminDAO extends OracleServer2 {
+public class AdminDAO extends OracleServer {
 	
 	private static AdminDAO instance = new AdminDAO(); // 인스턴스 객체 생성
 	public static AdminDAO getInstance() {return instance;} // 인스턴스 객체 리턴
@@ -52,7 +52,7 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public String changeType(String id) {
+	}
 	
 	// id를 통해 member테이블에서 검색
 	// 검색된 레코드값 중 id, name, nick, email, tel, membertype을 dto에 set
@@ -85,22 +85,22 @@ public class AdminDAO extends OracleServer2 {
 		int result = 0;
 		try {
 			conn = getConnection();
-			sql = "insert into jas values('0',?,?,?,?,?,sysdate)";
+			sql = "insert into jas values('0',?,?,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getMemberType());
-			pstmt.setString(3, dto.getEmail());
-			pstmt.setString(4, dto.getTel());
-			pstmt.setString(5, dto.getIp());
+			pstmt.setString(1, dto.getPress());
+			pstmt.setString(2, dto.getId());
+			pstmt.setString(3, dto.getMemberType());
+			pstmt.setString(4, dto.getEmail());
+			pstmt.setString(5, dto.getTel());
+			pstmt.setString(6, dto.getIp());
 			result = pstmt.executeUpdate();
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			oracleClose();
 		}
 		return result;
-	} // public void insertJas(MemberDTO dto) {
+	}
 
 	// jas 테이블에 총 몇줄의 레코드가 있는지 검색, result에 대입 후 return
 	public int getJCount() {
@@ -119,7 +119,7 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public int getJCount() {
+	}
 	
 	// jas 테이블 매 레코드마다 dto를 만들고 레코드의 값을 dto에 set한 후 JList에 add
 	public List getJList() {
@@ -147,7 +147,7 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return JList;
-	} // public List getJList() {
+	}
 	
 	// id를 통해 jas테이블의 레코드를 검색, 해당하는 레코드가 있으면 resulttype을 2로 수정
 	public int denyJas(MemberDTO dto) {
@@ -192,7 +192,7 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public boolean oneononeInsert(AdminDTO dto) {
+	}
 	
 	// qna 테이블에 레코드 갯수를 세고 result에 대입 및 return
 	public int qnaCount() {
@@ -212,7 +212,7 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public int oneononeCount() {
+	}
 	
 	// qna 테이블에서 resultType이 0인 레코드의 갯수를 result에 대입 및 return
 	public int qnaCount2() {
@@ -232,7 +232,7 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public int oneononeCount() {
+	}
 	
 	// db에 있는 정보를 num을 기준으로 내림차순, 위에서부터 아래로 로우넘 부여
 	// 매개변수로 받은 start, end로 로우넘을 구분
@@ -272,10 +272,12 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return qnaList;
-	} // public List oneononeList(int start, int end) {
+	}
 	
-	// qna 테이블에서 num값으로 레코드를 찾고 readcount에 1을 더하고
-	// 다시 qna 테이블에서 num값으로 레코드를 검색한 후 값이 있으면 resulttype에 readcount를 대입 // 5.2 5:37
+	// qna 테이블에서 num값으로 레코드를 찾고 readcount에 1을 더함
+	// 다시 qna 테이블에서 num값으로 레코드를 검색한 후 readcount를 count에 대입함
+	// readcount가 100이상이면 resultType을 1로 바꿈
+	// 그 이후 qna정보를 dto에 set
 	public AdminDTO qnaGet(int num) {
 		AdminDTO dto = null;
 		int count = 0;
@@ -328,14 +330,15 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return dto;
-	} // public AdminDTO oneononeGet(int num) {
+	}
 	
+	// 조회수 기능을 제거한 dto set기능
 	public AdminDTO qnaUpdateGet(int num) {
 		AdminDTO dto = null;
 		int count = 0;
 		try {
 			conn = getConnection();
-			sql = "select * from qnaRecon where num=?";
+			sql = "select * from qna where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -343,10 +346,11 @@ public class AdminDAO extends OracleServer2 {
 				dto = new AdminDTO();
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
 				dto.setTitle(rs.getString("title"));
 				dto.setCon(rs.getString("con"));
-				dto.setRecon(rs.getString("recon"));
+				dto.setReadCount(rs.getInt("readcount"));
 				dto.setIp(rs.getString("ip"));
 				dto.setReg(rs.getTimestamp("reg"));
 			}
@@ -356,8 +360,9 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return dto;
-	} // public AdminDTO oneononeGet(int num) {
+	}
 	
+	// qna 레코드에서 questionType, title, pw, con을 수정하는 기능
 	public int qnaUpdate(AdminDTO dto) {
 	int result = 0;
 	try {
@@ -378,6 +383,7 @@ public class AdminDAO extends OracleServer2 {
 	return result;
 	}
 	
+	// 비밀번호를 입력받아 qna를 delete
 	public int qnaDelete(AdminDTO dto) {
 		int result = 0;
 		try {
@@ -393,9 +399,9 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public int qnaDelete(AdminDTO dto) {
+	}
 		
-	// Q&A db에 데이터를 입력하는 메서드
+	// db에 데이터를 입력하는 기능
 	public boolean faqInsert(AdminDTO dto) {
 		boolean result = false;
 		try {
@@ -418,7 +424,24 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public boolean qnaInsert(AdminDTO dto) {
+	}
+	
+	// dto를 입력받아 데이터를 삭제하는 기능
+	public int faqDelete(AdminDTO dto) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "delete from faq where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	}
 	
 	// 시작값과 끝값을 입력하여 1~10 11~20등 특정 형식에 맞게 db 내 데이터를 List로 꺼내는 메서드
 	public List faqList(int start, int end) {
@@ -452,9 +475,9 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return faqList;
-	} // public List qnaList(int start, int end) {
+	}
 	
-	// Q&A의 갯수를 확인하는 메서드
+	// faq 테이블의 레코드가 몇개인지 확인하는 메서드
 	public int getfaqCount() {
 		int result = 0;
 		try {
@@ -471,7 +494,7 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public int getQnaCount() {
+	}
 	
 	// 아이디를 입력받아 Type을 확인하는 메서드
 	public int typeChk(String id) {
@@ -492,10 +515,9 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public int typeChk(String id) {
+	}
 	
-	// num을 이용하여 Q&A 정보를 dto에 set하는 메서드
-	// 4.27 확인필요
+	// num을 이용하여 faq 정보를 dto에 set하는 메서드
 	public AdminDTO faqGet(int num) {
 		AdminDTO dto = null;
 		try {
@@ -530,8 +552,9 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return dto;
-	} // public AdminDTO getQna(int num) {
+	}
 	
+	// qna 댓글갯수 확인 메서드(보완필요)
 	public int qnaReconCount() {
 		int result = 0;
 		try {
@@ -548,8 +571,9 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return result;
-	} // public int qnaReconCount() {
+	}
 	
+	// qna댓글 리스트 메서드(보완필요)
 	public List qnaReconList(String num2, int start, int end) {
 		List qnaReconList = new ArrayList();
 		try {
@@ -576,8 +600,9 @@ public class AdminDAO extends OracleServer2 {
 			oracleClose();
 		}
 		return qnaReconList;
-	} // public List oneononeList(int start, int end) {
+	}
 	
+	// qna댓글입력 메서드
 	public void qnaReconInsert(AdminDTO dto) {
 		try {
 			conn = getConnection();
@@ -595,6 +620,6 @@ public class AdminDAO extends OracleServer2 {
 		} finally {
 			oracleClose();
 		}
-	} // public void qnaReconInsert(AdminDTO dto) {
+	}
 	
-} // public class AdminDAO extends OracleServer {
+}

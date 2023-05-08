@@ -19,6 +19,3 @@
 		window.location.href = "/project1/admin/journalistList.jsp";
 	</script>
 	<%}%>
-<%-- dto.getId() : <%=dto.getId()%><br />
-dto.getMemberType() : <%=dto.getMemberType()%><br />
-dto.getEmail() : <%=dto.getEmail()%><br /> --%>

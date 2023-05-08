@@ -5,9 +5,11 @@
 <%@ page import="member.MemberDTO"%>
 <%@ page import="java.util.List"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%
-	// request.getParameter는 리턴타입이 String이라서 Integer를 이용해서 숫자로 변환
-	int num = Integer.parseInt(request.getParameter("num"));
+	int num = Integer.parseInt(request.getParameter("num")); // request.getParameter는 리턴타입이 String이라서 Integer를 이용해서 숫자로 변환
 	String pageNum = request.getParameter("pageNum");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
@@ -28,17 +30,10 @@
 	int startRow = (currentPage - 1) * pageSize + 1;
 	int endRow = currentPage * pageSize;
 	
-	/* List qnaReconList = null;
-	int count = dao.qnaReconCount();
-	if(count > 0) {
-		qnaReconList = dao.qnaReconList(startRow, endRow);
-	} */
 %>
-
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+<jsp:include page="/member/header.jsp" />
 
 <title>Q&A 게시판</title>
-
 <center><h3>Q&A 내용</h3></center>
 
 <hr />
@@ -94,7 +89,7 @@
 		<tr height="30">
 			<td align="center" colspan="3">
 				<input type="button" value="목록" onclick="location='qnaList.jsp'" />
-				<%if(dto.getId().equals(dto2.getId()) || dto2.getMemberType().equals("2")) {%>
+				<%if(dto.getId().equals(dto2.getId()) || dto2.getMemberType().equals("2")) {%> <!-- 작성자 아이디가 동일하거나 어드민이면 삭제가능 -->
 				<input type="button" value="수정" onclick="location='qnaUpdateForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
 				<input type="button" value="삭제" onclick="location='qnaDeleteForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
 				<%}%>
@@ -102,5 +97,4 @@
 		</tr>
 	</table>
 </form>
-
-<jsp:include page="qnaReconForm.jsp" />
+<jsp:include page="/member/footer.jsp"></jsp:include>

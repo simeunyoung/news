@@ -2,18 +2,20 @@
 <%@ page import="admin.AdminDAO"%>
 <%@ page import="member.MemberDTO"%>
 
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+
 <%
 	AdminDAO dao = AdminDAO.getInstance();
 	String memId = (String)session.getAttribute("memId");
 	MemberDTO dto = dao.setMember(memId);
 	if(memId == null) {dto.setMemberType("0");}
 %>
-
-<a href="/project1/admin/siteMap.jsp">사이트맵</a><br />
+<jsp:include page="/member/header.jsp" />
 
 <script src="helper.js"></script>
 <title>Q&A 작성</title>
-memId = <%=memId%>
+
 <center><h2>Q&A 작성</h2></center>
 
 <hr />
@@ -93,15 +95,6 @@ memId = <%=memId%>
 		<tr>
 			<td colspan="2"><textarea cols="70" rows="10" name="con"></textarea></td>
 		</tr>
-		<tr height="20">
-			<td colspan="2">
-			문의내용 n/1000자 입력 확인기능 구현요망
-			</td>
-		</tr>
-		<tr height="30">
-			<td align="center">첨부</td>
-			<td align="center"><input type="button" value="첨부파일 추가" onclick="imgUpload.jsp">
-		</tr>
 		<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value="작성" /><input type="button" value="취소" onclick="location='qnaList.jsp'" />
@@ -109,3 +102,4 @@ memId = <%=memId%>
 		</tr>
 	</table>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>
