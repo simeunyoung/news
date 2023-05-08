@@ -63,9 +63,37 @@ if (exist == null) {
 		reporterArray = reporter.split("@");
 	}
 	String[] nameArray = new String[existArray.length];
-	
-	
+
+//자동로그인 쿠기 작업
+
+String cooId = null;
+String cooPw = null;
+String cooAu = null;
+
+Cookie [] cookies = request.getCookies();
+
+for(Cookie c : cookies){
+	if(c.getName().equals("cooId")){
+		cooId = c.getValue();
+	}
+	if(c.getName().equals("cooPw")){
+		cooPw = c.getValue();
+	}
+	if(c.getName().equals("cooAu")){
+		cooAu = c.getValue();
+	}
+} %>
+
+<% if(cooId != null && cooPw != null && cooAu != null){
+	if(loginuser == null){
+	response.sendRedirect("/project1/member/loginPro.jsp");
+	}else{	}
+}else{%>
+	<%= cooId%>
+<% }
+
 %>
+
 <!-- header -->
 <jsp:include page="/member/header.jsp"></jsp:include>
 
@@ -142,3 +170,4 @@ if (exist == null) {
 
 <!-- footer -->
 <jsp:include page="/member/footer.jsp"></jsp:include>
+

@@ -23,19 +23,26 @@
 		if(auto != null){
 			Cookie coo1 = new Cookie("cooId", id);
 			Cookie coo2 = new Cookie("cooPw", pw);
-			Cookie coo3 = new Cookie("cooAuto", auto);
+			Cookie coo3 = new Cookie("cooAu", auto);
 			coo1.setMaxAge(60*60*24);
+			coo1.setPath("/");
 			coo2.setMaxAge(60*60*24);
+			coo2.setPath("/");
 			coo3.setMaxAge(60*60*24);
+			coo3.setPath("/");
 			response.addCookie(coo1);
 			response.addCookie(coo2);
 			response.addCookie(coo3);
 		}
 		
-		if(loNum.equals("null")){
-			response.sendRedirect("/project1/news/main.jsp");
-		}else{ // 구독현황에서 넘어왔으면 구독현황 페이지로 보내주기
-			response.sendRedirect("/project1/company/pressForm.jsp"); 
+
+
+		if(loNum == "1"){
+			response.sendRedirect("/project1/company/pressForm.jsp");
+			// 구독현황에서 넘어왔으면 구독현황 페이지로 보내주기
+		}else{
+			 response.sendRedirect("/project1/news/main.jsp");
+
 		}
 	} else if(check == 0){ %>
 		<script>

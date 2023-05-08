@@ -15,12 +15,16 @@ display:none;
 <%
 	String loNum = request.getParameter("loNum");
 	String cooId = null;
+
 	Cookie [] cookies = request.getCookies();
 	for(Cookie c : cookies){
 		if(c.getName().equals("cooId")){
 			cooId = c.getValue();
 		}
+		
 	}
+
+
 %>
 <body>
 	<div class="login-wrap">
@@ -51,7 +55,7 @@ display:none;
 			<tr>
 				<td>
 					<div class="row">
-						<input type="checkbox" id="auto" name="auto" value="1">
+						<input type="checkbox" id="auto" name="auto" >
 						<label for="auto">로그인 상태 유지</label>
 					</div>				
 				</td>

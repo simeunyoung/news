@@ -7,14 +7,17 @@
 	for(Cookie c : cookies){
 		if(c.getName().equals("cooId")){
 			c.setMaxAge(0);
+			c.setPath("/");
 			response.addCookie(c);
 		}
 		if(c.getName().equals("cooPw")){
 			c.setMaxAge(0);
+			c.setPath("/");
 			response.addCookie(c);
 		}
 		if(c.getName().equals("cooAu")){
 			c.setMaxAge(0);
+			c.setPath("/");
 			response.addCookie(c);
 		}
 	}
