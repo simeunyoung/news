@@ -89,7 +89,7 @@ for(Cookie c : cookies){
 	response.sendRedirect("/project1/member/loginPro.jsp");
 	}else{	}
 }else{%>
-	<%= cooId%>
+	
 <% }
 
 %>
