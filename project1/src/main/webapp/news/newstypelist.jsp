@@ -96,13 +96,8 @@
 		<% }
 			// 해당 페이지 번호를 누르면 페이지로 이동하게 링크를 걸음
                 for (int i = startPage; i <= endPage; i++) { %>
-		<% if (i == currentPage) { %>
-		<a>[<%=i %>]</a>
-		<% } else { %>
 		<a href="newstypelist.jsp?pageNum=<%=i %>&newstype=<%= newsType %>">[<%=i %>]</a>
-		<% } %>
 		<% }
-
                 if (endPage < pageCount) { %>
 		<a
 			href="newstypelist.jsp?pageNum=<%=endPage + 1 %>&newstype=<%=newsType %>">[다음]</a>
