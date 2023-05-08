@@ -207,10 +207,9 @@ nameArray[i] = reporterName;
 					<div class="press-chk">										<%-- 위와 같은방식 --%>
 						<div><%=nameArray[i]%></div>
 						<div>						
-							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=subscribe2[i]%>" checked />
-							<label for="chk<%=i%>"></label>
+							<input type="checkbox" id="check<%=i %>" name="<%=i%>" value="<%=subscribe2[i]%>" checked />
+							<label for="check<%=i%>"></label>
 						</div>
-					
 					</div>
 					<%
 					break;
@@ -221,8 +220,8 @@ nameArray[i] = reporterName;
 					<div class="press-chk">
 						<div><%=nameArray[i]%></div>
 						<div>
-							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=subscribe2[i]%>">
-							<label for="chk<%=i%>"></label>
+							<input type="checkbox" id="check<%=i %>" name="<%=i%>" value="<%=subscribe2[i]%>">
+							<label for="check<%=i%>"></label>
 						</div>
 					</div>
 					<%
