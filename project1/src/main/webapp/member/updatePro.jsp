@@ -4,6 +4,7 @@
 <jsp:useBean id="member" class="member.MemberDTO" />
 <jsp:setProperty property="*" name="member" />
 
+<!-- 정보수정  -->
 <%
 	String pageType = request.getParameter("pageType");
 	String id = (String)session.getAttribute("memId");

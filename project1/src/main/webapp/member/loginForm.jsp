@@ -110,6 +110,7 @@ display:none;
 	</div>
 	<script>
 
+	// 한국어, 영어 select하기
 	function changeSelection() {
 		var selectedElement = document.getElementById("lang-select");
 

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="/project1/resource/css/style.css" rel="stylesheet">
-<script src="/project1/resource/js/script.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,7 @@
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 </head>
-<jsp:include page="/member/header.jsp"></jsp:include>
+
 <body>
 	<form action="deletePro.jsp" method="post">
 		<div>
@@ -24,5 +23,5 @@
 		
 	</form>
 </body>
-<jsp:include page="/member/footer.jsp"></jsp:include>
+
 </html>

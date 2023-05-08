@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>유저 댓글 리스트</title>
+<title>CODENEWS</title>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 </head>
@@ -29,7 +29,7 @@ int endNum = crtPage * pageSize;
 
 RevalueDAO rv = RevalueDAO.getInstance();
 
-int count = rv.getMyReconCount(id);
+int count = rv.getMyReconCount(id); // 댓글 개수
 
 if(count > 0){
 	userList = rv.getMyReconList(id, startNum, endNum);
@@ -37,6 +37,7 @@ if(count > 0){
 int number = count - (crtPage - 1) * pageSize;
 %>
 <body>
+	<!-- 유저의 댓글 리스트 -->
 	<div class="card-body">
 		<h6 class="d-flex align-items-center mb-3">
 			<i class="material-icons text-info mr-2">내가 쓴 댓글(<%=count%>)
@@ -73,8 +74,7 @@ int number = count - (crtPage - 1) * pageSize;
 						<%=recon.getId()%>
 					<%} %>
 				</td>
-				<td><a
-					href="news.jsp?num<%=recon.getNum()%>&pageNum=<%=crtPage%>">
+				<td><a href="news.jsp?num<%=recon.getNum()%>&pageNum=<%=crtPage%>">
 						<%=recon.getTitle()%>
 				</a></td>
 				<td><%=recon.getCon()%></td>

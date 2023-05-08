@@ -18,7 +18,7 @@
 	MemberDAO user = MemberDAO.getInstance();
 	MemberDTO member = user.getMember(id2);
 		
-	int check = user.typeCheck(id);
+	int check = user.typeCheck(id); // 멤버타입 체크
 	if(id == null){
 		id = "";
 	}
@@ -26,7 +26,7 @@
 <body>
 	<div class="card mb-3">
 		<%
-		if (num == null) {
+			if (num == null) { // 정보만 보여주는 폼
 		%>
 		<div class="card-body">
 			<div class="row">
@@ -95,19 +95,18 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-				<%if(id.equals(id2)){
+				<%if(id.equals(id2)){ // 본인이면 수정하기 버튼 활성화
 				%>
 					<a class="btn btn-info edit-button"
 						onclick="location='user_mypage_form.jsp?num=1&id=<%=id%>&pageType=<%=pageType%>'">수정하기</a>
 					<%} %>
 				</div>
 			</div>
-			<input type="hidden" name="membertype"
-							value="<%=member.getMemberType()%>">
+			<input type="hidden" name="membertype" value="<%=member.getMemberType()%>">
 		</div>
 
 		<%
-		} else if (num.equals("1")) {
+		} else if (num.equals("1")) { // 정보 수정하는 폼
 		%>
 		<form action="updatePro.jsp" method="post">
 			<div class="card-body">
@@ -183,13 +182,13 @@
 					<div class="col-sm-12">
 						<input type="submit" class="btn btn-info" name="update" value="적용" />
 						<input type="hidden" name="pageType" value="<%=pageType%>">
-						<a class="btn btn-info" onclick="location='user_mypage_form.jsp?id=<%=id%>'">취소</a>
+						<a class="btn btn-info" onclick="location='user_mypage_form.jsp?id=<%=id%>&pageType=<%=pageType%>'">취소</a>
 					</div>
 				</div>
 			</div>
 		</form>
 		<%
-		}
+			}
 		%>
 	</div>
 </body>

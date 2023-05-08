@@ -563,7 +563,8 @@ public class NewsDAO extends OracleServer {
 	}
 
 	// member
-	public int getMyNewsCount(String id) { // 기자 자신의 기사 카운트 메서드
+	// 기자 자신의 기사 카운트 메서드
+	public int getMyNewsCount(String id) { 
 		int x = 0;
 		try {
 			conn = getConnection();
@@ -582,7 +583,8 @@ public class NewsDAO extends OracleServer {
 		return x;
 	} // public int getMyNewsCount(String id) {
 
-	public List getMyNewsList(String id, int startNum, int endNum) { // 기자 자신의 기사 리스트
+	// 기자 자신의 기사 리스트
+	public List getMyNewsList(String id, int startNum, int endNum) { 
 		List newsList = new ArrayList();
 		try {
 			conn = getConnection();

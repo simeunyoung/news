@@ -16,7 +16,7 @@
 	}
 	
 	MemberDAO manager = MemberDAO.getInstance();
-	int check = manager.userCheck(id,pw);
+	int check = manager.userCheck(id,pw); // 로그인 아이디,비밀번호 체크
 	
 	if(check == 1){
 		session.setAttribute("memId", id);
@@ -34,7 +34,7 @@
 		
 		if(loNum.equals("null")){
 			response.sendRedirect("/project1/news/main.jsp");
-		}else{
+		}else{ // 구독현황에서 넘어왔으면 구독현황 페이지로 보내주기
 			response.sendRedirect("/project1/company/pressForm.jsp"); 
 		}
 	} else if(check == 0){ %>

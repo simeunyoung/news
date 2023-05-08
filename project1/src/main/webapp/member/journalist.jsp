@@ -17,21 +17,21 @@ String id = (String) session.getAttribute("memId");
 String pageNum = request.getParameter("pageNum");
 String pageType = request.getParameter("pageType");
 
-int pageSize = 5;
+int pageSize = 5; // 한 페이지에 보여줄 목록의 수
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 if(pageNum == null){
 	pageNum = "1";
 }
 
-int crtPage = Integer.parseInt(pageNum);
-int startNum = (crtPage - 1) * pageSize + 1;
+int crtPage = Integer.parseInt(pageNum); // 선택한 pageNum을 숫자로 crtPage에 저장
+int startNum = (crtPage - 1) * pageSize + 1; // 목록의 시작 번호와 끝 번호 지정
 int endNum = crtPage * pageSize;
 
 List newsList = null;
 NewsDAO news = NewsDAO.getInstance();
 
-int count = news.getMyNewsCount(id);
+int count = news.getMyNewsCount(id); // 해당 아이디가 쓴 기사 수 저장
 
 if(count > 0){
 	newsList = news.getMyNewsList(id, startNum, endNum);
@@ -39,6 +39,7 @@ if(count > 0){
 int number = count - (crtPage -1) * pageSize;
 %>
 <body>
+<!-- include 마이페이지 중 내가 쓴 기사 목록 폼 -->
 	<div class="card">
 		<div class="card-body">
 			<h6 class="d-flex align-items-center mb-3">

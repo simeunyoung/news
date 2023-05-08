@@ -8,7 +8,7 @@
 <script src="/project1/resource/js/script.js"></script>
 <%
 	MemberDAO manager = MemberDAO.getInstance();
-	String result = manager.pwFind(member);
+	String result = manager.pwFind(member); // 비밀번호 찾기
 	if(result == null){
 %>
 	<script>

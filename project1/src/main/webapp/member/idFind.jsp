@@ -8,7 +8,7 @@
 
 <%
 	MemberDAO manager = MemberDAO.getInstance();
-	String result = manager.idFind(member);
+	String result = manager.idFind(member); // 아이디 찾기
 	if(result == null){
 %>
 	<script>

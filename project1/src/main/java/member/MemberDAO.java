@@ -59,6 +59,7 @@ public class MemberDAO extends OracleServer {
 			return x;
 		}
 
+		// 회원가입 메서드
 		public int insertMember(MemberDTO member) {
 			int result= 0;
 			try {
@@ -81,7 +82,8 @@ public class MemberDAO extends OracleServer {
 			return result;
 		}
 		
-		public String idFind(MemberDTO member) {
+		// 아이디 찾기 메서드
+		public String idFind(MemberDTO member) { // 아이디와 생년월일이 일치하면 아이디 반환
 			String result = null;
 			try {
 				conn = getConnection();
@@ -100,7 +102,8 @@ public class MemberDAO extends OracleServer {
 			return result;
 		}
 		
-		public String pwFind(MemberDTO member) {
+		// 비밀번호 찾기
+		public String pwFind(MemberDTO member) { // id와 email을 받아서 해당 id의 비밀번호 반환
 			String result = null;
 			try {
 				conn = getConnection();
@@ -119,6 +122,7 @@ public class MemberDAO extends OracleServer {
 			return result;
 		}
 
+		// 회원 정보 가져오기
 		public MemberDTO getMember(String id) {
 			MemberDTO member = null;
 			try {
@@ -176,7 +180,7 @@ public class MemberDAO extends OracleServer {
 			return member;
 		} // public MemberDTO getmember(String id) { this is only for news file
 			
-		
+		// 정보 수정
 		public void updateMember(MemberDTO member) {
 			try {
 				conn = getConnection();
@@ -199,6 +203,7 @@ public class MemberDAO extends OracleServer {
 			}
 		}
 
+		// 회원탈퇴(닉네임변경)
 		public int deleteMember(String id, String pw) {
 			int x = -1;
 			try {
@@ -209,7 +214,7 @@ public class MemberDAO extends OracleServer {
 				if(rs.next()) {
 					String dbpw=rs.getString("pw");
 					if(dbpw.equals(pw)) {
-						pstmt = conn.prepareStatement("update member set nick ='404', pw='null' where id = ?");
+						pstmt = conn.prepareStatement("update member set nick ='404(탈퇴한 회원)', pw='null' where id = ?");
 						pstmt.setString(1, id);
 						pstmt.executeUpdate();
 						x = 1;
@@ -225,7 +230,8 @@ public class MemberDAO extends OracleServer {
 			return x;
 		}
 		
-		public int typeCheck(String id) {
+		// 멤버타입 체크 메서드
+		public int typeCheck(String id) { // 아이디에 해당하는 멤버타입 반환
 			int result = 0;
 			try {
 				conn = getConnection();
@@ -243,7 +249,8 @@ public class MemberDAO extends OracleServer {
 			return result;
 		}
 		
-        public void updateImg(String sysName, String id) {
+		// 이미지 업로드 메서드
+        public void updateImg(String sysName, String id) { // 아이디에 해당하는 img에 업데이트
             try {
                 conn = getConnection();
                 sql ="update member set img = ? where id = ?";
@@ -258,6 +265,7 @@ public class MemberDAO extends OracleServer {
             }
         }
         
+        // 구독 목록 가져오기
         public String selectBookList(String id) {
         	String result = "";
         	try {
@@ -279,10 +287,11 @@ public class MemberDAO extends OracleServer {
         	return result;
         }
      
+        // 구독하기
         public void bookMarkInsert(String id, String id2, String books) {        
-        	String[] parts = books.split("@");
+        	String[] parts = books.split("@");// 구독한 기자 목록을 @를 기준으로 나눠서 list에 저장
         		boolean include = false;
-		    	for (String part : parts) {
+		    	for (String part : parts) {// 나눈 기자 id를 String으로 id2와 비교
 		    	    if (part.equals(id2)) {
 		    	        include = true;
 		    	        break;
@@ -292,7 +301,7 @@ public class MemberDAO extends OracleServer {
 				conn = getConnection();
 				sql="update member set reportersubscribe = ? where id =?";
 				pstmt = conn.prepareStatement(sql);
-				  if(!include) {
+				  if(!include) { // 구독한 기자가 아니면 구독목록에 추가
 				pstmt.setString(1, books + "@" + id2);
 				pstmt.setString(2, id);
 				  }
@@ -304,10 +313,11 @@ public class MemberDAO extends OracleServer {
 			}
         }
         
-        public void bookMarkDelete(String id, String id2, String books) {        
-        	String[] parts = books.split("@");
+        // 구독 취소 메서드
+        public void bookMarkDelete(String id, String id2, String books) {  
+        	String[] parts = books.split("@"); // 구독한 기자 목록을 @를 기준으로 나눠서 list에 저장
         		boolean include = false;
-		    	for (String part : parts) {
+		    	for (String part : parts) { // 나눈 기자 id를 String으로 id2와 비교
 		    	    if (part.equals(id2)) {
 		    	        include = true;
 		    	        break;
@@ -317,7 +327,7 @@ public class MemberDAO extends OracleServer {
 				conn = getConnection();
 				sql="update member set reportersubscribe = ? where id =?";
 				pstmt = conn.prepareStatement(sql);
-				  if(include) {
+				  if(include) { // 구독한 기자면 공백 처리 
 					 String bmDelete = "@"+id2;
 					 String aId = books.replace(bmDelete, "");
 				pstmt.setString(1, aId);

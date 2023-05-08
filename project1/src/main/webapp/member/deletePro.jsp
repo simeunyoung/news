@@ -14,6 +14,7 @@
 	MemberDAO manager = MemberDAO.getInstance();
 	int check = manager.deleteMember(id, pw);
 
+	// 멤버타입이 회원이면 세션 삭제
 	if(check == 1){
 		session.invalidate();
 	%>

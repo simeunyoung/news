@@ -14,12 +14,13 @@
 <body>
 	<footer>
 		<ul>
+		<!-- 비회원일 경우 로그인 노출 -->
 		<%if(id == null){ %>
-			<li><a href="/project1/member/loginForm.jsp">로그인</a></li>
+				<li><a href="/project1/member/loginForm.jsp">로그인</a></li>
 			<%}else{ %>
-			<li><a href="/project1/member/logout.jsp">로그아웃</a></li>
+				<li><a href="/project1/member/logout.jsp">로그아웃</a></li>
 			<%} %>
-			<li><a href="/project1/sitemap/sitemapmain.jsp">전체서비스</a></li>
+				<li><a href="/project1/sitemap/sitemapmain.jsp">전체서비스</a></li>
 		</ul>
 		<ul>
 			<li>이용약관</li>

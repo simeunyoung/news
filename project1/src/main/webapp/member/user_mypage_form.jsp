@@ -39,20 +39,17 @@ if (id == null && pageType.equals("1")) {
 %>
 
 </head>
+<!-- 마이페이지 pageType이 1이면 회원프로필, 2면 기자프로필-->
 <body>
-	<%-- col-mb-4 = mb는 중간 크기 화면 4는 가로크기, mb-3 = 하단 여백 --%>
-	<%-- card 본문을 감쌈 --%>
 	<jsp:include page="header.jsp" />
 	<div class="container">
-	
 		<%
-		if (pageType.equals("1")) {
+			if (pageType.equals("1")) { 
 		%>
 
 		<div class="main-body">
 			<nav aria-label="breadcrumb" class="main-breadcrumb">
 				<ol class="breadcrumb">
-					<%-- 사용자가 이전 페이지 or 홈으로 돌아갈 수 있음 --%>
 					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
 					<li class="breadcrumb-item active" aria-current="page">user
 						Profile</li>
@@ -60,12 +57,15 @@ if (id == null && pageType.equals("1")) {
 			</nav>
 			<div class="row gutters-sm">
 				<div class="userform-wrap">
+					<!-- 유저의 프로필 부분 -->
 					<jsp:include page="userProForm.jsp" />
 					<button type="button" onclick="location='/project1/company/pressForm.jsp'">구독현황 보러가기</button>
 				</div>
 				<div class="infoform-wrap">
+					<!-- 유저의 정보 부분  -->
 					<jsp:include page="infoForm.jsp" />
 					<div class="card userlist-wrap">
+					<!-- 유저가 쓴 댓글 리스트 -->
 						<jsp:include page="userlist.jsp" />
 					</div>
 				</div>
@@ -78,7 +78,6 @@ if (id == null && pageType.equals("1")) {
 	<div class="main-body">
 		<nav aria-label="breadcrumb" class="main-breadcrumb">
 			<ol class="breadcrumb">
-				<%-- 사용자가 이전 페이지 or 홈으로 돌아갈 수 있음 --%>
 				<li class="breadcrumb-item"><a href="index.html">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">
 					기자Profile</li>
@@ -86,12 +85,15 @@ if (id == null && pageType.equals("1")) {
 		</nav>
 		<div class="row gutters-sm">
 			<div class="jouralform-wrap">
+				<!-- 기자의 프로필 부분 -->
 				<jsp:include page="jouralProForm.jsp" />
 				<button type="button" onclick="location='/project1/company/pressForm.jsp'">구독현황 보러가기</button>
 			</div>
 			<div class="infoform-wrap">
+				<!-- 기자의 정보 부분 -->
 				<jsp:include page="infoForm.jsp" />
 				<div class="journalist-wrap">
+					<!-- 기자가 쓴 뉴스 리스트 -->
 					<jsp:include page="journalist.jsp" />
 				</div>
 			</div>
