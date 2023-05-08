@@ -8,7 +8,7 @@
 
 <% 
 	int num = 0;
-	if(request.getParameter("num") != null){
+	if(request.getParameter("num") != null){					//글번호는 값이 있어야되고 num에 글번호를 대입
 		num = Integer.parseInt(request.getParameter("num"));
 	}
 	String pageNum = request.getParameter("pageNum");
@@ -17,7 +17,7 @@
 	
 	try{
 		SvcenterDAO svDAO = SvcenterDAO.getInstance();
-		SvcenterDTO svDTO = svDAO.getSvDTO(num);
+		SvcenterDTO svDTO = svDAO.getSvDTO(num);				//해당 글번호를 테이블에 대입하고 검색해서 값을 꺼내옴
 %>
 
 <center><b>문의내용보기</b>
@@ -55,9 +55,9 @@
 		<tr>
 			<td colspan = "4" align = "right">
 				<%
-					String id = (String)session.getAttribute("memId");
-					if(id != null){
-						if(id.equals(svDTO.getId())){			//본인 글만 수정 삭제가능하게 설정
+					String id = (String)session.getAttribute("memId");	//세션에서 받아온 id를 저장
+					if(id != null){										//세션에서 넘겨받은 id는 값이 없는지 확인
+						if(id.equals(svDTO.getId())){					//본인 글만 수정 삭제가능하게 설정
 				%>
 			<input type = "button" value = "글수정" onclick = "location.href='qtupForm.jsp?num=<%=svDTO.getNum1()%>&pageNum=<%=pageNum%>'">
 				&nbsp;&nbsp;&nbsp;&nbsp;

@@ -19,7 +19,7 @@ public class RatingDAO extends OracleServer {
 		int result = -1;
 		try {
 			conn = getConnection();					
-			sql = "select * from rating where num = ?";			//넘겨받은 글번호를 넣고 테이블에 id를 검색
+			sql = "select * from rating where num = ?";				//넘겨받은 글번호를 넣고 테이블에 id를 검색
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -28,7 +28,7 @@ public class RatingDAO extends OracleServer {
 				dbid = rs.getString("id");
 				x = rs.getInt("bad");
 			}
-			if(dbid.equals(id) && x != 0) {
+			if(dbid.equals(id) && x != 0) {	//해당 글번호에 있는 것들 검색하고 세션에서 받아온 값고 테이블에서 검색한 값을 비교하고 테이블에서 가지고 온 싫어요를 비교 후 싫어요를 누른 상태에서 좋아요를 눌렀을때 동작
 				sql = "update rating set good = ?, bad = ?,total = ? where num = ? and id = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, dto.getGood()+1);
@@ -38,7 +38,7 @@ public class RatingDAO extends OracleServer {
 				pstmt.setString(5, id);
 				pstmt.executeUpdate();
 				
-			}else if(dbid.equals(id)) {									//세션에서 받아온 id와 평점 테이블을 검색해서 같은 id가 있는지 확인
+			}else if(dbid.equals(id)) {	//세션에서 받아온 id와 평점 테이블을 검색해서 같은 id가 있는지 확인하고 있다면 삭제
 				sql = "delete from rating where id = ? and num = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
@@ -46,7 +46,7 @@ public class RatingDAO extends OracleServer {
 				pstmt.executeUpdate();
 				result = 0;
 				
-			}else{
+			}else{						//만약 검색값이 없다면 테이블에 저장
 				sql = "insert into rating values(?,?,?,?,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, num);
@@ -82,7 +82,7 @@ public class RatingDAO extends OracleServer {
 				x = rs.getInt("good");
 			}
 			
-			if(dbid.equals(id) && x != 0) {
+			if(dbid.equals(id) && x != 0) {//해당 글번호에 있는 것들 검색하고 세션에서 받아온 값고 테이블에서 검색한 값을 비교하고 테이블에서 가지고 온 좋아요를 비교 후 좋아요를 누른 상태에서 싫어요를 눌렀을때 동작
 				sql = "update rating set good = ?,bad = ?,total = ? where num = ? and id = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, rDTO.getGood()+0);
@@ -92,7 +92,7 @@ public class RatingDAO extends OracleServer {
 				pstmt.setString(5, id);
 				pstmt.executeUpdate();
 				
-			}else if(dbid.equals(id)) {
+			}else if(dbid.equals(id)) {//세션에서 받아온 id와 평점 테이블을 검색해서 같은 id가 있는지 확인하고 있다면 삭제
 				sql = "delete from rating where id = ? and num = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
@@ -100,7 +100,7 @@ public class RatingDAO extends OracleServer {
 				pstmt.executeUpdate();
 				result = 0;
 				
-			}else{
+			}else{						//만약 검색값이 없다면 테이블에 저장
 				sql = "insert into rating values(?,?,?,?,?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, num);

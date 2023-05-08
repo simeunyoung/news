@@ -65,7 +65,11 @@ for(String part : parts){
 <div class="con1"><b>내용 : </b></div><br />
 <div id = "content"><%=text.getCon()%></div>
 <div align="right">
+<<<<<<< Updated upstream
 <%if(loginuser != null){ // 로그인을 했을 때
+=======
+<%if(loginuser != null){ 					//세션에서 받아온 id값이 있어야 되고 기사를 작성한 본인은 평점을 달지 못하게 설정
+>>>>>>> Stashed changes
 if(!loginuser.equals(text.getId())){%>
 <form>
 <table align = "right" width = "500" height = "60" border = "1" cellspacing =  "0" cellpadding = "0">
