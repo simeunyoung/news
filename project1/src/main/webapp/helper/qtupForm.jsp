@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "helper.SvcenterDAO"%>
 <%@ page import = "helper.SvcenterDTO"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <%-- 1대1 문의글 수정 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
@@ -12,7 +14,8 @@
 		SvcenterDTO svdto = svdao.updateGetSvcenter(num); 
 %>
 
-<center><b>글수정</b>
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp" />
 <br>
 	<form method = "post" name = "questionfrom" action = "qtupPro.jsp?pageNum=<%=pageNum%>">
 		<table width = "1000" height = "800" border = "1" cellspacing = "0" cellpadding = "0" align = "center">
@@ -50,3 +53,4 @@
 		</table>
 	</form>
 <%}catch(Exception e){}%>
+<jsp:include page="/member/footer.jsp"></jsp:include>

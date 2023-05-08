@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "member.MemberDTO"%>
 <%@ page import = "member.MemberDAO"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <%-- 1대1 문의 글작성 페이지 --%>
 <%if(session.getAttribute("memId") == null){%>
 	<script>
@@ -17,6 +19,8 @@
 
 try{
 %>
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp" />
 <center><b>글쓰기</b></center>
 <br>
 <form method = "post" name = "questionForm" action = "questionPro.jsp">
@@ -58,3 +62,4 @@ try{
 </table>
 </form>
 <%}catch(Exception e){}%>
+<jsp:include page="/member/footer.jsp"></jsp:include>

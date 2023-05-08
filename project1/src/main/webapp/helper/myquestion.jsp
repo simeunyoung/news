@@ -4,6 +4,8 @@
 <%@ page import = "helper.SvcenterDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.List"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <%-- 1대1문의를 작성했을 시 따로 내 문의글만 따로 목록으로 출력하는 게시판 --%>
 <%!
 	int pageSize = 10;
@@ -33,7 +35,10 @@
 	}
 	number = count - (currentPage - 1) * pageSize;
 %>
- 
+
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp" />
+
 <center><b>내문의목록(전체 글 : <%=count%>)</b>	<%-- 본인이 작성한 글이 있다면 몇개가 있는지 나타냄 --%>
 <table width = "700">
 	<tr>
@@ -106,3 +111,4 @@
 	}
 %> 
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

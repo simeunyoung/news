@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "helper.Svcenter1DAO"%>
 <%@ page import = "helper.Svcenter1DTO"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp"></jsp:include>
 <%--자주묻는질문 수정페이지 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
@@ -40,3 +44,4 @@
 			</table>
 	</form>
 <%}catch(Exception e){}%>
+<jsp:include page="/member/footer.jsp"></jsp:include>

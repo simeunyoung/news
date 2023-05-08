@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import = "member.MemberDTO"%>
 <%@page import = "member.MemberDAO"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 
 <%
 	String id = (String)session.getAttribute("memId"); //세션값으로 admin 아이디를 id에 대입
@@ -12,7 +14,8 @@
 	try{
 %>
 <%-- 자주묻는질문 작성페이지 --%>
-<center><b>글쓰기</b></center>
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp" />
 <br>
 <form method = "post" name = "frequentlyForm" action = "frequentlyPro.jsp">
 
@@ -43,3 +46,4 @@
 </table>
 </form>
 <%}catch(Exception e){}%>
+<jsp:include page="/member/footer.jsp"></jsp:include>

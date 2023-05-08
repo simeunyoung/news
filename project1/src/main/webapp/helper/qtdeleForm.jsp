@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <%-- 1대1 문의글 삭제 --%>
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
 %>
 
-<title>문의글삭제</title>
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp" />
 
 <script language = "JavaScript">
 
@@ -39,3 +42,4 @@ function deleteSave(){
 			</tr>
 		</table>
 	</form>
+<jsp:include page="/member/footer.jsp"></jsp:include>

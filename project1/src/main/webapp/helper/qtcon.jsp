@@ -3,8 +3,11 @@
 <%@ page import = "helper.SvcenterDAO"%>
 <%@ page import = "helper.SvcenterDTO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
+<link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="/project1/resource/js/script.js"></script>
 <%-- 1대1 문의글 내용보는곳 --%>
-<title>문의내용</title>
+<title>CODENEWS</title>
+<jsp:include page="/member/header.jsp" />
 
 <% 
 	int num = 0;
@@ -73,3 +76,4 @@
 </table>
 <%}catch(Exception e){} %>
 </form>
+<jsp:include page="/member/footer.jsp"></jsp:include>
