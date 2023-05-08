@@ -32,8 +32,7 @@ String news_scrap = method.newsscrap(loginuser); // 현재 로그인한 사용�
 
 RatingDAO rDAO = RatingDAO.getInstance();
 RatingDTO rDTO = rDAO.getRatingDTO(num); //기사평점 테이블의 good과 bad 그리고 total의 값을 각각 합쳐서 값을 꺼내옴
-%>
-<%
+
 // 사용자가 현재 뉴스를 스크랩한것인지 확인하는 코드
 // 스크랩이 null인경우 ""로 초기화
 // 초기화 시킨 이유는 split()을 사용할때 null인 경우에 NullPointerException이 발생함 때문에 초기화 시켜줌
@@ -50,8 +49,35 @@ for(String part : parts){
 		break;
 	}
 }
-%>
 
+
+
+String usertype = null;
+MemberDTO userinfo = null;
+
+String admin = "2";
+String normaluser = "1";
+String writer = "-1";
+
+
+if(loginuser != null){ //로그인을 했을 때
+MemberDAO memdao = MemberDAO.getInstance();
+userinfo = memdao.getmember(loginuser); // 세션을 통해서 member 테이블의 데이터를 가져온다.
+usertype = userinfo.getMemberType();  // 가져온 데이터 중에 맴버의 종류를 변수로 선언
+}
+// 싫어요가 30개 이상일 때
+if(rDTO.getBad() >= 30 && session.getAttribute("memId") == null ){
+%>
+<script type="text/javascript">
+alert("해당 게시글은 많은 이용자에 의해 블라인드 처리된 게시글 입니다.");
+history.go(-1);
+</script>
+<%}else if(rDTO.getBad() >= 30 && (usertype.equals(normaluser) || usertype.equals(writer))){ %>
+<script type="text/javascript">
+alert("해당 게시글은 많은 이용자에 의해 블라인드 처리된 게시글 입니다.");
+history.go(-1);
+</script>
+<%}else{ %>
 <div class="content_box">
 <div class="con1"><div class="conl"><b>뉴스 종류 : </b><%=text.getNewstype()%></div><div class="conr"><b>조회수 : </b><%=text.getViews()%></div></div>
 <div class="con1"><b>Title : </b><%=text.getTitle()%></div>
@@ -120,12 +146,7 @@ if(!include){
 
 <%
 if(loginuser != null){ //로그인을 했을 때
-MemberDAO memdao = MemberDAO.getInstance();
-MemberDTO userinfo = memdao.getmember(loginuser); // 세션을 통해서 member 테이블의 데이터를 가져온다.
-String usertype = userinfo.getMemberType();  // 가져온 데이터 중에 맴버의 종류를 변수로 선언
 
-String admin = "2";
-String normaluser = "1";
 if(loginuser.equals(text.getId())){%> <%-- 세션과 작성자가 일치할 때 --%>
 <input type="button" class="button" value="삭제하기" onclick="location='deleteForm.jsp?num=<%=text.getNum()%>'">
 <input type="button" class="button" value="수정하기" onclick="location='updateForm.jsp?num=<%=text.getNum()%>'">
@@ -154,6 +175,7 @@ if(session.getAttribute("memId") == null) {%> <%-- 비로그인 일 때 --%>
 </jsp:include>
 </div></div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
+
 
 <script>
 // 기사 내용 글자의 크기를 변경하는 기능
@@ -193,6 +215,8 @@ copyButton.addEventListener('click', function() {
 });
 </script>
 
+
+<%} %>
 <style>
 .button {
 	background-color: #475d9f;
