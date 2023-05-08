@@ -174,7 +174,7 @@
 <%}%>
 	</table>
 </form>
-
+<div class="pagination">
 <form align="center">
 <%}%>
 <%
@@ -200,4 +200,5 @@
 <%		}
 	}%>
 </form>
+</div>
 <jsp:include page="/member/footer.jsp"></jsp:include>

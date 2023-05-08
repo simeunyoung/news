@@ -19,8 +19,21 @@ public class AdminDAO extends OracleServer {
 	// 값이 있으면 해당 레코드의 resulttype을 1로 변경 
 	public String changeType(String id) {
 		String result = "";
+		String press = "";
 		try {
 			conn = getConnection();
+			sql = "select * from jas where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				press = rs.getString("press");
+				sql = "update jas set resulttype=1 where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+			} // jas resulttype 변경부분
+			
 			sql = "select * from member where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -29,23 +42,13 @@ public class AdminDAO extends OracleServer {
 				result = rs.getString("membertype");
 			}
 			if(result.equals("1")) {
-				sql = "update member set membertype=-1 where id=?";
+				sql = "update member set membertype=-1,press=? where id=?";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, id);
+				pstmt.setString(1, press);
+				pstmt.setString(2, id);
 				pstmt.executeUpdate();
 				result = "-1";
 			} // member mebertype 변경부분
-			
-			sql = "select * from jas where id=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				sql = "update jas set resulttype=1 where id=?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, id);
-				pstmt.executeUpdate();
-			} // jas resulttype 변경부분
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

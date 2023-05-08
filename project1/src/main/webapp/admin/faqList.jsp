@@ -83,7 +83,7 @@
 <%	}%>
 	</table>
 </form>
-
+<div class="pagination">
 <form align="center">
 <%
 	if(count > 0) { // 글이 있는지 확인
@@ -108,4 +108,5 @@
 <%		}
 	}%>
 </form>
+</div>
 <jsp:include page="/member/footer.jsp"></jsp:include>

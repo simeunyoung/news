@@ -65,7 +65,7 @@
 <%	}%>
 	</table>
 </form>
-
+<div class="pagination">
 <form align="center">
 <%
 	if(count > 0) {
@@ -89,6 +89,7 @@
 <%		}
 	}%>
 </form>
+</div>
 <%}%>
 
 <form action="qnaReconPro.jsp">
