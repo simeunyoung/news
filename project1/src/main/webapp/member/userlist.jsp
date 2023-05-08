@@ -57,7 +57,6 @@ int number = count - (crtPage - 1) * pageSize;
 				<th>TITLE</th>
 				<th>CONTENTS</th>
 				<th>RECONTENTS</th>
-				<th>IP</th>
 				<th>DATE</th>
 			</tr>
 			<%
@@ -79,7 +78,6 @@ int number = count - (crtPage - 1) * pageSize;
 				</a></td>
 				<td><%=recon.getCon()%></td>
 				<td><%=recon.getReCon()%></td>
-				<td><%=recon.getIp()%></td>
 				<td><%=sdf.format(recon.getReg())%></td>
 			</tr>
 			<%
@@ -90,36 +88,37 @@ int number = count - (crtPage - 1) * pageSize;
 		}
 		}
 		%>
-		<%
-		if (count > 0) {
-			// 하단 페이지 목록 번호 갯수 정하기
-			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-
-			int startPage = (int) (crtPage / 10) * 10 + 1;
-			int pageBlock = 10;
-			int endPage = startPage + pageBlock - 1;
-			if (endPage > pageCount) {
-				endPage = pageCount;
-			}
-
-			if (startPage > 10) {
-		%>
-			<a href="userlist.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
-		<%
-			}
-			for (int i = startPage; i <= endPage; i++) {
-		%>
-			<a href="userlist.jsp?pageNum=<%=i%>">[<%=i%>]</a>
-		<%
-			}
-			if (endPage < pageCount) {
-		%>
-			<a href="userlist.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
-		<%
+		<div class="pagination">
+			<%
+			if (count > 0) {
+				// 하단 페이지 목록 번호 갯수 정하기
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	
+				int startPage = (int) (crtPage / 10) * 10 + 1;
+				int pageBlock = 10;
+				int endPage = startPage + pageBlock - 1;
+				if (endPage > pageCount) {
+					endPage = pageCount;
 				}
-			}
-		%>
-
+	
+				if (startPage > 10) {
+			%>
+				<a href="userlist.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
+			<%
+				}
+				for (int i = startPage; i <= endPage; i++) {
+			%>
+				<a href="userlist.jsp?pageNum=<%=i%>">[<%=i%>]</a>
+			<%
+				}
+				if (endPage < pageCount) {
+			%>
+				<a href="userlist.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
+			<%
+					}
+				}
+			%>
+		</div>
 	</div>
 </body>
 </html>

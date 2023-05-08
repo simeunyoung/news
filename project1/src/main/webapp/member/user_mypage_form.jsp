@@ -13,7 +13,9 @@
 <head>
 <%-- css파일 경로 지정 --%>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/dbaea98925.js" crossorigin="anonymous"></script>
 <script src="/project1/resource/js/script.js"></script>
+
 
 
 <%
@@ -55,11 +57,11 @@ if (id == null && pageType.equals("1")) {
 						Profile</li>
 				</ol>
 			</nav>
-			<div class="row gutters-sm">
+			<div class="row mypage-wrap">
 				<div class="userform-wrap">
 					<!-- 유저의 프로필 부분 -->
 					<jsp:include page="userProForm.jsp" />
-					<button type="button" onclick="location='/project1/company/pressForm.jsp'">구독현황 보러가기</button>
+					
 				</div>
 				<div class="infoform-wrap">
 					<!-- 유저의 정보 부분  -->
@@ -72,41 +74,44 @@ if (id == null && pageType.equals("1")) {
 			</div>
 		</div>
 	</div>
+
 	<%
 	} else if (pageType.equals("2")) {
 	%>
-	<div class="main-body">
-		<nav aria-label="breadcrumb" class="main-breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">
-					기자Profile</li>
-			</ol>
-		</nav>
-		<div class="row gutters-sm">
-			<div class="jouralform-wrap">
-				<!-- 기자의 프로필 부분 -->
-				<jsp:include page="jouralProForm.jsp" />
-				<button type="button" onclick="location='/project1/company/pressForm.jsp'">구독현황 보러가기</button>
-			</div>
-			<div class="infoform-wrap">
-				<!-- 기자의 정보 부분 -->
-				<jsp:include page="infoForm.jsp" />
-				<div class="journalist-wrap">
-					<!-- 기자가 쓴 뉴스 리스트 -->
-					<jsp:include page="journalist.jsp" />
+	<div class="container">
+		<div class="main-body">
+			<nav aria-label="breadcrumb" class="main-breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active" aria-current="page">
+						기자Profile</li>
+				</ol>
+			</nav>
+			<div class="row mypage-wrap">
+				<div class="jouralform-wrap">
+					<!-- 기자의 프로필 부분 -->
+					<jsp:include page="jouralProForm.jsp" />
+				</div>
+				<div class="infoform-wrap">
+					<!-- 기자의 정보 부분 -->
+					<jsp:include page="infoForm.jsp" />
+					<div class="journalist-wrap">
+						<!-- 기자가 쓴 뉴스 리스트 -->
+						<jsp:include page="journalist.jsp" />
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
+	
 	<%
 	}
 	%>
+
 	<%}%>
-	
+		<jsp:include page="/member/footer.jsp"></jsp:include>
 </body>
-<jsp:include page="/member/footer.jsp"></jsp:include>
+
 </html>
 
 

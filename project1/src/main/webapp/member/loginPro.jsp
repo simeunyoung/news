@@ -20,6 +20,8 @@
 	
 	if(check == 1){
 		session.setAttribute("memId", id);
+		%>
+		<%=auto %><%
 		if(auto != null){
 			Cookie coo1 = new Cookie("cooId", id);
 			Cookie coo2 = new Cookie("cooPw", pw);

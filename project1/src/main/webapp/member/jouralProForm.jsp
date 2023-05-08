@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>CODENEWS</title>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/dbaea98925.js" crossorigin="anonymous"></script>
 <script src="/project1/resource/js/script.js"></script>
 </head>
 
@@ -42,9 +43,6 @@
 
 %>
 
-<style>
-.imgUpdate{display:none;}
-</style>
 <script>
 // 프로필 사진 변경하기 
 	function setThumbnail(event){
@@ -64,7 +62,7 @@
 	
 	function imgUpdate(){ // 이미지 수정 버튼
 		target = document.getElementsByClassName("imgUpdate");
-		target[0].style.display = 'block';
+		target[0].style.display = 'flex';
 	}
 	</script>
 <body>
@@ -73,7 +71,9 @@
 		<div class="card-body">
 			<div>
 				<div id="image_container">
-				<button type="button" onclick="imgUpdate()">img수정</button>
+				<%if(id.equals(id2)){ %>
+					<button type="button" class="modify-btn" onclick="imgUpdate()"><i class="fa-solid fa-pen fa-lg" style="color:#fff;"></i></button>
+				<%} %>
 
 				<%if(dto == null) {
 				} else {%>
@@ -84,26 +84,28 @@
 					<%}%>		
 				<%}%>
 				</div>
-				<div class="imgUpdate">
+				
 					<form action="imgUpload.jsp?pageType=<%=pageType %>" method="post" enctype="multipart/form-data">
-						<input type="file"	name="save" id="profile-pic" onchange="setThumbnail(event)"> <!-- 선택한 이미지 보여주고 pro로 보냄 -->
-						<input type="submit" value="업로드">
+						<div class="imgUpdate">
+							<input type="file"	name="save" id="profile-pic" onchange="setThumbnail(event)"> <!-- 선택한 이미지 보여주고 pro로 보냄 -->
+							<div>
+								<input type="submit" class="upload-btn" >
+							</div>
+						</div>
 					</form>
-				</div>
+				
 
 				<div class="mt-3">
-					<h4>기자</h4>
-					<p class="text-secondary mb-1">Full Stack Developer</p>
-					<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+					<h4 class="name"><%=id2 %>님</h4>
 						<%if(id != null && id.equals(id2)){%><!-- 본인이면 탈퇴하기 활성화 -->
-					<button class="btn btn-outline-primary"
-						onclick="location='deleteForm.jsp'">탈퇴하기</button>
+					<div class="flex-center"><button type="button" class="white-btn" onclick="location='deleteForm.jsp?pageType=2'">탈퇴하기</button></div>
 						<%}else{ %>
 							 <% if(!include){%><!-- 구독 중이면 취소, 아니면 구독하기 버튼 활성화 -->
-		                      	<button class="btn btn-primary" onclick="location='bookmarkPro.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독하기</button>
+		                      	<div class="flex-center"><button type="button" class="submit-btn" onclick="location='bookmarkPro.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독하기</button></div>
 		                      <%}else{%>
-		                      	<button class="btn btn-primary" onclick="location='bookmarkDelete.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독취소</button>
+		                      	<div class="flex-center"><button type="button" class="submit-btn" onclick="location='bookmarkDelete.jsp?id=<%=id%>&id2=<%=id2%>&books=<%=bookList%>'">구독취소</button></div>
                       		<%}%>
+                      		<div><button type="button" class="bookmark-btn" onclick="location='/project1/company/pressForm.jsp'">구독현황 <i class="fa-solid fa-right-long"></i> </button></div>
 						<%} %>
 				</div>
 			</div>

@@ -28,25 +28,7 @@
 		<%
 			if (num == null) { // 정보만 보여주는 폼
 		%>
-		<div class="card-body">
-			<div class="row">
-				<div class="col-sm-3">
-					<h6 class="mb-0">ID</h6>
-				</div>
-				<div class="col-sm-9 text-secondary">
-					<%=member.getId()%>
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col-sm-3">
-					<h6 class="mb-0">PW</h6>
-				</div>
-				<div class="col-sm-9 text-secondary">
-					<%=member.getPw()%>
-				</div>
-			</div>
-			<hr>
+		<div class="card-body info-wrap">
 			<div class="row">
 				<div class="col-sm-3">
 					<h6 class="mb-0">NAME</h6>
@@ -97,7 +79,7 @@
 				<div class="col-sm-12">
 				<%if(id.equals(id2)){ // 본인이면 수정하기 버튼 활성화
 				%>
-					<a class="btn btn-info edit-button"
+					<a class="white-btn"
 						onclick="location='user_mypage_form.jsp?num=1&id=<%=id%>&pageType=<%=pageType%>'">수정하기</a>
 					<%} %>
 				</div>

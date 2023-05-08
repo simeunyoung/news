@@ -89,36 +89,37 @@ int number = count - (crtPage -1) * pageSize;
 			<%
 				} // end else
 			%>
-			<%
-			if (count > 0) {
-				// 하단 페이지 목록 번호 갯수 정하기
-				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-
-				int startPage = (int) (crtPage / 10) * 10 + 1;
-				int pageBlock = 10;
-				int endPage = startPage + pageBlock - 1;
-				if (endPage > pageCount) {
-					endPage = pageCount;
-				}
-
-				if (startPage > 10) {
-			%>
-				<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage - 10%>">[이전]</a>
-			<%
-				} // end if
-				for (int i = startPage; i <= endPage; i++) {
-			%>
-				<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=i%>">[<%=i%>]</a>
-			<%
-				}// end for
-				if (endPage < pageCount) {
-			%>
-				<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage + 10%>">[다음]</a>
-			<%
-				} // end if
-				}// end if(count)
-			%>
-
+			<div class="pagination">
+				<%
+				if (count > 0) {
+					// 하단 페이지 목록 번호 갯수 정하기
+					int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	
+					int startPage = (int) (crtPage / 10) * 10 + 1;
+					int pageBlock = 10;
+					int endPage = startPage + pageBlock - 1;
+					if (endPage > pageCount) {
+						endPage = pageCount;
+					}
+	
+					if (startPage > 10) {
+				%>
+					<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage - 10%>">[이전]</a>
+				<%
+					} // end if
+					for (int i = startPage; i <= endPage; i++) {
+				%>
+					<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=i%>">[<%=i%>]</a>
+				<%
+					}// end for
+					if (endPage < pageCount) {
+				%>
+					<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage + 10%>">[다음]</a>
+				<%
+					} // end if
+					}// end if(count)
+				%>
+			</div>
 		</div>
 	</div>
 	

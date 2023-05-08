@@ -14,6 +14,7 @@
 <%
 String id = (String) session.getAttribute("memId");
 String id2 = request.getParameter("id");
+String pageType = request.getParameter("pageType");
 MemberDAO dao = MemberDAO.getInstance();
 int check = dao.typeCheck(id);
 
@@ -24,23 +25,23 @@ int check = dao.typeCheck(id);
 	<div class="card">
 		<div class="card-body">
 			<div>
-				<img src="/project1/resource/img/profile.png" class="rounded-circle" width="150">
+				<img src="/project1/resource/img/profile01.jpg" class="rounded-circle" width="150">
 				<div>
-					<h4>user</h4>
-					<p class="text-secondary mb-1">Full Stack Developer</p>
-					<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-
-					<%
-						if (id.equals(id2)) { // 본인이면
-					%>
-					<button class="btn btn-outline-primary"
-						onclick="location='deleteForm.jsp'">탈퇴하기</button>
-						<%if(check == -1){ // 기자면%> 
-							<button onclick="location='user_mypage_form.jsp?id=<%=id%>&pageType=2'">기자프로필</button>
-						<%} %>
-					<%
-					}
-					%>
+					<h4 class="name"><%=id2 %> 님</h4>
+					<div class="row button-wrap">
+						<%
+							if (id.equals(id2)) { // 본인이면
+						%>
+						<button type="button" class="white-btn"	onclick="location='deleteForm.jsp?pageType=1'">탈퇴하기</button>
+							<%if(check == -1){ // 기자면%> 
+								<button type="button" class="submit-btn" onclick="location='user_mypage_form.jsp?id=<%=id%>&pageType=2'">기자프로필</button>
+							<%} %>
+							<button type="button" class="bookmark-btn" onclick="location='/project1/company/pressForm.jsp'">구독현황 <i class="fa-solid fa-right-long"></i> </button>
+						<%
+						
+						}
+						%>
+					</div>
 				</div>
 			</div>
 		</div>

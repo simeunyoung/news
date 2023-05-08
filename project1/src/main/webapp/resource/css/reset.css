@@ -59,6 +59,7 @@ time, mark, audio, video {
 	box-sizing:border-box;
 	font-family: "Pretendard";
 	font-weight:normal;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -70,6 +71,8 @@ body {
 	width:1920px;
 	max-width:1920px;
 	min-width:1920px;
+	overflow:overlay;
+	position:relative;
 }
 ol, ul {
 	list-style: none;
