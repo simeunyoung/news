@@ -9,10 +9,9 @@
 
 <%
 	String id = (String)session.getAttribute("memId");
-	svDTO.setId(id);
 	
 	SvcenterDAO svDAO = SvcenterDAO.getInstance();
-	svDAO.insertSvcenter(svDTO);
+	svDAO.insertSvcenter(svDTO, id);
 	
 	response.sendRedirect("svmain.jsp");
 %>

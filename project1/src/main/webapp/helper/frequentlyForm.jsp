@@ -33,7 +33,7 @@
 	
 	<tr>
 		<td width = "70" align = "center">질문내용</td>
-		<td width = "330"><textarea name = "con" rows = "44" cols = "127"></textarea></td>
+		<td width = "330"><textarea name = "con" rows = "47" cols = "127"></textarea></td>
 	</tr>
 	
 	<tr>

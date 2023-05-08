@@ -48,7 +48,7 @@
 				<td colspan = "2" align = "center">
 					<input type = "submit" value = "글수정">
 					<input type = "reset" value = "다시작성">
-					<input type = "button" value = "글목록" onclick = "location.href='qalist.jsp?pageNum=<%=pageNum%>'"></td>
+					<input type = "button" value = "글목록" onclick = "location.href='qalist.jsp?pageNum=<%=pageNum%>num=<%=num%>'"></td>
 			</tr>
 		</table>
 	</form>

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "helper.SvcenterDAO"%>
 <%@ page import = "helper.SvcenterDTO"%>
+<%@ page import = "member.MemberDTO"%>
+<%@ page import = "member.MemberDAO"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
@@ -10,6 +12,7 @@
 <jsp:include page="/member/header.jsp" />
 
 <% 
+	String id = (String)session.getAttribute("memId");
 	int num = 0;
 	if(request.getParameter("num") != null){					//글번호는 값이 있어야되고 num에 글번호를 대입
 		num = Integer.parseInt(request.getParameter("num"));
@@ -21,6 +24,9 @@
 	try{
 		SvcenterDAO svDAO = SvcenterDAO.getInstance();
 		SvcenterDTO svDTO = svDAO.getSvDTO(num);				//해당 글번호를 테이블에 대입하고 검색해서 값을 꺼내옴
+		
+		MemberDAO mbDAO = MemberDAO.getInstance();
+		MemberDTO mbdto = mbDAO.getMember(id);
 %>
 
 <center><b>문의내용보기</b>
@@ -58,13 +64,12 @@
 		<tr>
 			<td colspan = "4" align = "right">
 				<%
-					String id = (String)session.getAttribute("memId");	//세션에서 받아온 id를 저장
 					if(id != null){										//세션에서 넘겨받은 id는 값이 없는지 확인
 						if(id.equals(svDTO.getId())){					//본인 글만 수정 삭제가능하게 설정
 				%>
 			<input type = "button" value = "글수정" onclick = "location.href='qtupForm.jsp?num=<%=svDTO.getNum1()%>&pageNum=<%=pageNum%>'">
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<%if(id.equals("admin")){%>						<%-- 관리자일 경우엔 글삭제가 가능하게 만듬 --%>
+				<%if(mbdto.getMemberType().equals("2")){%>						<%-- 관리자일 경우엔 글삭제가 가능하게 만듬 --%>
 			<input type = "button" value = "글삭제" onclick = "location.href='qtdeleForm.jsp?num=<%=svDTO.getNum1()%>&pageNum=<%=pageNum%>'">
 				&nbsp;&nbsp;&nbsp;&nbsp;
 					<%}%>

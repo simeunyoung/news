@@ -37,7 +37,7 @@
 			</tr>
 			<tr>
 				<td colspan = "2" align = "center">
-					<input type = "submit" value = "수 정">
+					<input type = "submit" value = "수정하기">
 					<input type = "reset" value = "다시작성">
 					<input type = "button" value = "돌아가기" onclick = "location.href='svmain.jsp?pageNum=<%=pageNum%>'"></td>
 			</tr>

@@ -13,7 +13,7 @@ public class Svcenter1DAO extends OracleServer {
 	
 	private Svcenter1DAO() {}
 	
-	public void insertSvcenter1(Svcenter1DTO svDTO1) throws Exception{
+	public void insertSvcenter1(Svcenter1DTO svDTO1) throws Exception{				//자주묻는질문을 작성시 테이블에 저장
 		
 		try {
 			conn = getConnection();
@@ -31,12 +31,12 @@ public class Svcenter1DAO extends OracleServer {
 		}
 	}
 	
-	public int getSvcenterCount1() throws Exception{
+	public int getSvcenterCount1() throws Exception{						//작성된 글이 있는지 없는지 확인
 		int x = 0;
 		
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select count(*) from svcenter1");
+			pstmt = conn.prepareStatement("select count(*) from svcenter1");	
 			rs = pstmt.executeQuery();
 			
 		if(rs.next()) {
@@ -50,7 +50,7 @@ public class Svcenter1DAO extends OracleServer {
 		return x;
 	}
 	
-	public List getSvcenter1(int start, int end) throws Exception{
+	public List getSvcenter1(int start, int end) throws Exception{			//작성된 글이 있다면 1부터 10까지의 번호로 글을 꺼내 리스트로 저장
 		List svcenterList1 = new ArrayList();
 		
 		try {
@@ -78,7 +78,7 @@ public class Svcenter1DAO extends OracleServer {
 		return svcenterList1;
 	}
 	
-	public Svcenter1DTO getSvdto1(int num) throws Exception{
+	public Svcenter1DTO getSvdto1(int num) throws Exception{				//글번호를 대입해서 테이블에 검색하고 해당 글번호의 정보를 꺼내옴
 		Svcenter1DTO svdto1 = null;
 		
 		try {
@@ -103,7 +103,7 @@ public class Svcenter1DAO extends OracleServer {
 		return svdto1;
 	}
 	
-	public Svcenter1DTO updateGetSvcenter1(int num) throws Exception{
+	public Svcenter1DTO updateGetSvcenter1(int num) throws Exception{		//글보는 창에서 수정버튼을 눌렀을 때 해당 글번호에 저장된 값을 꺼내서 출력
 		Svcenter1DTO svdto1 = null;
 		
 		try {
@@ -128,7 +128,7 @@ public class Svcenter1DAO extends OracleServer {
 		return svdto1;
 	}
 	
-	public void updateSvcenter1(Svcenter1DTO svdto1) throws Exception{
+	public void updateSvcenter1(Svcenter1DTO svdto1) throws Exception{		//수정을 하고 수정완료를 눌렀을 때 테이블에 업데이트
 		String sql = "";
 		
 		try {
@@ -147,7 +147,7 @@ public class Svcenter1DAO extends OracleServer {
 		}
 	}
 	
-	public void deleteSvcenter1(int num) throws Exception{
+	public void deleteSvcenter1(int num) throws Exception{					//해당 글번호를 삭제
 		String sql = "";
 		
 		try {

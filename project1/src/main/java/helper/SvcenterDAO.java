@@ -2,6 +2,7 @@ package helper;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import admin.AdminDTO;
 
 import server.OracleServer;
 
@@ -13,12 +14,12 @@ public class SvcenterDAO extends OracleServer{
 	public static SvcenterDAO getInstance() {return instance;}
 	private SvcenterDAO() {}
 	
-	public void insertSvcenter(SvcenterDTO svDTO) throws Exception{
+	public void insertSvcenter(SvcenterDTO svDTO, String id) throws Exception{				
 		try {
 			conn = getConnection();
 			sql = "insert into svcenter values(svcenter_seq.nextval,?,?,?,?,?,sysdate)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, svDTO.getId());
+			pstmt.setString(1, id);					//세션에서 넘겨받은 id값을 대입
 			pstmt.setString(2, svDTO.getTitle());
 			pstmt.setString(3, svDTO.getEmail());
 			pstmt.setString(4, svDTO.getCon());
@@ -31,7 +32,7 @@ public class SvcenterDAO extends OracleServer{
 		}
 	}
 	
-	public SvcenterDTO getSvDTO(int num1) throws Exception{
+	public SvcenterDTO getSvDTO(int num1) throws Exception{				//글번호를 대입해서 테이블에 검색하고 해당 글번호의 정보를 꺼내옴
 		SvcenterDTO svdto = null;
 		try {
 			conn = getConnection();
@@ -57,7 +58,7 @@ public class SvcenterDAO extends OracleServer{
 		return svdto;
 	}
 	
-	public int getSvcenterCount() throws Exception{
+	public int getSvcenterCount() throws Exception{				//1대1 문의글이 있는지 없는지 확인
 		int x = 0;
 		try {
 			conn = getConnection();
@@ -75,11 +76,11 @@ public class SvcenterDAO extends OracleServer{
 		return x;
 	}
 	
-	public int getMySvcenterCount(String id) throws Exception{
+	public int getMySvcenterCount(String id) throws Exception{	//본인이 작성한 글이 있는지 없는지 세션에서 넘겨받은 id로 테이블에 검색
 		int x = 0;
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select count(*) from svcenter");
+			pstmt = conn.prepareStatement("select count(*) from qna where id = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
@@ -94,7 +95,7 @@ public class SvcenterDAO extends OracleServer{
 		return x;
 	}
 	
-	public List getSvcenter(int start, int end) throws Exception{
+	public List getSvcenter(int start, int end) throws Exception{	//작성된 글이 있다면 1부터 10까지의 번호로 글을 꺼내 리스트로 저장
 		List svcenterList = new ArrayList();
 		
 		try {
@@ -123,12 +124,12 @@ public class SvcenterDAO extends OracleServer{
 		return svcenterList;
 	}
 	
-	public List getMySvcenter(String id, int start, int end) throws Exception{
+	public List getMySvcenter(String id, int start, int end) throws Exception{	//본인이 작성한 글이 있다면 1부터 10까지의 번호로 글을 꺼내옴
 		List svcenterList = new ArrayList();
 		
 		try {
 			conn = getConnection();
-			sql = "select * from(select e.*, rownum r from(select * from svcenter where id = ? order by reg desc)e) where r >= ? and r <= ?";
+			sql = "select * from (select e.*, rownum r from (select * from qna where id = ? order by num desc) e) where r >=? and r <=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start);
@@ -136,15 +137,21 @@ public class SvcenterDAO extends OracleServer{
 			rs = pstmt.executeQuery();
 			
 		while(rs.next()) {
-			SvcenterDTO svdto = new SvcenterDTO();
-			svdto.setNum1(rs.getInt("num1"));
-			svdto.setId(rs.getNString("id"));
-			svdto.setTitle(rs.getString("title"));
-			svdto.setEmail(rs.getString("email"));
-			svdto.setCon(rs.getString("con"));
-			svdto.setPw(rs.getString("pw"));
-			svdto.setReg(rs.getTimestamp("reg"));
-			svcenterList.add(svdto);
+			AdminDTO dto = new AdminDTO();
+			dto.setResultType(rs.getString("resultType"));
+			dto.setNum(rs.getInt("num"));
+			dto.setId(rs.getString("id"));
+			dto.setName(rs.getString("name"));
+			dto.setEmail(rs.getString("email"));
+			dto.setTel(rs.getString("tel"));
+			dto.setTitle(rs.getString("title"));
+			dto.setCon(rs.getString("con"));
+			dto.setReadCount(rs.getInt("readCount"));
+			dto.setQuestionType(rs.getString("questionType"));
+			dto.setMemberType(rs.getString("memberType"));
+			dto.setIp(rs.getString("ip"));
+			dto.setReg(rs.getTimestamp("reg"));
+			svcenterList.add(dto);
 		}
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -154,7 +161,7 @@ public class SvcenterDAO extends OracleServer{
 		return svcenterList;
 	}
 	
-	public SvcenterDTO updateGetSvcenter(int num) throws Exception{
+	public SvcenterDTO updateGetSvcenter(int num) throws Exception{			//파라미터로 글번호 값을 받아와서 대입하여 테이블에 검색하고 저장된 값을 꺼냄
 		SvcenterDTO svdto = null;
 		
 		try {
@@ -181,20 +188,20 @@ public class SvcenterDAO extends OracleServer{
 		return svdto;
 	}
 	
-	public int updateSvcenter(SvcenterDTO svdto) throws Exception{
-		String dbpasswd = "";
+	public int updateSvcenter(SvcenterDTO svdto) throws Exception{			
+		String dbpasswd = "";												//작성시 넣은 패스워드를 저장할 변수
 		String sql = "";
-		int x = -1;
+		int x = -1;															//테이블에 저장된 비밀번호 값과 입력받은 비밀번호가 맞는지 틀린지 확인하기 위한 변수
 		
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select pw from svcenter where num1 = ?");
+			pstmt = conn.prepareStatement("select pw from svcenter where num1 = ?");		//해당 글번호를 넣고 테이블에 비밀번호를 검색해서 꺼내옴
 			pstmt.setInt(1, svdto.getNum1());
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {dbpasswd = rs.getString("pw");
+			if(rs.next()) {dbpasswd = rs.getString("pw");									//꺼내온 값을 저장함
 			
-			if(dbpasswd.equals(svdto.getPw())) {
+			if(dbpasswd.equals(svdto.getPw())) {											//테이블에 저장된 값과 입력받은 비밀번호를 비교
 				sql = "update svcenter set id = ?, title = ?, email = ?, con = ?, pw = ? where num1 = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, svdto.getId());
@@ -217,19 +224,19 @@ public class SvcenterDAO extends OracleServer{
 	return x;
 	}
 	
-	public int deleteSvcenter(int num, String pw) throws Exception{
-		String dbpasswd = "";
-		int x = -1;
+	public int deleteSvcenter(int num, String pw) throws Exception{						//넘겨받은 글번호와 비밀번호	
+		String dbpasswd = "";															//작성시 넣은 패스워드를 저장할 변수
+		int x = -1;																		//테이블에 저장된 비밀번호 값과 입력받은 비밀번호가 맞는지 틀린지 확인하기 위한 변수
 		
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select pw from svcenter where num1 = ?");
+			pstmt = conn.prepareStatement("select pw from svcenter where num1 = ?");	//테이블에 넘겨받은 글번호를 넣고 테이블에 저장된 해당 글번호의 비밀번호를 검색
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
 		if(rs.next()) {
 			dbpasswd = rs.getString("pw");
-			if(dbpasswd.equals(pw)) {
+			if(dbpasswd.equals(pw)) {													//테이블에서 검색한 비밀번호와 입력받아서 가지고 온 비밀번호를 비교
 				pstmt = conn.prepareStatement("delete from svcenter where num1 = ?");
 				pstmt.setInt(1, num);
 				pstmt.executeUpdate();
