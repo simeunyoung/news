@@ -3,6 +3,7 @@ package revalue;
 import java.util.ArrayList;
 import java.util.List;
 
+import news.NewsDTO;
 import server.OracleServer;
 
 
@@ -58,4 +59,23 @@ public class RevalueDAO extends OracleServer {
 		return userList;
 	}
 
+	public int getReconNum(String title, String con){
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "select num from news where title=? and con=?"; 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, con);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("num");
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	}
 }

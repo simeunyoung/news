@@ -35,6 +35,8 @@ if(count > 0){
 	userList = rv.getMyReconList(id, startNum, endNum);
 }
 int number = count - (crtPage - 1) * pageSize;
+
+
 %>
 <body>
 	<!-- 유저의 댓글 리스트 -->
@@ -63,6 +65,7 @@ int number = count - (crtPage - 1) * pageSize;
 			if (userList != null) {
 				for (int i = 0; i < userList.size(); i++) {
 					RevalueDTO recon = (RevalueDTO) userList.get(i);
+					int result = rv.getReconNum(recon.getTitle(),recon.getCon());
 			%>
 			<tr>
 				<td><%=number--%></td>
@@ -73,7 +76,7 @@ int number = count - (crtPage - 1) * pageSize;
 						<%=recon.getId()%>
 					<%} %>
 				</td>
-				<td><a href="news.jsp?num<%=recon.getNum()%>&pageNum=<%=crtPage%>">
+				<td><a href="/project1/news/content.jsp?num=<%=result%>">
 						<%=recon.getTitle()%>
 				</a></td>
 				<td><%=recon.getCon()%></td>
