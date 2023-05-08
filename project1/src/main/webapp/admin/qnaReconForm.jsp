@@ -5,19 +5,19 @@
 <%@ page import="admin.AdminDAO"%>
 <%@ page import="member.MemberDTO"%>
 
-<link href="/project1/resource/css/style.css" rel="stylesheet">
-<script src="/project1/resource/js/script.js"></script>
-
 <%
-	int pageSize = 20; // 한 페이지에서 보여줄 게시물 수
+	int num = Integer.parseInt(request.getParameter("num"));
+	String pageNum = request.getParameter("pageNum");
+	String pageNum2 = request.getParameter("pageNum2");
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss"); // 작성일자 양식
 
-	String pageNum = request.getParameter("pageNum");
-	if(pageNum == null) {
-		pageNum = "1";
+	int pageSize = 10; // 한 페이지에서 보여줄 게시물 수
+
+	if(pageNum2 == null) {
+		pageNum2 = "1";
 	}
 	
-	int currentPage = Integer.parseInt(pageNum);
+	int currentPage = Integer.parseInt(pageNum2);
 	int startRow = (currentPage - 1) * pageSize + 1;
 	int endRow = currentPage * pageSize;
 	List qnaReconList = null;
@@ -27,13 +27,14 @@
 	MemberDTO dto2 = dao.setMember(memId);
 	if(memId == null) {
 		dto2.setId("비회원");
-		dto2.setName("비회원");}
-	int count = dao.qnaReconCount();
+		dto2.setName("비회원");
+		dto2.setMemberType("0");
+	}
+	int count = dao.qnaReconCount(num);
 	if(count > 0) {
-		qnaReconList = dao.qnaReconList(num2,startRow,endRow);
+		qnaReconList = dao.qnaReconList(num,startRow,endRow);
 	}
 %>
-<jsp:include page="/member/header.jsp" />
 
 <%	if(count == 0) {%>
 	<table align="center">
@@ -44,13 +45,22 @@
 <%	} else {%>
 <form align="center">
 	<table align="center">
+		<tr height="30">
+			<td align="center">댓글 고유번호</td>
+			<td align="center">작성자</td>
+			<td align="center">내용</td>
+			<%if(dto2.getMemberType().equals("2")) {%>
+			<td align="center">IP</td>
+			<%}%>
 	<%for(int i = 0; i < qnaReconList.size(); i++) {
 	AdminDTO dto = (AdminDTO)qnaReconList.get(i);%>
 		<tr height="30">
 			<td align="center"><%=dto.getNum()%></td>
 			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>)</td>
 			<td align="center"><%=dto.getRecon()%></td>
+			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center"><%=dto.getIp()%></td>
+			<%}%>
 		</tr>
 <%	}%>
 	</table>
@@ -69,13 +79,13 @@
 			endPage = pageCount;
 		}%>
 <%		if(startPage > 20) {%>
-			<a href="qnaReconForm.jsp?pageNum2=<%=startPage - 20%>">[이전]</a>
+			<a href="qnaContent.jsp?num=<%=num%>&pageNum=<%=pageNum%>&pageNum2=<%=startPage - 20%>">[이전]</a>
 <%		}
 		for(int i = startPage; i <= endPage; i++) {%>
-			<a href="qnaReconForm.jsp?pageNum2=<%=i%>">[<%=i%>]</a>
+			<a href="qnaContent.jsp?num=<%=num%>&pageNum=<%=pageNum%>&pageNum2=<%=i%>">[<%=i%>]</a>
 <%		}
 		if(endPage < pageCount) { %>
-			<a href="qnaReconForm.jsp?pageNum2=<%=startPage + 20%>">[다음]</a>
+			<a href="qnaContent.jsp?num=<%=num%>&pageNum=<%=pageNum%>&pageNum2=<%=startPage + 20%>">[다음]</a>
 <%		}
 	}%>
 </form>
@@ -87,11 +97,11 @@
 			<td>
 				<input type="hidden" name="id" value="<%=dto2.getId()%>" />
 				<input type="hidden" name="name" value="<%=dto2.getName()%>" />
-				<input type="hidden" name="num2" value="<%=num2%>"/>
+				<input type="hidden" name="num2" value="<%=num%>"/>
+				<input type="hidden" name="pageNum" value="<%=pageNum%>" />
 				<textarea name="recon" placeholder="댓글내용"></textarea>
 				<input type="submit" value="입력" />
 			</td>
 		</tr>
 	</table>
 </form>
-<jsp:include page="/member/footer.jsp"></jsp:include>

@@ -32,7 +32,18 @@
 <br />
 
 <form method="post" action="journalistPro.jsp">
-	<input type="text" name="press" placeholder="언론사" />
+	<select name="press">
+		<option value="동아일보">동아일보</option>
+		<option value="경향신문">경향신문</option>
+		<option value="노컷뉴스">노컷뉴스</option>
+		<option value="NewDaily">NewDaily</option>
+		<option value="뉴스타파">뉴스타파</option>
+		<option value="디지털타임스">디지털타임스</option>
+		<option value="마이데일리">마이데일리</option>
+		<option value="매일경제">매일경제</option>
+		<option value="미디어오늘">미디어오늘</option>
+	</select>
+	
 	<input type="hidden" name="id" value="<%=dto.getId()%>" />
 	<input type="hidden" name="memberType" value="<%=dto.getMemberType()%>" />
 	<input type="hidden" name="email" value="<%=dto.getEmail()%>" />

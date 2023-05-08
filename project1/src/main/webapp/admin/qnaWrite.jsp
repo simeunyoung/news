@@ -72,11 +72,11 @@
 		</tr>
 		<tr height="30">
 			<td align="center">이메일</td>
-			<td><input type="text" name="email" value="<%=dto.getEmail()%>" size="50" /></td>
+			<td><input type="text" name="email" value="<%=dto.getEmail()%>" size="70" /></td>
 		</tr>
 		<tr height="30">
 			<td align="center">연락처(선택사항)</td>
-			<td><input type="text" name="tel" value="<%=dto.getTel()%>" size="50" /></td>
+			<td><input type="text" name="tel" value="<%=dto.getTel()%>" size="70" /></td>
 		</tr>
 		<%}%>
 		<tr height="30">
@@ -87,7 +87,7 @@
 		</tr>
 		<tr height="30">
 			<td align="center">글 비밀번호</td>
-			<td><input type="password" name="pw" size="50" placeholer="글 비밀번호" /></td>
+			<td><input type="password" name="pw" size="70" placeholer="글 비밀번호" /></td>
 		</tr>
 		<tr height="30">
 			<td align="center" colspan="2">문의내용</td>

@@ -97,4 +97,8 @@
 		</tr>
 	</table>
 </form>
+<jsp:include page="/admin/qnaReconForm.jsp">
+<jsp:param value="<%=num%>" name="num2" />
+<jsp:param value="<%=pageNum%>" name="pageNum" />
+</jsp:include>
 <jsp:include page="/member/footer.jsp"></jsp:include>

@@ -47,6 +47,7 @@
 	<table align="center" border="1" cellspacing="0">
 		<tr height="30">
 			<td align="center" width="50">타입</td>
+			<td align="center" width="200">언론사</td>
 			<td align="center" width="200">아이디</td>
 			<td align="center" width="200">이메일</td>
 			<td align="center" width="200">신청일</td>
@@ -59,6 +60,7 @@
 		<%if(dto.getResultType().equals("0")) {%>
 		<tr height="20">
 			<td align="center" width="50"><%=dto.getMemberType()%></td>
+			<td align="center" width="200"><%=dto.getPress()%></td>
 			<td align="center" width="200"><%=dto.getId()%></td>
 			<td align="center" width="200"><%=dto.getEmail()%></td>
 			<td align="center" width="200"><%=sdf.format(dto.getReg())%></td>

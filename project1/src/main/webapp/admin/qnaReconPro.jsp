@@ -6,11 +6,20 @@
 <jsp:setProperty property="*" name="dto" />
 
 <%
-	int num2 = (int)session.getAttribute("num2");
-	
 	dto.setIp(request.getRemoteAddr());
-	
+	String num = request.getParameter("num2");
+	String pageNum = request.getParameter("pageNum");
 	AdminDAO dao = AdminDAO.getInstance();
-	dao.qnaReconInsert(dto);	
-	response.sendRedirect("qnaContent.jsp?num=dto.getNum()");
+	int result = dao.qnaReconInsert(dto);
 %>
+	<%if(result == 1) {%>
+	<script>
+		alert("작성되었습니다");
+		window.location.href ="/project1/admin/qnaContent.jsp?num=<%=dto.getNum2()%>&pageNum=<%=pageNum%>";
+	</script>
+	<%} else {%>
+	<script>
+		alert("오류발생");
+		window.location.href ="/project1/admin/qnaContent.jsp?num=<%=dto.getNum2()%>&pageNum=<%=pageNum%>";
+	</script>
+	<%}%>

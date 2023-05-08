@@ -132,6 +132,7 @@ public class AdminDAO extends OracleServer {
 			
 			while(rs.next()) {
 				AdminDTO dto = new AdminDTO();
+				dto.setPress(rs.getString("press"));
 				dto.setResultType(rs.getString("resultType"));
 				dto.setId(rs.getString("id"));
 				dto.setMemberType(rs.getString("memberType"));
@@ -555,12 +556,13 @@ public class AdminDAO extends OracleServer {
 	}
 	
 	// qna 댓글갯수 확인 메서드(보완필요)
-	public int qnaReconCount() {
+	public int qnaReconCount(int num2) {
 		int result = 0;
 		try {
 			conn = getConnection();
-			sql = "select count(*) from qnaRecon";
+			sql = "select count(*) from qnaRecon where num2=?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num2);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -574,18 +576,19 @@ public class AdminDAO extends OracleServer {
 	}
 	
 	// qna댓글 리스트 메서드(보완필요)
-	public List qnaReconList(String num2, int start, int end) {
+	public List qnaReconList(int num2, int start, int end) {
 		List qnaReconList = new ArrayList();
 		try {
 			conn = getConnection();
 			sql = "select * from (select e.*, rownum r from (select * from qnaRecon where num2=? order by num desc) e) where r >=? and r <=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, num2);
+			pstmt.setInt(1, num2);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				AdminDTO dto = new AdminDTO();
+				dto.setNum(rs.getInt("num"));
 				dto.setNum2(rs.getInt("num2"));
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
@@ -603,7 +606,8 @@ public class AdminDAO extends OracleServer {
 	}
 	
 	// qna댓글입력 메서드
-	public void qnaReconInsert(AdminDTO dto) {
+	public int qnaReconInsert(AdminDTO dto) {
+		int result = 0;
 		try {
 			conn = getConnection();
 			sql = "insert into qnaRecon values(qnaRecon_seq.nextval,?,?,?,?,?,sysdate)";
@@ -613,13 +617,13 @@ public class AdminDAO extends OracleServer {
 			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getRecon());
 			pstmt.setString(5, dto.getIp());
-			pstmt.executeUpdate();
-			
+			result = pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			oracleClose();
 		}
+		return result;
 	}
 	
 }
