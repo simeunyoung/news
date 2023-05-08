@@ -331,7 +331,8 @@ public class MemberDAO extends OracleServer {
 			}
         }
 		// company
-		  public TreeSet<String> selectPress() {
+        //member테이블 press컬럼에 있는 값(언론사)들을 TreeSet<String> 에 넣어 리턴 
+		  public TreeSet<String> selectPress() {					
 			  	TreeSet<String> list = new TreeSet<>();
 			  	try {
 				conn = getConnection();
@@ -349,6 +350,7 @@ public class MemberDAO extends OracleServer {
 				}
 				return list;
 			}
+		  	//언론사를 매개변수로 받아서 언론사에 해당하는 기자들 DTO ArrayList에 담아서 리턴 
 		    public ArrayList<MemberDTO> pressReporter(String press) {
 				ArrayList<MemberDTO> list = new ArrayList<>();
 				conn = getConnection();
@@ -369,7 +371,7 @@ public class MemberDAO extends OracleServer {
 				}
 				return list;
 			}
-		    
+		    //언론사를 매개변수로 받고 오름차순으로 해당 언론사 기자들 출력
 		    public ArrayList<MemberDTO> selectReporter(String press) {
 				ArrayList<MemberDTO> list = new ArrayList<>();
 				conn = getConnection();
@@ -390,7 +392,7 @@ public class MemberDAO extends OracleServer {
 				}
 				return list;
 			}
-
+		    //id와 구독한 언론사를 매개변수로 받아서 언론사 구독목록(db)에 추가
 		    public void PSubscribe(String id, String Wpress) {
 				   	try {
 					conn = getConnection();
@@ -404,7 +406,8 @@ public class MemberDAO extends OracleServer {
 					oracleClose();
 				}
 			}
-		    public String selectExist(String id) {
+		    //id에 해당하는 presssubscribe(구독한 언론사) 리턴 
+		    public String selectExist(String id) {				
 		        String exist = "";
 		        try {
 		            conn = getConnection();
@@ -423,6 +426,7 @@ public class MemberDAO extends OracleServer {
 		        }
 		        return exist;
 		    }
+		    //현재 구독되어있는 언론사, 구독하려는 언론사, id 매개변수로 받아서 구독하려는 언론사 추가 String타입 리턴
 		    public String savePress(String exist, String press, String id) {
 		    	String[] parts = exist.split("@");
 		    	boolean include = false;
@@ -448,6 +452,7 @@ public class MemberDAO extends OracleServer {
 		        }
 		        return "window.location.href='pressPage.jsp?press="+press+"'";
 		    }
+		    //현재 구독되어있는 언론사, 구독취소하려는 언론사, id 매개변수로 받아서 구독취소하려는 언론사 빼고 String타입 리턴
 		    public String unSavePress(String exist, String press, String id) {
 		    	String[] parts = exist.split("@");
 		    	String wPress = "";
@@ -475,8 +480,8 @@ public class MemberDAO extends OracleServer {
 		        }
 		        return "window.location.href='pressPage.jsp?press="+press+"'";
 		    }
-		    public ArrayList<MemberDTO> memForType(String type) {
-				ArrayList<MemberDTO> set = new ArrayList<>();
+		    public ArrayList<MemberDTO> memForType(String type) {			//membertype을 매개변수로 받아서 id, name, reportersubscribe을 
+				ArrayList<MemberDTO> set = new ArrayList<>();				//ArrayList에 DTO넣고 리턴
 				conn = getConnection();
 				String sql = "select * from member where membertype=?";
 				try { 	pstmt = conn.prepareStatement(sql);
@@ -496,6 +501,7 @@ public class MemberDAO extends OracleServer {
 				}
 				return set;
 			}
+		    //id를 매개변수로 받고 기자 구독목록을 리턴해줌
 		    public String subscribeR(String id) {
 		    	String sub = "1212";
 		        try {
@@ -515,6 +521,7 @@ public class MemberDAO extends OracleServer {
 		        }
 		        return sub;
 		    }
+		    //pressForm페이지에서 id, 구독체크한 언론사목록 매개변수로 받아서 db에 저장
 		    public void RSubscribe(String id, String result) {
 		    	try {
 					conn = getConnection();
