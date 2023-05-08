@@ -12,8 +12,8 @@
 <% String id = (String)session.getAttribute("memId");%>
 <% String exist = dao.selectExist(id);%>
 <% if(exist == null){exist = "";}%>
-<% String[] parts = exist.split("@");
-	boolean include = false;
+<% String[] parts = exist.split("@");					//part = 현재구독목록을 배열로 변환한것(String[])
+	boolean include = false;							//include = part에 파라미터로 받은 press가 equals면 true 아니면 false
 	for (String part : parts) {
     if (part.equals(press)) {
         include = true;
@@ -33,7 +33,7 @@ function deletePageHistoryAndRedirect() {
 	    }
 	  }
 
-	  // 다음 페이지로 이동
+	  // 다음 페이지로 이동(history를 남기지 않고 이동)		//파라미터 press, exist, id 전달
 	  location.replace('pressPro.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>');
 	}
 function deletePageHistoryAndRedirect1() {
@@ -47,18 +47,18 @@ function deletePageHistoryAndRedirect1() {
 	    }
 	  }
 
-	  // 다음 페이지로 이동
+	  // 다음 페이지로 이동(history를 남기지 않고 이동)		//파라미터 press, exist, id 전달
 	  location.replace('pressDelete.jsp?press=<%=press%>&exist=<%=exist%>&id=<%=id%>');
 	}
 
 </script>
 <html>
 <head>
+<title>CODENEWS</title>
 <%-- css파일 경로 지정 --%>
 <link href = "mypage.css" rel = "stylesheet" type = "text/css">
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
-<title>CODENEWS</title>
 </head>
 <body>
 <jsp:include page="/member/header.jsp" />
@@ -89,11 +89,11 @@ function deletePageHistoryAndRedirect1() {
                     <%-- 이름, 나머지 글자들 크기 및 글자색 조정 --%>
                     <div class="mt-3">
                       <h4><%=press.toUpperCase()%></h4>
-                      <% if(id == null){%>
+                      <% if(id == null){					//session id가 없으면 loginForm.jsp로 보내는 버튼%>
                       <button class="btn btn-primary" onclick= "location.href='/project1/member/loginForm.jsp'">구독하기</button>
-                      <% }else if(!include){%>
+                      <% }else if(!include){				//현재 구독목록에 포함되어있지 않을때 버튼(pressPro.jsp로 보냄)%>
                       <button class="btn btn-primary" onclick= "deletePageHistoryAndRedirect()">구독하기</button>
-                      <%}else{%>
+                      <%}else{								//현재 구독목록에 포함되어 있을때 버튼(pressDelete.jsp로 보냄)%>
                       <button class="btn btn-primary" onclick= "deletePageHistoryAndRedirect1()">구독취소</button>
                       <%}%>
                     </div>
@@ -113,7 +113,7 @@ function deletePageHistoryAndRedirect1() {
                       <h6 class="mb-0">기자목록</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
+                    <%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);		//press에 해당하는 기자 출력
 					for(int z = 0 ; z < reporterList.size() ; z++){%>
 					<a href="/project1/member/journalist.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
 					<%} %>
@@ -137,7 +137,7 @@ function deletePageHistoryAndRedirect1() {
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-5">관련 기사</i></h6>
                       <%
                       //
-                      ArrayList<NewsDTO> articleList = rv.selectArticle(press);				
+                      ArrayList<NewsDTO> articleList = rv.selectArticle(press);			//매개변수로 준 언론사에 해당하는 기사들을 담은 ArrayList 리턴			
                       	int count = articleList.size();
 
                       %>
@@ -154,8 +154,8 @@ function deletePageHistoryAndRedirect1() {
 												<th>TITLE</th>
 												<th>PRESS</th>
 												<th>DATE</th>												
-											</tr>
-											<%for(int i = 0 ; i < articleList.size() ; i++){%>
+											</tr>			<%-- articleList에 담겨있는 기사들 출력 --%>
+											<%for(int i = 0 ; i < articleList.size() ; i++){%>		
 												<tr>
 													<td><%=articleList.get(i).getNum() %></td>
 													<td>

@@ -13,7 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%String url = dao.savePress(exist, press, id);
+<%String url = dao.savePress(exist, press, id);			//파라미터로 받은값 db에 저장
 	if(url != null){ %>
 		<script>
 			alert("구독되었습니다");

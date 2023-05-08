@@ -22,11 +22,11 @@ MemberDAO dao = MemberDAO.getInstance();
 <jsp:include page="/member/header.jsp" />
 	
 	<%
-	String pageNum = request.getParameter("pageNum");
-	if (pageNum == null) {
+	String pageNum = request.getParameter("pageNum");		//pageNum 파라미터를 받음
+	if (pageNum == null) {									//파라미터가 없으면 pageNum 변수에 0대입
 		pageNum = "0";
 	}
-	if (pageNum.equals("0")) {
+	if (pageNum.equals("0")) {								//pageNum이 0일 때 보여주는 페이지(사이트소개)
 	%>
 	<main class="page-wrap">
 		<section id="intro">
@@ -40,7 +40,7 @@ MemberDAO dao = MemberDAO.getInstance();
 
 	</main>
 	<%
-	} else if (pageNum.equals("1")) {
+	} else if (pageNum.equals("1")) {						//pageNum이 1일 때 보여주는 페이지(팀원소개)
 	%>
 	<main>
 		<section id="intro">
@@ -73,7 +73,7 @@ MemberDAO dao = MemberDAO.getInstance();
 		</section>
 	</main>
 	<%
-	} else if (pageNum.equals("2")) {
+	} else if (pageNum.equals("2")) {						//pageNum이 2일 때 보여주는 페이지(언론사/기자리스트)
 	%>
 	<div class="page-wrap">
 		<section id="intro">
@@ -84,21 +84,21 @@ MemberDAO dao = MemberDAO.getInstance();
 					<th width=800px>기자</th>
 				</tr>
 
-				<%
-				TreeSet<String> pressList = dao.selectPress();
-				Object[] pressArray = pressList.toArray();
-				String element;
+				<%	
+				TreeSet<String> pressList = dao.selectPress();		//TreeSet타입으로 언론사이름 출력
+				Object[] pressArray = pressList.toArray();			//배열로 변환
+				String element;										
 				String press;
-				for (int i = 0; i < pressList.size(); i++) {
-					press = (String) pressArray[i];
+				for (int i = 0; i < pressList.size(); i++) {		//언론사 수 만큼 반복
+					press = (String) pressArray[i];					//Object 타입에서 String 타입으로 변환
 					element = press;
 				%>
 				<tr>
-					<td>
-						<a href="pressPage.jsp?press=<%=element%>"><%=element.toUpperCase()%></a>
+					<td>											<%-- 언론사이름 대문자로 출력--%>
+						<a href="pressPage.jsp?press=<%=element%>"><%=element.toUpperCase()%></a>		
 					</td>
 					<td>
-						<%
+						<%											 //기자이름 대문자로 출력
 						ArrayList<MemberDTO> reporterList = dao.selectReporter(press);
 						for (int z = 0; z < reporterList.size(); z++) {
 						%> <a

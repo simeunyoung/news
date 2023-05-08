@@ -6,23 +6,23 @@
 <%@ page import="news.NewsDAO"%>
 <%@ page import="java.util.*"%>
 <%
-String id = (String) session.getAttribute("memId");
+String id = (String) session.getAttribute("memId");						//id = 세션값memId
 %>
 <%
 MemberDAO dao = MemberDAO.getInstance();
 %>
 <%
-TreeSet<String> pressSet = dao.selectPress();
+TreeSet<String> pressSet = dao.selectPress();							//pressSet = 전체언론사이름 넣기
 %>
 <%
-String exist = dao.selectExist(id);
+String exist = dao.selectExist(id);										//exist = id에 해당하는 현재 언론사구독목록(String)
 %>
 <%
-String[] pressNames = pressSet.toArray(new String[pressSet.size()]);
+String[] pressNames = pressSet.toArray(new String[pressSet.size()]); 	//pressNames = 전체언론사이름을 배열로 바꿈	TreeSet ->String[]
 %>
 <%
-String[] existArray = null;
-if (exist == null) {
+String[] existArray = null;												//existArray = @로 언론사를 구분하고있는 exist변수를 split()매소드로 배열로 변환
+if (exist == null) {	
 	existArray = new String[1];
 	existArray[0] = "-";
 } else {
@@ -32,41 +32,41 @@ if (exist == null) {
 
 
 <%
-ArrayList<MemberDTO> reporterList = dao.memForType("-1");
+ArrayList<MemberDTO> reporterList = dao.memForType("-1");				//reporterList 모든기자의 id, name, 구독목록(기자)를 가지고있는DTO들을 담은 리스트
 %>
 <%
-String sub = dao.subscribeR(id);
+String sub = dao.subscribeR(id);										//sub = id에 해당하는 reportersubscribe
 %>
 
 <%
 String[] subscribe = null;
 %>
 <%
-if (sub == null) {
+if (sub == null) {							
 	subscribe = new String[1];
 	subscribe[0] = "_";
 } else {
 %>
 <%
-subscribe = sub.split("@");
+subscribe = sub.split("@");												//subscribe = sub을 split으로 나눈 String[] 배열
 }
 %>
 <%
-String[] subscribe2 = new String[reporterList.size()];
+String[] subscribe2 = new String[reporterList.size()];					//reporterList의 사이즈만큼배열선언(구독한기자수)
 %>
 <%
-String[] nameArray = new String[reporterList.size()];
+String[] nameArray = new String[reporterList.size()];					//reporterList의 사이즈만큼배열선언(구독한기자수)
 %>
 <%
-for (int i = 0; i < reporterList.size(); i++) {
+for (int i = 0; i < reporterList.size(); i++) {							//기자수만큼 반복해주고
 %>
 <%
-MemberDTO ddd = reporterList.get(i);
+MemberDTO ddd = reporterList.get(i);									//reporterList 리스트에서 인덱스 순서대로 DTO꺼내기
 %>
 <%
-String reporterId = ddd.getId();
-subscribe2[i] = reporterId;
-String reporterName = ddd.getName();
+String reporterId = ddd.getId();										//Name, id차례대로 꺼내서 배열에 넣어주기
+subscribe2[i] = reporterId;	
+String reporterName = ddd.getName();									
 nameArray[i] = reporterName;
 }
 %>
@@ -76,12 +76,12 @@ nameArray[i] = reporterName;
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구독</title>
+<title>CODENEWS</title>
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
 </head>
-		<script>
-				function selectAll01(selectAll)  {
+		<script>		<%-- 전체선택하게 해주는 script--%>		
+				function selectAll01(selectAll)  {				
 					  const checkboxes 
 					     = document.querySelectorAll('#tab01 input[type="checkbox"]');
 					  
@@ -124,17 +124,17 @@ nameArray[i] = reporterName;
 					<tr>
 						<td>
 						<div class="row center">
-							<%
-					boolean isChecked = false;
-					for (int i = 0; i < pressNames.length; i++) {
-						isChecked = false;
+					<%				
+					boolean isChecked = false;									
+					for (int i = 0; i < pressNames.length; i++) {					//전체언론사와 현재구독되어있는 언론사비교
+						isChecked = false;											//구독되어있으면 isChecked가 true
 						for (int z = 0; z < existArray.length; z++) {
 							isChecked = pressNames[i].equals(existArray[z]);
 							if (isChecked) {
 					%>
 					<div class="press-chk">
-						<div><%=pressNames[i]%></div>
-						<div>
+						<div><%=pressNames[i]%></div>								<%-- true일때 checked된 checkbox생성 --%>
+						<div>					<%-- name을 반복되는 i값으로 key값을 1씩증가해서 파라미터넘김--%>									
 							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=pressNames[i]%>" checked />
 							<label for="chk<%=i%>"></label>
 						</div>
@@ -148,7 +148,7 @@ nameArray[i] = reporterName;
 					if (!isChecked) {
 					%>
 					<div class="press-chk">
-						<div><%=pressNames[i]%></div>
+						<div><%=pressNames[i]%></div>								<%-- false일때 일반 checkbox생성 --%>
 						<div>
 							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=pressNames[i]%>">
 							<label for="chk<%=i%>"></label>
@@ -198,15 +198,15 @@ nameArray[i] = reporterName;
 						<td>
 						<div class="row center">
 					<%
-					for (int i = 0; i < subscribe2.length; i++) {
-						boolean isChecked2 = false;
+					for (int i = 0; i < subscribe2.length; i++) {				//구독한 기자 비교해서 있으면 true없으면 true
+						boolean isChecked2 = false;						
 						for (int z = 0; z < subscribe.length; z++) {
 							isChecked2 = subscribe2[i].equals(subscribe[z]);
 							if (isChecked2) {
 					%>
-					<div class="press-chk">
+					<div class="press-chk">										<%-- 위와 같은방식 --%>
 						<div><%=nameArray[i]%></div>
-						<div>
+						<div>						
 							<input type="checkbox" id="chk<%=i %>" name="<%=i%>" value="<%=subscribe2[i]%>" checked />
 							<label for="chk<%=i%>"></label>
 						</div>
@@ -229,7 +229,7 @@ nameArray[i] = reporterName;
 					}
 					}
 					%>
-					<input type="hidden" name="id" value="<%=id%>">
+					<input type="hidden" name="id" value="<%=id%>">						 <%--현재 session Id값도 파라미터로 같이전달 --%>
 					
 					</div>
 						</td>
@@ -250,14 +250,14 @@ nameArray[i] = reporterName;
 	NewsDAO ndao = NewsDAO.getInstance();
 	%>
 	<%
-	String newsString = ndao.newsscrap(id);
+	String newsString = ndao.newsscrap(id);				//뉴스 구독목록 출력
 	if(newsString == null){
 		newsString = "";
 	}
 	%>
 	<%-- DAO 만들어야됨 (구독한기사 출력)--%>
 	<%
-	String[] newsArray = newsString.split("@");
+	String[] newsArray = newsString.split("@");			//newsArray = 구독목록 출력한거 String[] 배열로 변화
 	%>
 	<div class="tab-content" id="tab03">
 		<table>
@@ -276,9 +276,9 @@ nameArray[i] = reporterName;
 
 				<%
 				for (int i = 1; i < newsArray.length; i++) {
-				%>
-				<%
-				if (newsArray[i] != "" && newsArray[i] != null) {
+				%>				<%-- 구독목록 출력한 배열 수만큼 반복해서 출력--%>
+				<%			
+				if (newsArray[i] != "" && newsArray[i] != null) {				
 					NewsDTO ndto = ndao.getCon(Integer.parseInt(newsArray[i]));
 				%>
 				<tr>

@@ -13,7 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%String url = dao.unSavePress(exist, press, id);
+<%String url = dao.unSavePress(exist, press, id);			//파라미터로 받은값 db에 저장하는 매소드
 if(url != null){ %>
 		<script>		
 			alert("구독이 취소되었습니다");
