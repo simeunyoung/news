@@ -53,7 +53,7 @@
 			<a href = "qalist.jsp">문의목록</a>
 		</td>
 		
-	<%if(id != null && id.equals("admin")){%>
+	<%if(id != null && !id.equals("admin")){%>
 		<td align = "center" colspan = "2">
 			<a href = "/project1/admin/journalistForm.jsp">기자신청하기</a>
 		</td>

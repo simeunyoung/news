@@ -23,32 +23,32 @@
 <jsp:include page="/member/header.jsp"></jsp:include>
 <center><b>내 용</b></center>
 <form>
-	<table width = "600" height = "500" border = "1" cellspacing = "0" cellpadding = "0" align = "center">
+	<table width = "600" height = "500" border = "1" cellspacing = "0" cellpadding = "0">
 		<tr width = "8" height = "8">
-			<td align = "center" width = "10">글번호</td>
-			<td align = "center" width = "10" align = "center" colspan = "3"><%=svdto1.getNum()%></td>
+			<td width = "10">글번호</td>
+			<td width = "10" colspan = "3"><%=svdto1.getNum()%></td>
 		</tr>
 		
 		<tr width = "10" height = "10">
-			<td align = "center" width = "10">작성자</td>
-			<td align = "center" width = "10" align = "center"><%=svdto1.getId()%></td>
+			<td width = "10">작성자</td>
+			<td width = "10"><%=svdto1.getId()%></td>
 			
-			<td align = "center" width = "10">작성일</td>
-			<td align = "center" width = "10" align = "center"><%=sdf.format(svdto1.getReg())%></td>
+			<td width = "10">작성일</td>
+			<td width = "10"><%=sdf.format(svdto1.getReg())%></td>
 		</tr>
 		
 		<tr heigth = "6" height = "10">
-			<td align = "center" width = "10">제 목</td>
-			<td align = "center" width = "10" align = "center" colspan = "3"><%=svdto1.getTitle()%></td>
+			<td width = "10">제 목</td>
+			<td width = "10" colspan = "3"><%=svdto1.getTitle()%></td>
 		</tr>
 		
 		<tr height = "400">
-			<td align = "center" width = "20">내 용</td>
-			<td align = "left" width = "20" align = "center" colspan = "3"><%=svdto1.getCon()%></td>
+			<td width = "20">내 용</td>
+			<td width = "20" colspan = "3"><%=svdto1.getCon()%></td>
 		</tr>
 		
 		<tr>
-			<td colspan = "4" align = "right">
+			<td colspan = "4">
 			
 			<%if(id != null){
 				if(id.equals("admin")){%>		<%-- 세션에서 받아온 id 값이 있어야 되고 그 아이디가 관리자일 경우에만 보이게 설정 --%>
