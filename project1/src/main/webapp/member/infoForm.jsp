@@ -11,6 +11,7 @@
 <script src="/project1/resource/js/script.js"></script>
 </head>
 <%
+
 	String id = (String)session.getAttribute("memId");
 	String num = request.getParameter("num");
 	String id2 = request.getParameter("id");
@@ -91,8 +92,7 @@
 		} else if (num.equals("1")) { // 정보 수정하는 폼
 		%>
 		<form action="updatePro.jsp" method="post">
-			<div class="card-body">
-
+			<div class="card-body info-wrap">
 				<div class="row">
 					<div class="col-sm-3">
 						<h6 class="mb-0">ID</h6>
@@ -160,12 +160,10 @@
 							value="<%=member.getMemberType()%>">
 				<hr>
 				<%-- 프로필 편집 --%>
-				<div class="row">
-					<div class="col-sm-12">
-						<input type="submit" class="btn btn-info" name="update" value="적용" />
+				<div class="row col-sm-12 buttom-wrap">
+						<input type="submit" class="submit-btn" name="update" value="적용" />
 						<input type="hidden" name="pageType" value="<%=pageType%>">
-						<a class="btn btn-info" onclick="location='user_mypage_form.jsp?id=<%=id%>&pageType=<%=pageType%>'">취소</a>
-					</div>
+						<a class="white-btn" onclick="location='user_mypage_form.jsp?id=<%=id%>&pageType=<%=pageType%>'">취소</a>
 				</div>
 			</div>
 		</form>

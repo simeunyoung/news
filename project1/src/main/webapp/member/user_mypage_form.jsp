@@ -9,6 +9,7 @@
 <%@page import="member.MemberDTO"%>
 <%@page import="member.MemberDAO"%>
 
+<!doctype>
 <html>
 <head>
 <%-- css파일 경로 지정 --%>
@@ -19,6 +20,7 @@
 
 
 <%
+request.setCharacterEncoding("utf-8"); 
 String id = (String) session.getAttribute("memId");
 String pageNum = request.getParameter("pageNum");
 String pageType = request.getParameter("pageType");

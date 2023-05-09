@@ -121,26 +121,29 @@ request.setCharacterEncoding("UTF-8");
 				<!-- 날짜별검색 -->
 				<form action="/project1/news/searchPro.jsp" method="get">
 					<div class="input-row" id="date-search-form">
-						<span class="title">조회기간</span>
-						<div class="row-mobile">
-							<div class="form-input-group">
-								<input type="date" class="date" name="startDate" id="startDate"
-									value="<%=new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())%>">
+						<div class="input-row-cont">
+							<span class="title">조회기간</span>
+							<div class="row-mobile">
+								<div class="form-input-group">
+									<input type="date" class="date" name="startDate" id="startDate"
+										value="<%=new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())%>">
+								</div>
+								<span class="date-division">~</span>
+								<div class="form-input-group">
+									<!-- 오늘날짜로 설정 -->
+									<input type="date" class="date" name="endDate" id="endDate"
+										value="<%=java.time.LocalDate.now()%>"
+										min="<%=java.time.LocalDate.now()%>">
+								</div>
 							</div>
-							<span class="date-division">~</span>
-							<div class="form-input-group">
-							<!-- 오늘날짜로 설정 -->
-								<input type="date" class="date" name="endDate" id="endDate"
-									value="<%=java.time.LocalDate.now()%>"	min="<%=java.time.LocalDate.now()%>"> 
-							</div>
-						</div>
-						<div class="form-input-group radio-group">
-							<div class="square-radio-group">
-								<!-- date 파라미터 보냄 -->
-								<a href="/project1/news/searchPro.jsp?date=today">오늘</a>
-								<a href="/project1/news/searchPro.jsp?date=week">일주일</a> 
-								<a href="/project1/news/searchPro.jsp?date=month">한달</a>
-								<a href="/project1/news/searchPro.jsp?date=year">일년</a>
+							<div class="form-input-group radio-group">
+								<div class="square-radio-group">
+									<!-- date 파라미터 보냄 -->
+									<a href="/project1/news/searchPro.jsp?date=today">오늘</a> <a
+										href="/project1/news/searchPro.jsp?date=week">일주일</a> <a
+										href="/project1/news/searchPro.jsp?date=month">한달</a> <a
+										href="/project1/news/searchPro.jsp?date=year">일년</a>
+								</div>
 							</div>
 						</div>
 						<div class="submit-wrap">
