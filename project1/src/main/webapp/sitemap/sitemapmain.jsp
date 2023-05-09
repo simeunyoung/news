@@ -69,7 +69,7 @@ MemberDTO mbdto = mbDAO.getMember(id);
 		<%}else{%>
 		<td align = "center"><a href="/project1/member/user_mypage_form.jsp?id=<%=id%>&pageType=1">내프로필</a></td>
 		<%}%>
-		<td align = "center"><a href="/project1/news/newstypelist.jsp?newstype=Java">자바</a></td>
+		<td align = "center"><a href="/project1/news/newstypelist.jsp?newstype=java">자바</a></td>
 		<td rowspan = "17"></td>
 	<%if(id != null){%>
 		<td align = "center"><a href="/project1/helper/myquestion.jsp">내문의목록</a></td>
