@@ -141,8 +141,8 @@ number = newscount - (currentPage - 1) * pageSize;
 			<tr>
 				<%-- 최신글이 가장 위에 위치하도록 목록에서 역순으로 번호를 부여 --%>
 				<td><%=number--%></td>
-				<td>
-					<div onclick="location='content.jsp?num=<%=article.getNum()%>'"><%=article.getTitle()%></div>
+				<td class="click" onclick="location='content.jsp?num=<%=article.getNum()%>'">
+					<div><%=article.getTitle()%></div>
 					<div><%=article.getCon()%></div>
 				</td>
 				<td><%=article.getId()%></td>

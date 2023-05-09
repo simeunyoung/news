@@ -42,6 +42,16 @@ public class NewsDAO extends OracleServer {
 	} // public int CountAllList() throws Exception {
 
 	public void insert(NewsDTO dto) {
+		if(dto.getCon().contains("&nbsp;")) {
+			dto.setCon(dto.getCon().replace("&nbsp;", ""));
+		}
+		if(dto.getCon().contains("<p>")) {
+			dto.setCon(dto.getCon().replace("<p>", ""));
+		}
+		if(dto.getCon().contains("</p>")) {
+			dto.setCon(dto.getCon().replace("</p>", ""));
+		}
+		System.out.println(dto.getCon());
 		try {
 			conn = getConnection();
 			sql = "insert into news(num,nick,title,con,reg,pw,ip,id,newstype) values(news_seq.nextval,?,?,?,?,?,?,?,?)";

@@ -39,7 +39,9 @@ main {
 	align-items: center;
 	justify-content: center;
 }
-
+.click{
+	cursor:pointer;
+}
 /************************************
 ************** component ***************
 *************************************/
@@ -982,6 +984,191 @@ input[type="submit"].upload-btn {
 	align-items: center;
 	justify-content: center;
 	gap: 30px;
+}
+/************************************
+************** content ***************
+*************************************/
+.page-wrap.content{
+	display:flex;
+	justify-content:center;
+}
+.content-box{
+	width:1200px;
+}
+.content-box .cont-top{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	margin-bottom: 20px;
+    border-bottom: 2px solid #111;
+    padding-bottom: 20px;
+}
+.content-box .cont-top .cont-top-left{
+	
+}
+.content-box .cont-top .cont-top-center{
+	
+}
+.content-box .cont-top .cont-top-right{
+	
+}
+.content-box .cont-title{
+	font-size:30px;
+	font-weight:600;
+	margin-bottom:50px;
+}
+.content-box .cont-mid{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	gap:20px;
+	border-bottom:1px solid #ddd;
+	padding-bottom:10px;
+	margin-bottom:20px;
+	font-size: 14px;
+	color: #bdbdbd;
+}
+.content-box .cont-mid .cont-mid-left{
+	display:flex;
+	align-items:center;
+	gap:20px;
+}
+.content-box .cont-right-wrap{
+	display:flex;
+	align-items:flex-end;
+	gap:10px;
+}
+.content-box .cont-right-wrap .book-btn{
+	background: orange;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    width: 35px;
+    height: 35px;
+    	cursor:pointer;
+}
+.content-box .cont-right-wrap .book-btn button{
+	width:30px;
+	height:30px;
+	cursor:pointer;
+}
+#copyButton{
+	width:35px;
+	height:35px;
+	border-radius:50%;
+	background:pink;
+	cursor:pointer;
+}
+.content-box .cont-mid-right button{
+	border:1px solid #ddd;
+	cursor:pointer;
+	color:#888;
+}
+.content-box .cont-mid-right button:first-child{
+	font-size:13px;
+	width: 28px;
+	height:28px;
+}
+.content-box .cont-mid-right button:nth-child(2){
+	font-size:14px;
+	width: 30px;
+	height:30px;
+}
+.content-box .cont-mid-right button:last-child{
+	font-size:15px;
+	width: 32px;
+	height:32px;
+}
+.content-box .cont-mid-press{
+	
+}
+.content-box .cont-mid .cont-mid-date{
+	
+}
+.cont-content{
+	
+}
+.cont-content .cont-cont-press{
+	margin-bottom:10px;
+}
+.cont-content #content{
+	font-size: 17px;
+    line-height: 22px;
+    min-height: 100px;
+}
+.cont-content .cont-cont-jn{
+	margin-top: 40px;
+    display: block;
+    margin-bottom:20px;
+}
+.content-box .cont-like{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	gap:20px;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	padding:20px 0;
+}
+.content-box .cont-like .like-box{
+	width:100px;
+	height:100px;
+	
+}
+.content-box .cont-like .like-box,
+.content-box .cont-like .bad-box {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.content-box .cont-like .like-box-txt{
+	font-size: 13px;
+    color: #888;
+    font-weight:400;
+    margin-bottom:5px;
+}
+.good-btn, .bad-btn{
+	width:70px;
+	height:60px;
+	cursor:pointer;
+}
+.good-btn .fa-2xl, .bad-btn .fa-2xl{
+	font-size:3.3em
+	}
+.content-box .cont-like .bad-box{
+	width:100px;
+	height:100px;
+	
+}
+.content-box .button-wrap{
+	display:flex;
+	align-items:center;
+	justify-content:flex-end;
+}
+.content-box .button-wrap button{
+	width:30px;
+	height:30px;
+	cursor:pointer;
+}
+.recon-wrap{
+	border:1px solid #ddd;
+	padding:10px;
+	border-radius:4px;
+	display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+.recon-wrap input{
+	display:block;
+}
+.recon-wrap input[type="text"].textarea_box{
+	border:1px solid #ddd;
+	border-radius:4px;
+	width: 100%;
+    height: 100px;
 }
 /************************************
 ************** footer ***************

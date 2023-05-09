@@ -26,6 +26,7 @@ if (session.getAttribute("memId") == null) { //세션이 없을 때 해당 페�
 %>
 <Script>
 	alert("[에러 발생] 권한을 가지고 있지 않은 사용자 접근 시도를 하였습니다. 로그인을 하고 접근하여 주시기 바랍니다.");
+
 </Script>
 <%
 response.sendRedirect("list.jsp");
@@ -57,7 +58,7 @@ response.sendRedirect("list.jsp");
 			<div id="smartEditor"><textarea id="editorTxt" class="textarea_box" name="con" placeholder="내용을 입력해주세요."></textarea></div>
 			<br /> 비밀번호 : <input class="short_box" name="pw" type="text"
 				placeholder="게시글 비밀번호를 입력해주세요.">&nbsp;&nbsp;&nbsp; <input
-				type="submit" class="submit_button" value="작성완료"  />
+				type="submit" class="submit_button" value="작성완료" onclick="return writeCheck();"  />
 		</div>
 	</form>
 <jsp:include page="/member/footer.jsp"></jsp:include>
@@ -141,6 +142,11 @@ submitPost = function() {
   var title = document.write.title.value;
   var pw = document.write.pw.value;
 
+//   alert(content);
+//   if(content.includes("&") || content.includes("<") || content.includes(">")){
+// 		alert("특수기호 ㄴㄴ");
+// 		return false;
+// 	}
   if(newstype == "x"){ // 폼 태그에 newstype 값을 선택하지 않을 때 알림창으로 알려준다.
 		alert("뉴스의 종류가 선택되지 않았습니다.");
 		return false  
@@ -158,7 +164,6 @@ submitPost = function() {
     console.log(content)
     return true;
   }
-  
 
 }
 
