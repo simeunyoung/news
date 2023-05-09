@@ -56,7 +56,7 @@
 	<%}%>
 <%}%>
 		<td align = "center" colspan = "2">
-			<a href = "/project1/admin/qnaList.jsp">문의목록</a>
+			<a href = "/project1/admin/qnaList.jsp">Q&A목록</a>
 		</td>
 	<%if(id != null){	
 	if(mbdto.getMemberType().equals("1")){%>				<%-- id의 값은 있어야 되고 해당 id 멤버타입이 1일 경우에만 나오게 설정 --%>
@@ -66,7 +66,7 @@
 	<%}%>	
 <%}%>
 		<td align = "center" colspan = "2">
-			<a href = "myquestion.jsp">내문의목록</a>
+			<a href = "myquestion.jsp">1대1문의목록</a>
 		</td>
 	</tr>		
 </table>

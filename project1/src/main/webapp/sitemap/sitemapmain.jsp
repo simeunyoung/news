@@ -55,7 +55,7 @@ MemberDTO mbdto = mbDAO.getMember(id);
 		<%}%>
 		<td align = "center"><a href="/project1/news/newstypelist.jsp?newstype=Python">파이썬</a></td>
 		<td align = "center"><a href="/project1/company/introduce.jsp?pageNum=2">기자리스트</a></td>
-		<td align = "center"><a href="/project1/admin/qnaWrite.jsp">1대1문의</a></td>
+		<td align = "center"><a href="/project1/helper/svmain.jsp">FAQ</a>
 	<%if(id != null){%>
 		<%if(mbdto.getMemberType().equals("2")){ %>
 		<td align = "center"><a href="/project1/admin/journalistList.jsp">기자신청목록</a></td>
@@ -70,9 +70,16 @@ MemberDTO mbdto = mbDAO.getMember(id);
 		<td align = "center"><a href="/project1/member/user_mypage_form.jsp?id=<%=id%>&pageType=1">내프로필</a></td>
 		<%}%>
 		<td align = "center"><a href="/project1/news/newstypelist.jsp?newstype=java">자바</a></td>
-		<td rowspan = "17"></td>
+		<td rowspan = "6"></td>
 	<%if(id != null){%>
-		<td align = "center"><a href="/project1/helper/myquestion.jsp">내문의목록</a></td>
+		<%if(!mbdto.getMemberType().equals("2")){%>	
+		<td align = "center"><a href="/project1/admin/qnaWrite.jsp">1대1문의</a></td>
+		<%}else{%>
+		<td align = "center"><a href="/project1/helper/myquestion.jsp">1대1문의목록</a></td>
+		<%}%>
+	<%}%>
+	<%if(id == null){%>
+		<td align = "center"><a href="/project1/admin/qnaWrite.jsp">1대1문의</a></td>
 		<%}%>
 	<%if(id != null){%>
 		<%if(mbdto.getMemberType().equals("2")){ %>
@@ -87,12 +94,21 @@ MemberDTO mbdto = mbDAO.getMember(id);
 		<td align = "center"><a href="/project1/member/logout.jsp">로그아웃</a></td>
 		<%}%>
 		<td align = "center"><a href="/project1/news/newstypelist.jsp?newstype=JavaScript">자바스크립트</a></td>
-		<td rowspan = "8"></td>
+	<%if(id != null){%>
+		<%if(mbdto.getMemberType().equals("2")){%>	
+		<td rowspan = "6"></td>
+		<%}else{%>
+		<td align = "center"><a href="/project1/helper/myquestion.jsp">1대1문의목록</a></td>
+		<%}%>
+	<%}%>
+	<%if(id == null){%>
+		<td align = "center"><a href="/project1/helper/myquestion.jsp">1대1문의목록</a></td>
+		<%}%>
 	<%if(id != null){%>
 		<%if(mbdto.getMemberType().equals("2")){%>
 		<td align = "center"><a href="/project1/helper/jebolist.jsp">제보받은목록</a></td>
-		<%}%>
 	<%}%>
+<%}%>
 	</tr>
 	<tr>
 		<td rowspan = "17"></td>		
