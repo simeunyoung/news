@@ -71,7 +71,9 @@ String cooPw = null;
 String cooAu = null;
 
 Cookie [] cookies = request.getCookies();
-
+if(cookies == null){
+	
+}else{
 for(Cookie c : cookies){
 	if(c.getName().equals("cooId")){
 		cooId = c.getValue();
@@ -82,7 +84,9 @@ for(Cookie c : cookies){
 	if(c.getName().equals("cooAu")){
 		cooAu = c.getValue();
 	}
-} %>
+} 
+}
+%>
 
 <% if(cooId != null && cooPw != null && cooAu != null){
 	if(loginuser == null){
