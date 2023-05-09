@@ -42,6 +42,11 @@ main {
 .click{
 	cursor:pointer;
 }
+.table-top{
+	display:flex;
+	align-items:center;
+	justify-content:flex-end;
+}
 /************************************
 ************** component ***************
 *************************************/
@@ -1183,7 +1188,7 @@ input[type="submit"].upload-btn {
 .recon-top .recon-info {
 	margin-bottom:10px;
 }
-.recon-top .recon-info p:first-child{}
+
 .recon-top .recon-info p:last-child{
 	font-size:13px;
 	color:#888;
@@ -1199,6 +1204,21 @@ input[type="submit"].upload-btn {
 }
 .recon-box .recon-cont{
 	color:#222;
+}
+/************************************
+************** faq ***************
+*************************************/
+.page-wrap.faq .white-btn{
+	min-width: 70px;
+    height: 30px;
+}
+
+/************************************
+************** qna ***************
+*************************************/
+.page-wrap.qna .white-btn{
+	min-width: 70px;
+    height: 30px;
 }
 /************************************
 ************** footer ***************

@@ -46,11 +46,10 @@ if (id == null && pageType.equals("1")) {
 <!-- 마이페이지 pageType이 1이면 회원프로필, 2면 기자프로필-->
 <body>
 	<jsp:include page="header.jsp" />
-	<div class="container">
 		<%
 			if (pageType.equals("1")) { 
 		%>
-
+	<div class="container">
 		<div class="main-body">
 			<nav aria-label="breadcrumb" class="main-breadcrumb">
 				<ol class="breadcrumb">
@@ -77,6 +76,7 @@ if (id == null && pageType.equals("1")) {
 		</div>
 	</div>
 
+		
 	<%
 	} else if (pageType.equals("2")) {
 	%>
@@ -105,15 +105,16 @@ if (id == null && pageType.equals("1")) {
 			</div>
 		</div>
 	</div>
-	
+			
 	<%
 	}
 	%>
 
 	<%}%>
-		<jsp:include page="/member/footer.jsp"></jsp:include>
+<jsp:include page="/member/footer.jsp"></jsp:include>
 </body>
 
 </html>
+
 
 

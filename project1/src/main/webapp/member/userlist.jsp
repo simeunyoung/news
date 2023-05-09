@@ -16,8 +16,8 @@
 String id = (String)session.getAttribute("memId");
 String pageNum = request.getParameter("pageNum");
 String nick = (String)session.getAttribute("nick");
-
-int pageSize = 10; // 한 페이지에 보여줄 목록의 수
+String pageType = request.getParameter("pageType");
+int pageSize = 3; // 한 페이지에 보여줄 목록의 수
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 if(pageNum == null){
 	pageNum = "1";
@@ -106,17 +106,17 @@ int number = count - (crtPage - 1) * pageSize;
 	
 				if (startPage > 10) {
 			%>
-				<a href="userlist.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
+				<a href="user_mypage_form.jsp?pageNum=<%=startPage - 10%>&pageType=<%=pageType%>&id=<%=id%>">[이전]</a>
 			<%
 				}
 				for (int i = startPage; i <= endPage; i++) {
 			%>
-				<a href="userlist.jsp?pageNum=<%=i%>">[<%=i%>]</a>
+				<a href="user_mypage_form.jsp?pageNum=<%=i%>&pageType=<%=pageType%>&id=<%=id%>">[<%=i%>]</a>
 			<%
 				}
 				if (endPage < pageCount) {
 			%>
-				<a href="userlist.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
+				<a href="user_mypage_form.jsp?pageNum=<%=startPage + 10%>&pageType=<%=pageType%>&id=<%=id%>">[다음]</a>
 			<%
 					}
 				}
