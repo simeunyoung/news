@@ -62,7 +62,7 @@
 			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center"><%=dto.getIp()%></td>
 			<%}%>
-			<td align="center"><input type="button" value="삭제" onclick="location='qnaReconDelete.jsp?num=<%=dto.getNum()%>'" />
+			<td align="center"><input type="button" value="삭제" onclick="location='qnaReconDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>&pageNum2=<%=pageNum2%>'" />
 		</tr>
 <%	}%>
 	</table>

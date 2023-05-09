@@ -629,4 +629,48 @@ public class AdminDAO extends OracleServer {
 		return result;
 	}
 	
+	public AdminDTO getRecon(int num) {
+		AdminDTO dto = new AdminDTO();
+		try {
+			conn = getConnection();
+			sql = "select * from qnaRecon where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setNum(rs.getInt("num"));
+				dto.setNum2(rs.getInt("num2"));
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setRecon(rs.getString("recon"));
+				dto.setReg(rs.getTimestamp("reg"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return dto;
+	}
+	public int deleteRecon(AdminDTO dto) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "select * from qnaRecon where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sql = "delete from qnaRecon where num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, dto.getNum());
+				result = pstmt.executeUpdate();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	}
 }
