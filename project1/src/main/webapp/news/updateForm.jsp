@@ -26,6 +26,7 @@ NewsDTO text = method.getdata(num); // 데이터를 불러내는 메소드에 nu
 			value="<%=text.getId()%>">
 		<%--<%=id%> --%>
 		<br /> <input type="hidden" name="num" value="<%=text.getNum()%>">
+		<input type="hidden" name="nick" value="<%=text.getNick()%>">
 		</td> TOPIC : <select class="select_box" name="newstype">
 			<option value="<%=text.getNewstype()%>">선택된 종류 :<%=text.getNewstype()%></option>
 			<option value="Python">Python</option>
