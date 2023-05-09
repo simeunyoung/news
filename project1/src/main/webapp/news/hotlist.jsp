@@ -27,7 +27,7 @@
 	int startRow = (currentPage - 1) * pageSize + 1; // 페이지 시작 번호
 	int endRow = currentPage * pageSize; // 페이지 끝 번호
 	int newscount = 0; // 전체 게시글 수를 저장 할 변수
-	int number = 0; // 게시글의 번호를 저장 할 변수
+	int number = 1; // 게시글의 번호를 저장 할 변수
 	
 	List newsList = null;
 	NewsDAO newsPro = NewsDAO.getInstance();
@@ -37,8 +37,6 @@
 	if(newscount > 0){
 		newsList = newsPro.gethotNews(startRow, endRow);
 	}
-	
-	number = newscount - (currentPage - 1) * pageSize;
 %>
 
 <html>
@@ -72,7 +70,7 @@
 			NewsDTO article = (NewsDTO)newsList.get(i);
 		%>
 		<tr height = "30">
-			<td align = "center" width = "50"><%=number--%></td>
+			<td align = "center" width = "50"><%=number++%></td>
 			<td align = "center" width = "150"><a href = "content.jsp?num=<%=article.getNum()%>"><%=article.getTitle() %></a></td>
 			<td align = "center" width = "150"><%=article.getId() %></td>
 			<td align = "center" width = "150"><%=article.getPress() %></td>

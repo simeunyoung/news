@@ -72,10 +72,11 @@ int number = count - (crtPage -1) * pageSize;
 					<td><%=number--%></td>
 					<td><%=journalist.getId()%></td>
 					<td><%=journalist.getNewstype()%></td>
-					<td><a
-						href="news.jsp?num<%=journalist.getNum()%>&pageNum=<%=crtPage%>">
-							<%=journalist.getTitle()%>
-					</a></td>
+					<td>
+  					<a href="/project1/news/content.jsp?num=<%=journalist.getNum()%>&pageNum=<%=crtPage%>">
+   							 <%=journalist.getTitle()%>
+ 					</a>
+					</td>
 					<td><%=journalist.getCon()%></td>
 					<td><%=journalist.getIp()%></td>
 					<td><%=sdf.format(journalist.getReg())%></td>
