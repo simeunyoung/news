@@ -42,22 +42,19 @@
 <jsp:include page="/member/header.jsp" />
 
 <title>Q&A 목록</title>
-<center><h2>Q&A</h2></center>
-
-<hr />
+<div class = "page-wrap qna">
 <%if(dto2.getMemberType().equals("2")) {%>
-<center><h3>글목록(<%=count%>)</h3></center>
+<h3>Q&A 목록(<%=count%>)</h3>
 <%} else {%>
-<center><h3>글목록(<%=count2%>)</h3></center>
+<h3>Q&A 목록(<%=count2%>)</h3>
 <%}%>
-<table align="center" width="1000">
-	<tr>
-		<td align="right"><input type="button" value="글쓰기" onclick="location='qnaWrite.jsp'" /></td>
-	</tr>
-</table>
+<div class = "table-top">
+<input type="button" value="글쓰기" class = "white-btn" onclick="location='qnaWrite.jsp'" />
+</div>
+
 
 <%	if(count == 0){%>
-	<table align="center" width="1000" border="1" cellspacing="0" cellpadding="0">
+	<table>
 		<tr height="30">
 			<td align="center">게시판에 저장된 글이 없습니다.</td>
 		</tr>
@@ -66,16 +63,16 @@
 <form>
 	<table>
 		<tr height="30">
-			<td align="center" width="50">순번</td>
-			<td align="center" width="150">문의유형</td>
-			<td align="center" width="80">고유번호</td>
-			<td align="center" width="250">제목</td>
-			<td align="center" width="150">작성자</td>
-			<td align="center" width="200">작성일</td>
-			<td align="center" width="80">조회수</td>
+			<th align="center" width="50">순번</th>
+			<th align="center" width="150">문의유형</th>
+			<th align="center" width="80">고유번호</th>
+			<th align="center" width="250">제목</th>
+			<th align="center" width="150">작성자</th>
+			<th align="center" width="200">작성일</th>
+			<th align="center" width="80">조회수</th>
 			<%if(dto2.getMemberType().equals("2")) {%>
-			<td align="center" width="150">IP</td>
-			<td align="center" width="100">블라인드</td>
+			<th align="center" width="150">IP</th>
+			<th align="center" width="100">블라인드</th>
 			<%}%>
 		</tr>
 <%if(dto2.getMemberType().equals("0") || dto2.getMemberType().equals("1") || dto2.getMemberType().equals("-1")) {%>
@@ -203,5 +200,6 @@
 <%		}
 	}%>
 </form>
+</div>
 </div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
