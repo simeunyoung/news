@@ -32,9 +32,6 @@
 <jsp:include page="/member/header.jsp" />
 
 <title>FAQ 게시판</title>
-<center><h2>FAQ 게시판</h2></center>
-
-<hr />
 
 <center><h3>FAQ 목록(<%=count%>)</h3></center>
 
