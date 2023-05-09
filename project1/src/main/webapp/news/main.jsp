@@ -109,7 +109,7 @@ for(Cookie c : cookies){
 					<p class="title">오늘의 뉴스</p>
 					<button type="button" class="white-btn" onClick="window.location.reload()"><i class="fa-solid fa-rotate-right"></i>새로보기</button>
 				</div>
-				<a href="/project1/news/main_list.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
+				<a href="/project1/news/list.jsp" class="more">전체 보기<i class="fa-solid fa-angle-right"></i></a>
 			</div>	
 			<div class="list-card">
 				<%
