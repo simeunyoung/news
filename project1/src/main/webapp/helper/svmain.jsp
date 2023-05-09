@@ -42,10 +42,9 @@
 	
 	faqList = dao.faqList(startRow, endRow); // 로우넘값을 지정해 faq를 꺼냄
 %>
-<title>CODENEWS</title>
-<!-- header -->
 <jsp:include page="/member/header.jsp"></jsp:include>
-<center><b>고객센터</b></center>
+<title>CODENEWS</title>
+<div class = "page-wrap qna">
 <table align = "center" width = "500" height = "60" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr>
 		<%if(id != null){
@@ -88,10 +87,10 @@
 <form>
 	<table align="center" width="700" border="1" cellspacing="0" cellpadding="0">
 		<tr height="30">
-			<td align="center" width="150">문의유형</td>
-			<td align="center" width="80">고유번호</td>
-			<td align="center" width="250">제목</td>
-			<td align="center" width="80">조회수</td>
+			<th align="center" width="150">문의유형</th>
+			<th align="center" width="80">고유번호</th>
+			<th align="center" width="250">제목</th>
+			<th align="center" width="80">조회수</th>
 		</tr>
 <%	for(int i = 0; i < faqList.size(); i++) {
 		AdminDTO dto = (AdminDTO)faqList.get(i);%>
@@ -151,4 +150,5 @@
 	<%}%>
 <%}%>
 </form>
+</div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
