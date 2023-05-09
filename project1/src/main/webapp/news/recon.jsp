@@ -59,7 +59,7 @@ if (session.getAttribute("memId") == null) {
 	<input type="hidden" name="contentpage" value="<%=num%>"> 
 	<div class="recon-wrap">
 		<input type="text" class="textarea_box" name="recon" placeholder="댓글을 입력해주세요.">
-		<input type="submit" value="입력" class="submit_button">
+		<input type="submit" value="입력" class="submit-btn">
 	</div>
 	
 </form>
@@ -76,40 +76,35 @@ if (recons != null) {
 	for (int rnum = 0; rnum < recons.size(); rnum++) {
 		NewsDTO recontext = (NewsDTO) recons.get(rnum); //Object(list)형 --> DTO형으로 꺼내주고 있다.
 %>
-<div align="right">
-	<%=recontext.getReg()%>
-	<%
-	if (session.getAttribute("memId") == null) {
-	} else if (usernick.equals(recontext.getId())) {
-	%>
-	<a
-		href="reconUpdateForm.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><font
-		color="#808080">수정</font></a>&nbsp;
-	<%-- not fixed --%>
-	/&nbsp;<a
-		href="reconDeletePro.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><font
-		color="#808080">삭제</font></a>
-	<%-- not fixed --%>
-	<%
-	} else if (usertype.equals("2")) {
-	%>
-	<a
-		href="reconDeletePro.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><font
-		color="#808080">삭제</font></a>
-	<%-- not fixed --%>
-	<%
-	}
-	%>
+<div class="recon-box">
+	<div class="recon-top">
+		<div class="recon-info">
+			<p><%=recontext.getNick()%></p>
+			<p><%=recontext.getReg()%></p>
+		</div>
+		<div class="recon-btn-wrap">
+				<%
+				if (session.getAttribute("memId") == null) {
+				} else if (usernick.equals(recontext.getId())) {
+				%>
+				<a href="reconUpdateForm.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><i class="fa-regular fa-pen-to-square" style="color: #bfbfbf;"></i></a>
+				<span>|</span>			
+				<a href="reconDeletePro.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><i class="fa-solid fa-trash-can" style="color: #bfbfbf;"></i></a>
+				
+				<%
+				} else if (usertype.equals("2")) {
+				%>
+				<a
+					href="reconDeletePro.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><i class="fa-solid fa-trash-can" style="color: #bfbfbf;"></i></a>
+				
+				<%
+				}
+				%>
+		</div>
+	</div>
+	<div class="recon-cont"><%=recontext.getRecon()%></div>
 </div>
-<b><%=recontext.getNick()%></b>
-<font color="#808080">#<%=recontext.getId()%></font>
-[ IP :
-<%=recontext.getIp()%>
-]
 
-<%=recontext.getRecon()%>
-
-<hr />
 <%
 }
 } else {
@@ -121,7 +116,7 @@ if (recons != null) {
 }
 %>
 
-<div align="center">
+<div class="pagination">
 	<%
 	if (reconcount > 0) {
 		int pageCount = reconcount / pageSize + (reconcount % pageSize == 0 ? 0 : 1);

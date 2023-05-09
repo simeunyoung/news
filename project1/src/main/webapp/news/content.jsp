@@ -84,7 +84,7 @@ if (rDTO.getBad() >= 30 && session.getAttribute("memId") == null) {
 		<div class="cont-top">
 			<div class="cont-top-left"><%=text.getPress()%></div>
 			<div class="cont-top-center"><%=text.getNewstype()%></div>
-			<div class="cont-top-right"><%=text.getViews()%></div>
+			<div class="cont-top-right"><i class="fa-solid fa-eye" style="color: #bfbfbf;"></i> <%=text.getViews()%></div>
 		</div>
 		<div class="cont-title"><%=text.getTitle()%></div>
 		<div class="cont-mid">
