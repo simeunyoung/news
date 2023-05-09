@@ -35,6 +35,9 @@
 	}
 	
 	int number = count - (currentPage-1) * pageSize;
+	if(dto2.getMemberType() == null) {
+		dto2.setMemberType("0");
+	}
 %>
 <jsp:include page="/member/header.jsp" />
 

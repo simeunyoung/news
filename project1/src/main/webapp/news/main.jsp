@@ -167,7 +167,7 @@ for(Cookie c : cookies){
 		</div>
 	</div>	
 </div>
-
+</div>
 <!-- footer -->
 <jsp:include page="/member/footer.jsp"></jsp:include>
 

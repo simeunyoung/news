@@ -47,20 +47,22 @@
 	<table align="center">
 		<tr height="30">
 			<td align="center">댓글 고유번호</td>
-			<td align="center">작성자</td>
 			<td align="center">내용</td>
+			<td align="center">작성자</td>
 			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center">IP</td>
 			<%}%>
+			<td align="center">댓글삭제</td>
 	<%for(int i = 0; i < qnaReconList.size(); i++) {
 	AdminDTO dto = (AdminDTO)qnaReconList.get(i);%>
 		<tr height="30">
 			<td align="center"><%=dto.getNum()%></td>
-			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>)</td>
 			<td align="center"><%=dto.getRecon()%></td>
+			<td align="center"><%=dto.getId()%>(<%=dto.getName()%>)</td>
 			<%if(dto2.getMemberType().equals("2")) {%>
 			<td align="center"><%=dto.getIp()%></td>
 			<%}%>
+			<td align="center"><input type="button" value="삭제" onclick="location='qnaReconDelete.jsp?num=<%=dto.getNum()%>'" />
 		</tr>
 <%	}%>
 	</table>
@@ -88,9 +90,9 @@
 			<a href="qnaContent.jsp?num=<%=num%>&pageNum=<%=pageNum%>&pageNum2=<%=startPage + 20%>">[다음]</a>
 <%		}
 	}%>
+<%}%>
 </form>
 </div>
-<%}%>
 
 <form action="qnaReconPro.jsp">
 	<table align="center">

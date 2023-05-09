@@ -59,7 +59,9 @@ String admin = "2";
 String normaluser = "1";
 String writer = "-1";
 
-
+if(loginuser == null) {
+userinfo.setMemberType("0");
+}
 if(loginuser != null){ //로그인을 했을 때
 MemberDAO memdao = MemberDAO.getInstance();
 userinfo = memdao.getmember(loginuser); // 세션을 통해서 member 테이블의 데이터를 가져온다.
@@ -173,7 +175,7 @@ if(session.getAttribute("memId") == null) {%> <%-- 비로그인 일 때 --%>
 <jsp:param value="<%=text.getCon()%>" name="con"/>
 <jsp:param value="<%=num%>" name="num"/>
 </jsp:include>
-</div></div>
+</div></div></div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
 
 
