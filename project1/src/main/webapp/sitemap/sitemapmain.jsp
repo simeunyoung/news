@@ -90,7 +90,7 @@ MemberDTO mbdto = mbDAO.getMember(id);
 		<td rowspan = "8"></td>
 	<%if(id != null){%>
 		<%if(mbdto.getMemberType().equals("2")){%>
-		<td align = "center"><a href="">제보받은목록</a></td>
+		<td align = "center"><a href="/project1/helper/jebolist.jsp">제보받은목록</a></td>
 		<%}%>
 	<%}%>
 	</tr>

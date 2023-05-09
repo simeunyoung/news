@@ -252,4 +252,58 @@ public class SvcenterDAO extends OracleServer{
 		}
 		return x;
 	}
+	
+	public int jeboCount() {				//qna 테이블에 질문타입이 4인 글이 몇개가 있는지 확인
+		int result = 0;
+		try {
+			conn = getConnection();
+			sql = "select count(*) from qna where questiontype = 4";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return result;
+	}
+	
+	public List jaboList(int start, int end) {		//1대1문의로 들어온 문의가 제보하기만 따로 테이블에 검색해서 꺼내옴
+		List qnaList = new ArrayList();
+		try {
+			conn = getConnection();
+			sql = "select * from (select e.*, rownum r from (select * from qna where questiontype = 4 order by num desc) e) where r >=? and r <=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				AdminDTO dto = new AdminDTO();
+				dto.setResultType(rs.getString("resultType"));
+				dto.setNum(rs.getInt("num"));
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setTel(rs.getString("tel"));
+				dto.setTitle(rs.getString("title"));
+				dto.setCon(rs.getString("con"));
+				dto.setReadCount(rs.getInt("readCount"));
+				dto.setQuestionType(rs.getString("questionType"));
+				dto.setMemberType(rs.getString("memberType"));
+				dto.setIp(rs.getString("ip"));
+				dto.setReg(rs.getTimestamp("reg"));
+				qnaList.add(dto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			oracleClose();
+		}
+		return qnaList;
+	}
 }

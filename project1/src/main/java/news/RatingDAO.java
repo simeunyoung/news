@@ -19,14 +19,16 @@ public class RatingDAO extends OracleServer {
 		int result = -1;
 		try {
 			conn = getConnection();					
-			sql = "select * from rating where num = ?";				//넘겨받은 글번호를 넣고 테이블에 저장된 값을 검색
+			sql = "select * from rating where num = ? and id=?";				//넘겨받은 글번호와 id를 넣고 테이블에 저장된 값을 검색
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
+			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
-				
-			if(rs.next()) {
-				dbid = rs.getString("id");
-				x = rs.getInt("bad");
+			
+			// "test"
+			if(rs.next()) {  
+				dbid = rs.getString("id");     // 2
+				x = rs.getInt("bad"); // 0
 			}
 			if(dbid.equals(id) && x != 0) {			//해당 글번호에 있는 것들 검색하고 세션에서 받아온 값고 테이블에서 검색한 값을 비교하고 테이블에서 가지고 온 싫어요를 비교 후 싫어요를 누른 상태에서 좋아요를 눌렀을때 동작
 				sql = "update rating set good = ?, bad = ?,total = ? where num = ? and id = ?";
@@ -72,9 +74,10 @@ public class RatingDAO extends OracleServer {
 		
 		try {
 			conn = getConnection();
-			sql = "select * from rating where num = ?";		//해당 글번호의 저장된 값을 꺼냄
+			sql = "select * from rating where num = ? and id = ?";		//해당 글번호의 저장된 값을 꺼냄
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
+			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
 				
 			if(rs.next()) {
