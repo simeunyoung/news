@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="member.MemberDAO"%>
+<%@ page import="java.util.*" %>
 <% MemberDAO dao = MemberDAO.getInstance();%>
+<% TreeSet<String> pressSet = dao.selectPress();%>
 <% String id = request.getParameter("id");%>
-<% int size = request.getParameterMap().size()-1;%>				<%-- size = 받은파라미터의 개수에서 -1 한값 --%>
+<% int size = pressSet.size();%>				<%-- size = 전체언론사 수 --%>
 <% StringBuilder sb = new StringBuilder(); %>				
 <%for (int i = 0; i <= size; i++) {								//1=aaa 이런식으로 파라미터값오면
   if (request.getParameter(Integer.toString(i)) != null) {		//차례대로 sb(StringBuilder)에 @넣어서 추가
