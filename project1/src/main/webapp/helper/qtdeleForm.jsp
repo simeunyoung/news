@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< Updated upstream
 <link href="/project1/resource/css/style.css" rel="stylesheet">
 <script src="/project1/resource/js/script.js"></script>
-=======
->>>>>>> Stashed changes
 <%@ page import = "member.MemberDAO"%>
 <%@ page import = "member.MemberDTO"%>
 <%-- 1대1 문의글 삭제 --%>
@@ -17,11 +14,8 @@
 	MemberDTO mbdto = mbDAO.getMember(id);
 %>
 
-<<<<<<< Updated upstream
 <title>CODENEWS</title>
 <jsp:include page="/member/header.jsp" />
-=======
->>>>>>> Stashed changes
 <%if(id != null){
 	if(mbdto.getMemberType().equals("2")){%>
 	<center><b>글삭제</b>
@@ -74,11 +68,7 @@ function deleteSave(){
 			</tr>
 		</table>
 	</form>
-<<<<<<< Updated upstream
 <jsp:include page="/member/footer.jsp"></jsp:include>
 	<%}%>
 <%}%>
-=======
-	<%}%>
-<%}%>
->>>>>>> Stashed changes
+
