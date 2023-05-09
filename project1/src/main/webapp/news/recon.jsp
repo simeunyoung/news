@@ -58,7 +58,7 @@ if (session.getAttribute("memId") == null) {
 	<input type="hidden" name="con" value="<%=con%>"> 
 	<input type="hidden" name="contentpage" value="<%=num%>"> 
 	<div class="recon-wrap">
-		<input type="text" class="textarea_box" name="recon" placeholder="댓글을 입력해주세요.">
+		<input type="text" class="textarea_box" name="recon" placeholder="권리침해, 욕설 및 특정 대상을 비하하는 내용을 게시할 경우 이용약관 및 관련법률에 의해 제재될 수 있습니다.">
 		<input type="submit" value="입력" class="submit-btn">
 	</div>
 	
