@@ -168,8 +168,12 @@ for(Cookie c : cookies){
 			<div class="row">
 				<% for(int i = 1 ; i < reporterArray.length ; i++){%>
 				<% MemberDTO mem = dao.getMember(reporterArray[i]); %>
+				<%if(mem != null){ %>
 				<div class="card"><a href ="/project1/member/user_mypage_form.jsp?pageType=2&id=<%= reporterArray[i] %>"><%= mem.getNick() %></a></div>
-				<% }%>
+				<% }else {%>
+				<div class = "card">null</div>
+				<%	}
+				}%>
 			</div>
 			</div>
 		</div>

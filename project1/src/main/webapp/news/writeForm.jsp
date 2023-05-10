@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+z<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="member.MemberDTO"%>
 <%@ page import="member.MemberDAO"%>
@@ -35,7 +35,7 @@ response.sendRedirect("list.jsp");
 <body>
 	<div class="page-wrap write">
 		<div class="write-form-wrap">
-			<form action="writePro.jsp" name="write" onsubmit="return submitPost()">
+			<form action="writePro.jsp" method = "post" name="write" onsubmit="return submitPost()">
 			<%-- form문에 원하는 값들을 입력하고 Pro로 전달하게 설정한다. --%>
 				<input type="hidden" name="id" value="<%=loginuser%>"><input type="hidden" name="nick" value="<%=usernick%>">
 				<%-- 작성할 때 id와 nick은 히든 값으로 해서 변경할 수 없게 해준다. 
