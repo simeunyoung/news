@@ -201,7 +201,9 @@ nameArray[i] = reporterName;
 					for (int i = 0; i < subscribe2.length; i++) {				//구독한 기자 비교해서 있으면 true없으면 true
 						boolean isChecked2 = false;						
 						for (int z = 0; z < subscribe.length; z++) {
+							 if(subscribe2[i] != null){
 							isChecked2 = subscribe2[i].equals(subscribe[z]);
+							 }
 							if (isChecked2) {
 					%>
 					<div class="press-chk">										<%-- 위와 같은방식 --%>
