@@ -38,7 +38,6 @@ int number = 0;
 
 NewsDAO method = NewsDAO.getInstance();
 reconcount = method.getReconCount(title, con); // recon 갯수를 알아내는 메소드
-System.out.println(title+" "+ con);
 List recons = method.getRecon(title, con, startRow, endRow); // recon을 조건에 맞게 가져오는 메소드
 // <-- +
 %>

@@ -51,7 +51,7 @@ public class NewsDAO extends OracleServer {
 		if(dto.getCon().contains("</p>")) {
 			dto.setCon(dto.getCon().replace("</p>", ""));
 		}
-		System.out.println(dto.getCon());
+		
 		try {
 			conn = getConnection();
 			sql = "insert into news(num,nick,title,con,reg,pw,ip,id,newstype,press) values(news_seq.nextval,?,?,?,?,?,?,?,?,?)";

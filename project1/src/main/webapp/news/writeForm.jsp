@@ -113,6 +113,7 @@ submitPost = function() {
     oEditors.getById["editorTxt"].exec("FOCUS")
     return false;
   } else {
+
     console.log(content)
     return true;
   }
