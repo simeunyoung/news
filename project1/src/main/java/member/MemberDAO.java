@@ -64,7 +64,7 @@ public class MemberDAO extends OracleServer {
 			int result= 0;
 			try {
 				conn = getConnection();
-				pstmt = conn.prepareStatement("insert into member(id,pw,name,nick,email,tel,birthdate,memberType,press,reg) values(?,?,?,?,?,?,?,'1',?,sysdate)");
+				pstmt = conn.prepareStatement("insert into member(id,pw,name,nick,email,tel,birthdate,memberType,press,reg,ip) values(?,?,?,?,?,?,?,'1',?,sysdate,?)");
 				pstmt.setString(1, member.getId());
 				pstmt.setString(2, member.getPw());
 				pstmt.setString(3, member.getName());
@@ -73,6 +73,7 @@ public class MemberDAO extends OracleServer {
 				pstmt.setString(6, member.getTel());
 				pstmt.setString(7, member.getBirthdate());
 				pstmt.setString(8, member.getPress());
+				pstmt.setString(9, member.getIp());
 				result = pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();

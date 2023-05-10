@@ -8,6 +8,8 @@
 <jsp:setProperty property="*" name="member" />
 
 <%
+	member.setIp(request.getRemoteAddr());	
+
 	member.setReg(new Timestamp(System.currentTimeMillis()));
 	MemberDAO manager = MemberDAO.getInstance();
 	int result = manager.insertMember(member); // 회원가입
