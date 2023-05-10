@@ -1410,31 +1410,6 @@ input[type="submit"].upload-btn {
 	padding:10px;
 	display: inline-block;
 }
-.page-wrap.press .card.js-list .js-item a:hover{
-	background:#eee;
-}
-/************************************
-************** journalistForm ***************
-*************************************/
-.page-wrap.js-request{
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    gap:20px;
-}
-.js-request {
-	display:flex;
-	gap:10px;
-	
-}
-.js-request select{
-	border:1px solid #ddd;
-	border-radius:4px;
-	width:200px;
-	height:38px;
-}
-
-
 /************************************
 ************** footer ***************
 *************************************/

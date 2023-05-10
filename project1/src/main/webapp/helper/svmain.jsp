@@ -16,16 +16,14 @@
 <%String id = (String)session.getAttribute("memId");
 	if(id == null || id != null){%>				<%-- 로그인을 안한 유저도 들어올 수 있게 설정 --%>
 <%!
-
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss"); // 날짜형식 설정
 %>
 
 <%
 	MemberDAO mbDAO = MemberDAO.getInstance();
 	MemberDTO mbdto = mbDAO.getMember(id);
-	
+		
 	String pageNum = request.getParameter("pageNum");
-
 %>
 <jsp:include page="/member/header.jsp"></jsp:include>
 <title>CODENEWS</title>
@@ -50,6 +48,5 @@
 		</ul>
 	</div>
 	<%}%>
-
 </div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
