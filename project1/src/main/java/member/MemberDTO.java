@@ -65,7 +65,6 @@ public class MemberDTO {
 		return tel;
 	}
 	public void setTel(String tel) {
-		if (tel.matches("^\\d{0,15}$"))
 		this.tel = tel;
 	}
 	public Timestamp getReg() {

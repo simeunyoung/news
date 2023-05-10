@@ -82,7 +82,7 @@ public class AdminDAO extends OracleServer {
 		}
 		return dto;
 	} // public MemberDTO setMember(String sid) {
-	
+
 	// dto를 매개변수로 받아 jas 테이블에 insert
 	public int insertJas(AdminDTO dto) {
 		int result = 0;

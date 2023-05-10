@@ -48,7 +48,7 @@ int number = count - (crtPage -1) * pageSize;
 			<%
 				if (count == 0) { // 리스트에 목록이 없으면 보여줌
 			%>
-				<div>저장된 댓글이 없습니다.</div>
+				<div class="no-list">저장된 글이 없습니다.</div>
 			<%
 				} else { // 리스트에 목록이 있으면 보여줌
 			%>

@@ -10,26 +10,24 @@
 	String memId = (String)session.getAttribute("memId");
 	MemberDTO dto = dao.setMember(memId);
 	// 일반회원이 아니면 들어올 수 없게함
-	if(dto.getMemberType() == null) {%>
-	<script>
-		alert("로그인 후 진행해주세요");
-		history.go(-1);
-	</script>
+	if(dto.getMemberType() == null || dto.getMemberType().equals("0")) {
+	out.print(dto.getMemberType());%>
+		<script>
+			alert("로그인 후 진행해주세요");
+			history.go(-1);
+		</script>
 	<%} else if(dto.getMemberType().equals("1")) {%>
 	<%} else {%>
-	<script>
-		alert("일반회원이 아닙니다.");
-		history.go(-1);
-	</script>
+		<script>
+			alert("일반회원이 아닙니다.");
+			history.go(-1);
+		</script>
 	<%}%>
 	
 <jsp:include page="/member/header.jsp" />
 
 <title>기자신청</title>
-<center><h2>기자신청</h2></center>
-
-<hr />
-<br />
+<h2>기자신청</h2>
 
 <form method="post" action="journalistPro.jsp">
 	<select name="press">

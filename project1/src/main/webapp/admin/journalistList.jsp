@@ -21,16 +21,16 @@
 	jList = dao.getJList();
 	
 	if(dto2.getMemberType() == null) {%>
-	<script>
-		alert("비정상적인 접근입니다.");
-		history.go(-1);
-	</script>
+		<script>
+			alert("비정상적인 접근입니다.");
+			history.go(-1);
+		</script>
 	<%} else if(dto2.getMemberType().equals("2")) {%>	
 	<%} else {%>
-	<script>
-		alert("비정상적인 접근입니다.");
-		history.go(-1);
-	</script>
+		<script>
+			alert("비정상적인 접근입니다.");
+			history.go(-1);
+		</script>
 	<%}%>
 
 <jsp:include page="/member/header.jsp" />
