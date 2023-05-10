@@ -54,7 +54,7 @@ public class NewsDAO extends OracleServer {
 		System.out.println(dto.getCon());
 		try {
 			conn = getConnection();
-			sql = "insert into news(num,nick,title,con,reg,pw,ip,id,newstype) values(news_seq.nextval,?,?,?,?,?,?,?,?)";
+			sql = "insert into news(num,nick,title,con,reg,pw,ip,id,newstype,press) values(news_seq.nextval,?,?,?,?,?,?,?,?,?)";
 			// 쿼리문 작성
 			pstmt = conn.prepareStatement(sql); // 쿼리문 적용
 			pstmt.setString(1, dto.getNick()); // ?의 순서에 맞는 데이터 적용
@@ -65,6 +65,7 @@ public class NewsDAO extends OracleServer {
 			pstmt.setString(6, dto.getIp());
 			pstmt.setString(7, dto.getId());
 			pstmt.setString(8, dto.getNewstype());
+			pstmt.setString(9, dto.getPress());
 			pstmt.executeUpdate(); 
 			//executeQuery은 테이블에 데이터를 가져오는 것/ executeUpdate는 테이블에 데이터를 적용시키는 것
 		} catch (Exception e) {

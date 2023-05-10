@@ -1,4 +1,5 @@
 <%@page import="member.MemberDAO"%>
+<%@page import="member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -17,9 +18,13 @@
 	
 	MemberDAO manager = MemberDAO.getInstance();
 	int check = manager.userCheck(id,pw); // 로그인 아이디,비밀번호 체크
+
+	
+
 	
 	if(check == 1){
 		session.setAttribute("memId", id);
+		
 		%>
 		<%=auto %><%
 		if(auto != null){

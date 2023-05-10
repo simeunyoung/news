@@ -24,6 +24,8 @@ if (loginuser == null) {
 } else {
 	MemberDAO memdao = MemberDAO.getInstance();
 	MemberDTO usertype = memdao.getmember(loginuser);
+	MemberDTO mem = memdao.getmember(loginuser);
+	String press = mem.getPress();
 
 	memtype = usertype.getMemberType();
 }

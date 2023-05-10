@@ -43,7 +43,7 @@ public class MemberDAO extends OracleServer {
 			int x = -1;
 			try {
 				conn = getConnection();
-				pstmt = conn.prepareStatement("select id from member where id = ?"); // 입력받은 id와 같은 id가 있는지 체크
+				pstmt = conn.prepareStatement("select id,press from member where id = ?"); // 입력받은 id와 같은 id가 있는지 체크
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
@@ -171,6 +171,7 @@ public class MemberDAO extends OracleServer {
 					member.setBirthdate(rs.getString("birthdate"));
 					member.setReg(rs.getTimestamp("reg"));
 					member.setMemberType(rs.getString("memberType"));
+					member.setPress(rs.getString("press"));
 				}
 			}catch (Exception e) {
 				e.printStackTrace();

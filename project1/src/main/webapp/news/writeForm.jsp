@@ -14,13 +14,16 @@ z<%@ page language="java" contentType="text/html; charset=UTF-8"
 request.setCharacterEncoding("UTF-8");
 
 String loginuser = (String) session.getAttribute("memId");
+
 MemberDTO userinfo = null;
 String usernick = null;
+String userpress = null;
 MemberDAO memdao = MemberDAO.getInstance();
 
 if (session.getAttribute("memId") != null) { // 세션이 있을 때 세션을 활용해서 member테이블에서 해당 id의 세션에 있는 nick 값을 가져온다.
 	userinfo = memdao.getmember(loginuser);
 	usernick = userinfo.getNick();
+	userpress = userinfo.getPress();
 }
 if (session.getAttribute("memId") == null) { //세션이 없을 때 해당 페이지로 접속하면 접근할 수 없게 막고 알림으로 알려준다.
 %>
@@ -37,7 +40,9 @@ response.sendRedirect("list.jsp");
 		<div class="write-form-wrap">
 			<form action="writePro.jsp" method = "post" name="write" onsubmit="return submitPost()">
 			<%-- form문에 원하는 값들을 입력하고 Pro로 전달하게 설정한다. --%>
-				<input type="hidden" name="id" value="<%=loginuser%>"><input type="hidden" name="nick" value="<%=usernick%>">
+				<input type="hidden" name="id" value="<%=loginuser%>">
+				<input type="hidden" name="nick" value="<%=usernick%>">
+				<input type="hidden" name="press" value="<%=userpress%>">
 				<%-- 작성할 때 id와 nick은 히든 값으로 해서 변경할 수 없게 해준다. 
 				또한 아이디의 경우 글을 삭제 및 수정할 때를 위해 저장하며, nick의 경우 글을 작성한 사람을 나타내기 위해 저장한다. --%>
 				<%-- 글을 작성할 때 직접 입력하면 안되는 부분을 히든 값으로 넘겨서 기록하기 --%>
