@@ -24,30 +24,35 @@ public class MemberDTO {
 		return id;
 	}
 	public void setId(String id) {
+		if(id.matches("^[a-z0-9]{5,20}$"))
 		this.id = id;
 	}
 	public String getPw() {
 		return pw;
 	}
 	public void setPw(String pw) {
+		if(pw.matches("^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z!@#$%^&*0-9]{8,16}$"))
 		this.pw = pw;
 	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
+		if (name.length() <= 40)
 		this.name = name;
 	}
 	public String getNick() {
 		return nick;
 	}
 	public void setNick(String nick) {
+		if (nick.length() <= 40)
 		this.nick = nick;
 	}
 	public String getBirthdate() {
 		return birthdate;
 	}
 	public void setBirthdate(String birthdate) {
+		if (birthdate.length() == 8)
 		this.birthdate = birthdate;
 	}
 	public String getEmail() {
@@ -60,6 +65,7 @@ public class MemberDTO {
 		return tel;
 	}
 	public void setTel(String tel) {
+		if (tel.matches("^\\d{0,15}$"))
 		this.tel = tel;
 	}
 	public Timestamp getReg() {
@@ -72,12 +78,14 @@ public class MemberDTO {
 		return memberType;
 	}
 	public void setMemberType(String memberType) {
+		if (memberType.equals("-1") || memberType.equals("0") || memberType.equals("1") || memberType.equals("2"))
 		this.memberType = memberType;
 	}
 	public String getPress() {
 		return press;
 	}
 	public void setPress(String press) {
+		if (!press.contains("@"))
 		this.press = press;
 	}
 	public String getPressSubcribe() {
