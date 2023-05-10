@@ -14,14 +14,18 @@
 <jsp:include page="/member/header.jsp" />
 
 <script src="helper.js"></script>
-<title>Q&A 작성</title>
+<title>Q&A</title>
 
 <body onload="begin()">
 	<div class="page-wrap qna2">
 		<div class="write-form-wrap">
-		<h2 class="write-tit">Q&A 작성</h2>
+		<h2 class="write-tit">Q&A</h2>
 			<form method="post" name="qnaform" action="qnaPro.jsp" onsubmit="return check()">
 				<table>
+				<colgroup>
+					<col style="width:30%;">
+					<col style="width:70%;">
+				</colgroup>
 					<tr height="30">
 						<td align="center">문의유형</td>
 						<td align="center">

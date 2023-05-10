@@ -50,6 +50,18 @@ main {
 .write-tit{
 	font-size:22px;
 }
+.no-list{
+	width:100%;
+	height:50px;
+	border-top: 2px solid #111;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color:#888;
+	font-size:14px;
+	margin-top:10px;
+}
 
 /************************************
 ************** component ***************
@@ -1256,6 +1268,52 @@ input[type="submit"].upload-btn {
 	border:1px solid #ddd;
 }
 /************************************
+************** svmain ***************
+*************************************/
+.page-wrap.svmain{
+	display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.svmain-wrap{
+	width:650px;
+	text-align:center;
+}
+.svmain-wrap .svmain-tit{
+	font-size:26px;
+	margin-bottom:60px;
+}
+.svmain-wrap ul{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-wrap:wrap;
+	gap:20px;
+}
+.svmain-wrap ul li{
+	width:150px;
+	height:150px;
+    border: 1px solid #ddd;
+    background:#555;
+    cursor:pointer;
+}
+.svmain-wrap ul li a{
+	color:#fff;
+	width:100%;
+	height:100%;
+	text-align: center;
+    vertical-align: middle;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.svmain-wrap ul li:hover{
+	background:#fff;
+}
+.svmain-wrap ul li:hover a{
+	color:#111;
+}
+/************************************
 ************** faq ***************
 *************************************/
 .page-wrap.faq .white-btn{
@@ -1316,24 +1374,42 @@ input[type="submit"].upload-btn {
 /************************************
 ************** press ***************
 *************************************/
-.page-wrap.press{
-	
-}
+
 .page-wrap .press-wrap{
 	display:flex;
 	gap:20px;
 }
-
+.page-wrap.press .card{
+	cursor:auto;
+	padding:20px;
+}
 .page-wrap.press .card.profile{
 	min-width:300px;
 	min-height:300px;
+	text-align:center;
+}
+.page-wrap.press .card.profile h4{
+	margin-bottom:20px;
 }
 .page-wrap.press .card.js-list{
 	width:720px;
 	min-height:300px;
 	margin-bottom:20px;
 }
-
+.page-wrap.press .card.js-list .js-item{
+	display:flex;
+	gap:10px;
+	flex-wrap:wrap;
+	padding-top:10px;
+	margin-top:10px;
+	border-top:2px solid #111;
+}
+.page-wrap.press .card.js-list .js-item a{
+	border:1px solid #ddd;
+	border-radius:4px;
+	padding:10px;
+	display: inline-block;
+}
 /************************************
 ************** footer ***************
 *************************************/

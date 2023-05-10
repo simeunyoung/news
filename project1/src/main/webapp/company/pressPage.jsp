@@ -94,32 +94,27 @@ function deletePageHistoryAndRedirect1() {
             <div class="press-right">
               <div class="card js-list">
                 <div class="card-body">
-                  <div class="row">
-                    <div>
-                      <h6>기자목록</h6>
-                    </div>
-                    <div class="">
+                    <h6>기자목록</h6>
+                    <div class="js-item">
 	                    <%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);		//press에 해당하는 기자 출력
 						for(int z = 0 ; z < reporterList.size() ; z++){%>
 							<a href="/project1/member/journalist.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
 						<%} %>
                     </div>
                   </div>
-
-                </div>
               </div>
                   <div class="card">
                     <div class="card-body">
-                      <h6><i class="material-icons">관련 기사</i></h6>
+
                       <%
 	                      ArrayList<NewsDTO> articleList = rv.selectArticle(press);			//매개변수로 준 언론사에 해당하는 기사들을 담은 ArrayList 리턴			
 	                      	int count = articleList.size();
 
                       %>
-                    	<i class="material-icons text-info">관련 기사 수(<%=count %>)</i>
+                    	<p class="text-info">관련 기사 (<%=count %>)</p>
                     	<%if(count == 0){ %>
-							<div>
-								저장된 댓글이 없습니다.
+							<div class="no-list">
+								저장된 글이 없습니다.
 							</div>
 							<%}else { %>
 								<table>

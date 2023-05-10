@@ -61,6 +61,7 @@ request.setCharacterEncoding("UTF-8");
 						<li><a href="/project1/admin/qnaList.jsp">Q&A</a></li>
 						<li><a href="/project1/admin/journalistForm.jsp">기자신청</a></li>
 						<li><a href="/project1/admin/qnaWrite2.jsp">제보하기</a></li>
+						<li><a href="/project1/admin/qnaWrite.jsp">1:1 문의하기</a></li>
 					</ul></li>
 					
 				<%
