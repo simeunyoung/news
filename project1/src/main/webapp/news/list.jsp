@@ -96,29 +96,13 @@ number = newscount - (currentPage - 1) * pageSize;
 		<%
 		if (newscount == 0) { // 게시글이 없을 때
 		%>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<center>
+		<div class="no-list">
 			<h3>죄송합니다.. 현재 뉴스 목록에 기사가 없습니다.</h3>
 			<h4>
 				뉴스를 준비 중입니다.<br /> 나중에 다시 이용하여 주시기 바랍니다.
 			</h4>
-		</center>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
+		</div>
+
 		<%
 		} else {
 		%>
@@ -132,8 +116,6 @@ number = newscount - (currentPage - 1) * pageSize;
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-		
-		
 		<%
 		// newsList에서 NewsDTO에 저장되어있는 정보를 한 행씩 출력
 		for (int i = 0; i < newsList.size(); i++) {
@@ -145,7 +127,7 @@ number = newscount - (currentPage - 1) * pageSize;
 				<td><%=number--%></td>
 				<td class="click" onclick="location='content.jsp?num=<%=article.getNum()%>'">
 					<div><%=article.getTitle()%></div>
-					<div><%=article.getCon()%></div>
+					
 				</td>
 				<td><%=article.getId()%></td>
 				<td><%=article.getPress()%></td>
