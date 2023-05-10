@@ -53,6 +53,14 @@ int number = count - (crtPage - 1) * pageSize;
 			} else {
 		%>
 		<table>
+				<colgroup>
+					<col style="width:5%" />
+					<col style="width:15%" />
+					<col style="width:18%" />
+					<col style="width:32%" />
+					<col style="width:15%" />
+					<col style="width:15%" />
+				</colgroup>
 			<tr>
 				<th>NO</th>
 				<th>ID</th>
@@ -76,11 +84,11 @@ int number = count - (crtPage - 1) * pageSize;
 						<%=recon.getId()%>
 					<%} %>
 				</td>
-				<td><a href="/project1/news/content.jsp?num=<%=result%>">
+				<td class="over"><a href="/project1/news/content.jsp?num=<%=result%>">
 						<%=recon.getTitle()%>
 				</a></td>
-				<td><%=recon.getCon()%></td>
-				<td><%=recon.getReCon()%></td>
+				<td class="over"><%=recon.getCon()%></td>
+				<td class="over"><%=recon.getReCon()%></td>
 				<td><%=sdf.format(recon.getReg())%></td>
 			</tr>
 			<%

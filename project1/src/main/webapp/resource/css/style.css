@@ -47,6 +47,10 @@ main {
 	align-items:center;
 	justify-content:flex-end;
 }
+.write-tit{
+	font-size:22px;
+}
+
 /************************************
 ************** component ***************
 *************************************/
@@ -240,6 +244,7 @@ main {
 /* table */
 table {
 	margin-top: 10px;
+	table-layout: fixed;
 }
 
 table tr th {
@@ -253,8 +258,13 @@ table tr td {
 	border-bottom: 1px solid #ddd;
 	padding: 10px;
 	vertical-align: middle;
+	
 }
-
+table tr td.over{
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
 /* login */
 #lang-select {
 	position: absolute;
@@ -1204,6 +1214,7 @@ input[type="submit"].upload-btn {
 }
 .recon-box .recon-cont{
 	color:#222;
+	word-break: break-all;
 }
 .page-wrap.write{
 	display:flex;
@@ -1255,10 +1266,74 @@ input[type="submit"].upload-btn {
 /************************************
 ************** qna ***************
 *************************************/
+.page-wrap.qna2{
+	display:flex;
+	justify-content:center;
+}
+.page-wrap.qna2 table td{
+	text-align:left;
+}
+.page-wrap.qna2 table tr:last-child td{
+	border-bottom:0;
+}
+.page-wrap.qna2 table input[type="text"],
+.page-wrap.qna2 table input[type="password"],
+.page-wrap.qna2 table select{
+	border: 1px solid #ddd;
+	border-radius:4px;
+	height:30px;
+	width:100%;
+}
+.page-wrap.qna2 table{
+	border-top:1px solid #ddd;
+}
+.page-wrap.qna2 table tr{
+	height:50px;
+}
+.page-wrap.qna2 table textarea{
+	width:100%;
+	border: 1px solid #ddd;
+	border-radius:4px;
+}
 .page-wrap.qna .white-btn{
 	min-width: 70px;
     height: 30px;
 }
+.page-wrap.qna2 .write-form-wrap{
+	width:800px;
+
+}
+.page-wrap.qna2 .button-wrap{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	gap:10px;
+	margin-top:10px;
+}
+.page-wrap.qna2 .write-tit{
+	margin-bottom:20px;
+}
+/************************************
+************** press ***************
+*************************************/
+.page-wrap.press{
+	
+}
+.page-wrap .press-wrap{
+	display:flex;
+	gap:20px;
+}
+
+.page-wrap.press .card.profile{
+	min-width:300px;
+	min-height:300px;
+}
+.page-wrap.press .card.js-list{
+	width:720px;
+	min-height:300px;
+	margin-bottom:20px;
+}
+
 /************************************
 ************** footer ***************
 *************************************/

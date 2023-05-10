@@ -53,13 +53,19 @@ int number = count - (crtPage -1) * pageSize;
 				} else { // 리스트에 목록이 있으면 보여줌
 			%>
 			<table>
+				<colgroup>
+					<col style="width:5%" />
+					<col style="width:15%" />
+					<col style="width:18%" />
+					<col style="width:35%" />
+					<col style="width:18%" />
+					<col style="width:9%" />
+				</colgroup>
 				<tr>
 					<th>NO</th>
-					<th>ID</th>
 					<th>NEWSTYPE</th>
 					<th>TITLE</th>
 					<th>CONTENTS</th>
-					<th>IP</th>
 					<th>DATE</th>
 					<th>VIEWS</th>
 				</tr>
@@ -70,15 +76,13 @@ int number = count - (crtPage -1) * pageSize;
 				%>
 				<tr>
 					<td><%=number--%></td>
-					<td><%=journalist.getId()%></td>
 					<td><%=journalist.getNewstype()%></td>
 					<td>
   					<a href="/project1/news/content.jsp?num=<%=journalist.getNum()%>&pageNum=<%=crtPage%>">
    							 <%=journalist.getTitle()%>
  					</a>
 					</td>
-					<td><%=journalist.getCon()%></td>
-					<td><%=journalist.getIp()%></td>
+					<td class="over"><%=journalist.getCon()%></td>
 					<td><%=sdf.format(journalist.getReg())%></td>
 					<td><%=journalist.getViews()%></td>
 				</tr>
