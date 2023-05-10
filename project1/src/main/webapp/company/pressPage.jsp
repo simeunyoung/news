@@ -98,7 +98,7 @@ function deletePageHistoryAndRedirect1() {
                     <div class="js-item">
 	                    <%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);		//press에 해당하는 기자 출력
 						for(int z = 0 ; z < reporterList.size() ; z++){%>
-							<a href="/project1/member/journalist.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
+							<a href="/project1/member/journalist.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>
 						<%} %>
                     </div>
                   </div>

@@ -42,13 +42,11 @@ int number = count - (crtPage -1) * pageSize;
 <!-- include 마이페이지 중 내가 쓴 기사 목록 폼 -->
 	<div class="card">
 		<div class="card-body">
-			<h6 class="d-flex align-items-center mb-3">
-				<i class="material-icons text-info mr-2">내가 쓴 기사(<%=count%>)</i>
-			</h6>
+			<h6>내가 쓴 기사(<%=count%>)</h6>
 			<%
 				if (count == 0) { // 리스트에 목록이 없으면 보여줌
 			%>
-				<div>저장된 댓글이 없습니다.</div>
+				<div class="no-list">저장된 글이 없습니다.</div>
 			<%
 				} else { // 리스트에 목록이 있으면 보여줌
 			%>

@@ -41,14 +41,11 @@ int number = count - (crtPage - 1) * pageSize;
 <body>
 	<!-- 유저의 댓글 리스트 -->
 	<div class="card-body">
-		<h6 class="d-flex align-items-center mb-3">
-			<i class="material-icons text-info mr-2">내가 쓴 댓글(<%=count%>)
-			</i>
-		</h6>
+		<h6>내가 쓴 댓글(<%=count%>)</h6>
 		<%
 			if (count == 0) {
 		%>
-		<div>저장된 댓글이 없습니다.</div>
+		<div class="no-list">저장된 댓글이 없습니다.</div>
 		<%
 			} else {
 		%>

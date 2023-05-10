@@ -62,7 +62,6 @@ if (id == null && pageType.equals("1")) {
 				<div class="userform-wrap">
 					<!-- 유저의 프로필 부분 -->
 					<jsp:include page="userProForm.jsp" />
-					
 				</div>
 				<div class="infoform-wrap">
 					<!-- 유저의 정보 부분  -->
