@@ -45,7 +45,7 @@
 <title>CODENEWS</title>
 <jsp:include page="/member/header.jsp" />
 
-<center><b>내문의목록(전체 글 : <%=count%>)</b>	<%-- 본인이 작성한 글이 있다면 몇개가 있는지 나타냄 --%>
+<center><b>1대1문의목록(전체 글 : <%=count%>)</b>	<%-- 본인이 작성한 글이 있다면 몇개가 있는지 나타냄 --%>
 <table width = "700">
 	<tr>
 		<td align = "right">
@@ -69,7 +69,7 @@
 
 <%}else{%>								<%-- 작성한 글이 있을 경우 게시판을 만들고 출력 --%>
 &nbsp;&nbsp;&nbsp;&nbsp;
-<center><b>내문의목록</b>
+<center><b>1대1문의목록</b>
 <table ailgn = "center" width = "800" border = "1" cellspacing = "0" cellpadding = "0">
 	<tr height = "30">
 		<td align = "center" width = "50">글번호</td>

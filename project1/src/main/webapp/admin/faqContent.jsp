@@ -16,7 +16,7 @@
 	String memId = (String)session.getAttribute("memId"); // memId에 세션 대입
 	AdminDTO dto = dao.faqGet(num); // num으로 faq정보 불러옴
 	MemberDTO dto2 = dao.setMember(memId); // 세션id로 회원정보 불러옴
-	if(memId == null) {dto.setMemberType("0");} // 비로그인의 경우 멤버타입 0으로 지정
+	if(dto2.getMemberType() == null) {dto2.setMemberType("0");} // 비로그인의 경우 멤버타입 0으로 지정
 %>
 <jsp:include page="/member/header.jsp" />
 

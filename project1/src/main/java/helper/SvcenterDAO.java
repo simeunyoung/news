@@ -95,6 +95,25 @@ public class SvcenterDAO extends OracleServer{
 		return x;
 	}
 	
+	public int getMySvcenterCount1(String id) throws Exception{
+		int x = 0;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select count(*) from svcenter where id = ?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+		if(rs.next()) {
+			x = rs.getInt(1);
+		}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			oracleClose();
+		}
+		return x;
+	}
+	
 	public List getSvcenter(int start, int end) throws Exception{	//작성된 글이 있다면 1부터 10까지의 번호로 글을 꺼내 리스트로 저장
 		List svcenterList = new ArrayList();
 		
@@ -159,6 +178,37 @@ public class SvcenterDAO extends OracleServer{
 			oracleClose();
 		}
 		return svcenterList;
+	}
+	
+	public List getMySvcenter1(String id, int start, int end) throws Exception{
+		List svcenterList1 = new ArrayList();
+		
+		try {
+			conn = getConnection();
+			sql = "select * from(select e.*, rownum r from(select * from svcenter where id = ? order by reg desc)e) where r >= ? and r <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rs = pstmt.executeQuery();
+			
+		while(rs.next()) {
+			SvcenterDTO svdto = new SvcenterDTO();
+			svdto.setNum1(rs.getInt("num1"));
+			svdto.setId(rs.getString("id"));
+			svdto.setTitle(rs.getString("title"));
+			svdto.setEmail(rs.getString("email"));
+			svdto.setCon(rs.getString("con"));
+			svdto.setPw(rs.getString("pw"));
+			svdto.setReg(rs.getTimestamp("reg"));
+			svcenterList1.add(svdto);
+		}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			oracleClose();
+		}
+		return svcenterList1;
 	}
 	
 	public SvcenterDTO updateGetSvcenter(int num) throws Exception{			//파라미터로 글번호 값을 받아와서 대입하여 테이블에 검색하고 저장된 값을 꺼냄

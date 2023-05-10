@@ -32,33 +32,33 @@
 <center><b>문의내용보기</b>
 <br>
 <form>
-	<table width = "600" height = "500" border = "1" cellspacing = "0" cellpadding = "0" align = "center">
+	<table width = "600" height = "500" border = "1" cellspacing = "0" cellpadding = "0">
 		<tr width = "8" height = "8">
 			<td align = "center" width = "10">글번호</td>
-			<td align = "center" width = "10" align = "center" colspan = "3"><%=svDTO.getNum1()%></td>
+			<td width = "10" colspan = "3"><%=svDTO.getNum1()%></td>
 		</tr>
 		
 		<tr width = "10" height = "10">
-			<td align = "center" width = "35">작성자</td>
-			<td align = "center" width = "35" align = "center"><%=svDTO.getId()%></td>
+			<td width = "35">작성자</td>
+			<td width = "35"><%=svDTO.getId()%></td>
 			
-			<td align = "center" width = "35">작성일</td>
-			<td align = "center" width = "35" align = "center"><%=sdf.format(svDTO.getReg())%>
+			<td width = "35">작성일</td>
+			<td width = "35"><%=sdf.format(svDTO.getReg())%>
 		</tr>
 		
 		<tr height = "10">
-			<td align = "center" width = "70">email</td>
-			<td align = "center" width = "70" align = "center" colspan = "3"><%=svDTO.getEmail()%></a></td>
+			<td width = "70">email</td>
+			<td width = "70" colspan = "3"><%=svDTO.getEmail()%></a></td>
 		</tr>
 		
 		<tr height = "10">
-			<td align = "center" width = "70">제 목</td>
-			<td align = "center" width = "70" align = "center" colspan = "3"><%=svDTO.getTitle()%></td>
+			<td width = "70">제 목</td>
+			<td width = "70" colspan = "3"><%=svDTO.getTitle()%></td>
 		</tr>
 		
 		<tr height = "30">
-			<td align = "center" width = "125">문의내용</td>
-			<td align = "left" width = "400" heigth = "300" align = "center" colspan = "3"><%=svDTO.getCon()%></td>
+			<td width = "125">문의내용</td>
+			<td width = "400" heigth = "300" colspan = "3"><%=svDTO.getCon()%></td>
 		</tr>
 		
 		<tr>

@@ -10,6 +10,8 @@
 
 <%
 	String pageNum = request.getParameter("pageNum");
+	String id = (String)session.getAttribute("memId");
+	svdto.setId(id);
 	
 	SvcenterDAO svdao = SvcenterDAO.getInstance();
 	int check = svdao.updateSvcenter(svdto); 
