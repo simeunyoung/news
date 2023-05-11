@@ -26,10 +26,11 @@
 	
 <jsp:include page="/member/header.jsp" />
 
-<title>기자신청</title>
-<h2>기자신청</h2>
+<div class="page-wrap js-request">
+	<h2>기자신청</h2>
 
 <form method="post" action="journalistPro.jsp">
+	<div class="js-request">
 	<select name="press">
 		<option value="동아일보">동아일보</option>
 		<option value="경향신문">경향신문</option>
@@ -47,5 +48,7 @@
 	<input type="hidden" name="email" value="<%=dto.getEmail()%>" />
 	<input type="hidden" name="tel" value="<%=dto.getTel()%>" /> 
 	<input type="submit" value="전송">
+	</div>
 </form>
+</div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
