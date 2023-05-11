@@ -117,10 +117,7 @@ for(Cookie c : cookies){
 			</div>	
 			<div class="list-card">
 				<%
-				if (newsList2.isEmpty()) {
-				    NewsDTO article = null;
-				} else {
-				for (int i = 0; i < newsList.size(); i++) {
+				for (int i = 0; i < 5; i++) {
 					int random = (int)(Math.random()*(listnumber-1));
 					NewsDTO article = (NewsDTO) newsList2.get(random);
 				%>
@@ -131,7 +128,6 @@ for(Cookie c : cookies){
 				</div>
 				<%
 					}
-				}
 				%>
 			</div>
 		</div>

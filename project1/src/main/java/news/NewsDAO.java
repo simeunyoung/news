@@ -488,7 +488,7 @@ public class NewsDAO extends OracleServer {
 		try {
 			conn = getConnection();
 			sql = "select * from(select e.*, rownum r from"
-					+ "(select * from news where reg between trunc(sysdate - 6) and trunc(sysdate)) e)"
+					+ "(select * from news where reg between trunc(sysdate - 6) and trunc(sysdate+1)) e )"
 					+ " where r >= 1 and r <= 38";
 			//trunc는 sysdate의 시간을 생략하는 명령어
 			pstmt = conn.prepareStatement(sql);

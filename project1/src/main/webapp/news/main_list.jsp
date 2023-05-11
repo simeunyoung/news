@@ -80,7 +80,7 @@ int listnumber = newsList.size();
 	
 int random = (int)(Math.random()*(listnumber-1));
 NewsDTO article = (NewsDTO) newsList.get(random); %>
-
+<%=listnumber %>
 <a href="content.jsp?num=<%=article.getNum()%>"><div class="list_showcase">
 <div align="right"><font color="#a9a9a9"><b><%=article.getNewstype() %>&nbsp;´º½º</b></font></div>
 <b><font size="5px" color="#696969"><%=article.getTitle() %></font></b><br />
