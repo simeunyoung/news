@@ -141,6 +141,7 @@ public class NewsDAO extends OracleServer {
 				info = new NewsDTO();
 				info.setNum(rs.getInt("num"));
 				info.setNick(rs.getString("nick"));
+				info.setId(rs.getString("id"));
 				info.setNewstype(rs.getString("newstype"));
 				info.setTitle(rs.getString("title"));
 				info.setCon(rs.getString("con"));
@@ -198,9 +199,10 @@ public class NewsDAO extends OracleServer {
 				if (checkpw.equals(info.getPw())) { 
 					// 위 쿼리문의 pw와 메소드에서 가져온 값과 일치 할 때
 					result = 1; // if문에 true일 때 result의 값이 0에서 1로 변경
-					sql = "update news set nick=?,newstype=?,title=?,con=?,pw=? where num=?";
+					sql = "update news set id =?, nick=?,newstype=?,title=?,con=?,pw=? where num=?";
 					// 쿼리문 작성
-					pstmt = conn.prepareStatement(sql); // 쿼리문 적용
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, info.getId());// 쿼리문 적용
 					pstmt.setString(1, info.getNick()); // 쿼리문에 맞는 데이터 저장
 					pstmt.setString(2, info.getNewstype());
 					pstmt.setString(3, info.getTitle());
