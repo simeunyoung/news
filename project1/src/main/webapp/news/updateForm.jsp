@@ -16,7 +16,7 @@ NewsDAO method = NewsDAO.getInstance();
 NewsDTO text = method.getdata(num); // 데이터를 불러내는 메소드에 num의 값을 입력해서 num에 맞는 레코드를 불러낸다.
 %>
 
-<form action="updatePro.jsp" name="write" onsubmit="return submitPost()">
+<form action="updatePro.jsp" name="write" method = "post" onsubmit="return submitPost()">
 	<div class="form_box">
 	<%-- form문에서 텍스트 박스에 불러낸 레코드 값들을 다시 입력할 수 있게 텍스트 박스에 넣어 수정하고 form문애소 submit하면,
 	변경한 데이터를 Pro 페이지에 전달해준다. --%>
