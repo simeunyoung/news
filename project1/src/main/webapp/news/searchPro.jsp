@@ -12,6 +12,7 @@
 %>
 
 <%  
+
 String search = request.getParameter("search");
 String startDate = request.getParameter("startDate");
 String endDate = request.getParameter("endDate");
@@ -34,7 +35,7 @@ String date = request.getParameter("date");
     }else if(date.equals("year")){
     	searchList = dao.getSearchTodayList(date); // 일년
     }
-    
+    System.out.println(searchList);
 %>
 <!DOCTYPE>
 <html>

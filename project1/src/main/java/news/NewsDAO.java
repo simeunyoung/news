@@ -730,16 +730,17 @@ public class NewsDAO extends OracleServer {
 				sql +=" trunc(reg) = trunc(sysdate) ";
 				break;
 			case "week" : 
-				sql +=" reg between trunc(sysdate - 7) and trunc(sysdate - 1) ";
+				sql +=" reg between sysdate - 6 and sysdate";
 				break;
 			case "month" : 
 				sql +=" reg >= add_months(sysdate , -1) and reg < sysdate";
 				break;
 			case "year" : 
-				sql +=" REG BETWEEN TRUNC(SYSDATE - 365) AND TRUNC(SYSDATE)";
+				sql +=" REG BETWEEN SYSDATE - 365 AND SYSDATE";
 				break;
 			}
 			sql += " order by reg desc";
+			System.out.println(date);
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
