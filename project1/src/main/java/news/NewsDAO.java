@@ -555,6 +555,7 @@ public class NewsDAO extends OracleServer {
 				NewsDTO article = new NewsDTO();
 				article.setNum(rs.getInt("num"));
 				article.setNick(rs.getString("nick"));
+				article.setId(rs.getString("id"));
 				article.setNewstype(rs.getString("newstype"));
 				article.setTitle(rs.getString("title"));
 				article.setCon(rs.getString("con"));
