@@ -865,6 +865,24 @@ public class NewsDAO extends OracleServer {
         }
         
     }
+    public String getNick(String id) {
+    	String nick= null;
+    	try {
+    		conn = getConnection();
+    		sql = "select nick from member where id =?";
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setString(1, id);
+    		rs = pstmt.executeQuery();
+    		if(rs.next()) {
+    			nick = rs.getString(1);
+    		}
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}finally{
+    		oracleClose();
+    	}
+    	return nick;
+    }
    
 }
 

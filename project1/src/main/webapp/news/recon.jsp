@@ -83,8 +83,9 @@ if (recons != null) {
 		</div>
 		<div class="recon-btn-wrap">
 				<%
+				String dbnick = method.getNick(recontext.getNick());
 				if (session.getAttribute("memId") == null) {
-				} else if (usernick.equals(recontext.getId())) {
+				}else if (dbnick.equals(usernick)) {
 				%>
 				<a href="reconUpdateForm.jsp?num=<%=recontext.getNum()%>&connum=<%=num%>"><i class="fa-regular fa-pen-to-square" style="color: #bfbfbf;"></i></a>
 				<span>|</span>			
