@@ -19,23 +19,22 @@
 <jsp:include page="/member/header.jsp" />
 
 <title>Q&A 수정</title>
-memId = <%=memId%>
-<center><h3>Q&A 수정</h3></center>
-
-<hr />
-<br />
-
+<div class="page-wrap content">
+	<div class="content-box cont mf">
+		<h3>Q&A 수정</h3>
+		<div class="cont-top">
+			<div class="cont-top-left"># <%=dto.getNum()%><input type="hidden" name="num" value="<%=dto.getNum()%>" /></div>
+			<div class="cont-top-right"><i class="fa-solid fa-eye" style="color: #bfbfbf;"></i> <%=dto.getReadCount()%></div>
+		</div>
 <form method="post" action="qnaUpdatePro.jsp?pageNum=<%=pageNum%>">
-	<table align="center" width="800" border="1" cellspacing="0">
+	<table>
+		<colgroup>
+			<col style="width:20%">
+			<col style="width:80%">
+		</colgroup>
 		<tr height="30">
-			<td align="center" width="400">
-				글 고유번호 : <%=dto.getNum()%>
-				<input type="hidden" name="num" value="<%=dto.getNum()%>" />
-			</td>
-			<td align="center">조회수 : <%=dto.getReadCount()%></td>
-		</tr>
-		<tr height="30">
-			<td align="center" colspan="2">문의유형 :
+		<td>문의유형</td>
+			<td>
 				<select name="questionType">
 					<option value='0'>선택</option>
 					<option value='1'>자바(Java)</option>
@@ -48,26 +47,32 @@ memId = <%=memId%>
 			</td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="4">제목 : <input type="text" name="title" value="<%=dto.getTitle()%>" size="70" /></td>
+			<td>제목</td>
+			<td><input type="text" name="title" value="<%=dto.getTitle()%>" size="70" /></td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">비밀번호 : <input type="password" name="pw" value="<%=dto.getPw()%>" size="70" /></td>
+			<td>비밀번호</td>
+			<td><input type="password" name="pw" value="<%=dto.getPw()%>" size="70" /></td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>님)</td>
+			<td>작성자</td>
+			<td><%=dto.getId()%>(<%=dto.getName()%>님)</td>
 		</tr>
 		<tr height="300">
-			<td align="center" colspan="2"><textarea cols="100" rows="20" name="con"><%=dto.getCon()%></textarea></td>
+			<td>내용</td>
+			<td><textarea cols="100" rows="20" name="con"><%=dto.getCon()%></textarea></td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">작성일자 : <%=sdf.format(dto.getReg())%></td>
+			<td>작성일자</td>
+			<td> <%=sdf.format(dto.getReg())%></td>
 		</tr>
-		<tr height="30">
-			<td align="center" colspan="3">
-				<input type="button" value="목록" onclick="location='qnaList.jsp'" />
-				<input type="submit" value="수정" />
-			</td>
-		</tr>
+
 	</table>
+		<div class="buttom-wrap">
+			<input type="button" class="white-btn" value="목록" onclick="location='qnaList.jsp'" />
+			<input type="submit" class="white-btn" value="수정" />
+	</div>
 </form>
+</div>
+</div>
 <jsp:include page="/member/footer.jsp"></jsp:include>

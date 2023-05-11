@@ -30,7 +30,6 @@ int endNum = crtPage * pageSize;
 RevalueDAO rv = RevalueDAO.getInstance();
 
 int count = rv.getMyReconCount(id); // 댓글 개수
-
 if(count > 0){
 	userList = rv.getMyReconList(id, startNum, endNum);
 }
@@ -70,7 +69,7 @@ int number = count - (crtPage - 1) * pageSize;
 			if (userList != null) {
 				for (int i = 0; i < userList.size(); i++) {
 					RevalueDTO recon = (RevalueDTO) userList.get(i);
-					int result = rv.getReconNum(recon.getTitle(),recon.getCon());
+					int result = rv.getReconNum(recon.getTitle());
 			%>
 			<tr>
 				<td><%=number--%></td>

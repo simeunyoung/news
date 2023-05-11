@@ -6,6 +6,7 @@
 <%@ page import="java.util.List"%>
 
 <link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/dbaea98925.js" crossorigin="anonymous"></script>
 <script src="/project1/resource/js/script.js"></script>
 
 <%
@@ -36,16 +37,21 @@
 <title>Q&A 게시판</title>
 
 <div class="page-wrap content">
-	<div class="content">
+	<div class="content-box cont">
 		<h3>Q&A 내용</h3>
-		<div>
-			<div><%=dto.getNum()%></div>
-			<div><%=dto.getReadCount()%></div>
+		<div class="cont-top">
+			<div class="cont-top-left"># <%=dto.getNum()%></div>
+			<div class="cont-top-right"><i class="fa-solid fa-eye" style="color: #bfbfbf;"></i> <%=dto.getReadCount()%></div>
 		</div>
 		<form>
 			<table>
+			<colgroup>
+				<col style="width:20%">
+				<col style="width:80%">
+			</colgroup>
 				<tr height="30">
-					<td align="center" colspan="2">문의유형 : 
+					<td>문의유형</td>
+					<td> 
 						<%
 						if(dto.getQuestionType().equals("1")) {
 							out.println("자바");
@@ -68,33 +74,35 @@
 					</td>
 				</tr>
 				<tr height="30">
-					<td align="center" colspan="2">제목 : <%=dto.getTitle()%></td>
+					<td>제목  </td>
+					<td><%=dto.getTitle()%></td>
 				</tr>
 				<tr height="30">
-					<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>님)</td>
+					<td>작성자 </td>
+					<td> <%=dto.getId()%>(<%=dto.getName()%>님)</td>
 				</tr>
 				<%if(dto2.getMemberType().equals("2")) {%>
 				<tr height="30">
-					<td align="center" width="400">이메일 : <%=dto.getEmail()%></td>
-					<td align="center">연락처 : <%=dto.getTel()%></td>
+					<td width="400">이메일 : <%=dto.getEmail()%></td>
+					<td>연락처 : <%=dto.getTel()%></td>
 				</tr>
 				<%}%>
 				<tr height="300">
-					<td align="center" colspan="2"><%=dto.getCon()%></td>
+					<td>내용 </td>
+					<td><%=dto.getCon()%></td>
 				</tr>
 				<tr height="30">
-					<td align="center" colspan="2">작성일자 : <%=sdf.format(dto.getReg())%></td>
-				</tr>
-				<tr height="30">
-					<td align="center" colspan="2">
-						<input type="button" value="목록" onclick="location='qnaList.jsp'" />
-						<%if(dto.getId().equals(dto2.getId()) || dto2.getMemberType().equals("2")) {%> <!-- 작성자 아이디가 동일하거나 어드민이면 삭제가능 -->
-						<input type="button" value="수정" onclick="location='qnaUpdateForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
-						<input type="button" value="삭제" onclick="location='qnaDeleteForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
-						<%}%>
-					</td>
+					<td>작성일자 </td>
+					<td><%=sdf.format(dto.getReg())%></td>
 				</tr>
 			</table>
+				<div class="buttom-wrap">
+					<input type="button" value="목록" class="white-btn" onclick="location='qnaList.jsp'" />
+					<%if(dto.getId().equals(dto2.getId()) || dto2.getMemberType().equals("2")) {%> <!-- 작성자 아이디가 동일하거나 어드민이면 삭제가능 -->
+					<input type="button" value="수정" class="submit-btn" onclick="location='qnaUpdateForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
+					<input type="button" value="삭제" class="white-btn" onclick="location='qnaDeleteForm.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
+					<%}%>
+				</div>
 		</form>
 	</div>
 </div>

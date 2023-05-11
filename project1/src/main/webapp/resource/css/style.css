@@ -1029,15 +1029,40 @@ input[type="submit"].upload-btn {
 	margin-bottom: 20px;
     border-bottom: 2px solid #111;
     padding-bottom: 20px;
+    color:#bfbfbf;
 }
-.content-box .cont-top .cont-top-left{
-	
+.content-box.cont table{
+	margin-top:0;
 }
-.content-box .cont-top .cont-top-center{
-	
+.content-box.cont table td:first-child{
+	text-align:left;
+	text-indent: 40px;
+    border-right: 1px solid #ddd;
 }
-.content-box .cont-top .cont-top-right{
+.content-box.cont .cont-top{
+	margin-top:40px;
+	margin-bottom:0px;
+	padding-bottom:10px;
+}
+.content-box.cont.mf td{
+	text-align:left;
+
+}
+.content-box.cont.mf select,
+.content-box.cont.mf input[type="text"],
+.content-box.cont.mf input[type="password"]
+
+{
+	width:100%;
+	border:1px solid #ddd;
+	height:30px;
+	border-radius:4px;
+}
+.content-box.cont.mf textarea{
+	width:100%;
+	border:1px solid #ddd;
 	
+	border-radius:4px;
 }
 .content-box .cont-title{
 	font-size:30px;

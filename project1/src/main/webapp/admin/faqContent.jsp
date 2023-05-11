@@ -5,6 +5,7 @@
 <%@ page import="member.MemberDTO"%>
 
 <link href="/project1/resource/css/style.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/dbaea98925.js" crossorigin="anonymous"></script>
 <script src="/project1/resource/js/script.js"></script>
 
 <%
@@ -21,19 +22,23 @@
 <jsp:include page="/member/header.jsp" />
 
 <title>FAQ 게시판</title>
-<center><h3>FAQ</h3></center>
 
-<hr />
-<br />
-
+<div class="page-wrap content">
+	<div class="content-box cont">
+	<h3>FAQ</h3>
+	<div class="cont-top">
+			<div class="cont-top-left"># <%=dto.getNum()%></div>
+			<div class="cont-top-right"><i class="fa-solid fa-eye" style="color: #bfbfbf;"></i> <%=dto.getReadCount()%></div>
+		</div>
 <form>
-	<table align="center" width="800" border="1" cellspacing="0">
+	<table>
+		<colgroup>
+			<col style="width:20%">
+			<col style="width:80%">
+		</colgroup>
 		<tr height="30">
-			<td align="center" width="400">글 고유번호 : <%=dto.getNum()%></td>
-			<td align="center">조회수 : <%=dto.getReadCount()%></td>
-		</tr>
-		<tr height="30">
-			<td align="center" colspan="2">문의유형 : 
+			<td>문의유형</td>
+			<td> 
 				<%
 				if(dto.getQuestionType().equals("1")) {
 					out.println("자바");
@@ -56,26 +61,31 @@
 			</td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">작성자 : <%=dto.getId()%>(<%=dto.getName()%>님)
+			<td>작성자</td>
+			<td> <%=dto.getId()%>(<%=dto.getName()%>님)
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">제목 : <%=dto.getTitle()%></td>
+			<td>제목</td>
+			<td> <%=dto.getTitle()%></td>
 		</tr>
 		<tr height="300">
-			<td align="center" colspan="2"><%=dto.getCon()%></td>
+			<td>내용</td>	
+			<td><%=dto.getCon()%></td>
 		</tr>
 		<tr height="30">
-			<td align="center" colspan="2">작성일자 : <%=sdf.format(dto.getReg())%></td>
-		</tr>
-		<tr height="30">
-			<td align="center" colspan="2">
-				<input type="button" value="목록" onclick="location='faqList.jsp'" />
-				<!-- 글을 삭제하기위해 num과 pageNum을 보냄 -->
-				<%if(dto2.getMemberType().equals("2")) {%>
-				<input type="button" value="삭제" onclick="location='faqDelete.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
-				<%}%>
-			</td>
+			<td>작성일자</td>
+			<td> <%=sdf.format(dto.getReg())%></td>
 		</tr>
 	</table>
+	<div class="buttom-wrap">
+		<input type="button" class="white-btn" value="목록" onclick="location='faqList.jsp'" />
+		<!-- 글을 삭제하기위해 num과 pageNum을 보냄 -->
+		<%if(dto2.getMemberType().equals("2")) {%>
+		<input type="button" class="white-btn" value="삭제" onclick="location='faqDelete.jsp?num=<%=num%>&pageNum=<%=pageNum%>'" />
+		<%}%>
+	</div>
 </form>
+</div>
+</div>
+
 <jsp:include page="/member/footer.jsp"></jsp:include>
