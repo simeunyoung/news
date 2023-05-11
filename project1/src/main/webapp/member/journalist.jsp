@@ -109,17 +109,17 @@ int number = count - (crtPage -1) * pageSize;
 	
 					if (startPage > 10) {
 				%>
-					<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage - 10%>">[이전]</a>
+					<a href="user_mypage_form.jsp?id=<%=id2 %>&pageType=<%=pageType %>&pageNum=<%=startPage - 10%>">[이전]</a>
 				<%
 					} // end if
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-					<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=i%>">[<%=i%>]</a>
+					<a href="user_mypage_form.jsp?id=<%=id2 %>&pageType=<%=pageType %>&pageNum=<%=i%>">[<%=i%>]</a>
 				<%
 					}// end for
 					if (endPage < pageCount) {
 				%>
-					<a href="user_mypage_form.jsp?id=<%=id %>&pageType=<%=pageType %>&pageNum=<%=startPage + 10%>">[다음]</a>
+					<a href="user_mypage_form.jsp?id=<%=id2 %>&pageType=<%=pageType %>&pageNum=<%=startPage + 10%>">[다음]</a>
 				<%
 					} // end if
 					}// end if(count)
