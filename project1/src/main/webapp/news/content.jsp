@@ -222,7 +222,7 @@ if (rDTO.getBad() >= 30 && session.getAttribute("memId") == null) {
 				}
 				%>
 			</div>
-			<br />
+			
 
 			<%-- ========================= 경계선 ========================= --%>
 			<%-- include 액션태그를 사용해서 JSP파일을 content와 합친다. --%>

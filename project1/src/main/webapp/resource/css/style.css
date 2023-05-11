@@ -750,10 +750,23 @@ input[type="submit"].search-btn {
 .list-card .card {
 	padding: 20px;
 }
-
+.list-card .cont-title{
+	font-size:20px;
+	text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+}
 .list-card .cont-txt {
-	height: 75px;
+	height: 58px;
 	width: 215px;
+	line-height:20px;
+	text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    overflow: hidden;
 }
 
 .list-card .cont-box {

@@ -27,7 +27,7 @@ request.setCharacterEncoding("UTF-8");
 
 String loginuser = (String) session.getAttribute("memId");
 
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 String pageNum = "1";
 int pageSize = 5;

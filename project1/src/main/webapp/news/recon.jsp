@@ -7,8 +7,7 @@
 <%@ page import="member.MemberDAO"%>
 
 <b>댓글</b>
-<br />
-<br />
+
 <%
 String loginuser = (String) session.getAttribute("memId");
 int num = Integer.parseInt(request.getParameter("num")); // 액션태그에 전달 받은 num 파라미터 값
@@ -109,9 +108,9 @@ if (recons != null) {
 }
 } else {
 %>
-<center>
+<div class="no-list">
 	현재 존재하는 댓글이 없습니다.
-</center>
+</div>
 <%
 }
 %>
