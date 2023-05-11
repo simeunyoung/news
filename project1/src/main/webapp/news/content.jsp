@@ -257,16 +257,30 @@ if (rDTO.getBad() >= 30 && session.getAttribute("memId") == null) {
 
 
 <script>
+// -엘리먼트, 요소 같은 의미-
+	// copyButton변수 선언
+	// id 속성 값이 copyButton인 요소를 할당(버튼 역할을 하는 HTML요소)
 	var copyButton = document.getElementById('copyButton');
-	// 버튼 클릭시 실행될 함수 지정
+	// click 이벤트 리스너는 copyButton이 클릭될때 실행
+	// function()은 버튼 클릭시에 실행되는 코드(익명함수)
 	copyButton.addEventListener('click', function() {
-		var url = window.location.href; // 현재 URL 가져오기
-		var tempInput = document.createElement("input"); // 임시 input 엘리먼트 생성
-		tempInput.setAttribute("value", url); // input 엘리먼트에 URL 값 추가
-		document.body.appendChild(tempInput); // input 엘리먼트를 body에 추가
-		tempInput.select(); // input 엘리먼트 선택
-		document.execCommand("copy"); // 복사 명령 실행
-		document.body.removeChild(tempInput); // input 엘리먼트 삭제
+		// url변수에 현재 URL을 할당
+		var url = window.location.href;
+		// 임시 input 엘리먼트 생성
+		// document.createElement()를 사용해 새로운 input요소 생성하고, tempInput 변수에 할당
+		var tempInput = document.createElement("input"); 
+		// tempInput 요소의 value 속성을 현재 url값으로 설정
+		tempInput.setAttribute("value", url);
+		// tempInput 요소를 현재 페이지의 body 요소의 자식 요소로 추가(tempInput 요소가 현재 페이지의 body요소에 추가 됨)
+		document.body.appendChild(tempInput);
+		// tempInput 요소 선택
+		tempInput.select(); 
+		// 복사 명령 실행
+		// execCommand()를 사용해 선택된 텍스트를 클립보드에 복사
+		document.execCommand("copy"); 
+		// input 엘리먼트 삭제
+		// tempInput 요소 삭제
+		document.body.removeChild(tempInput); 
 		alert("URL이 복사되었습니다.");
 	});
 </script>
