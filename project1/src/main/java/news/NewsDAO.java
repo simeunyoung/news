@@ -78,15 +78,14 @@ public class NewsDAO extends OracleServer {
 	public void insertRecon(NewsDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?,?)"; //쿼리문 작성
+			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?)"; //쿼리문 작성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getNick());
+			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getTitle());
 			pstmt.setString(3, dto.getCon());
 			pstmt.setString(4, dto.getRecon());
 			pstmt.setString(5, dto.getIp());
 			pstmt.setTimestamp(6, dto.getReg());
-			pstmt.setString(7, dto.getId());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -325,8 +324,7 @@ public class NewsDAO extends OracleServer {
 				do {
 					allinfo = new NewsDTO();
 					allinfo.setNum(rs.getInt("num"));
-					allinfo.setId(rs.getString("id"));
-					allinfo.setNick(rs.getString("nick"));
+					allinfo.setNick(rs.getString("id"));
 					allinfo.setTitle(rs.getString("title"));
 					allinfo.setCon(rs.getString("con"));
 					allinfo.setReg(rs.getTimestamp("reg"));

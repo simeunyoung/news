@@ -14,6 +14,7 @@
 </head>
 <%
 String id = (String) session.getAttribute("memId");
+String id2 = request.getParameter("id");
 String pageNum = request.getParameter("pageNum");
 String pageType = request.getParameter("pageType");
 
@@ -31,10 +32,9 @@ int endNum = crtPage * pageSize;
 List newsList = null;
 NewsDAO news = NewsDAO.getInstance();
 
-int count = news.getMyNewsCount(id); // 해당 아이디가 쓴 기사 수 저장
-
+int count = news.getMyNewsCount(id2); // 해당 아이디가 쓴 기사 수 저장
 if(count > 0){
-	newsList = news.getMyNewsList(id, startNum, endNum);
+	newsList = news.getMyNewsList(id2, startNum, endNum);
 }
 int number = count - (crtPage -1) * pageSize;
 %>
@@ -77,7 +77,7 @@ int number = count - (crtPage -1) * pageSize;
 				<tr>
 					<td><%=number--%></td>
 					<td><%=journalist.getNewstype()%></td>
-					<td>
+					<td class="over">
   					<a href="/project1/news/content.jsp?num=<%=journalist.getNum()%>&pageNum=<%=crtPage%>">
    							 <%=journalist.getTitle()%>
  					</a>

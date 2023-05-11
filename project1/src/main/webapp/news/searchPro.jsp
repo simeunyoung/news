@@ -24,15 +24,15 @@ String date = request.getParameter("date");
     if(search != null){
     	searchList = dao.getSearchList(search);
     }else if(startDate != null && endDate != null){
-    	searchList = dao.getSearchDateList(startDate, endDate);	
+    	searchList = dao.getSearchDateList(startDate, endDate);	// 시작날짜와 종료날짜를 받음
     }else if(date.equals("today")){
-    	searchList = dao.getSearchTodayList(date);
+    	searchList = dao.getSearchTodayList(date); // 오늘
     }else if(date.equals("week")){
-    	searchList = dao.getSearchTodayList(date);
+    	searchList = dao.getSearchTodayList(date); // 일주일
     }else if(date.equals("month")){
-    	searchList = dao.getSearchTodayList(date);
+    	searchList = dao.getSearchTodayList(date); // 한달
     }else if(date.equals("year")){
-    	searchList = dao.getSearchTodayList(date);
+    	searchList = dao.getSearchTodayList(date); // 일년
     }
     
 %>

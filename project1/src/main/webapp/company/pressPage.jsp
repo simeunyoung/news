@@ -98,7 +98,7 @@ function deletePageHistoryAndRedirect1() {
                     <div class="js-item">
 	                    <%ArrayList<MemberDTO> reporterList = dao.selectReporter(press);		//press에 해당하는 기자 출력
 						for(int z = 0 ; z < reporterList.size() ; z++){%>
-							<a href="/project1/member/journalist.jsp?id=<%=reporterList.get(z).getId()%>"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
+							<a href="/project1/member/user_mypage_form.jsp?id=<%=reporterList.get(z).getId()%>&pageType=2"><%=reporterList.get(z).getName()%></a>&nbsp;&nbsp;&nbsp;
 						<%} %>
                     </div>
                   </div>
@@ -111,7 +111,7 @@ function deletePageHistoryAndRedirect1() {
 	                      	int count = articleList.size();
 
                       %>
-                    	<p class="text-info">관련 기사 (<%=count %>)</p>
+                    	<p class="text-info">관련 기사 (3)</p>
                     	<%if(count == 0){ %>
 							<div class="no-list">
 								저장된 글이 없습니다.
@@ -125,7 +125,7 @@ function deletePageHistoryAndRedirect1() {
 										<th>PRESS</th>
 										<th>DATE</th>												
 									</tr>			<%-- articleList에 담겨있는 기사들 출력 --%>
-									<%for(int i = 0 ; i < articleList.size() ; i++){%>		
+									<%for(int i = 0 ; i <3; i++){%>		
 										<tr>
 											<td><%=articleList.get(i).getNum() %></td>
 											<td>
@@ -136,10 +136,13 @@ function deletePageHistoryAndRedirect1() {
 											<td><%=articleList.get(i).getId() %></td>
 											<td><%=press.toUpperCase()%></td>
 											<td><%=articleList.get(i).getReg() %></td>
-											<%-- 임시 !!<td><%=sdf.format(article.getReg()) %></td> --%>											
+											<%-- 임시 !!<td><%=sdf.format(article.getReg()) %></td> --%>									
 										</tr>
-								</table>
-							<%}} %>
+							
+							<%}
+									
+									} %>
+							</table>
                     </div>
                   </div>
             </div>

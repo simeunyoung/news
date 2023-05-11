@@ -24,7 +24,7 @@
     response.sendRedirect("user_mypage_form.jsp?id="+id+"&pageType="+pageType);
 %>
 
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 

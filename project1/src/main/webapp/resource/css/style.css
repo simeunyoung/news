@@ -1371,6 +1371,10 @@ input[type="submit"].upload-btn {
 .page-wrap.qna2 .write-tit{
 	margin-bottom:20px;
 }
+
+.page-wrap.content .content{
+	width:1200px;
+}
 /************************************
 ************** press ***************
 *************************************/

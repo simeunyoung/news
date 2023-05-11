@@ -75,9 +75,10 @@
 					<button type="button" class="modify-btn" onclick="imgUpdate()"><i class="fa-solid fa-pen fa-lg" style="color:#fff;"></i></button>
 				<%} %>
 
-				<%if(dto == null) {
-				} else {%>
-					<%if(dto.getImg()==null){ %><!-- 가져올 이미지가 없으면 기본 프로필사진 -->
+				<%if(dto == null) {%>
+					<img src="/project1/resource/img/profile01.jpg" class="rounded-circle" width="150">
+				<%} else {%>
+					<%if(dto.getImg()==null || dto.getImg().equals("null")){ %><!-- 가져올 이미지가 없으면 기본 프로필사진 -->
 						<img src="/project1/resource/img/profile01.jpg" class="rounded-circle" width="150">
 					<%}else{ %>
 						<img src="/project1/resource/img/<%=dto.getImg()%>" class="rounded-circle" width="150">	
