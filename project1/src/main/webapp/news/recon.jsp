@@ -21,7 +21,7 @@ if (loginuser != null) { // 세션을 가지고 있을 때 적용
 }
 
 String title = request.getParameter("title"); // 액션태그에서 가져온 파라미터
-String con = request.getParameter("con"); // 액션 태그에서 가져온 파라미터
+
 // + -->
 String pageNum = request.getParameter("pageNum");
 if (pageNum == null) {
@@ -36,8 +36,8 @@ int reconcount = 0;
 int number = 0;
 
 NewsDAO method = NewsDAO.getInstance();
-reconcount = method.getReconCount(title, con); // recon 갯수를 알아내는 메소드
-List recons = method.getRecon(title, con, startRow, endRow); // recon을 조건에 맞게 가져오는 메소드
+reconcount = method.getReconCount(title); // recon 갯수를 알아내는 메소드
+List recons = method.getRecon(title, startRow, endRow); // recon을 조건에 맞게 가져오는 메소드
 // <-- +
 %>
 <%
@@ -53,7 +53,6 @@ if (session.getAttribute("memId") == null) {
 	<input type="hidden" name="id" value="<%=loginuser%>"> 
 	<input type="hidden" name="nick" value="<%=userinfo.getNick()%>"> 
 	<input type="hidden" name="title" value="<%=title%>"> 
-	<input type="hidden" name="con" value="<%=con%>"> 
 	<input type="hidden" name="contentpage" value="<%=num%>"> 
 	<div class="recon-wrap">
 		<input type="text" class="textarea_box" name="recon" placeholder="권리침해, 욕설 및 특정 대상을 비하하는 내용을 게시할 경우 이용약관 및 관련법률에 의해 제재될 수 있습니다.">

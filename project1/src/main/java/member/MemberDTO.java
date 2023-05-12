@@ -84,7 +84,7 @@ public class MemberDTO {
 		return press;
 	}
 	public void setPress(String press) {
-		if (!press.contains("@"))
+        if (!press.contains("@"))
 		this.press = press;
 	}
 	public String getPressSubcribe() {

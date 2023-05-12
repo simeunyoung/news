@@ -78,14 +78,13 @@ public class NewsDAO extends OracleServer {
 	public void insertRecon(NewsDTO dto) {
 		try {
 			conn = getConnection();
-			sql = "insert into revalue values(revalue_seq.nextval,?,?,?,?,?,?)"; //쿼리문 작성
+			sql = "insert into revalue(num,id,title,recon,ip,reg) values(revalue_seq.nextval,?,?,?,?,?)"; //쿼리문 작성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3, dto.getCon());
-			pstmt.setString(4, dto.getRecon());
-			pstmt.setString(5, dto.getIp());
-			pstmt.setTimestamp(6, dto.getReg());
+			pstmt.setString(3, dto.getRecon());
+			pstmt.setString(4, dto.getIp());
+			pstmt.setTimestamp(5, dto.getReg());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,7 +172,6 @@ public class NewsDAO extends OracleServer {
 				info.setId(rs.getString("id"));
 				info.setId(rs.getString("nick"));
 				info.setTitle(rs.getString("title"));
-				info.setCon(rs.getString("con"));
 				info.setRecon(rs.getString("recon"));
 			}
 		} catch (Exception ex) {
@@ -198,16 +196,15 @@ public class NewsDAO extends OracleServer {
 				if (checkpw.equals(info.getPw())) { 
 					// 위 쿼리문의 pw와 메소드에서 가져온 값과 일치 할 때
 					result = 1; // if문에 true일 때 result의 값이 0에서 1로 변경
-					sql = "update news set id =?, nick=?,newstype=?,title=?,con=?,pw=? where num=?";
+					sql = "update news set id =?, nick=?,newstype=?,title=?,pw=? where num=?";
 					// 쿼리문 작성
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, info.getId());// 쿼리문 적용
 					pstmt.setString(1, info.getNick()); // 쿼리문에 맞는 데이터 저장
 					pstmt.setString(2, info.getNewstype());
 					pstmt.setString(3, info.getTitle());
-					pstmt.setString(4, info.getCon());
-					pstmt.setString(5, info.getPw());
-					pstmt.setInt(6, info.getNum());
+					pstmt.setString(4, info.getPw());
+					pstmt.setInt(5, info.getNum());
 					pstmt.executeUpdate(); // 해당 쿼리문에 맞는 데이터가 변경할 시 변경 내용 적용
 				}
 			}
@@ -273,14 +270,13 @@ public class NewsDAO extends OracleServer {
 		return textList;
 	} // public List getTexts(int start, int end) throws Exception {
 
-	public List getrecon(String title, String con) throws Exception {
+	public List getrecon(String title) throws Exception {
 		List textList = null;
 		try {
 			conn = getConnection();
-			sql = "select * from revalue where title=? and con=?"; // 쿼리문 작성
+			sql = "select * from revalue where title=?"; // 쿼리문 작성
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
-			pstmt.setString(2, con);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				textList = new ArrayList(30); // list의 데이터를 30개로 제한
@@ -290,7 +286,6 @@ public class NewsDAO extends OracleServer {
 					info.setId(rs.getString("id"));
 					info.setId(rs.getString("nick"));
 					info.setTitle(rs.getString("title"));
-					info.setCon(rs.getString("con"));
 					info.setReg(rs.getTimestamp("reg"));
 					info.setIp(rs.getString("ip"));
 					info.setRecon(rs.getString("recon"));
@@ -305,18 +300,17 @@ public class NewsDAO extends OracleServer {
 		return textList;
 	} // public List getRecon(String title,String con) throws Exception {
 	
-	public List getRecon(String title,String con,int a, int b) throws Exception {
+	public List getRecon(String title,int a, int b) throws Exception {
 		List textList = null; // 위에 30으로 제한한 부분 수정 메소드
 		try {
 			conn = getConnection();
-			sql = "select * from (select e.*,rownum r from (select * from revalue where title=? and con=? order by reg desc) e )"
+			sql = "select * from (select e.*,rownum r from (select * from revalue where title=? order by reg desc) e )"
 					+ " where r >= ? and r <= ?"; 
 			//직접 수기로 숫자를 제한하지 않고 rownum을 사용해서 recon의 데이터를 제한하고 저장
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
-			pstmt.setString(2, con);
-			pstmt.setInt(3, a);
-			pstmt.setInt(4, b);
+			pstmt.setInt(2, a);
+			pstmt.setInt(3, b);
 			rs = pstmt.executeQuery(); // sql에서 데이터를 가져오기
 			if (rs.next()) {
 				textList = new ArrayList(b); //list의 데이터 생성
@@ -326,7 +320,6 @@ public class NewsDAO extends OracleServer {
 					allinfo.setNum(rs.getInt("num"));
 					allinfo.setNick(rs.getString("id"));
 					allinfo.setTitle(rs.getString("title"));
-					allinfo.setCon(rs.getString("con"));
 					allinfo.setReg(rs.getTimestamp("reg"));
 					allinfo.setIp(rs.getString("ip"));
 					allinfo.setRecon(rs.getString("recon"));
@@ -401,15 +394,14 @@ public class NewsDAO extends OracleServer {
 
 	} // public void deleteRecon(int num) throws Exception {
 	
-	public int getReconCount(String title,String con) throws Exception {
+	public int getReconCount(String title) throws Exception {
 		int x = 0;
 
 		try {
 			conn = getConnection();
-			sql = "select count(*) from revalue where title=? and con=?";
+			sql = "select count(*) from revalue where title=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
-			pstmt.setString(2, con);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				x = rs.getInt(1);
