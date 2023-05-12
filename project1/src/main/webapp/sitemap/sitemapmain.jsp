@@ -69,7 +69,7 @@ MemberDTO mbdto = mbDAO.getMember(id);
 		<ul>
 			<li><h3>고객센터</h3></li>
 			<li><a href="/project1/admin/qnaList.jsp">Q&A</a></li>
-			<li><a href="/project1/helper/svmain.jsp">FAQ</a></li>
+			<li><a href="/project1/admin/faqList.jsp">FAQ</a></li>
 			<li><a href="/project1/admin/qnaWrite.jsp">1:1문의하기</a></li>
 			<li><a href="/project1/helper/myquestion.jsp">1:1문의목록</a></li>
 		</ul>
