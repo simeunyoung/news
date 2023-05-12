@@ -547,4 +547,25 @@ public class MemberDAO extends OracleServer {
 					oracleClose();
 				}
 			}
+		    public boolean unUser(String id) {
+		        boolean sub = false;
+		        try {
+		            conn = getConnection();
+		            pstmt = conn.prepareStatement("select * from member where id = ?");
+		            pstmt.setString(1, id);
+		            rs = pstmt.executeQuery();
+		            if (rs.next()) {
+		                String pw = rs.getString("pw");
+		                if (pw.equals("null")) {
+		                    sub = true;
+		                }
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+					oracleClose();
+				}
+		        return sub;
+		            
+		    }
 }

@@ -76,7 +76,11 @@ if (recons != null) {
 <div class="recon-box">
 	<div class="recon-top">
 		<div class="recon-info">
+		<%if(memdao.unUser(recontext.getNick())) {%>
+			<p>탈퇴한 회원입니다.</p>
+		<%}else{%>
 			<p><%=recontext.getNick()%></p>
+			<%} %>
 			<p><%=recontext.getReg()%></p>
 		</div>
 		<div class="recon-btn-wrap">
