@@ -44,7 +44,6 @@ public class RevalueDAO extends OracleServer {
 					recon.setNum(rs.getInt("num"));
 					recon.setId(rs.getString("id"));
 					recon.setTitle(rs.getString("title"));
-					recon.setCon(rs.getString("con"));
 					recon.setReCon(rs.getString("recon"));
 					recon.setIp(rs.getString("ip"));	
 					recon.setReg(rs.getTimestamp("reg"));									

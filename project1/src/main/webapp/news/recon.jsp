@@ -1,26 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="news.NewsDTO"%>
 <%@ page import="news.NewsDAO"%>
 <%@ page import="java.util.*"%>
 <%@ page import="member.MemberDTO"%>
 <%@ page import="member.MemberDAO"%>
 
-<b>´ñ±Û</b>
+
 
 <%
 String loginuser = (String) session.getAttribute("memId");
-int num = Integer.parseInt(request.getParameter("num")); // ¾×¼ÇÅÂ±×¿¡ Àü´Ş ¹ŞÀº num ÆÄ¶ó¹ÌÅÍ °ª
+int num = Integer.parseInt(request.getParameter("num")); // ì•¡ì…˜íƒœê·¸ì— ì „ë‹¬ ë°›ì€ num íŒŒë¼ë¯¸í„° ê°’
 MemberDAO memdao = MemberDAO.getInstance();
 MemberDTO userinfo = memdao.getmember(loginuser);
 String usernick = null;
 String usertype = null;
-if (loginuser != null) { // ¼¼¼ÇÀ» °¡Áö°í ÀÖÀ» ¶§ Àû¿ë
+if (loginuser != null) { // ì„¸ì…˜ì„ ê°€ì§€ê³  ìˆì„ ë•Œ ì ìš©
 	usernick = userinfo.getNick();
 	usertype = userinfo.getMemberType();
 }
 
-String title = request.getParameter("title"); // ¾×¼ÇÅÂ±×¿¡¼­ °¡Á®¿Â ÆÄ¶ó¹ÌÅÍ
+String title = request.getParameter("title"); // ì•¡ì…˜íƒœê·¸ì—ì„œ ê°€ì ¸ì˜¨ íŒŒë¼ë¯¸í„°
 
 // + -->
 String pageNum = request.getParameter("pageNum");
@@ -36,8 +36,8 @@ int reconcount = 0;
 int number = 0;
 
 NewsDAO method = NewsDAO.getInstance();
-reconcount = method.getReconCount(title); // recon °¹¼ö¸¦ ¾Ë¾Æ³»´Â ¸Ş¼Òµå
-List recons = method.getRecon(title, startRow, endRow); // reconÀ» Á¶°Ç¿¡ ¸Â°Ô °¡Á®¿À´Â ¸Ş¼Òµå
+reconcount = method.getReconCount(title); // recon ê°¯ìˆ˜ë¥¼ ì•Œì•„ë‚´ëŠ” ë©”ì†Œë“œ
+List recons = method.getRecon(title, startRow, endRow); // reconì„ ì¡°ê±´ì— ë§ê²Œ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
 // <-- +
 %>
 <%
@@ -46,17 +46,17 @@ if (session.getAttribute("memId") == null) {
 
 <%
 } else {
-// recon ÆäÀÌÁö¿¡¼­ reconFormÀ» »ı¼ºÇÏ°í µ¥ÀÌÅÍ °ªÀ» Àü´ŞÇØ¼­ ProÆäÀÌÁö·Î ÀÌµ¿
+// recon í˜ì´ì§€ì—ì„œ reconFormì„ ìƒì„±í•˜ê³  ë°ì´í„° ê°’ì„ ì „ë‹¬í•´ì„œ Proí˜ì´ì§€ë¡œ ì´ë™
 %>
-
+<h3 class="recon-tit">ëŒ“ê¸€</h3>
 <form action="reconwritePro.jsp" method="post" class="flexthing">
 	<input type="hidden" name="id" value="<%=loginuser%>"> 
 	<input type="hidden" name="nick" value="<%=userinfo.getNick()%>"> 
 	<input type="hidden" name="title" value="<%=title%>"> 
 	<input type="hidden" name="contentpage" value="<%=num%>"> 
 	<div class="recon-wrap">
-		<input type="text" class="textarea_box" name="recon" placeholder="±Ç¸®Ä§ÇØ, ¿å¼³ ¹× Æ¯Á¤ ´ë»óÀ» ºñÇÏÇÏ´Â ³»¿ëÀ» °Ô½ÃÇÒ °æ¿ì ÀÌ¿ë¾à°ü ¹× °ü·Ã¹ı·ü¿¡ ÀÇÇØ Á¦ÀçµÉ ¼ö ÀÖ½À´Ï´Ù.">
-		<input type="submit" value="ÀÔ·Â" class="submit-btn">
+		<input type="text" class="textarea_box" name="recon" placeholder="ê¶Œë¦¬ì¹¨í•´, ìš•ì„¤ ë° íŠ¹ì • ëŒ€ìƒì„ ë¹„í•˜í•˜ëŠ” ë‚´ìš©ì„ ê²Œì‹œí•  ê²½ìš° ì´ìš©ì•½ê´€ ë° ê´€ë ¨ë²•ë¥ ì— ì˜í•´ ì œì¬ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.">
+		<input type="submit" value="ì…ë ¥" class="submit-btn">
 	</div>
 	
 </form>
@@ -71,7 +71,7 @@ if (recons != null) {
 	number = reconcount - (currentPage - 1) * pageSize; //+
 
 	for (int rnum = 0; rnum < recons.size(); rnum++) {
-		NewsDTO recontext = (NewsDTO) recons.get(rnum); //Object(list)Çü --> DTOÇüÀ¸·Î ²¨³»ÁÖ°í ÀÖ´Ù.
+		NewsDTO recontext = (NewsDTO) recons.get(rnum); //Object(list)í˜• --> DTOí˜•ìœ¼ë¡œ êº¼ë‚´ì£¼ê³  ìˆë‹¤.
 %>
 <div class="recon-box">
 	<div class="recon-top">
@@ -108,7 +108,7 @@ if (recons != null) {
 } else {
 %>
 <div class="no-list">
-	ÇöÀç Á¸ÀçÇÏ´Â ´ñ±ÛÀÌ ¾ø½À´Ï´Ù.
+	í˜„ì¬ ì¡´ì¬í•˜ëŠ” ëŒ“ê¸€ì´ ì—†ìŠµë‹ˆë‹¤.
 </div>
 <%
 }
@@ -126,21 +126,21 @@ if (recons != null) {
 		}
 		if (startPage > 10) {
 	%>
-	<a href="content.jsp?num=<%=num%>&pageNum=<%=startPage - 10%>"> [ÀÌ
-		Àü]</a>
+	<a href="content.jsp?num=<%=num%>&pageNum=<%=startPage - 10%>"> [ì´
+		ì „]</a>
 	<%
 	}
 	for (int i = startPage; i <= endPage; i++) {
 	%>
 	<a href="content.jsp?num=<%=num%>&pageNum=<%=i%>"> [<%=i%>]
 	</a>
-	<%-- contentÆäÀÌÁö¿¡¼­ pagenumÀ¸·Î recon ÆäÀÌÁö¸¸ ÀÌµ¿ÇÏ°Ô ¼³Á¤ --%>
+	<%-- contentí˜ì´ì§€ì—ì„œ pagenumìœ¼ë¡œ recon í˜ì´ì§€ë§Œ ì´ë™í•˜ê²Œ ì„¤ì • --%>
 	<%
 	}
 	if (endPage < pageCount) {
 	%>
-	<a href="content.jsp?num=<%=num%>&pageNum=<%=startPage + 10%>"> [´Ù
-		À½]</a>
+	<a href="content.jsp?num=<%=num%>&pageNum=<%=startPage + 10%>"> [ë‹¤
+		ìŒ]</a>
 	<%
 	}
 	}

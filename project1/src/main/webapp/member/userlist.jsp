@@ -61,7 +61,7 @@ int number = count - (crtPage - 1) * pageSize;
 				<th>NO</th>
 				<th>ID</th>
 				<th>TITLE</th>
-				<th>CONTENTS</th>
+		
 				<th>RECONTENTS</th>
 				<th>DATE</th>
 			</tr>
@@ -83,7 +83,6 @@ int number = count - (crtPage - 1) * pageSize;
 				<td class="over"><a href="/project1/news/content.jsp?num=<%=result%>">
 						<%=recon.getTitle()%>
 				</a></td>
-				<td class="over"><%=recon.getCon()%></td>
 				<td class="over"><%=recon.getReCon()%></td>
 				<td><%=sdf.format(recon.getReg())%></td>
 			</tr>

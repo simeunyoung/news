@@ -108,6 +108,14 @@ number = newscount - (currentPage - 1) * pageSize;
 		%>
 
 		<table>
+			<colgroup>
+				<col style="width:5%;"/>
+				<col style="width:50%;"/>
+				<col style="width:10%;"/>
+				<col style="width:15%;"/>
+				<col style="width:15%;"/>
+				<col style="width:5%;"/>
+			</colgroup>
 			<tr>
 				<th>작성 번호</th>
 				<th>뉴스(내용)</th>
