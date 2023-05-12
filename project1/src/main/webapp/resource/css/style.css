@@ -723,6 +723,8 @@ input[type="submit"].search-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	text-align:center;
+	line-height: 18px;
 }
 
 :is(.jn_bookmark, .press_bookmark) .row {
@@ -733,6 +735,7 @@ input[type="submit"].search-btn {
 :is(.jn_bookmark, .press_bookmark) .card {
 	width: 100px;
 	height: 100px;
+	display:flex;
 	align-items: center;
 	justify-content: center;
 }
@@ -1477,6 +1480,58 @@ input[type="submit"].upload-btn {
 	border-radius:4px;
 	width:200px;
 	height:38px;
+}
+/************************************
+************** sitemap ***************
+*************************************/
+.page-wrap.sitemap{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.site-wrap{
+	margin-top: 30px;
+	width:936px;
+}
+.sitemap-wrap{
+	display: flex;
+    width: 100%;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+.site-tit{
+	width:100%;
+	margin-bottom:30px;
+	padding-bottom:20px;
+	border-bottom:2px solid #222;
+	text-align:center;
+	font-size:20px;
+}
+
+.sitemap-wrap ul li{
+	margin-bottom:20px
+}
+.sitemap-wrap ul li:hover{
+	text-decoration:underline;
+}
+.sitemap-wrap ul li:first-child:hover{
+	text-decoration:none;
+}
+.sitemap-wrap ul li:first-child{
+	margin-bottom:30px;
+	font-size: 18px;
+	
+}
+/************************************
+************** myquestion ***************
+*************************************/
+
+.page-wrap.myquestion .button-wrap{
+	display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
 }
 /************************************
 ************** footer ***************

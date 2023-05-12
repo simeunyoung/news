@@ -35,7 +35,7 @@ String date = request.getParameter("date");
     }else if(date.equals("year")){
     	searchList = dao.getSearchTodayList(date); // 일년
     }
-    System.out.println(searchList);
+    
 %>
 <!DOCTYPE>
 <html>

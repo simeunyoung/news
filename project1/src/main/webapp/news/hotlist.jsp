@@ -41,29 +41,26 @@
 
 <html>
 	<head>
-		<title> 핫 토픽 뉴스 </title>
+		<title>CODENEWS</title>
 	</head>
 	
 	<body>
+	<div class="page-wrap">
 	<%
 	if(newscount == 0){
 	%>
-	<table width = "700" border = "1" cellpadding = "0" cellspacing = "0">
-		<tr>
-			<td> 핫한 뉴스가 없습니다. </td>
-		</tr>
-	</table>
+	<div class="no-list">Hot 뉴스가 없습니다.</div>
 	<%
 	}else{
 	%>
 	<table border = "1" width = "700" cellpadding = "0" cellspacing = "0" align = "center">
 		<tr height = "30">
-			<td align = "center" width = "50"> 번호 </td>
-			<td align = "center" width = "250"> 제목 </td>
-			<td align = "center" width = "100"> 작성자 </td>
-			<td align = "center" width = "150"> 언론사 </td>
-			<td align = "center" width = "150"> 작성일 </td>
-			<td align = "center" width = "50"> 조회 </td>
+			<th align = "center" width = "50"> 번호 </th>
+			<th align = "center" width = "250"> 제목 </th>
+			<th align = "center" width = "100"> 작성자 </th>
+			<th align = "center" width = "150"> 언론사 </th>
+			<th align = "center" width = "150"> 작성일 </th>
+			<th align = "center" width = "50"> 조회 </th>
 		</tr>
 		<%
 		for(int i = 0; i < newsList.size(); i++){
@@ -107,6 +104,7 @@
 			}
 		}
 	%>
+	</div>
 	</div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
 	</body>

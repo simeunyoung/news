@@ -44,38 +44,31 @@
 
 <title>CODENEWS</title>
 <jsp:include page="/member/header.jsp" />
-
-<center><b>1대1문의목록(전체 글 : <%=count%>)</b>	<%-- 본인이 작성한 글이 있다면 몇개가 있는지 나타냄 --%>
-<table width = "700">
-	<tr>
-		<td align = "right">
+<div class="page-wrap myquestion">
+<h3>1:1 문의목록(전체 글 : <%=count%>)</h3>	<%-- 본인이 작성한 글이 있다면 몇개가 있는지 나타냄 --%>
+	<div class="button-wrap">
 		<%if(session.getAttribute("memId") == null){%>
 			<a href = "/project1/member/loginForm.jsp">로그인</a>		<%-- 만약 로그인 상태가 아니면 전체글 목록은 0으로 표시가 될 것이고 로그인을 할 수 있게 만들어 둠 --%>
 		<%}else{%>
-			<a href = "/project1/admin/qnaWrite.jsp">글쓰기</a>
-			<a href = "/project1/member/logout.jsp">로그아웃</a>
+			<a href = "/project1/admin/qnaWrite.jsp" class="submit-btn">글쓰기</a>
+			<a href = "/project1/member/logout.jsp" class="white-btn">로그아웃</a>
 		<%}%>
-		</td>
-	</tr>
-</table>
+	</div>
 
 
 <%if(count == 0){%>						<%-- 작성한 글이 없을 시 해당 페이지에 출력하는 곳 --%>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<table align = "center" width = "700" border = "1" cellpadding = "0" cellspacing = "0">
-	<tr>
-		<td align = "center">작성하신 글이 없습니다.</td>
-</table>
+
+	<div class="no-list">작성하신 글이 없습니다.</div>
 
 <%}else{%>								<%-- 작성한 글이 있을 경우 게시판을 만들고 출력 --%>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<center><b>1대1문의목록</b>
-<table ailgn = "center" width = "800" border = "1" cellspacing = "0" cellpadding = "0">
+
+<b>1대1문의목록</b>
+<table>
 	<tr height = "30">
-		<td align = "center" width = "50">글번호</td>
-		<td align = "center" width = "500">제 목</td>
-		<td align = "center" width = "100">작성자</td>
-		<td align = "center" width = "100">문의날짜</td>
+		<th align = "center" width = "50">글번호</th>
+		<th align = "center" width = "500">제 목</th>
+		<th align = "center" width = "100">작성자</th>
+		<th align = "center" width = "100">문의날짜</th>
 		
 	<%
 		for(int i = 0 ; i < svcenterList.size() ; i++){						//위에서 검색한 값이 리스트에 저장이 되어있기에 반복문을 사용해서 리스트에 저장된 값으 수만큼 반복하여 하나씩 꺼내서 svdto에 저장
@@ -92,7 +85,7 @@
 </table>
 <%}%>
 
-<form align = "center">
+<form>
 	<%
 		if(count > 0){
 			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -117,4 +110,5 @@
 	}
 %> 
 </form>
+</div>
 <jsp:include page="/member/footer.jsp"></jsp:include>
